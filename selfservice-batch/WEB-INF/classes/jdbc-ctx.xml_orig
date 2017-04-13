@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+<!-- 
+
+		<bean id="uachieveapi.dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    		<property name="jndiName"><value>${uachieve.selfservice.jdbc.jndi}</value></property>
+  		</bean>
+-->
+
+  <bean id="uachieveapi.dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+    <property name="targetDataSource">
+      <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${uachieve.selfservice.jdbc.driver}" />
+        <property name="url" value="${uachieve.selfservice.jdbc.url}" />
+        <property name="username" value="${uachieve.selfservice.jdbc.username}" />
+        <property name="password" value="${uachieve.selfservice.jdbc.password}" />
+        <property name="initialSize" value="${uachieve.selfservice.jdbc.initialSize}" />
+        <property name="maxActive" value="${uachieve.selfservice.jdbc.maxActive}" />
+        <property name="maxIdle" value="${uachieve.selfservice.jdbc.maxIdle}" />
+        <property name="maxWait" value="${uachieve.selfservice.jdbc.maxWait}" />
+        <property name="minIdle" value="${uachieve.selfservice.jdbc.minIdle}" />
+        <property name="testOnBorrow" value="${uachieve.selfservice.jdbc.testOnBorrow}" />
+        <property name="testOnReturn" value="${uachieve.selfservice.jdbc.testOnReturn}" />
+        <property name="testWhileIdle" value="${uachieve.selfservice.jdbc.testWhileIdle}" />
+        <!-- TODO validation query is not working on Koch's Oracle instance.  Works on other MSSQL and Oracle instances though. -->
+        <property name="validationQuery" value="${uachieve.selfservice.jdbc.validationQuery}" />
+      </bean>
+    </property>
+  </bean>
+  <!-- 
+    If the security tables are NOT in the main uachieve database, comment 
+    the "alias" tag below and uncomment out the "security.dataSource" bean after it.
+    You must also then make sure to define database properties in selfservice-security.properties.
+  -->
+
+ 
+    <alias name="uachieveapi.dataSource" alias="security.dataSource" />
+    <alias name="uachieveapi.dataSource" alias="udirect.dataSource" />
+ 
+   <!--
+  <bean id="security.dataSource" parent="uachieveapi.dataSource">
+    <property name="targetDataSource">
+      <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${uachieve.security.jdbc.driver}" />
+        <property name="url" value="${uachieve.security.jdbc.url}" />
+        <property name="username" value="${uachieve.security.jdbc.username}" />
+        <property name="password" value="${uachieve.security.jdbc.password}" />
+        <property name="initialSize" value="${uachieve.selfservice.jdbc.initialSize}" />
+        <property name="maxActive" value="${uachieve.selfservice.jdbc.maxActive}" />
+        <property name="maxIdle" value="${uachieve.selfservice.jdbc.maxIdle}" />
+        <property name="maxWait" value="${uachieve.selfservice.jdbc.maxWait}" />
+        <property name="minIdle" value="${uachieve.selfservice.jdbc.minIdle}" />
+      </bean>
+    </property>
+  </bean>
+  
+  		<bean id="security.dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    		<property name="jndiName"><value>${uachieve.selfservice.jdbc.jndi}</value></property>
+  		</bean>
+  
+   -->
+
+ 	<!-- bean id="bannerDao" class="com.redlantern.interfaces.student.dao.BannerDaoImpl">
+ 		<property name="bannerJdbcTemplate" ref="uachieveapi.jdbcTemplate"/>
+ 		<property name="uachieveJdbcTemplate" ref="uachieveapi.jdbcTemplate" />
+ 	</bean -->
+ 
+ 	<alias alias="actionservice.dataSource" name="uachieveapi.dataSource" />
+</beans>

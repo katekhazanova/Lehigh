@@ -371,100 +371,6 @@
        						</property>
        					</bean>
        				</entry>
-       			<entry key="StudentPlanProgress">
-					<bean id ="StudentPlanProgress" parent="abstractReport" class="com.collegesource.report.model.Report">
-						<property name="reportName" value="StudentPlanProgress"/>
-						<property name="reportLabel" value="Student Planning Report"/>
-						<property name="reportDescription">
-							<value>	
-       							<![CDATA[This report will give you plan tracking information based on students taken courses.
-       								]]>
-       						</value>
-       					</property>
-       					<property name="subReports">
-       							<list>
-       								<bean id="CoursesTaken" parent="abstractReport" class="com.collegesource.report.model.Report">
-       									<property name="reportName" value="CoursesTaken"/>
-       								</bean>
-       							</list>
-       						</property>
-       					<property name="parameters">
-       							<list>
-    								<bean id ="currentTerm" class="com.collegesource.report.model.ReportParameter">
-         								<property name="name" value="currentTerm"/>
-       									<property name="label" value="Ending Plan Term"/>
-       									<property name="description" value="Track for course completion through this term."/>
-       									<property name="optional" value="false"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="String"/>     									
-       								</bean>
-       							    <bean id="OffTrack" class="com.collegesource.report.model.ReportParameter">
-       							   	    <property name="name" value="offTrack"/>
-       									<property name="label" value="Off Track Course Threshold"/>
-       									<property name="description" value="How many courses the student has to miss before they are considered off track "/>
-       									<property name="optional" value="false"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="Integer"/>
-       								</bean>
-       								<bean id="PlanStatus" class="com.collegesource.report.model.ReportParameter">
-       									<property name="name" value="published_status"/>
-       									<property name="label" value="Plan Status"/>
-       									<property name="description" value="The status of the plans to be tracked"/>
-       									<property name="optional" value="true"/>
-       									<property name="inputType" value="dropdown"/>
-       									<property name="inputClass" value="String"/>
-       									<property name="listOfValues">
-       										<map>
-       											<entry key="" value="All Declared Plans"/>
-       											<entry key="A" value="All Approved Plans"/>
-       										</map>
-       									</property>
-       								</bean>
-       								<bean id ="DeclaredDprog" class="com.collegesource.report.model.ReportParameter">
-         								<property name="name" value="dprog"/>
-       									<property name="label" value="Declared Program"/>
-       									<property name="description" value="Generate this report only for students who have this declared program"/>
-       									<property name="optional" value="true"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="String"/>     									
-       								</bean>
-    								<bean id ="planApprover" class="com.collegesource.report.model.ReportParameter">
-         								<property name="name" value="approver"/>
-       									<property name="label" value="Plan Approver"/>
-       									<property name="description" value="The username of the plan approver"/>
-       									<property name="optional" value="true"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="String"/>     									
-       								</bean>
-       								<bean id="InstidqPlanProgress" class="com.collegesource.report.model.ReportParameter">
-       									<property name="name" value="instidq"/>
-       									<property name="label" value="IDQ"/>
-       									<property name="description" value="Institution's two-digit ID qualifier"/>
-       									<property name="optional" value="true"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="String"/>
-       								</bean>
-       								<bean id="InstidPlanProgress" class="com.collegesource.report.model.ReportParameter">
-       									<property name="name" value="instid"/>
-       									<property name="label" value="InstID"/>
-       									<property name="description" value="Institution's unique identification code"/>
-       									<property name="optional" value="true"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="String"/>
-       								</bean>
-       								<bean id ="InstcdPlanProgress" class="com.collegesource.report.model.ReportParameter">
-         								<property name="name" value="instcd"/>
-       									<property name="label" value="CD"/>
-       									<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
-       									<property name="optional" value="true"/>
-       									<property name="inputType" value="textbox"/>
-       									<property name="inputClass" value="String"/>     									
-       								</bean>
-
-       							</list>
-       					</property>	
-						</bean>
-					</entry>
        				
        			<entry key="CourseSearch">
 					<bean id ="CourseSearch" parent="abstractReport" class="com.collegesource.report.model.Report">
@@ -479,21 +385,203 @@
        					<property name="subReports">
        							<list>
        								<bean id="Convert" parent="abstractReport" class="com.collegesource.report.model.Report">
-       									<property name="reportName" value="Convert"/>    								</bean>    								
+       									<property name="reportName" value="Convert"/>
+       									<property name="parameters">
+       									<list>
+       							  		  <bean id="Select_CourseConvert" class="com.collegesource.report.model.ReportParameter">
+       							   	   		<property name="name" value="Select_Course"/>
+       										<property name="label" value="Select Course"/>
+       										<property name="description" value="Course you wish to search for"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="IDQConvert" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="IDQ"/>
+       										<property name="label" value="IDQ"/>
+       										<property name="description" value="Institution's two-digit ID qualifier"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="InstIDConvert" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="InstID"/>
+       										<property name="label" value="InstID"/>
+       										<property name="description" value="Institution's unique identification code"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id ="CDConvert" class="com.collegesource.report.model.ReportParameter">
+         									<property name="name" value="CD"/>
+       										<property name="label" value="CD"/>
+       										<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>     									
+       									</bean>
+       									</list>
+       								</property>
+       								</bean>
+       								
        								<bean id="RepeatTable" parent="abstractReport" class="com.collegesource.report.model.Report">
        									<property name="reportName" value="RepeatTable"/>
+       									<property name="parameters">
+       									<list>
+       							  		  <bean id="Select_CourseRepeat" class="com.collegesource.report.model.ReportParameter">
+       							   	   		<property name="name" value="Select_Course"/>
+       										<property name="label" value="Select Course"/>
+       										<property name="description" value="Course you wish to search for"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="IDQRepeat" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="IDQ"/>
+       										<property name="label" value="IDQ"/>
+       										<property name="description" value="Institution's two-digit ID qualifier"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="InstIDRepeat" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="InstID"/>
+       										<property name="label" value="InstID"/>
+       										<property name="description" value="Institution's unique identification code"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id ="CDRepeat" class="com.collegesource.report.model.ReportParameter">
+         									<property name="name" value="CD"/>
+       										<property name="label" value="CD"/>
+       										<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>     									
+       									</bean>
+       									</list>
+       								</property>
        								</bean>
        								<bean id="String" parent="abstractReport" class="com.collegesource.report.model.Report">
        									<property name="reportName" value="String"/>
+       									<property name="parameters">
+       									<list>
+       							  		  <bean id="Select_CourseString" class="com.collegesource.report.model.ReportParameter">
+       							   	   		<property name="name" value="Select_Course"/>
+       										<property name="label" value="SelectCourse"/>
+       										<property name="description" value="Course you wish to search for"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="IDQString" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="IDQ"/>
+       										<property name="label" value="IDQ"/>
+       										<property name="description" value="Institution's two-digit ID qualifier"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="InstIDString" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="InstID"/>
+       										<property name="label" value="InstID"/>
+       										<property name="description" value="Institution's unique identification code"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id ="CDString" class="com.collegesource.report.model.ReportParameter">
+         									<property name="name" value="CD"/>
+       										<property name="label" value="CD"/>
+       										<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>     									
+       									</bean>
+       									</list>
+       								</property>
        								</bean>
        								<bean id="SubReq" parent="abstractReport" class="com.collegesource.report.model.Report">
        									<property name="reportName" value="SubReq"/>
        								</bean>
        								<bean id="TASource" parent="abstractReport" class="com.collegesource.report.model.Report">
        									<property name="reportName" value="TASource"/>
+       									<property name="parameters">
+       									<list>
+       							  		  <bean id="Select_CourseTASource" class="com.collegesource.report.model.ReportParameter">
+       							   	   		<property name="name" value="Select_Course"/>
+       										<property name="label" value="SelectCourse"/>
+       										<property name="description" value="Course you wish to search for"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="IDQTASource" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="IDQ"/>
+       										<property name="label" value="IDQ"/>
+       										<property name="description" value="Institution's two-digit ID qualifier"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="InstIDTASource" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="InstID"/>
+       										<property name="label" value="InstID"/>
+       										<property name="description" value="Institution's unique identification code"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id ="CDTASource" class="com.collegesource.report.model.ReportParameter">
+         									<property name="name" value="CD"/>
+       										<property name="label" value="CD"/>
+       										<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>     									
+       									</bean>
+       									</list>
+       								</property>
        								</bean>
        								<bean id="TATarget" parent="abstractReport" class="com.collegesource.report.model.Report">
        									<property name="reportName" value="TATarget"/>
+       									<property name="parameters">
+       									<list>
+       							  		  <bean id="Select_CourseTATarget" class="com.collegesource.report.model.ReportParameter">
+       							   	   		<property name="name" value="Select_Course"/>
+       										<property name="label" value="SelectCourse"/>
+       										<property name="description" value="Course you wish to search for"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="IDQTATarget" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="IDQ"/>
+       										<property name="label" value="IDQ"/>
+       										<property name="description" value="Institution's two-digit ID qualifier"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id="InstIDTATarget" class="com.collegesource.report.model.ReportParameter">
+       										<property name="name" value="InstID"/>
+       										<property name="label" value="InstID"/>
+       										<property name="description" value="Institution's unique identification code"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>
+       									</bean>
+       									<bean id ="CDTATarget" class="com.collegesource.report.model.ReportParameter">
+         									<property name="name" value="CD"/>
+       										<property name="label" value="CD"/>
+       										<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       										<property name="optional" value="true"/>
+       										<property name="inputType" value="textbox"/>
+       										<property name="inputClass" value="String"/>     									
+       									</bean>
+       									</list>
+       								</property>
        								</bean>
        							</list>
        						</property>
@@ -531,6 +619,7 @@
        									<property name="inputType" value="textbox"/>
        									<property name="inputClass" value="String"/>     									
        								</bean>
+
        							</list>
        					</property>	
 						</bean>

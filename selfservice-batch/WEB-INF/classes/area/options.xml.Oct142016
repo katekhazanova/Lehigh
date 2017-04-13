@@ -1,0 +1,499 @@
+<?xml version="1.0"?>
+<pages>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  OPTIONS
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+  Option sets entered here are typically used as values in dropdown lists in the 
+  pages that are configured later in this file.
+  
+  If there is a form field that requires a choice from a dropdown, the 
+  dropdown can be configured here.
+  
+  For example, to create a dropdown that contains a list of majors, use
+  something like the following:
+  
+  <options name="majors">
+    <option name="MR" label="Master Ranching" />
+    <option name="RF" label="Retail Floristry" />
+    <option name="ST" label="Sports Turf Management" />
+    <option name="FS" label="Fishing Sciences and Management" />
+  </options>
+  
+  In the above example, 
+    <options name="majors">
+  starts the options set and gives it a name to identify it with later (this 
+  name must be unique).
+  Next, each
+    <option name="X" label="Xxxx Xxx" />
+  entry defines an item that will be available from the dropdown.  The name
+  value is what will be submitted, while the label value is what the user will
+  see in the dropdown.  
+  
+  As a convenience, leave off the label field to have the name value displayed
+  as well as submitted.  In the following example, notice that the B option
+  does not have a label, and therefore the name value will be displayed as
+  well as submitted:
+  
+  <options name="gradeExample">
+    <option name="A" label="A" />
+    <option name="B" />
+  </options>
+  
+  Remember, option set names must be unique.  So doing the following would 
+  be illegal:
+  
+  <options name="courses">
+    <option name="MTH101" />
+  </options>
+  
+  ...and then later on in the file:
+  
+  <options name="courses">
+    <option name="ENG101" />
+  </options>
+
+	You also have the ability to define a check-box for any field and rather
+	than it just be TRUE/FALSE or Y/N, you can designate a character value for 
+	TRUE and a character value for FALSE. This means when CHECKED, the TRUE
+	value will be persisted. When UN-CHECKED the FALSE value will be persisted.
+	
+	For example:
+	
+			<checkboxMapping name="characterMappingAll" trueValue="A" falseValue=" " />
+
+	Remember, to reference a field to use your checkboxMapping, you must include
+	the NAME from example above as the checkBoxMapping value.
+	
+	Example, to make the Include What If Courses a check-box, define it this way:
+	
+		      <column name="includePlannedCourses" label="What If Courses">
+		        <detailView inputType="checkbox" checkboxMapping="characterMappingAll" />
+		      </column>
+	
+  The following option sets come predefined for your convenience.  We have also included 
+  characterMapping definitions for each of the D_WHATIF value options. If you
+  prefer not to use them, you may comment them out, delete them, or just 
+  leave them as is.      
+
+  -->
+
+  <options name="listAllOptions">
+  	<option name=" " label="' ' - Default" />
+    <option name="L" label="L - Full Listing" />
+    <option name="S" label="S - Short Listing" />
+    <option name="P" label="P - Postcard Audit" />
+    <option name="M" label="M - Include Pseudo" />
+    <option name="H" label="H - Reference Audit Listing" />
+  </options>
+
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               GRADE TABLE
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <options name="gradeTable">
+    <option name="A" label="A" />
+    <option name="A-" />
+    <option name="B+" />
+    <option name="B" />
+    <option name="B-" />
+    <option name="C+" />
+    <option name="C" />
+    <option name="C-" />
+    <option name="D+" />
+    <option name="D" />
+    <option name="D-" />
+    <option name="F" />
+    <option name="Z" />
+  </options>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               YEAR TERMS
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <options name="yearTerms">
+    <option name="201310" label="Spring 2013" />
+    <option name="201320" label="Summer 2013" />  
+    <option name="201330" label="Fall 2013" />
+    <option name="201410" label="Spring 2014" />
+    <option name="201420" label="Summer 2014" />  
+    <option name="201430" label="Fall 2014" />
+    <option name="201510" label="Spring 2015" />
+    <option name="201520" label="Summer 2015" />  
+    <option name="201530" label="Fall 2015" />    
+    <option name="201610" label="Spring 2016" />
+    <option name="201620" label="Summer 2016" />
+    <option name="201630" label="Fall 2016" />
+  </options>
+  
+  <options name="auditRequestYearTerms">
+     <option name="201310" label="Spring 2013" />
+    <option name="201320" label="Summer 2013" />  
+    <option name="201330" label="Fall 2013" />
+    <option name="201410" label="Spring 2014" />
+    <option name="201420" label="Summer 2014" />  
+    <option name="201430" label="Fall 2014" />
+    <option name="201510" label="Spring 2015" />
+    <option name="201520" label="Summer 2015" />  
+    <option name="201530" label="Fall 2015" />    
+    <option name="201610" label="Spring 2016" />
+    <option name="201620" label="Summer 2016" />
+    <option name="201630" label="Fall 2016" />
+  </options>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  TRUE/FALSE
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <options name="trueFalse">
+    <option name="true" label="Yes" />
+    <option name="false" label="No" />
+  </options>
+
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                              Character value CHECKBOX mappings
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+		<!-- Include ALL whatif_courses -->
+		<checkboxMapping name="characterMappingAll" trueValue="A" falseValue=" " />
+		<!-- Include Planned courses -->
+		<checkboxMapping name="characterMappingPlanned" trueValue="P" falseValue=" " />
+		<!-- Include Cart courses only -->
+		<checkboxMapping name="characterMappingCart" trueValue="T" falseValue=" " />
+		<!-- Include u.direct courses from default plan -->
+		<checkboxMapping name="characterMappingUdirect" trueValue="D" falseValue=" " />
+		<!-- Option D if any exist, otherwise option A -->
+		<checkboxMapping name="characterMappingEitherOr" trueValue="E" falseValue=" " />
+		
+		
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  LIST OF COUNTRIES 
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <options name="countries">
+    <option name="US" label="United States" />
+    <option name="CA" label="Canada" />
+    <option name="MX" label="Mexico" />
+    <option name="" label="- Select a Country -" />
+    <option name="AF" label="Afghanistan" />
+    <option name="AX" label="Aland Islands" />
+    <option name="AL" label="Albania" />
+    <option name="DZ" label="Algeria" />
+    <option name="AS" label="American Samoa" />
+    <option name="AD" label="Andorra" />
+    <option name="AO" label="Angola" />
+    <option name="AI" label="Anguilla" />
+    <option name="AQ" label="Antarctica" />
+    <option name="AG" label="Antigua and Barbuda" />
+    <option name="AR" label="Argentina" />
+    <option name="AM" label="Armenia" />
+    <option name="AW" label="Aruba" />
+    <option name="AC" label="Ascension Island" />
+    <option name="AU" label="Australia" />
+    <option name="AT" label="Austria" />
+    <option name="AZ" label="Azerbaijan" />
+    <option name="BS" label="Bahamas" />
+    <option name="BH" label="Bahrain" />
+    <option name="BB" label="Barbados" />
+    <option name="BD" label="Bangladesh" />
+    <option name="BY" label="Belarus" />
+    <option name="BE" label="Belgium" />
+    <option name="BZ" label="Belize" />
+    <option name="BJ" label="Benin" />
+    <option name="BM" label="Bermuda" />
+    <option name="BT" label="Bhutan" />
+    <option name="BW" label="Botswana" />
+    <option name="BO" label="Bolivia" />
+    <option name="BA" label="Bosnia and Herzegovina" />
+    <option name="BV" label="Bouvet Island" />
+    <option name="BR" label="Brazil" />
+    <option name="IO" label="British Indian Ocean Territory" />
+    <option name="BN" label="Brunei Darussalam" />
+    <option name="BG" label="Bulgaria" />
+    <option name="BF" label="Burkina Faso" />
+    <option name="BI" label="Burundi" />
+    <option name="KH" label="Cambodia" />
+    <option name="CM" label="Cameroon" />
+    <option name="CA" label="Canada" />
+    <option name="CV" label="Cape Verde" />
+    <option name="KY" label="Cayman Islands" />
+    <option name="CF" label="Central African Republic" />
+    <option name="TD" label="Chad" />
+    <option name="CL" label="Chile" />
+    <option name="CN" label="China" />
+    <option name="CX" label="Christmas Island" />
+    <option name="CC" label="Cocos (Keeling) Islands" />
+    <option name="CO" label="Colombia" />
+    <option name="KM" label="Comoros" />
+    <option name="CG" label="Congo" />
+    <option name="CD" label="Congo, Democratic Republic" />
+    <option name="CK" label="Cook Islands" />
+    <option name="CR" label="Costa Rica" />
+    <option name="CI" label="Cote D'Ivoire (Ivory Coast)" />
+    <option name="HR" label="Croatia (Hrvatska)" />
+    <option name="CU" label="Cuba" />
+    <option name="CY" label="Cyprus" />
+    <option name="CZ" label="Czech Republic" />
+    <option name="CS" label="Czechoslovakia (former)" />
+    <option name="DK" label="Denmark" />
+    <option name="DJ" label="Djibouti" />
+    <option name="DM" label="Dominica" />
+    <option name="DO" label="Dominican Republic" />
+    <option name="TP" label="East Timor" />
+    <option name="EC" label="Ecuador" />
+    <option name="EG" label="Egypt" />
+    <option name="SV" label="El Salvador" />
+    <option name="GQ" label="Equatorial Guinea" />
+    <option name="ER" label="Eritrea" />
+    <option name="EE" label="Estonia" />
+    <option name="ET" label="Ethiopia" />
+    <option name="FK" label="Falkland Islands (Malvinas)" />
+    <option name="FO" label="Faroe Islands" />
+    <option name="FJ" label="Fiji" />
+    <option name="FI" label="Finland" />
+    <option name="FR" label="France" />
+    <option name="FX" label="France, Metropolitan" />
+    <option name="GF" label="French Guiana" />
+    <option name="PF" label="French Polynesia" />
+    <option name="TF" label="French Southern Territories" />
+    <option name="MK" label="F.Y.R.O.M. (Macedonia)" />
+    <option name="GA" label="Gabon" />
+    <option name="GM" label="Gambia" />
+    <option name="GE" label="Georgia" />
+    <option name="DE" label="Germany" />
+    <option name="GH" label="Ghana" />
+    <option name="GI" label="Gibraltar" />
+    <option name="GB" label="Great Britain (UK)" />
+    <option name="GR" label="Greece" />
+    <option name="GL" label="Greenland" />
+    <option name="GD" label="Grenada" />
+    <option name="GP" label="Guadeloupe" />
+    <option name="GU" label="Guam" />
+    <option name="GT" label="Guatemala" />
+    <option name="GN" label="Guinea" />
+    <option name="GW" label="Guinea-Bissau" />
+    <option name="GY" label="Guyana" />
+    <option name="HT" label="Haiti" />
+    <option name="HM" label="Heard and McDonald Islands" />
+    <option name="HN" label="Honduras" />
+    <option name="HK" label="Hong Kong" />
+    <option name="HU" label="Hungary" />
+    <option name="IS" label="Iceland" />
+    <option name="IN" label="India" />
+    <option name="ID" label="Indonesia" />
+    <option name="IR" label="Iran" />
+    <option name="IQ" label="Iraq" />
+    <option name="IE" label="Ireland" />
+    <option name="IL" label="Israel" />
+    <option name="IM" label="Isle of Man" />
+    <option name="IT" label="Italy" />
+    <option name="JE" label="Jersey" />
+    <option name="JM" label="Jamaica" />
+    <option name="JP" label="Japan" />
+    <option name="JO" label="Jordan" />
+    <option name="KZ" label="Kazakhstan" />
+    <option name="KE" label="Kenya" />
+    <option name="KI" label="Kiribati" />
+    <option name="KP" label="Korea (North)" />
+    <option name="KR" label="Korea (South)" />
+    <option name="KW" label="Kuwait" />
+    <option name="KG" label="Kyrgyzstan" />
+    <option name="LA" label="Laos" />
+    <option name="LV" label="Latvia" />
+    <option name="LB" label="Lebanon" />
+    <option name="LI" label="Liechtenstein" />
+    <option name="LR" label="Liberia" />
+    <option name="LY" label="Libya" />
+    <option name="LS" label="Lesotho" />
+    <option name="LT" label="Lithuania" />
+    <option name="LU" label="Luxembourg" />
+    <option name="MO" label="Macau" />
+    <option name="MG" label="Madagascar" />
+    <option name="MW" label="Malawi" />
+    <option name="MY" label="Malaysia" />
+    <option name="MV" label="Maldives" />
+    <option name="ML" label="Mali" />
+    <option name="MT" label="Malta" />
+    <option name="MH" label="Marshall Islands" />
+    <option name="MQ" label="Martinique" />
+    <option name="MR" label="Mauritania" />
+    <option name="MU" label="Mauritius" />
+    <option name="YT" label="Mayotte" />
+    <option name="MX" label="Mexico" />
+    <option name="FM" label="Micronesia" />
+    <option name="MD" label="Moldova" />
+    <option name="MC" label="Monaco" />
+    <option name="ME" label="Montenegro" />
+    <option name="MS" label="Montserrat" />
+    <option name="MA" label="Morocco" />
+    <option name="MZ" label="Mozambique" />
+    <option name="MM" label="Myanmar" />
+    <option name="NA" label="Namibia" />
+    <option name="NR" label="Nauru" />
+    <option name="NP" label="Nepal" />
+    <option name="NL" label="Netherlands" />
+    <option name="AN" label="Netherlands Antilles" />
+    <option name="NT" label="Neutral Zone" />
+    <option name="NC" label="New Caledonia" />
+    <option name="NZ" label="New Zealand (Aotearoa)" />
+    <option name="NI" label="Nicaragua" />
+    <option name="NE" label="Niger" />
+    <option name="NG" label="Nigeria" />
+    <option name="NU" label="Niue" />
+    <option name="NF" label="Norfolk Island" />
+    <option name="MP" label="Northern Mariana Islands" />
+    <option name="NO" label="Norway" />
+    <option name="OM" label="Oman" />
+    <option name="PK" label="Pakistan" />
+    <option name="PW" label="Palau" />
+    <option name="PS" label="Palestinian Territory, Occupied" />
+    <option name="PA" label="Panama" />
+    <option name="PG" label="Papua New Guinea" />
+    <option name="PY" label="Paraguay" />
+    <option name="PE" label="Peru" />
+    <option name="PH" label="Philippines" />
+    <option name="PN" label="Pitcairn" />
+    <option name="PL" label="Poland" />
+    <option name="PT" label="Portugal" />
+    <option name="PR" label="Puerto Rico" />
+    <option name="QA" label="Qatar" />
+    <option name="RE" label="Reunion" />
+    <option name="RO" label="Romania" />
+    <option name="RU" label="Russian Federation" />
+    <option name="RW" label="Rwanda" />
+    <option name="GS" label="S. Georgia and S. Sandwich Isls." />
+    <option name="KN" label="Saint Kitts and Nevis" />
+    <option name="LC" label="Saint Lucia" />
+    <option name="VC" label="Saint Vincent &amp; the Grenadines" />
+    <option name="WS" label="Samoa" />
+    <option name="SM" label="San Marino" />
+    <option name="ST" label="Sao Tome and Principe" />
+    <option name="SA" label="Saudi Arabia" />
+    <option name="SN" label="Senegal" />
+    <option name="RS" label="Serbia" />
+    <option name="SC" label="Seychelles" />
+    <option name="SL" label="Sierra Leone" />
+    <option name="SG" label="Singapore" />
+    <option name="SI" label="Slovenia" />
+    <option name="SK" label="Slovak Republic" />
+    <option name="SB" label="Solomon Islands" />
+    <option name="SO" label="Somalia" />
+    <option name="ZA" label="South Africa" />
+    <option name="GS" label="S. Georgia and S. Sandwich Isls." />
+    <option name="ES" label="Spain" />
+    <option name="LK" label="Sri Lanka" />
+    <option name="SH" label="St. Helena" />
+    <option name="PM" label="St. Pierre and Miquelon" />
+    <option name="SD" label="Sudan" />
+    <option name="SR" label="Suriname" />
+    <option name="SJ" label="Svalbard &amp; Jan Mayen Islands" />
+    <option name="SZ" label="Swaziland" />
+    <option name="SE" label="Sweden" />
+    <option name="CH" label="Switzerland" />
+    <option name="SY" label="Syria" />
+    <option name="TW" label="Taiwan" />
+    <option name="TJ" label="Tajikistan" />
+    <option name="TZ" label="Tanzania" />
+    <option name="TH" label="Thailand" />
+    <option name="TG" label="Togo" />
+    <option name="TK" label="Tokelau" />
+    <option name="TO" label="Tonga" />
+    <option name="TT" label="Trinidad and Tobago" />
+    <option name="TN" label="Tunisia" />
+    <option name="TR" label="Turkey" />
+    <option name="TM" label="Turkmenistan" />
+    <option name="TC" label="Turks and Caicos Islands" />
+    <option name="TV" label="Tuvalu" />
+    <option name="UG" label="Uganda" />
+    <option name="UA" label="Ukraine" />
+    <option name="AE" label="United Arab Emirates" />
+    <option name="UK" label="United Kingdom" />
+    <option name="US" label="United States" />
+    <option name="UM" label="US Minor Outlying Islands" />
+    <option name="UY" label="Uruguay" />
+    <option name="SU" label="USSR (former)" />
+    <option name="UZ" label="Uzbekistan" />
+    <option name="VU" label="Vanuatu" />
+    <option name="VA" label="Vatican City State (Holy See)" />
+    <option name="VE" label="Venezuela" />
+    <option name="VN" label="Viet Nam" />
+    <option name="VG" label="British Virgin Islands" />
+    <option name="VI" label="Virgin Islands (U.S.)" />
+    <option name="WF" label="Wallis and Futuna Islands" />
+    <option name="EH" label="Western Sahara" />
+    <option name="YE" label="Yemen" />
+    <option name="YU" label="Yugoslavia (former)" />
+    <option name="ZM" label="Zambia" />
+    <option name="ZR" label="(Zaire) - See Congo, Democratic Republic" />
+    <option name="ZW" label="Zimbabwe" />
+  </options>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               LIST OF US STATES
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <options name="usStates">
+    <option name="" label="- Select a State -" />
+    <option name="AL" label="Alabama" />
+    <option name="AK" label="Alaska" />
+    <option name="AS" label="American Samoa" />
+    <option name="AZ" label="Arizona" />
+    <option name="AR" label="Arkansas" />
+    <option name="CA" label="California" />
+    <option name="CO" label="Colorado" />
+    <option name="CT" label="Connecticut" />
+    <option name="DE" label="Delaware" />
+    <option name="DC" label="District Of Columbia" />
+    <option name="FM" label="Federated States Of Micronesia" />
+    <option name="FL" label="Florida" />
+    <option name="GA" label="Georgia" />
+    <option name="GU" label="Guam" />
+    <option name="HI" label="Hawaii" />
+    <option name="ID" label="Idaho" />
+    <option name="IL" label="Illinois" />
+    <option name="IN" label="Indiana" />
+    <option name="IA" label="Iowa" />
+    <option name="KS" label="Kansas" />
+    <option name="KY" label="Kentucky" />
+    <option name="LA" label="Louisiana" />
+    <option name="ME" label="Maine" />
+    <option name="MH" label="Marshall Islands" />
+    <option name="MD" label="Maryland" />
+    <option name="MA" label="Massachusetts" />
+    <option name="MI" label="Michigan" />
+    <option name="MN" label="Minnesota" />
+    <option name="MS" label="Mississippi" />
+    <option name="MO" label="Missouri" />
+    <option name="MT" label="Montana" />
+    <option name="NE" label="Nebraska" />
+    <option name="NV" label="Nevada" />
+    <option name="NH" label="New Hampshire" />
+    <option name="NJ" label="New Jersey" />
+    <option name="NM" label="New Mexico" />
+    <option name="NY" label="New York" />
+    <option name="NC" label="North Carolina" />
+    <option name="ND" label="North Dakota" />
+    <option name="MP" label="Northern Mariana Islands" />
+    <option name="OH" label="Ohio" />
+    <option name="OK" label="Oklahoma" />
+    <option name="OR" label="Oregon" />
+    <option name="PW" label="Palau" />
+    <option name="PA" label="Pennsylvania" />
+    <option name="PR" label="Puerto Rico" />
+    <option name="RI" label="Rhode Island" />
+    <option name="SC" label="South Carolina" />
+    <option name="SD" label="South Dakota" />
+    <option name="TN" label="Tennessee" />
+    <option name="TX" label="Texas" />
+    <option name="UT" label="Utah" />
+    <option name="VT" label="Vermont" />
+    <option name="VI" label="Virgin Islands" />
+    <option name="VA" label="Virginia" />
+    <option name="WA" label="Washington" />
+    <option name="WV" label="West Virginia" />
+    <option name="WI" label="Wisconsin" />
+    <option name="WY" label="Wyoming" />
+  </options>
+
+</pages>

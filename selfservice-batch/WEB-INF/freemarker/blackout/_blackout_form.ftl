@@ -40,7 +40,7 @@
 						<input type="checkbox" id="wednesday" name="wednesday" value="Y" <#if blackout.isWednesday()> checked</#if>>Wed	
 						<input type="checkbox" id="thursday" name="thursday" value="Y" <#if blackout.isThursday()> checked</#if>>Th
 						<input type="checkbox" id="friday" name="friday" value="Y" <#if blackout.isFriday()> checked</#if>>Fri
-						<input type="checkbox" id="saturday" name="saturday" value="Y" <#if blackout.isSaturday()> checked</#if>>Sat
+						<input type="checkbox" id="saturday" name="staurday" value="Y" <#if blackout.isSaturday()> checked</#if>>Sat
 						<input type="checkbox" id="sunday" name="sunday" value="Y" <#if blackout.isSunday()> checked</#if>>Sun
 					</td>
 					<td>&nbsp;</td>

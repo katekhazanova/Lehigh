@@ -1,26 +1,89 @@
 <@layout.head title="My Audit" />
 <@layout.body hideMenu=printerFriendly>
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <input type="hidden" id="pageGroup" value="audits"/>
-
+<#if !useFile>
+<#-- ========== DISPLAY AUDIT ========== -->
 <#if showAudit>
-	<input type="hidden" id="auditExceptionMode" value="true"/>
-	<#if showSuccess??>
-		<input type="hidden" id="showSuccess" value="${showSuccess}"/>
-	</#if>
-
-	<#if runAudit??>
-		<input type="hidden" id="runAudit" value="${runAudit}"/>
-	</#if>
-  	
-	<#include 'exception_audit_header.ftl' />
+	<input type="hidden" id="exceptionMode"value="true"/>
+  	<div class="row">
+  	<h1 class="sr-only">Exception Mode</h1>
+  	<h2 class="sr-only">Student and Audit Information</h2>
+		<div class="col-md-2" style="font-size:16px;margin-bottom: 10px;font-weight: 500; line-height: 1.1; margin-top:10px;">
+			${audit.prefixName!''} ${audit.firstName!''} ${audit.middleName!''} ${audit.lastName!''} ${audit.suffixName!''} ${audit.stuName!''}
+		</div>
+		<div class="col-md-3" style="font-size:16px;margin-bottom: 10px;font-weight: 500; line-height: 1.1; margin-top:10px;">
+				<#if audit.dptitle1??>${audit.dptitle1!''} <br /></#if>
+					<#if audit.dptitle2??>${audit.dptitle2!''} <br /></#if>
+					<#if audit.webtitle??>${audit.webtitle!''} <br/></#if>
+		</div>
+		<div class="col-md-2" style="font-size:16px;margin-bottom: 10px;font-weight: 500; line-height: 1.1; margin-top:10px;">
+			${audit.dprog!''}
+		</div>
+		<div class="col-md-2" style="font-size:16px;margin-bottom: 10px;font-weight: 500; line-height: 1.1; margin-top:10px;">
+			${termService.getFriendlyNameFromCode(audit.catlyt)!audit.catlyt}
+		</div>
+		<div class="col-md-3 pull-right">
+			<a class="btn btn-default" href="<@s.url />/audit/read.html">Exit Exception Mode</a>
+		</div>
+	</div>
 	
+	<hr style="margin-top: 0px;">
+	
+	<div class="row">
+		<div id="ExceptionAdded" class="col-md-offset-3 col-md-6 alert alert-success" style="display:none;">
+			<center><strong>Success!</strong> One or more Exceptions have been recently added please run the audit for them to apply.</center>
+		</div>
+		<div id="loadingAudit" class="col-md-offset-3 col-md-6 alert alert-info" style="display:none;">
+			<#assign updateMsg = "updating every ${auditConfig.auditPollingRate} seconds" />
+			<center><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> <strong>Loading...</strong> The audit you requested is running, ${updateMsg}</center>
+		</div>
+	</div>
+	
+	<#-- ========== AUDIT MENU ========== -->
 <div class="row">
-
-	<#include 'exception_audit.ftl' />
-
-	<div id="exceptionList" class="col-md-5 col-sm-12" >
+<h2 class="sr-only">Audit Result Details</h2>
+  	<div class="col-md-7">				
+	<#if displayHtmlReport()>
+		<div id="auditResults">
+			<div id="auditMenu">
+				<#--
+					Adds the "Open All Sections" and "Close All Sections" links to the top of the audit.
+					This toolbar is hidden initially (display:none;) and is only displayed to user agents that have javascript enabled.
+					See selfservice.audit.initAudit() javascript for more info.
+				-->
+				<div class="aligncenter auditHeaderMessage">
+					<@s.message 'audit.htmlHeaderMessage' />
+				</div>
+				
+				<p id="expandCollapseAllLinks" style="display:none;">
+					<a href="#" id="expandAll">Open All Sections</a> <span class="spacer">&nbsp;</span> 
+					<a href="#" id="collapseAll">Close All Sections</a>
+				</p>
+						
+				<#if !printerFriendly>
+					<@help.tooltip topic="auditresults" />
+				</#if>		
+				
+			</div> <!-- end auditMenu -->
+	
+			<#-- ========== AUDIT REPORT ========== -->
+			<#--${report}-->
+			<br/>
+			<@readerDumper reader=reportReader />
+			
+			<#assign collapseReqs = auditConfig.autoCollapseStandardView />
+			
+			<script type="text/javascript">
+				Event.observe(window, 'load', function() {
+					selfservice.audit.initAudit('<@h.url href="/plannedcourse/preview.html" />', ${auditConfig.specialEffects?string}, '${seriesIdentifierClass}', ${collapseReqs?string});
+				}); 
+			</script>
+		</div>
+	</#if>
+	</div>
+	<div id="exceptionList" class="col-md-5" >
 		      <h2 style="margin-bottom: 0px;">Exceptions</h2>
 		      <br/>
 		      	<table id="currentExceptions" class="table table-striped table-bordered table-hover table-condensed">
@@ -238,7 +301,7 @@
    					</div>
 				</div>
 				
-				<div id="chosen-box" class="col-md-6 auditHighlight">
+				<div id="chosen-box" class="col-md-6" style="border:2px solid orange;">
 					<div class="col-md-12">
 						<span class="courseMod-chosen-label" style="font-style: italic;"></span>
 					</div>
@@ -250,7 +313,7 @@
 					</div>
 				</div>
 				
-				<div id="chosen-box2" class="col-md-6 auditHighlight" style="display: none;">
+				<div id="chosen-box2" class="col-md-6" style="display: none; border:2px solid orange;" >
 					<div class="col-md-12">
 						<span class="courseMod-chosen-label2" style="font-style: italic;"></span>
 					</div>
@@ -361,10 +424,6 @@
 		<input type="hidden" id="addCourseButton" value="${addCourse}"/>
 		<input type="hidden" id="swapCourseButton" value="${swapCourse}"/>
 		
-		<@sec.hasAppFnPerm appFn=AppFuncRole.SS_AREA_EXCEPTION perm="C">
-        	<input type="hidden" id="moreButton" value="true"/>
-		</@sec.hasAppFnPerm>
-
 		<script type="text/javascript" >
 			var authCodes =[
 			<#list authCodes as authCode>
@@ -375,5 +434,14 @@
 		
 	</div><!--/course mode col -->
 </div><!-- /Page Row -->
+<br>
+<div class="row">
+	<@h.statusLegend />
+</div>
+  	
+</#if>
 </#if>
 </@layout.body>
+
+<#function displayHtmlReport><#return reportType?string?upper_case == "HTM" /></#function>
+<#function displayPdfReport> <#return reportType?string?upper_case == "PDF" /></#function>

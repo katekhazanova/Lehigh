@@ -47,11 +47,11 @@
 					<!-- ************************************************** -->
 					
 					<property name="comKey">
-						<value>ONL</value>
+						<value>COM</value>
 					</property>
 					
 					<property name="serverName">
-						<value>SETTHIS</value>
+						<value> </value>
 					</property>
 					
 					<property name="sleepTime">
@@ -67,6 +67,7 @@
 						<entry key="TXT" value="TRUE" /> 	-->
 					<property name="enabledReports">
 						<util:map>
+                                                        <entry key="TXT" value="TRUE" />
 							<entry key="PDF" value="TRUE" />
 						</util:map>
 					</property>
@@ -114,7 +115,7 @@
 						<value></value>
 					</property>
 
-					<lookup-method name="createAuditProcessor" bean="auditProcessor"/>					
+					<lookup-method name="createAuditProcessor" bean="auditProcessor"/>
 					<!-- ************************************************** -->
 					<!-- *** end of editable property values            *** -->
 					<!-- ************************************************** -->
@@ -134,6 +135,204 @@
 										
 				</bean>
 				<!-- ***  end copy  *** -->
+
+                                <!-- *** begin copy *** -->
+                                <bean id="ssHandler" class="uachieve.daemon.RequestHandler" scope="prototype">
+
+
+                                        <!-- ************************************************** -->
+                                        <!-- *** Edit the "value" elements of these proper- *** -->
+                                        <!-- *** ties as appropriate for your institution   *** -->
+                                        <!-- ************************************************** -->
+
+                                        <property name="comKey">
+                                                <value>COM</value>
+                                        </property>
+
+                                        <property name="serverName">
+                                                <value>SS</value>
+                                        </property>
+
+                                        <property name="sleepTime">
+                                                <value>3</value>
+                                        </property>
+
+                                        <!--
+                                                Format is <entry key="<TYPE>" value="<TRUE/FALSE>" />
+                                                Add the following lines to the util:map below to enable
+                                                these report types.
+
+                                                <entry key="HTM" value="TRUE" />
+                                                <entry key="TXT" value="TRUE" />        -->
+                                        <property name="enabledReports">
+                                                <util:map>
+                                                        <entry key="PDF" value="TRUE" />
+                                                        <entry key="HTM" value="TRUE" />
+                                                </util:map>
+                                        </property>
+
+                                        <!-- true/false -->
+                                        <property name="deleteRequest">
+                                                <value>false</value>
+                                        </property>
+
+                                        <property name="loadLocalStudentData">
+                                                <value>true</value>
+                                        </property>
+                                        <property name="loadSISStudentData">
+                                                <value>true</value>
+                                        </property>
+
+                                        <!-- name of file in the ../config directory -->
+                                        <property name="fileNameIncludeTextTop">
+                                                <value></value>
+                                        </property>
+
+                                        <!-- name of file in the ../config directory -->
+                                        <property name="fileNameIncludeTextBottom">
+                                                <value></value>
+                                        </property>
+
+                                        <!-- Valid Options are:
+                                                OneFile, SepFiles, Database, OneFileAndDatabase, SepFilesAndDatabase
+
+                                                        default (if blank) is Database
+                                         -->
+                                        <property name="reportSaveOptions">
+                                                <value>Database</value>
+                                        </property>
+                                        <!-- Path to save reports to File System
+
+                                                        default (if blank) is ../reports
+                                        -->
+                                        <property name="reportSavePath">
+                                                <value></value>
+                                        </property>
+
+                                        <!-- If left blank, defaults to its standard location of /logs -->
+                                        <property name="logSavePath">
+                                                <value></value>
+                                        </property>
+
+                                        <lookup-method name="createAuditProcessor" bean="auditProcessor"/>
+                                        <!-- ************************************************** -->
+                                        <!-- *** end of editable property values            *** -->
+                                        <!-- ************************************************** -->
+
+
+                                        <!-- ************************************************** -->
+                                        <!-- ***   Do not edit the properties below here    *** -->
+                                        <!-- *** (unless you really know what you're doing) *** -->
+                                        <!-- ************************************************** -->
+                                        <property name="auditService"><ref bean="uachieve-slayer.auditService"/></property>
+                                        <property name="supportService"><ref bean="uachieve-slayer.supportService"/></property>
+                                        <property name="requestQueue"><ref local="jobRequestQueue"/></property>
+                                        <property name="performanceMonitor" ref="performanceMonitor"/>
+                                        <!-- ************************************************** -->
+                                        <!-- *** End of non-editable properties             *** -->
+                                        <!-- ************************************************** -->
+
+                                </bean>
+                                <!-- ***  end copy  *** -->
+
+                                <!-- *** begin copy *** -->
+                                <bean id="batchHandler" class="uachieve.daemon.RequestHandler" scope="prototype">
+
+
+                                        <!-- ************************************************** -->
+                                        <!-- *** Edit the "value" elements of these proper- *** -->
+                                        <!-- *** ties as appropriate for your institution   *** -->
+                                        <!-- ************************************************** -->
+
+                                        <property name="comKey">
+                                                <value>BAT</value>
+                                        </property>
+
+                                        <property name="serverName">
+                                                <value>BATCH</value>
+                                        </property>
+
+                                        <property name="sleepTime">
+                                                <value>3</value>
+                                        </property>
+
+                                        <!--
+                                                Format is <entry key="<TYPE>" value="<TRUE/FALSE>" />
+                                                Add the following lines to the util:map below to enable
+                                                these report types.
+
+                                                <entry key="HTM" value="TRUE" />
+                                                <entry key="TXT" value="TRUE" />        -->
+                                        <property name="enabledReports">
+                                                <util:map>
+                                                        <entry key="PDF" value="TRUE" />
+                                                        <entry key="TXT" value="TRUE" />
+                                                </util:map>
+                                        </property>
+
+                                        <!-- true/false -->
+                                        <property name="deleteRequest">
+                                                <value>false</value>
+                                        </property>
+
+                                        <property name="loadLocalStudentData">
+                                                <value>true</value>
+                                        </property>
+                                        <property name="loadSISStudentData">
+                                                <value>true</value>
+                                        </property>
+
+                                        <!-- name of file in the ../config directory -->
+                                        <property name="fileNameIncludeTextTop">
+                                                <value></value>
+                                        </property>
+
+                                        <!-- name of file in the ../config directory -->
+                                        <property name="fileNameIncludeTextBottom">
+                                                <value></value>
+                                        </property>
+
+                                        <!-- Valid Options are:
+                                                OneFile, SepFiles, Database, OneFileAndDatabase, SepFilesAndDatabase
+
+                                                        default (if blank) is Database
+                                         -->
+                                        <property name="reportSaveOptions">
+                                                <value>Database</value>
+                                        </property>
+                                        <!-- Path to save reports to File System
+
+                                                        default (if blank) is ../reports
+                                        -->
+                                        <property name="reportSavePath">
+                                                <value></value>
+                                        </property>
+
+                                        <!-- If left blank, defaults to its standard location of /logs -->
+                                        <property name="logSavePath">
+                                                <value></value>
+                                        </property>
+
+                                        <lookup-method name="createAuditProcessor" bean="auditProcessor"/>
+                                        <!-- ************************************************** -->
+                                        <!-- *** end of editable property values            *** -->
+                                        <!-- ************************************************** -->
+
+
+                                        <!-- ************************************************** -->
+                                        <!-- ***   Do not edit the properties below here    *** -->
+                                        <!-- *** (unless you really know what you're doing) *** -->
+                                        <!-- ************************************************** -->
+                                        <property name="auditService"><ref bean="uachieve-slayer.auditService"/></property>
+                                        <property name="supportService"><ref bean="uachieve-slayer.supportService"/></property>
+                                        <property name="requestQueue"><ref local="jobRequestQueue"/></property>
+                                        <property name="performanceMonitor" ref="performanceMonitor"/>
+                                        <!-- ************************************************** -->
+                                        <!-- *** End of non-editable properties             *** -->
+                                        <!-- ************************************************** -->
+
+                                </bean>
+                                <!-- ***  end copy  *** -->
 
 			</list>
 		</property>

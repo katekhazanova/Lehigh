@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 <!--
   Copyright (c) 2008-2014 CollegeSource, Inc.  All Rights Reserved.
-  
-  This software is the confidential and proprietary information of 
-  redLantern, LLC ("Confidential Information").  You shall not 
-  disclose such Confidential Information and shall use it only in 
+
+  This software is the confidential and proprietary information of
+  redLantern, LLC ("Confidential Information").  You shall not
+  disclose such Confidential Information and shall use it only in
   accordance with the terms of the license agreement you entered
   into with redLantern, LLC.  You shall not distribute this software
   in any form (whole, part, modified, compiled, encrypted, etc.) to
   any individual or organization not covered by the terms of your
   license agreement.
-  
+
   -->
 
 <!-- Properties that can be changed to reference client customized classes -->
-			
-    <bean id="customStudentDataLoader"  class="uachieve.server.custom.DefaultStudentDataLoader"/>    
+
+    <!--<bean id="customStudentDataLoader"  class="uachieve.server.custom.DefaultStudentDataLoader"/>-->
 	<bean id="customStudentDataMutator" class="uachieve.server.custom.DefaultStudentDataMutator"/>
 	<bean id="customStudentDataMerger" class="uachieve.server.custom.DefaultStudentDataMerger"/>
-	
-	
+
+<!-- CUSTOM CODE-->
+<import resource="classpath:studentQueries.xml" />
+
+	<bean id="customStudentDataLoader" class="com.collegesource.interfaces.student.BannerStudentDataLoader">
+		<property name="bannerDao" ref="bannerDao" />
+		<property name="topText" value="topfile.txt"/>
+		<property name="whatIfTopText" value="whatif-topfile.txt"/>
+ 	</bean>
+
+	<bean id="bannerDao" class="com.collegesource.interfaces.student.dao.BannerDaoImpl">
+       <property name="bannerJdbcTemplate" ref="server.jdbcTemplate"/>
+       <property name="studentQueryUtil" ref="studentQueryUtil" />
+    </bean>
+<!-- END CUSTOM CODE -->
+
 	<bean id="transferResultsMutator" class="uachieve.server.ta.DefaultTransferResultsMutator" >
 		<property name="studentService" ref="uachieve-slayer.studentService"/>
 	</bean>
-	
-	<!-- End of properties that can be changed to reference client customized classes -->	
+
+	<!-- End of properties that can be changed to reference client customized classes -->
 </beans>

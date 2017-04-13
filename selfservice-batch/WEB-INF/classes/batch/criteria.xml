@@ -1,304 +1,392 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	
+
   	<bean id="criteria" class="uachieve.bas.area.batch.model.Criteria">
-  	
+
   		<!-- Used as main student query -->
+		<property name="studentNameQuery">
+			<value>
+				select 		distinct lu.LIN as stuno, lu.name as stuname
+				from 		LU_UACHIEVE_BATCH lu
+			</value>
+		</property>
+
+  		<!-- Query used to retrieve unique list of students for Preview screen -->
 		<property name="studentQuery">
 			<value>
-				select 		sm.stuno, a.stuname, d.dprog as dprog, d.drcatlyt as catlyt  
-				from 		stu_master sm, stu_demo a, stu_dprog d
-				where 		sm.int_seq_no = a.stu_mast_no
-				and         sm.int_seq_no = d.stu_mast_no 
-				
-				<!--  select 		sm.stuno, sm.stuname, dprog as dprog, drcatlyt as catlyt  
-				from 		batch_students sm
-				where 		
-				-->
+				select 		distinct lu.LIN as stuno, lu.name as stuname
+				from 		LU_UACHIEVE_BATCH lu
 			</value>
-		</property>	
-		
-		
+		</property>
+
+
 		<!-- Keyword for where statement -->
 		<property name="studentQueryKeyword">
 			<value>
-				and
+				WHERE
 			</value>
 		</property>
-		
+
 		<property name="previewOrderby">
-		<value>stuno</value>
+		<value>stuname</value>
 		</property>
-		
+
 		<property name="auditOrderby">
 		<value>stuname, dprog, catlyt</value>
 		</property>
-		
-		
+
+
 		<property name="operands">
 			<map>
-				<!-- Possible data points -->
-				
-				<entry key="StudentDegree">
-				
-					<bean id="studentDegree" class="uachieve.bas.area.batch.model.Operand">
-					
+
+				<entry key="RegTerm">
+
+					<bean id="regTerm" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Student Degree</value>
+							<value>Reg Term</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								sm.int_seq_no in (select stu_mast_no from stu_dprog where dprog {operator} {value})
+								lu.REG_TERM {operator} {value}
 							</value>
 						</property>
-						
+
 						<property name="lov">
 							<value>
-								select 	    (dprog + ' '),
-											(dprog + ' - ' + dptitle1) value
-								from 		dprog 
-								where 		instidq = '73' 
-											and rtrim(instid) = 'TEST40'
-											and rtrim(instcd) = ''
-											and lyt like '999999' 
-								order by	dprog
+								select stvterm_code, stvterm_code value
+								from stvterm 
+								where stvterm_start_date between sysdate-180 and sysdate+150
 							</value>
 						</property>
-						
+
 					</bean>
-					
+
 				</entry>
-				
-				
-				
-				<entry key="StudentException">
-				
-					<bean id="studentException" class="uachieve.bas.area.batch.model.Operand">
-					
+
+
+
+				<entry key="GraduationTerm">
+
+					<bean id="graduationTerm" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Student Exception</value>
+							<value>Graduation Term</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								sm.int_seq_no in (select stu_mast_no from stu_exceptions where ctlcd {operator} {value})
+								lu.GRADUATION_TERM {operator} {value}
 							</value>
 						</property>
-						
+
 						<property name="lov">
 							<value>
-								select		distinct ctlcd,
-											ctlcd value
-    							from		gmaster
-   								where 		line_type = 'E'
-   											and ctlcd is not null
-   								order by	ctlcd
+								select stvterm_code, stvterm_code value
+								from stvterm 
+								where stvterm_start_date between sysdate-180 and sysdate+150
 							</value>
 						</property>
 						
 					</bean>
-					
+
 				</entry>
-				
-				
-				<entry key="StudentCollege">
-				
-					<bean id="StudentCollege" class="uachieve.bas.area.batch.model.Operand">
-					
+
+
+				<entry key="DegreeStatus">
+
+					<bean id="degreeStatus" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Student College</value>
+							<value>Degree Status</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								sm.int_seq_no in (select stu_mast_no from stu_dprog where dprog in (select distinct dprog from dprog where college {operator} {value}))
+								lu.DEGREE_STATUS {operator} {value}
 							</value>
 						</property>
-						
+
 						<property name="lov">
 							<value>
-								select 		distinct college,
-											college value
-								from 		dprog 
-								where 		college is not null
+								select stvdegs_code, stvdegs_code||'-'||stvdegs_desc value
+								from stvdegs 
+								where stvdegs_award_status_ind in ('A','P') 
+								order by stvdegs_award_status_ind, stvdegs_code DESC
 							</value>
 						</property>
 						
 					</bean>
-					
+
 				</entry>
-				
-				
-				<entry key="StudentDegreeDate">
-				
-					<bean id="studentDegreeDate" class="uachieve.bas.area.batch.model.Operand">
-					
+
+
+				<entry key="Class">
+
+					<bean id="class" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Student Degree Date</value>
+							<value>Class</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								sm.int_seq_no in (select stu_mast_no from stu_dprog where degree_date {operator} {value})
+								lu.class {operator} {value}
 							</value>
 						</property>
-						
-						<property name="valueList">
-							<map>
-								<entry key="201010" value="Fall 2010"/>
-								<entry key="201130" value="Spring 2011"/>
-								<entry key="201140" value="Summer 2011"/>
-								<entry key="201110" value="Fall 2011"/>
-								<entry key="201230" value="Spring 2012"/>
-								<entry key="201240" value="Summer 2012"/>
-								<entry key="201210" value="Fall 2012"/>
-								<entry key="201330" value="Spring 2013"/>
-								<entry key="201340" value="Summer 2013"/>
-							</map>
+
+						<property name="lov">
+							<value>
+								select stvclas_code, stvclas_code||'-'||stvclas_desc value 
+								from stvclas 
+								order by stvclas_code ASC
+							</value>
 						</property>
-						
+
 					</bean>
-					
+
 				</entry>
-				
-				
-				<entry key="AppliedForGraduation">
-				
-					<bean id="appliedForGraduation" class="uachieve.bas.area.batch.model.Operand">
-					
+
+				<entry key="CohortCode">
+
+					<bean id="cohortCode" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Applied for Graduation</value>
+							<value>Cohort Code</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								sm.int_seq_no in (select stu_mast_no from stu_dprog where isnull(degreestatus,'N') {operator} {value})
+								lu.COHORT_CODE {operator} {value}
 							</value>
 						</property>
-						
+
 						<property name="valueList">
 							<map>
-								<entry key="Y" value="Y"/>
-								<entry key="N" value="N"/>
+								<entry key="0710GRRE" value="0710GRRE"/>
+								<entry key="0840GRSP" value="0840GRSP"/>
+								<entry key="0840UGFR" value="0840UGFR"/>
+								<entry key="0840UGTR" value="0840UGTR"/>
+								<entry key="1120GRSP" value="1120GRSP"/>
+								<entry key="1140GRAS" value="1140GRAS"/>
+								<entry key="1320GRAS" value="1320GRAS"/>
+								<entry key="1340GRRE" value="1340GRRE"/>
+								<entry key="1340UGFR" value="1340UGFR"/>
+								<entry key="FIN" value="FIN"/>
 							</map>
 						</property>
+						
 					</bean>
-						
-					
+
 				</entry>
-				
-				<entry key="CumGPA">
-				
-					<bean id="cumGpa" class="uachieve.bas.area.batch.model.Operand">
-					
+
+				<entry key="SportCode">
+
+					<bean id="sportCode" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Cum GPA</value>
+							<value>Sport Code</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								1 = 1
+								lu.SPORT_CODE {operator} {value}
 							</value>
 						</property>
-						<property name="valueList">
-							<map>
-								<entry key="4.0" value="4.0"/>
-								<entry key="3.5" value="3.5"/>
-								<entry key="3.0" value="3.0"/>
-								<entry key="2.5" value="2.5"/>
-								<entry key="2.0" value="2.0"/>
-								<entry key="1.5" value="1.5"/>
-								<entry key="1.0" value="1.0"/>
-							</map>
+
+						<property name="lov">
+							<value>
+								select stvactc_code, stvactc_code||'-'||stvactc_desc value
+								from stvactc 
+								where stvactc_actp_code = 'SPRTS' 
+								and stvactc_accg_code = 'UNGRD' 
+								order by stvactc_code ASC
+							</value>
 						</property>
 						
 					</bean>
-					
+
 				</entry>
 				
-				<entry key="CumHRS">
-				
-					<bean id="cumHrs" class="uachieve.bas.area.batch.model.Operand">
-					
+				<entry key="CollegeCode">
+
+					<bean id="collegeCode" class="uachieve.bas.area.batch.model.Operand">
+
 						<property name="name">
-							<value>Cum Hrs</value>
+							<value>College Code</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
-						<property name="query"> 
+
+						<property name="query">
 							<value>
-								1 = 1
+								lu.COLLEGE_CODE {operator} {value}
 							</value>
 						</property>
-						<property name="valueList">
-							<map>
-								<entry key="15" value="15"/>
-								<entry key="30" value="30"/>
-								<entry key="60" value="60"/>
-								<entry key="80" value="80"/>
-								<entry key="100" value="100"/>
-								<entry key="120" value="120"/>
-								<entry key="150" value="150"/>
-							</map>
+
+						<property name="lov">
+							<value>
+								select stvcoll_code, stvcoll_code value
+								from stvcoll 
+								order by stvcoll_code ASC
+							</value>
 						</property>
 						
 					</bean>
-					
+
+				</entry>
+				
+				<entry key="DegreeCode">
+
+					<bean id="degreeCode" class="uachieve.bas.area.batch.model.Operand">
+
+						<property name="name">
+							<value>Degree Code</value>
+						</property>
+
+						<property name="type">
+							<value>string</value>
+						</property>
+
+						<property name="query">
+							<value>
+								lu.DEGREE_CODE {operator} {value}
+							</value>
+						</property>
+
+						<property name="lov">
+							<value>
+								select distinct srvcmjr_degc_code, srvcmjr_degc_code||'-'||stvdegc_desc value
+								from srvcmjr a join stvdegc on srvcmjr_degc_code = stvdegc_code 
+								where  a.srvcmjr_term_code_eff = (select max(b.srvcmjr_term_code_eff) 
+																				   from srvcmjr b
+																				   where a.srvcmjr_curr_rule = b.srvcmjr_curr_rule)
+								and a.srvcmjr_dau_ind = 'Y' 
+								order by srvcmjr_degc_code||'-'||stvdegc_desc ASC
+							</value>
+						</property>
+						
+					</bean>
+
+				</entry>
+				
+				<entry key="LevelCode">
+
+					<bean id="levelCode" class="uachieve.bas.area.batch.model.Operand">
+
+						<property name="name">
+							<value>Level Code</value>
+						</property>
+
+						<property name="type">
+							<value>string</value>
+						</property>
+
+						<property name="query">
+							<value>
+								lu.LEVEL_CODE {operator} {value}
+							</value>
+						</property>
+
+						<property name="lov">
+							<value>
+								select stvlevl_code, stvlevl_code value
+								from stvlevl 
+								order by stvlevl_code ASC
+							</value>
+						</property>
+						
+					</bean>
+
+				</entry>
+				
+				<entry key="MajorCode">
+
+					<bean id="majorCode" class="uachieve.bas.area.batch.model.Operand">
+
+						<property name="name">
+							<value>Major Code</value>
+						</property>
+
+						<property name="type">
+							<value>string</value>
+						</property>
+
+						<property name="query">
+							<value>
+								lu.MAJOR_CODE {operator} {value}
+							</value>
+						</property>
+
+						<property name="lov">
+							<value>
+								select distinct srvcmjr_majr_code, srvcmjr_majr_code||'-'||stvmajr_desc value
+								from srvcmjr a join stvmajr on srvcmjr_majr_code = stvmajr_code 
+								where  a.srvcmjr_term_code_eff = (select max(b.srvcmjr_term_code_eff) 
+																				   from srvcmjr b
+																				   where a.srvcmjr_curr_rule = b.srvcmjr_curr_rule)
+								and a.srvcmjr_dau_ind = 'Y' 
+								and a.srvcmjr_majr_code is not null 
+								order by srvcmjr_majr_code||'-'||stvmajr_desc ASC
+							</value>
+						</property>
+						
+					</bean>
+
 				</entry>
 				
 				<entry key="StudentNumber">
-				
+
 					<bean id="studentNumber" class="uachieve.bas.area.batch.model.Operand">
-					
+
 						<property name="name">
 							<value>Student Number</value>
 						</property>
-						
+
 						<property name="type">
 							<value>string</value>
 						</property>
-						
+
 						<property name="query">
 							<value>
-								sm.stuno {operator} {value}
+								lu.LIN {operator} {value}
 							</value>
 						</property>
-						
+
 					</bean>
-					
+
 				</entry>
-				
+
 			</map>
 		</property>
-	</bean>	
-	
+	</bean>
+
 </beans>

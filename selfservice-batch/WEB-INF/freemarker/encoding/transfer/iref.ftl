@@ -1,5 +1,5 @@
 <@layout.head title="Institutional Reference Table - ${mastref.iname!''}" />
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <@layout.body>
 
@@ -32,18 +32,18 @@
 					<a href="iref.html?sourceCd=${mastref.comp_id.sourceCd?url}&fyt=${mastref.comp_id.mrfyt?url}<#if clone=="true">&clone=true</#if>" 
 					type="button" id="iref-refresh" class="btn btn-default btn-sm"><i class="fa fa-undo"></i> Restore</a>
 					<#if clone=="false">
-						<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=u">
+						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=u">
 						<a href="#" type="button" id="iref-save" onclick="saveIref()" class="btn btn-primary btn-sm" accesskey="s" disabled><i class="fa fa-save"></i> Save</a>
-						</@security.authorize>
+						</@redauth.authorize>
 					<#else>
-						<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=c">
+						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=c">
 						<a href="#" type="button" id="iref-save" onclick="cloneIref()" class="btn btn-primary btn-sm" accesskey="s" disabled><i class="fa fa-copy"></i> Clone</a>
-    					</@security.authorize>
+    					</@redauth.authorize>
 					</#if> 
     				<a href="<@s.url "/encoding/transfer/institution.html" />" id="iref-exit" type="button" class="btn btn-default btn-sm" accesskey="x"><i class="fa fa-arrow-left"></i> Exit Table</a>
-					<@security.authorize ifNoneGranted="SS_ENCODING_TA_IREF=u,SS_ENCODING_TA_IREF=c">
+					<@redauth.authorize ifNoneGranted="SS_ENCODING_TA_IREF=u,SS_ENCODING_TA_IREF=c">
 						<input type="hidden" id="disableIrefInputs"value="true" />
-					</@security.authorize>
+					</@redauth.authorize>
 				</span>
 	    	</div>
     	</div>
@@ -409,10 +409,10 @@
 					</div>
 					<div class="col-md-4">
 						<span class="pull-right">
-						<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 						Add row at line <input type="text" class="" id="insertGrade" value="${gradeDefs?size + 1}" style="width: 30px;">
 						<a accesskey="g" type="button" id="addGrade" class="btn btn-success btn-xs" onclick="addRowGrade()" href="#" title="Add Row"><i class="fa fa-plus"></i> Add</a>
-						</@security.authorize>
+						</@redauth.authorize>
 						</span>
 					</div>
 				</div>
@@ -519,9 +519,9 @@
 								</td>
 								<td class="aligncenter"><a href="#" class="btn btn-default btn-xs" type="button" onclick="popGradeModal(event);return false;"><i class="fa fa-ellipsis-h"></i></a></td>
 								<td class="aligncenter">
-									<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=u,SS_ENCODING_TA_IREF=c">
+									<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_IREF=u,SS_ENCODING_TA_IREF=c">
 									<button type="button" class="btn btn-danger btn-xs deleteGrade" onclick="delRowGrade(event)" title="Delete Course"><i class="fa fa-trash-o"></i></button></td>
-									</@security.authorize>
+									</@redauth.authorize>
 								<input type="hidden" value="${gradeDef.intSeqNo?c}" class="intSeqNo" />
 								<input type="hidden" value="${gradeDef.memo!''}" class="grade_memo" />
 								<input type="hidden" value="${gradeDef.lastModDate!''}" class="last_mod_date" />

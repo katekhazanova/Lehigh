@@ -1,0 +1,28 @@
+read to xml file
+=====================================
+Processing institution: LehighDProg
+Dprog: 0%.. 20%.. 31%.. 52%.. 72%.. 83%.. 100% complete!
+
+
+Reader:
+
+
+Results for: LehighDProg
+
+Object                                                Replication Count
+-----------------------------------------------------
+uachieve.apis.requirement.Dprog                   :   959
+uachieve.apis.requirement.DprogReq                :   11709
+
+
+
+Writer:
+
+
+Results for: LehighDProg
+
+Object                                                Replication Count
+-----------------------------------------------------
+
+ WARN 12:22:08,744 [redlantern.dbtools.manager.ReplicationStation] Institution: LehighReq skipped.  Not specified in parameters.
+Institution: LehighReq skipped.  Not specified in parameters.

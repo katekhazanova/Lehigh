@@ -1,0 +1,129 @@
+0        : [INFO]   - CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM initial entry.  JobID: 2017030916283724   Mar 9, 2017 4:28:37 PM
+0        : [INFO]   - u.achieve Server Location:  
+
+0        : [INFO]   - Environment Details:
+OS Name   : AIX
+OS Version: 6.1
+OS Arch   : ppc64
+Java Vers : 1.7.0
+Java Vend : IBM Corporation
+Java Home :/usr/java71_64/jre
+
+0        : [INFO]   - Server Lib  Details:
+DB2Jcc4-4.14.111.jar
+antlr-2.7.6.jar
+aopalliance-1.0.jar
+asm-4.0.jar
+aspectjweaver-1.6.8.jar
+c3p0-0.9.1.2.jar
+cglib-nodep-2.2.jar
+commons-beanutils-1.8.0.jar
+commons-collections-3.2.2.jar
+commons-dbcp-1.2.jar
+commons-lang-2.4.jar
+commons-logging-1.0.4.jar
+commons-net-1.4.1.jar
+commons-pool-1.1.jar
+dbtools-4.3.jar
+dom4j-1.6.1.jar
+ehcache-core-2.4.3.jar
+flying-saucer-core-9.0.1.jar
+flying-saucer-pdf-9.0.1.jar
+freemarker-2.3.20.jar
+guava-13.0.1.jar
+hibernate-commons-annotations-4.0.1.Final.jar
+hibernate-core-3.5.6-Final.jar
+hibernate-ehcache-3.5.6-Final.jar
+hibernate-jpa-2.0-api-1.0.0.Final.jar
+hibernate-validator-3.1.0.GA.jar
+itext-4.2.0.jar
+javassist-3.13.0.GA.jar
+jboss-logging-3.1.0.GA.jar
+jboss-transaction-api_1.1_spec-1.0.0.Final.jar
+jta-1.1.jar
+log4j-1.2.15.jar
+quartz-1.8.3.jar
+redlantern-commons-model-1.0.1.jar
+redlantern-interfaces-4.0.10.jar
+regwizard-api-0.9.9.8.2.jar
+slf4j-api-1.7.2.jar
+slf4j-log4j12-1.7.2.jar
+spring-aop-3.1.4.RELEASE.jar
+spring-asm-3.1.4.RELEASE.jar
+spring-beans-3.1.4.RELEASE.jar
+spring-context-3.1.4.RELEASE.jar
+spring-context-support-3.1.4.RELEASE.jar
+spring-core-3.1.4.RELEASE.jar
+spring-expression-3.1.4.RELEASE.jar
+spring-jdbc-3.1.4.RELEASE.jar
+spring-orm-3.1.4.RELEASE.jar
+spring-test-3.1.4.RELEASE.jar
+spring-tx-3.1.4.RELEASE.jar
+uachieve-apis-4.3.0.4.jar
+uachieve-auditreport-4.3.0.4.jar
+uachieve-server-4.3.0.4.jar
+uachieve-slayer-4.3.0.4.jar
+util.jar-1.0.jar
+xpp3_min-1.1.4c.jar
+xstream-1.3.1.jar
+
+0        : [INFO]   - Preparing to load Grade Table for key: COM   72 002365 []
+10       : [INFO]   - Preparing to load Convert Table for key: COM   72 002365 []
+45       : [INFO]   - Convert Table built with 640 entries.  Key: COM   72 002365 []
+45       : [INFO]   - Preparing to load String Table for key: COM   72 002365 []
+255      : [INFO]   - String Table built with 997 entries.  Key: COM   72 002365 []
+255      : [INFO]   - Preparing to load Repeat Table for key: COM   72 002365 []
+295      : [INFO]   - Repeat Table built with 664 entries.  Key: COM   72 002365 []
+296      : [INFO]   - Process Audit Request: JobQueueDetail [jobQueueList=null, stuno=886906479, status=null, evalsw=S]
+387      : [INFO]   - Student data retrieved from uachieve tables for 72, 002365, 886906479
+392      : [INFO]   - 1 exceptions ready for processing
+405      : [INFO]   - 26 courses ready for processing
+407      : [INFO]   - Attempting to find degree program: uachieve.apis.requirement.DprogPK@484acc96 [instidq='72' instid='002365' instcd='' dprog='BSEVEENG' dpfyt='201640' ]
+416      : [ERROR]  - BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+416      : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:407
+416      : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:147
+416      : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:97
+417      : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:73
+417      : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:62
+417      : [ERROR]  -   ST uachieve.server.rules.program.ProgramLoader:53
+417      : [ERROR]  -   ST java.lang.Thread:857
+467      : [ERROR]  -      java.lang.IllegalStateException: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+467      : [ERROR]  -      Caused By: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+467      : [ERROR]  -   [STACKTRACE]  uachieve.server.control.Controller:572
+467      : [ERROR]  -   [STACKTRACE]  uachieve.server.control.Controller:370
+468      : [ERROR]  -   [STACKTRACE]  uachieve.server.control.Controller:266
+468      : [ERROR]  -   [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+468      : [ERROR]  -   [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+468      : [ERROR]  -   [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+468      : [ERROR]  -   [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+468      : [ERROR]  -   [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+468      : [ERROR]  -   [STACKTRACE]  java.lang.Thread:857
+468      : [ERROR]  -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:407
+469      : [ERROR]  -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:147
+469      : [ERROR]  -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:97
+469      : [ERROR]  -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:73
+469      : [ERROR]  -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:62
+469      : [ERROR]  -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:53
+469      : [ERROR]  -   [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+471      : [INFO]   - Audit exiting with errors.
+471      : [INFO]   -      java.lang.IllegalStateException: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+471      : [INFO]   -      Caused By: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+471      : [INFO]   -   [STACKTRACE]  uachieve.server.control.Controller:572
+471      : [INFO]   -   [STACKTRACE]  uachieve.server.control.Controller:370
+471      : [INFO]   -   [STACKTRACE]  uachieve.server.control.Controller:266
+471      : [INFO]   -   [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+471      : [INFO]   -   [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+471      : [INFO]   -   [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+471      : [INFO]   -   [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+471      : [INFO]   -   [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+471      : [INFO]   -   [STACKTRACE]  java.lang.Thread:857
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:407
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:147
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:97
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:73
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:62
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:53
+471      : [INFO]   -   [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+472      : [INFO]   - Error Report generated @ 720 bytes
+472      : [INFO]   - Saving audit without text tables... 
+478      : [INFO]   - Audit successfully saved to database: intSeqNo=[89067481] jobid=[2017030916283724]

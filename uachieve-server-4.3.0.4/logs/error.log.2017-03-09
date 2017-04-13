@@ -1,0 +1,140 @@
+ERROR [39788370] - 2017030909544717::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [54754583] - 2017030914041838::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ISEMJRCRS, rqfyt=201640]
+ERROR [54754583] - 2017030914041838::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ISEMJRCRS, rqfyt=201640]
+ERROR [54754583] - 2017030914041838::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [54754584] - 2017030914041838::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [54754584] - 2017030914041838::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [54754584] - 2017030914041838::  ST java.lang.Thread:857
+ERROR [54754589] - 2017030914041838::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ISEMJRCRS, rqfyt=201640]
+ERROR [54754596] - 2017030914041838::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ISEMJRCRS, rqfyt=201640]
+ERROR [54754596] - 2017030914041838::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [54754597] - 2017030914041838::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [54754597] - 2017030914041838::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [54754597] - 2017030914041838::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [54754598] - 2017030914041838::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [54754598] - 2017030914041838::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [54754598] - 2017030914041838::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [54754599] - 2017030914041838::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [54754599] - 2017030914041838::  [STACKTRACE]  java.lang.Thread:857
+ERROR [54754599] - 2017030914041838::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [54754600] - 2017030914041838::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [54754600] - 2017030914041838::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [54754601] - 2017030914041838::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [54916644] - 2017030914065878::BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BA  DESN       ] CATLYT [201440]
+ERROR [54916645] - 2017030914065878::  ST uachieve.server.rules.program.ProgramTable:407
+ERROR [54916645] - 2017030914065878::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [54916645] - 2017030914065878::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [54916645] - 2017030914065878::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [54916646] - 2017030914065878::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [54916646] - 2017030914065878::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [54916646] - 2017030914065878::  ST java.lang.Thread:857
+ERROR [54916758] - 2017030914065878::     java.lang.IllegalStateException: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BA  DESN       ] CATLYT [201440]
+ERROR [54916758] - 2017030914065878::     Caused By: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BA  DESN       ] CATLYT [201440]
+ERROR [54916759] - 2017030914065878::  [STACKTRACE]  uachieve.server.control.Controller:604
+ERROR [54916759] - 2017030914065878::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [54916760] - 2017030914065878::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [54916760] - 2017030914065878::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [54916761] - 2017030914065878::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [54916761] - 2017030914065878::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [54916761] - 2017030914065878::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [54916762] - 2017030914065878::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [54916762] - 2017030914065878::  [STACKTRACE]  java.lang.Thread:857
+ERROR [54916762] - 2017030914065878::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:407
+ERROR [54916763] - 2017030914065878::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:147
+ERROR [54916763] - 2017030914065878::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:97
+ERROR [54916764] - 2017030914065878::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:73
+ERROR [54916764] - 2017030914065878::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:62
+ERROR [54916764] - 2017030914065878::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:53
+ERROR [54916765] - 2017030914065878::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [58004755] - 2017030914582917::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=HISTMINOR, rqfyt=201440]
+ERROR [58004755] - 2017030914582917::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=HISTMINOR, rqfyt=201440]
+ERROR [58004755] - 2017030914582917::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [58004756] - 2017030914582917::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [58004756] - 2017030914582917::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [58004756] - 2017030914582917::  ST java.lang.Thread:857
+ERROR [58004790] - 2017030914582917::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=HISTMINOR, rqfyt=201440]
+ERROR [58004791] - 2017030914582917::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=HISTMINOR, rqfyt=201440]
+ERROR [58004791] - 2017030914582917::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [58004791] - 2017030914582917::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [58004792] - 2017030914582917::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [58004792] - 2017030914582917::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [58004792] - 2017030914582917::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [58004793] - 2017030914582917::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [58004793] - 2017030914582917::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [58004793] - 2017030914582917::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [58004794] - 2017030914582917::  [STACKTRACE]  java.lang.Thread:857
+ERROR [58004794] - 2017030914582917::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [58004794] - 2017030914582917::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [58004795] - 2017030914582917::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [58004795] - 2017030914582917::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [60106377] - 2017030915333086::   BQ34E: NO COPY COURSE LIST: WGSS3**  .  SKIPPED
+ERROR [60106378] - 2017030915333086::   BQ34E: NO COPY COURSE LIST: WGSS***  .  SKIPPED
+ERROR [60500592] - 2017030915400440::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [63412277] - 2017030916283724::BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+ERROR [63412277] - 2017030916283724::  ST uachieve.server.rules.program.ProgramTable:407
+ERROR [63412277] - 2017030916283724::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [63412277] - 2017030916283724::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [63412278] - 2017030916283724::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [63412278] - 2017030916283724::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [63412278] - 2017030916283724::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [63412278] - 2017030916283724::  ST java.lang.Thread:857
+ERROR [63412328] - 2017030916283724::     java.lang.IllegalStateException: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+ERROR [63412328] - 2017030916283724::     Caused By: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+ERROR [63412328] - 2017030916283724::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [63412328] - 2017030916283724::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]  java.lang.Thread:857
+ERROR [63412329] - 2017030916283724::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:407
+ERROR [63412330] - 2017030916283724::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:147
+ERROR [63412330] - 2017030916283724::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:97
+ERROR [63412330] - 2017030916283724::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:73
+ERROR [63412330] - 2017030916283724::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:62
+ERROR [63412330] - 2017030916283724::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:53
+ERROR [63412330] - 2017030916283724::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [63791950] - 2017030916345648::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [63791950] - 2017030916345648::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [63791950] - 2017030916345648::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [63791951] - 2017030916345648::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [63791951] - 2017030916345648::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [63791951] - 2017030916345648::  ST java.lang.Thread:857
+ERROR [63792035] - 2017030916345648::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [63792035] - 2017030916345648::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [63792035] - 2017030916345648::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [63792036] - 2017030916345648::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [63792036] - 2017030916345648::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [63792036] - 2017030916345648::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [63792036] - 2017030916345648::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [63792036] - 2017030916345648::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [63792036] - 2017030916345648::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [63792037] - 2017030916345648::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [63792037] - 2017030916345648::  [STACKTRACE]  java.lang.Thread:857
+ERROR [63792037] - 2017030916345648::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [63792037] - 2017030916345648::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [63792037] - 2017030916345648::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [63792037] - 2017030916345648::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [64008230] - 2017030916383112::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [64008230] - 2017030916383112::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [64008230] - 2017030916383112::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [64008230] - 2017030916383112::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [64008231] - 2017030916383112::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [64008231] - 2017030916383112::  ST java.lang.Thread:857
+ERROR [64008294] - 2017030916383112::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [64008294] - 2017030916383112::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+ERROR [64008294] - 2017030916383112::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]  java.lang.Thread:857
+ERROR [64008295] - 2017030916383112::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [64008296] - 2017030916383112::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [64008296] - 2017030916383112::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [64008296] - 2017030916383112::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857

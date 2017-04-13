@@ -29,18 +29,27 @@
 	
 <options name="forcedYearTerms">
 	<option name="" label="" />
-    <option name="201310" label="Spring 2013" />
-    <option name="201320" label="Summer 2013" />  
-    <option name="201330" label="Fall 2013" />
-    <option name="201410" label="Spring 2014" />
-    <option name="201420" label="Summer 2014" />  
-    <option name="201430" label="Fall 2014" />
-    <option name="201510" label="Spring 2015" />
-    <option name="201520" label="Summer 2015" />  
-    <option name="201530" label="Fall 2015" />    
-    <option name="201610" label="Spring 2016" />
-    <option name="201620" label="Summer 2016" />
-    <option name="201630" label="Fall 2016" />
+    <option name="20048" label="Fall 04" />
+    <option name="20051" label="Winter 05" />
+    <option name="20056" label="Summer 05" />
+    <option name="20058" label="Fall 05" />
+    <option name="20061" label="Winter 06" />
+    <option name="20066" label="Summer 06" />
+    <option name="20098" label="Fall 09" />
+    <option name="20101" label="Winter 10" />
+    <option name="20106" label="Summer 10" />
+    <option name="20108" label="Fall 10" />
+    <option name="20111" label="Winter 11" />
+    <option name="20116" label="Summer 11" /> 
+    <option name="20118" label="Fall 11" /> 
+    <option name="20121" label="Winter 12" /> 
+    <option name="20126" label="Summer 12" /> 
+    <option name="20128" label="Fall 12" /> 
+    <option name="20131" label="Winter 13" /> 
+    <option name="20136" label="Summer 13" /> 
+    <option name="20138" label="Fall 13" /> 
+    <option name="20141" label="Winter 14" /> 
+    <option name="20146" label="Summer 14" />    
   </options>
 	
 	<options name="retentionPeriod">
@@ -103,7 +112,7 @@
 				<permissions read="nobody" />
 			</column>
 			<column name="userid" label="User">
-				<detailView />
+				<detailView inputType="menu" options="userOptions" />
 			</column>
 			<column name="viw" label="View" >
 				<detailView inputType="checkbox" checkboxMapping="YNMapping" />
@@ -196,8 +205,6 @@
 		<columns>
 			<column name="stuno" label="Student Number"/>
 			<column name="stuname" label="Student Name" />
-			<!--<column name="dprog" label="Student Forced Program" />
-			<column name="catlyt" label="Student Forced Term" />-->
 		</columns>
 	</page>
 

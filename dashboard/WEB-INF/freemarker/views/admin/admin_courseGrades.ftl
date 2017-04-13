@@ -14,9 +14,9 @@
 		
 		<#list courseGrades as courseGrade>
 			<tr class="adm-rw">
-				<td>${courseGrade.gradeListName!}</td>
-				<td>${courseGrade.grade!}</td>
-				<td>${courseGrade.gpaPoints!}</td>
+				<td>${courseGrade.gradeListName}</td>
+				<td>${courseGrade.grade}</td>
+				<td>${courseGrade.gpaPoints}</td>
 				<td>
 					<#if courseGrade.excludeFromGpa>
 						true
@@ -25,10 +25,7 @@
 					</#if>
 				</td>
 				<td>
-					
-					<@security.authorize ifAnyGranted="UDIR_Admin=u  ">
-						<button type="button" onclick="removeCourseGrade('${courseGrade.id}')" class="btn btn-danger" ><i class="icon-trash"></i> Delete</button>
-					</@security.authorize>
+					<button type="button" onclick="removeCourseGrade('${courseGrade.id}')" class="btn btn-danger" ><i class="icon-trash"></i> Delete</button>
 				</td>
 			</tr>
 		</#list>
@@ -41,13 +38,11 @@
 		<form name="addCourseGrade" class="form-horizontal" role="form" action="admin_courseGrades.html" method="POST" >
 			
 			
-			<@d.inputRowAdminCheck name="gradeList" label="Grade List" max="50" value="" />
-			<@d.inputRowAdminCheck name="grade" label="Grade " max="4" value="" />
-			<@d.inputRowAdminCheck name="gpaPoints" label="GPA Points" max="16" value="0" />
-			<@d.checkBoxAdminCheck name="exclude" label="Exclude from Calculation" value="true" checked="false" />
-			<@security.authorize ifAnyGranted="UDIR_Admin=u  ">
-				<@d.submitButtons />
-			</@security.authorize>
+			<@d.inputRow name="gradeList" label="Grade List" max="50" value="" />
+			<@d.inputRow name="grade" label="Grade " max="4" value="" />
+			<@d.inputRow name="gpaPoints" label="GPA Points" max="16" value="0" />
+			<@d.checkBox name="exclude" label="Exclude from Calculation" value="true" checked="false" />
+			<@d.submitButtons />
 			<input type="hidden" name="create" value="true"/>
 		</form>
 

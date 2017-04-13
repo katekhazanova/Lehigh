@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/util 
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<!--
+  Copyright (c) 2008-2014 CollegeSource Inc.  All Rights Reserved.
+  
+  This software is the confidential and proprietary information of 
+  CollegeSource Inc. ("Confidential Information").  You shall not 
+  disclose such Confidential Information and shall use it only in 
+  accordance with the terms of the license agreement you entered
+  into with redLantern, LLC.  You shall not distribute this software
+  in any form (whole, part, modified, compiled, encrypted, etc.) to
+  any individual or organization not covered by the terms of your
+  license agreement.
+  
+  -->
+
+
+	<!-- *********************************************************************** -->
+	<!-- ***                       DAEMON DEFINITIONS                        *** -->
+	<!-- *********************************************************************** -->
+	
+	<bean id="daemonController" class="uachieve.daemon.DaemonController">
+	
+		<property name = "requestHandlers">
+			<list>
+			
+				<!-- *************************************************************************** -->
+				<!-- ** To create another RequestHandler, copy this entire bean definition and * -->
+				<!-- ** paste it after the existing bean definition, within the list element.  * -->
+				<!-- ** Give it a new bean id, change the serverName, and comKey if necessary  * -->
+				<!-- *************************************************************************** -->
+				
+				<!-- *** begin copy *** -->
+				<bean id="requestHandler" class="uachieve.daemon.RequestHandler" scope="prototype">
+				
+				
+					<!-- ************************************************** -->
+					<!-- *** Edit the "value" elements of these proper- *** --> 
+					<!-- *** ties as appropriate for your institution   *** -->
+					<!-- ************************************************** -->
+					
+					<property name="comKey">
+						<value>COM</value>
+					</property>
+					
+					<property name="serverName">
+						<value> </value>
+					</property>
+					
+					<property name="sleepTime">
+						<value>5</value>
+					</property> 
+					
+					<!-- 
+						Format is <entry key="<TYPE>" value="<TRUE/FALSE>" /> 
+						Add the following lines to the util:map below to enable 
+						these report types.
+						
+						<entry key="HTM" value="TRUE" /> 
+						<entry key="TXT" value="TRUE" /> 	-->
+					<property name="enabledReports">
+						<util:map>
+                                                        <entry key="TXT" value="TRUE" />
+							<entry key="PDF" value="FALSE" />
+						</util:map>
+					</property>
+					
+					<!-- true/false -->
+					<property name="deleteRequest">
+						<value>false</value>
+					</property>
+					
+					<property name="loadLocalStudentData">
+						<value>true</value>
+					</property>
+					<property name="loadSISStudentData">
+						<value>true</value>
+					</property>
+					
+					<!-- name of file in the ../config directory -->
+					<property name="fileNameIncludeTextTop">
+						<value></value>
+					</property>
+					
+					<!-- name of file in the ../config directory -->
+					<property name="fileNameIncludeTextBottom">
+						<value></value>
+					</property>
+					
+					<!-- Valid Options are:
+						OneFile, SepFiles, Database, OneFileAndDatabase, SepFilesAndDatabase
+						
+							default (if blank) is Database
+					 -->
+					<property name="reportSaveOptions">
+						<value>Database</value>
+					</property>
+					<!-- Path to save reports to File System 
+					
+							default (if blank) is ../reports
+					-->
+					<property name="reportSavePath">
+						<value></value>
+					</property>
+					
+					<!-- If left blank, defaults to its standard location of /logs -->
+					<property name="logSavePath">
+						<value></value>
+					</property>
+
+					<lookup-method name="createAuditProcessor" bean="auditProcessor"/>					
+					<!-- ************************************************** -->
+					<!-- *** end of editable property values            *** -->
+					<!-- ************************************************** -->
+									
+					
+					<!-- ************************************************** -->
+					<!-- ***   Do not edit the properties below here    *** -->
+					<!-- *** (unless you really know what you're doing) *** -->
+					<!-- ************************************************** -->
+					<property name="auditService"><ref bean="uachieve-slayer.auditService"/></property>
+					<property name="supportService"><ref bean="uachieve-slayer.supportService"/></property>
+					<property name="requestQueue"><ref local="jobRequestQueue"/></property>
+					<property name="performanceMonitor" ref="performanceMonitor"/>
+					<!-- ************************************************** -->
+					<!-- *** End of non-editable properties             *** -->
+					<!-- ************************************************** -->
+										
+				</bean>
+				<!-- ***  end copy  *** -->
+
+			</list>
+		</property>
+
+		<property name="requestQueue"><ref local="jobRequestQueue"/></property>
+		
+		<property name="executionQueue"><ref local="jobExecQueue"/></property>
+		<property name="corePoolSize"><value>${uachieve.server.daemon.corePoolSize}</value></property>
+		<property name="maxPoolSize"><value>${uachieve.server.daemon.maxPoolSize}</value></property>
+		<property name="keepAliveTime"><value>${uachieve.server.daemon.keepAliveTime}</value></property>
+		<property name="performanceMonitor" ref="performanceMonitor"/> 
+		
+	</bean>
+	
+	<bean id="controllerFacade" class="uachieve.daemon.control.ControllerFacade" 
+				scope="prototype" init-method="init">
+		
+		<lookup-method name="createAuditRequestRunnable" bean="auditRequestRunnable"/>
+		
+		<property name="batchCoreSize"><value>${uachieve.server.batch.batchCoreSize}</value></property>	
+		<property name="batchMaxSize"><value>${uachieve.server.batch.batchMaxSize}</value></property>	
+		<property name="batchWaitTime"><value>${uachieve.server.batch.batchWaitTime}</value></property>
+		<property name="supportService"><ref bean="uachieve-slayer.supportService"/></property>
+		<property name="auditService"><ref bean="uachieve-slayer.auditService"/></property>
+	</bean>
+	
+	<bean id="auditRequestRunnable" class="uachieve.daemon.control.AuditRequestRunnable" scope="prototype">
+		<property name="controller"><ref bean="controller"/></property>
+	
+	</bean>
+
+	<bean id="auditProcessor" class="uachieve.daemon.AuditProcessor" scope="prototype">
+		<property name="controllerFacade"><ref bean="controllerFacade"/></property>
+		<property name="auditService"><ref bean="uachieve-slayer.auditService"/></property>
+		<property name="postAuditProcessor"><ref bean="postAuditProcessor"/></property>
+	</bean>
+	<bean id="postAuditProcessor" class="uachieve.server.custom.EmptyPostAuditProcessor" scope="prototype"/>
+		
+	
+	<bean id="auditProcessorWithEndscript" class="uachieve.daemon.AuditProcessor" scope="prototype">
+		<property name="controllerFacade"><ref bean="controllerFacade"/></property>
+		<property name="auditService"><ref bean="uachieve-slayer.auditService"/></property>
+		<property name="postAuditProcessor"><ref bean="EndscriptPostAuditProcessor"/></property>
+	</bean>
+	<bean id="EndscriptPostAuditProcessor" class="uachieve.server.custom.EndscriptPostAuditProcessor" scope="prototype">
+		<property name="command">
+			<value></value>
+		</property>
+		<property name="outputDir">
+			<value></value>
+		</property>
+	</bean>
+	
+	<bean id="jobRequestQueue" class="java.util.concurrent.LinkedBlockingQueue" />
+	<bean id="jobExecQueue" class="java.util.concurrent.PriorityBlockingQueue" />
+	
+</beans>

@@ -25,7 +25,7 @@
 			
 		<title>${title}</title>
 		<link rel="icon" type="image/ico" href="<@spring.url relativeUrl="/images/favicon.ico" />"/>
-		<input type="hidden" id="contextPath" value="${springMacroRequestContext.getContextPath()}" />
+		
 		
 		<script type="text/javascript"> if (top.frames.length!=0) top.location=self.document.location; </script>
 		
@@ -46,7 +46,7 @@
 		</ul>
 		
 	<@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r,
-			UDIR_Roadmaps=r, UDIR_Plans=r, UDIR_Advisor=r,UDIR_Publisher=r,SS_ROLE_ANONYMOUS=r, SS_ROLE_USER=r,DASH_Reports=r,UDIR_Admin=r, SB_ADMIN_EDIT=r,DASH_AUDIT_COMPARE=r">
+			UDIR_Roadmaps=r, UDIR_Plans=r, UDIR_Advisor=r,UDIR_Publisher=r,SS_ROLE_ANONYMOUS=r, SS_ROLE_USER=r,DASH_Reports=r,UDIR_Admin=r, SB_ADMIN_EDIT=r">
 		
 		
 		<header role="banner" class="hidden-print">
@@ -74,7 +74,7 @@
 		
 		
 		<@security.authorize ifNoneGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r,
-			UDIR_Roadmaps=r, UDIR_Plans=r, UDIR_Advisor=r,UDIR_Publisher=r,SS_ROLE_ANONYMOUS=r, SS_ROLE_USER=r,DASH_Reports=r,UDIR_Admin=r,SB_ADMIN_EDIT=r,DASH_AUDIT_COMPARE=r">
+			UDIR_Roadmaps=r, UDIR_Plans=r, UDIR_Advisor=r,UDIR_Publisher=r,SS_ROLE_ANONYMOUS=r, SS_ROLE_USER=r,DASH_Reports=r,UDIR_Admin=r,SB_ADMIN_EDIT=r">
 		<header role="banner" class="hidden-print">
 			<div id="header" class="hidden-xs hidden-sm">
 				<div id="headerLogo" class=" first">

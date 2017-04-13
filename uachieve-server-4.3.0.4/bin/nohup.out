@@ -1,0 +1,339 @@
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=false}
+Directory created successfully @ /data/u12/uachieve/uachieve-server-4.3.0.4/reports
+audit thread pool initialized: core size [2], max size [2]
+u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM
+shutting down in 5 seconds, allowing jobs in process to complete
+u.achieve server shutdown
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [SS]
+enabled report types {PDF=true, HTM=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [BATCH]
+enabled report types {PDF=true, TXT=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+audit thread pool initialized: core size [2], max size [2]
+u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM
+shutting down in 5 seconds, allowing jobs in process to complete
+u.achieve server shutdown
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [SS]
+enabled report types {PDF=true, HTM=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [BATCH]
+enabled report types {PDF=true, TXT=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+audit thread pool initialized: core size [2], max size [2]
+u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM
+     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBU0000       ] CATLYT [201710]
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]  java.lang.Thread:857
+     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBU0000       ] CATLYT [201540]
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]  java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201440]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201440]
+  [STACKTRACE]  uachieve.server.control.Controller:604
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [WMST           ] CATLYT [201540]
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]  java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSMINHDR, rqfyt=201540]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSMINHDR, rqfyt=201540]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [RUS            ] CATLYT [201340]
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]  java.lang.Thread:857
+FATAL ERROR:  'org.xml.sax.SAXParseException: The element type "td" must be terminated by the matching end-tag "</td>".'
+           :The element type "td" must be terminated by the matching end-tag "</td>".
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201640]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201640]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+FATAL ERROR:  'org.xml.sax.SAXParseException: The element type "td" must be terminated by the matching end-tag "</td>".'
+           :The element type "td" must be terminated by the matching end-tag "</td>".
+shutting down in 5 seconds, allowing jobs in process to complete
+u.achieve server shutdown
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [SS]
+enabled report types {PDF=true, HTM=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [BATCH]
+enabled report types {PDF=true, TXT=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+audit thread pool initialized: core size [2], max size [2]
+u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ISEMJRCRS, rqfyt=201640]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ISEMJRCRS, rqfyt=201640]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BA  DESN       ] CATLYT [201440]
+     Caused By: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BA  DESN       ] CATLYT [201440]
+  [STACKTRACE]  uachieve.server.control.Controller:604
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:407
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=HISTMINOR, rqfyt=201440]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=HISTMINOR, rqfyt=201440]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+     Caused By: BQ02S: 2 Degree Programs found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSEVEENG       ] CATLYT [201640]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:407
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=PREMPHYRQ, rqfyt=201440]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSTELEC , rqfyt=201340]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSTELEC , rqfyt=201340]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=UNIVAP   , rqfyt=201440]
+     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=UNIVAP   , rqfyt=201440]
+  [STACKTRACE]  uachieve.server.control.Controller:572
+  [STACKTRACE]  uachieve.server.control.Controller:370
+  [STACKTRACE]  uachieve.server.control.Controller:266
+  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+  [STACKTRACE]  java.lang.Thread:857
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [WGSS           ] CATLYT [201540]
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+  [STACKTRACE]  java.lang.Thread:857
+shutting down in 5 seconds, allowing jobs in process to complete
+u.achieve server shutdown
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [SS]
+enabled report types {PDF=true, HTM=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [BATCH]
+enabled report types {PDF=true, TXT=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+audit thread pool initialized: core size [2], max size [2]
+u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM
+shutting down in 5 seconds, allowing jobs in process to complete
+u.achieve server shutdown
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [SS]
+enabled report types {PDF=true, HTM=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [BATCH]
+enabled report types {PDF=true, TXT=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+Exception in thread "main" org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'studentQueryUtil' defined in class path resource [studentQueries.xml]: Error setting property values; nested exception is org.springframework.beans.NotWritablePropertyException: Invalid property 'shrAttributeQuery' of bean class [com.collegesource.interfaces.student.util.StudentQueryUtil]: Bean property 'shrAttributeQuery' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1396)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1118)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:517)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:456)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:294)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:225)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:291)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:193)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:607)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:925)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:472)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:139)
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:93)
+	at uachieve.daemon.DaemonController.getInstance(DaemonController.java:65)
+	at uachieve.daemon.DaemonController.main(DaemonController.java:77)
+Caused by: org.springframework.beans.NotWritablePropertyException: Invalid property 'shrAttributeQuery' of bean class [com.collegesource.interfaces.student.util.StudentQueryUtil]: Bean property 'shrAttributeQuery' is not writable or has an invalid setter method. Does the parameter type of the setter match the return type of the getter?
+	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:1064)
+	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:924)
+	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:76)
+	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:58)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1393)
+	... 14 more
+u.achieve server booting up...
+request handler started: servername [ ]
+enabled report types {TXT=true, PDF=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [SS]
+enabled report types {PDF=true, HTM=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+request handler started: servername [BATCH]
+enabled report types {PDF=true, TXT=true}
+Directory found @ /data/u12/uachieve/uachieve-server-4.3.0.4/bin/../reports
+audit thread pool initialized: core size [2], max size [2]
+u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM

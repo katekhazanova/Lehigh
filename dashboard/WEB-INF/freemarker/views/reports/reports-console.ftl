@@ -42,10 +42,6 @@
 		<div class="col-md-6">
 				<h2>Course Demand </h2>
 				<ul>
-					<#--<li><a href="<@spring.url relativeUrl="/reports/report-options.html?report=StudentPlanProgress" />" title="Student Plan Progress" alt="Student Plan Progress">
-						Student Plan Progress
-						</a>
-					</li>-->
 					<li><a href="<@spring.url relativeUrl="/reports/report-options.html?report=CourseDemandOverview" />" title="Course Demand Overview" alt="Course Demand Overview">
 						Course Demand Overview
 						</a>

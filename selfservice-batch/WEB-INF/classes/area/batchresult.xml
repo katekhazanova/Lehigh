@@ -9,10 +9,8 @@
 			<column name="key.stuName" label="Name" />
 			<column name="key.dprog" label="Degree" />
 			<column name="key.catlyt" label="Term" />
-			<column name="key.complete" label="Complete" 
+			<column name="key.complete" label="Status" 
 				renderer="uachieve.bas.area.batchresult.web.renderer.JobQueueRunCompleteColumnRenderer" />
-			<column name="key.ip" label="Course Type" 
-				renderer="uachieve.bas.area.batchresult.web.renderer.JobQueueRunIpColumnRenderer" width="5"/>	
 			<column label="openPdf" derived="true" 
 				renderer="uachieve.bas.area.batchresult.web.renderer.OpenBatchPdfAuditColumnRenderer" />
 			<column label="openTxt" derived="true" 
@@ -127,7 +125,7 @@
 					<permissions read="nobody" />
 				</masterView>
 			</column>
-			<column derived="true" label="Audit Result Status" renderer="uachieve.bas.area.batchresult.web.renderer.ResultStatusCountColumnRenderer" />
+			<column derived="true" label="Student Request Statuses" renderer="uachieve.bas.area.batchresult.web.renderer.ResultStatusCountColumnRenderer" />
 			<column derived="true" label="View Audits" renderer="uachieve.bas.area.batchresult.web.renderer.ViewAuditsColumnRenderer" />
 		</columns>
 	</page>

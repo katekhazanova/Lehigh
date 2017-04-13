@@ -1,0 +1,30 @@
+# The URL that u.achieve Self Service is accessible by.  For example, if your
+# users access Self Service by going to http://www.onlinephd.com/selfservice, enter
+# that url here. Using a value of "http://localhost" will only working during local
+# testing, but will not work in a production environment.
+uachieve.selfservice.graph.externalServerAddress=https://enzo.cc.lehigh.edu:8445/selfservice-batch
+
+# Specifies whether or not graphs should be animated.  If true, a small animation will
+# be shown when the graph is first displayed.  Only works when the graph produced is Flash.
+#uachieve.selfservice.graph.animate=true
+
+# Sets the maximum number of decimal places to show for gpa graph data
+#uachieve.selfservice.graph.gpa.decimalPlaces=3
+
+# Sets whether the maximum number of decimal places will always be shown on gpa graphs
+#uachieve.selfservice.graph.gpa.showAllDecimals=false
+
+#Sets whether the the gpa on the graphs should be truncated rather than rounded
+#uachieve.selfservice.graph.gpa.truncate=true
+
+# Sets the maximum number of decimal places to show for credit hour graph data
+#uachieve.selfservice.graph.hour.decimalPlaces=1
+
+# Sets whether the maximum number of decimal places will always be shown on credit hour graphs
+#uachieve.selfservice.graph.hour.showAllDecimals=false
+
+#Label shown at the bottom of the pie chart and the academic progress stacked bar char
+#uachieve.selfservice.graph.hour.label=Hours
+
+#Label shown at the bottom of the vertical bar chart and the academic progress bar char
+#uachieve.selfservice.graph.gpa.label=GPA

@@ -101,7 +101,7 @@
 			<bean class="redlantern.actions.yearterm.TermTemplate">
 				<property name="startMonth" value="8" />
 				<property name="yearOffset" value="0" />
-				<property name="termCode" value="30" />
+				<property name="termCode" value="40" />
 				<property name="displayName" value="Fall" />
 				<property name="defaultTerm" value="true" />
 				<property name="regCutoffMonth" value="12" />

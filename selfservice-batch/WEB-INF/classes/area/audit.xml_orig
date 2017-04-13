@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<pages>
+
+	<checkboxMapping name="trueFalseMapping" trueValue="true" falseValue="false" />
+
+  <options name="reportTypes">
+    <option name="htm" label="Regular (HTML)" />
+    <option name="pdf" label="PDF" />
+  </options>
+  
+  <options name="whatIfOptions">
+    <option name=" " label="' ' - Default" />
+    <option name="A" label="A - Include ALL whatif_courses" />
+    <option name="P" label="P - Include Planned courses" />
+    <!-- option name="T" label="T - Include Cart courses only" /-->
+  </options>
+  
+  <options name="referenceOptions">
+  	<option name=" " label="' ' - Default" />
+  	<option name="R" label="R - All A/R courses reported" />
+  	<option name="S" label="S - Only courses with references reported" />
+  </options>
+    
+  <options name="evalswOptions" provider="uachieve.selfservice.area.audit.web.provider.EvalswOptionsProvider" />
+    
+  <page name="StuDprogMarker" label="Marker" urlBase="audit">
+    <permissions create="nobody" edit="nobody" delete="nobody" read="SS_AREA_AUDIT" />
+    <masterView defaultSortBy="marker" />
+    <columns>
+      <column name="marker" label="Marker" />
+      <column name="drval" label="Value" />
+      <column name="drtype" label="Type" />
+      <column name="drcatlyt" label="CATLYT" renderer="uachieve.selfservice.area.audit.web.renderer.StuDprogMarkerTermColumnRenderer" />    
+      <!-- column name="drinstcd" label="CD" />
+      <column name="memo" label="Memo" />
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa" />
+      <column name="lastModUser" label="By" / -->
+    </columns>
+  </page>
+    
+  <page name="StudentDegreeProgram" label="Default Program" urlBase="audit">
+    <permissions create="nobody" read="SS_AREA_AUDIT" edit="nobody" delete="nobody" />
+    <masterView defaultSortBy="dprog" />
+    <subPage name="StuDprogMarker" property="markers" />
+    <columns>
+      <column name="instcd" label="School" sortable="false" />
+      <column name="dprog" label="Degree Program" sortable="false" />
+      <column name="dptitle1" label="Title" sortable="false" />
+      <column name="dptitle2" label="Title" sortable="false">
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="webtitle" label="Title" sortable="false">
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="drcatlyt" label="Catalog Year" sortable="false" renderer="uachieve.selfservice.area.audit.web.renderer.StudentDegreeProgramTermColumnRenderer" />
+    </columns>
+  </page>
+
+  <page name="AuditRequestOptions" label="Options" urlBase="audit">
+    <permissions create="SS_AREA_AUDIT" read="SS_AREA_AUDIT" edit="SS_AREA_AUDIT" />
+    <masterView defaultSortBy="lasertext" />
+    <columns>
+      <column name="includeInProgressCourses" label="Include In Progress Courses">
+        <detailView inputType="checkbox" checkboxMapping="trueFalseMapping" />
+      </column>
+      <!-- column name="listAll" label="List All">
+		<detailView inputType="menu" options="listAllOptions" />
+	  </column-->
+      <column name="includePlannedCourses" label="What If Courses">
+        <detailView inputType="checkbox" checkboxMapping="characterMappingAll" />
+      </column>
+      <column name="sysIn.evalsw" label="Run Type" >
+      	<detailView inputType="menu" options="evalswOptions" />
+      </column>
+     <column name="reportType" label="Format">
+        <detailView inputType="menu" options="reportTypes" />
+      </column>
+      <!--
+      <column name="sysIn.report" label="report" />
+      <column name="sysIn.pntreq" label="pntreq" />
+      <column name="sysIn.fdpmask" label="fdpmask" />
+      <column name="sysIn.timeToken" label="timeToken" />
+      <column name="sysIn.lasertext" label="lasertext" />
+      <column name="sysIn.format" label="format" />
+      <column name="sysIn.parseflg" label="parseflg" />
+      -->
+      <!--  reference articulation config -->
+      	<!-- column name="sysIn.sinstid" label="Select Only From ID">
+      		<detailView maxLength="8">
+      			<permissions create="SS_ROLE_ADVISOR" read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+      		</detailView>
+      	</column>
+    	<column name="sysIn.sinstcd" label="Select Only From CD">
+    		<detailView maxLength="3">
+    			<permissions create="SS_ROLE_ADVISOR" read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+    		</detailView>
+    	</column>
+    	<column name="sysIn.revart" label="Reference">
+    		<detailView inputType="menu" options="referenceOptions">
+    			<permissions create="SS_ROLE_ADVISOR" read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+    		</detailView>
+    	</column>
+    	<column name="sysIn.binstid" label="Inst ID">
+    		<detailView maxLength="8">
+    			<permissions create="SS_ROLE_ADVISOR" read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+    		</detailView>
+    	</column>
+      	<column name="sysIn.binstcd" label="Inst CD">
+      		<detailView maxLength="3">
+      			<permissions create="SS_ROLE_ADVISOR" read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+      		</detailView>
+      	</column>
+      	<column name="sysIn.bytaken" label="Year/Term Taken">
+      		<detailView maxLength="7" inputType="menu" options="yearTerms">
+      			<permissions create="SS_ROLE_ADVISOR" read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+      		</detailView>
+      	</column-->
+    </columns>
+  </page>
+
+  <page name="JobQueueList" label="Running Audit" urlBase="audit">
+    <permissions create="nobody" edit="nobody" delete="nobody" />
+    <masterView defaultSortBy="jobQueueDetails[0].fdprog" />
+    <columns>
+      <column name="jobQueueDetails[0].fdprog" label="Program" sortable="false" default="Default Program"
+        renderer="uachieve.selfservice.area.audit.web.renderer.WebtitleColumnRenderer" />
+      <column name="jobQueueDetails[0].fcatlyt" label="Catalog Year" sortable="false" default="Default Catalog Year" 
+      	renderer="uachieve.selfservice.area.audit.web.renderer.JobQueueListTermColumnRenderer" />
+    </columns>
+  </page>
+
+  <page name="JobQueueRun" label="Completed Audit" urlBase="audit">
+    <permissions create="SS_AREA_AUDIT" edit="nobody" delete="SS_AREA_AUDIT" />
+    <masterView defaultSortBy="rundate" sortAsc="false" />
+    <columns>
+      <!-- TODO intSeqNo can be removed - just using for testing -->
+      <column name="intSeqNo" label="ID" width="8" />
+      <!-- column name="jobid" label="jobid" / -->
+      <column name="instcd" label="Instcd" width="5" align="left"/>
+      <column name="dprog" label="Program" default="Default" renderer="uachieve.selfservice.area.audit.web.renderer.JobQueueRunColumnRenderer" align="left"/>
+      <column name="catlyt" label="Catalog Year" default="Default" align="left" renderer="uachieve.selfservice.area.audit.web.renderer.JobQueueRunTermColumnRenderer" width="10" />
+      <column name="rundate" label="Created" format="date:MM/dd/yyyy h:mm aaa" align="left" />
+      <column name="dprogType" label="Audit Type" sortable="true" renderer="uachieve.selfservice.area.audit.web.renderer.DprogTypeColumnRenderer" width="5" />
+      <column name="reportType" label="Format" sortable="true" renderer="uachieve.selfservice.area.audit.web.renderer.ReportTypeColumnRenderer" width="5" />      
+      <!--
+        <column name="webtitle" label="Title" />
+      -->
+      <column name="userid" label="Run By"></column>
+      <column name="ip" label="Course Type" sortable="false" renderer="uachieve.selfservice.area.audit.web.renderer.AuditTypeColumnRenderer" width="5" />
+      <column derived="true" label="View" renderer="uachieve.selfservice.area.audit.web.renderer.AuditLinkColumnRenderer" width="8" />
+    </columns>
+  </page>
+  
+  <page name="JobQueueCourse" label="Course" urlBase="audit">
+    <masterView defaultSortBy="tabx"> <!-- "editYt"-->
+      <!-- filter on="stabx" label="Term" displayProperty="stabx" / -->
+      <!-- filter on="editYt" label="Year" /-->
+      <!-- <filter on="credit" label="Hours" /> -->
+      <filter on="grade" label="Grade" />
+      <filter on="stabx" label="Term" displayProperty="subreqTitle" />
+    </masterView>
+    
+    <columns>
+      <column name="stabx" label="Term" displayProperty="subreqTitle" align="left"  />
+      <column name="editYt" label="Course Term" align="left" />
+      <column name="xcourse" label="Course" align="left" />
+      <column name="credit" label="Hours" format="number:#0.00" />
+      <column name="grade" label="Grade" />
+      <column name="ctitle" label="Title" align="left" />
+      <column derived="true" label="Status" renderer="uachieve.selfservice.area.audit.web.renderer.CourseStatusColumnRenderer" />
+    </columns>
+  
+  </page>
+
+  <page name="JobQueueException" label="Exception" urlBase="audit">
+    <masterView defaultSortBy="userSeqNo">
+      <filter on="ctlcd" label="Code" />
+    </masterView>
+    <columns>
+      <!-- column name="intSeqNo" label="ID" / -->
+      <!-- column name="jobqSeqNo" label="Audit ID" / -->
+       <!--column name="userSeqNo" label="#" width="5"/ -->
+      <column name="ctlcd" label="Code" width="7"/>
+      <column name="cline" label="Audit Note" width="22"/>
+      <column name="psname" label="Pseudo Name" width="12"/>
+      <column name="course" label="Course" width="12"/>
+      <column name="rcourse" label="RCourse" width="12"/>
+      <column name="rname" label="Req Name" width="10"/>
+      <column name="memo" label="Memo" />
+      <!-- column name="lastModUser" label="Last Mod User" / -->
+      <!-- column name="lastModDate" label="Last Mod Date" / -->
+    </columns>
+  </page>
+</pages>

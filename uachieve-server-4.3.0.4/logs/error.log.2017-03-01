@@ -1,0 +1,18 @@
+ERROR [162701317] - 2017030110575741::BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBIBIOL       ] CATLYT [201340]
+ERROR [162701319] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:400
+ERROR [162701319] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [162701320] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [162701320] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [162701320] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [162701321] - 2017030110575741::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [162701321] - 2017030110575741::  ST java.lang.Thread:857
+ERROR [162702161] - 2017030110575741::Program [BSBIBIOL] not found-- continuing audit with additional programs
+ERROR [162707442] - 2017030110575741::BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBU           ] CATLYT [201340]
+ERROR [162707443] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:400
+ERROR [162707443] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [162707443] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [162707444] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [162707444] - 2017030110575741::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [162707444] - 2017030110575741::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [162707444] - 2017030110575741::  ST java.lang.Thread:857
+ERROR [162707572] - 2017030110575741::Program [BSBU] not found-- continuing audit with additional programs

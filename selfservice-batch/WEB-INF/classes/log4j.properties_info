@@ -1,0 +1,218 @@
+# - This file (WEB-INF/classes/log4j.properties) configures logging for the application.
+# - To change logging settings, edit this file and then restart your servlet container.
+
+# - LOG4J OVERVIEW
+# - log4j is a Java logging library.  It uses the concepts of loggers and appenders to allow
+# - easy configuration of logging.
+
+# - An individual "logger" is responsible for enabling/disabling logging for a specific part
+# - of an application.  Loggers can be configured to log only certain levels (debug, info,
+# - warn, error, or fatal) and can output to different destinations (log files, console, email).
+
+# - An "appender" is a destination for log statements - log files, the console, or email,
+# - for example.  You may configure as many appenders as you like and attach them to
+# - whichever loggers you wish.  This allows, for example, log statements for part of
+# - the program to be written to log files, and log statements from another part of the program
+# - to be sent via email.
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# LOGGERS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - Loggers can be used to control what part of self service issues log statements
+# - and at what level they are issued.
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - ROOT LOGGER
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - The root logger - all loggers defined below inherit from this logger.  This logger
+# - defines the default logging level and destination(s) for the application.
+# - Example usage:
+# - * To enable debug level logging and print to a log file for the entire application:
+# -     log4j.rootLogger=debug, logfile
+# - * To enable info level logging and print to a log file and emails for the entire application
+# -     log4j.rootLogger=info, logfile, email
+log4j.rootLogger=info, logfile
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - U.ACHIEVE SELF SERVICE LOGGERS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - The following loggers control logging for all Java classes under
+# - the uachieve.selfservice.* packages.  The loggers are broken down by
+# - general areas and also by specific classes.  Depending on the situtation,
+# - it may prove more useful to turn up logging for a specific area (like "audits")
+# - to get a general idea of what is happening, and sometimes it may be more helpful
+# - to turn up logging for a specific class to filter out all of the other
+# - logging "noise".
+
+# - GENERAL AREA LOGGERS
+
+# - the parent logger of all uachieve.selfservice classes
+#log4j.logger.uachieve.selfservice=debug
+
+# - loggers for the different functional areas of the application: audit, course,
+# - dprog, exception, general, plannedcourse, student, transfereval, pages,
+# - security, and util
+#log4j.logger.uachieve.selfservice.area=debug
+#log4j.logger.uachieve.selfservice.area.audit=debug
+#log4j.logger.uachieve.selfservice.area.course=debug
+#log4j.logger.uachieve.selfservice.area.dprog=debug
+#log4j.logger.uachieve.selfservice.area.exception=debug
+#log4j.logger.uachieve.selfservice.area.general=debug
+#log4j.logger.uachieve.selfservice.area.plannedcourse=debug
+#log4j.logger.uachieve.selfservice.area.student=debug
+#log4j.logger.uachieve.selfservice.area.transfereval=debug
+#log4j.logger.uachieve.selfservice.pages=debug
+#log4j.logger.uachieve.selfservice.security=debug
+#log4j.logger.uachieve.selfservice.util=debug
+
+# - SPECIFIC CLASS LOGGERS
+
+#log4j.logger.uachieve.selfservice.web.util.flash.Flash=debug
+#log4j.logger.uachieve.selfservice.web.util.flash.FlashScopeHandlerInterceptor=debug
+log4j.logger.uachieve.selfservice.pages.PageServiceImpl=error
+#log4j.logger.uachieve.selfservice.util.web.flash.FlashScopeHandlerInterceptor=debug
+#log4j.logger.uachieve.selfservice.util.logging.DebugInterceptor=debug
+log4j.logger.uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean=info
+#log4j.logger.uachieve.selfservice.area.dprog.dao.StuDprogHibernateDao=debug
+log4j.logger.uachieve.selfservice.util.web.freemarker.NonModelExposingFreeMarkerViewResolver=error
+log4j.logger.uachieve.selfservice.util.web.LoggingSimpleMappingExceptionResolver=info
+log4j.logger.uachieve.selfservice.AntisamyUtil=WARN, securityfile
+
+# - U.ACHIEVE APIs LOGGERS
+
+#log4j.logger.uachieve.apis=warn
+#log4j.logger.uachieve.apis.student.dao.hibernate=debug
+
+# - COLLEGESOURCE SECURITY LOGGERS
+log4j.logger.com.collegesource.security=warn
+log4j.logger.com.collegesource.interfaces=warn
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - THIRD PARTY LIBRARY LOGGERS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# - Spring Security
+#log4j.logger.org.springframework.security=debug
+log4j.logger.org.springframework.security.authentication.event.LoggerListener=warn
+log4j.logger.org.springframework.security.access.event.LoggerListener=warn
+
+# - APACHE COMMONS - general utilities
+#log4j.logger.org.apache.commons=debug
+
+# - EHCACHE - data caching
+#log4j.logger.net.sf.ehcache=debug
+log4j.logger.net.sf.ehcache.CacheManager=error
+
+# - FREEMARKER - template engine
+#log4j.logger.freemarker=debug
+
+# - HIBERNATE - data persistence
+#log4j.logger.org.hibernate=warn
+
+# uncomment the following two loggers to log all parameters passed to queries
+#log4j.logger.org.hibernate.SQL=debug
+#log4j.logger.org.hibernate.type=trace
+
+#log4j.logger.org.hibernate.loader.hql.QueryLoader=trace
+log4j.logger.org.hibernate.hql.ast.tree.FromElementType=error
+log4j.logger.org.hibernate.cache.UpdateTimestampsCache=error
+log4j.logger.org.hibernate.cache.StandardQueryCache=error
+log4j.logger.org.hibernate.cache.NonstrictReadWriteCache=error
+
+# - IBATIS - data persistence
+#log4j.logger.com.ibatis=debug
+#log4j.logger.com.ibatis.common.jdbc.SimpleDataSource=debug
+#log4j.logger.com.ibatis.common.jdbc.ScriptRunner=debug
+#log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate=debug
+#log4j.logger.java.sql.Connection=debug
+#log4j.logger.java.sql.Statement=debug
+#log4j.logger.java.sql.PreparedStatement=debug
+#log4j.logger.java.sql.ResultSet=debug
+
+# - JAWR - javascript and css compression
+#log4j.logger.net.jawr=debug
+
+# - SPRING - configuration
+#log4j.logger.org.springframework=debug
+log4j.logger.org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver=error
+#log4j.logger.org.springframework.transaction=debug
+
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# APPENDERS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# - Appenders are destinations for log statements, like log files, the console, or emails.
+
+# - CONSOLE APPENDER - logs to the console
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - %m [ndc: %x]%n
+
+# - FILE APPENDER - logs to files, automatically rolls to next file once certain size is reached
+
+log4j.appender.logfile=org.apache.log4j.RollingFileAppender
+# - log file location
+log4j.appender.logfile.File=/home/tomcat/UAchieve/logs/uachieve.selfservice4.log
+# - max file size before rollover
+log4j.appender.logfile.MaxFileSize=10MB
+# - how many back up files to keep
+log4j.appender.logfile.MaxBackupIndex=10
+# Pattern to output: date priority [category] - message
+log4j.appender.logfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.logfile.layout.ConversionPattern=%d %p [%c] [%X{user}] - %m [ndc: %x]%n
+
+# - EMAIL APPENDER - emails log messages of level warn or higher
+
+log4j.appender.email=org.apache.log4j.net.SMTPAppender
+
+# - the Subject option takes a string value which should be a the subject of the e-mail message
+log4j.appender.email.Subject=u.achieve self service log message
+
+# - comma separated list of recipient addresses
+log4j.appender.email.To=change_me@yourschool.com
+
+# - comma separated list of cc recipient addresses
+#log4j.appender.email.Cc=changeme1@yourschool.com,changeme2@yourschool.com
+
+# - comma separated list of bcc recipient addresses
+#log4j.appender.email.Bcc=changeme1@yourschool.com,changeme2@yourschool.com
+
+# - the From option takes a string value which should be a e-mail address of the sender
+log4j.appender.email.From=change_me@yourschool.com
+
+# - the BufferSize option takes a positive integer representing the maximum number of logging events to collect in a cyclic buffer
+#log4j.appender.email.BufferSize=100
+
+# - setting the SmtpDebug option to true will cause the mail session to log its server interaction to stdout
+#log4j.appender.email.SMTPDebug=true
+
+# - the SMTPHost option takes a string value which should be a the host name of the SMTP server that will send the e-mail message
+log4j.appender.email.SMTPHost=change.me.your.school.com
+
+# - the SmtpPassword option takes a string value which should be the password required to authenticate against the mail server
+#log4j.appender.email.SMTPPassword=changeme
+
+# - the SmtpUsername option takes a string value which should be the username required to authenticate against the mail server
+#log4j.appender.email.SMTPUsername=changeme
+
+log4j.appender.email.layout=org.apache.log4j.PatternLayout
+log4j.appender.email.layout.ConversionPattern=%d{DATE} %-5p %m - %c{3} [%t] [%r ms] [ndc: %x]%n
+log4j.appender.email.evaluatorClass=uachieve.selfservice.util.logging.WarnLevelTriggeringEventEvaluator
+# - only send emails if log level is this level or above
+log4j.appender.email.threshold=warn
+
+##########################################################################
+################## Appender for Security Logger  ############################
+##########################################################################
+log4j.logger.SecurityLog=warn, securityfile
+log4j.additivity.SecurityLog=false
+
+log4j.appender.securityfile=org.apache.log4j.RollingFileAppender
+log4j.appender.securityfile.File=/home/tomcat/UAchieve/logs/uachieve.selfservice.security-warnings.log
+log4j.appender.securityfile.MaxFileSize=10MB
+log4j.appender.securityfile.MaxBackupIndex=10
+log4j.appender.securityfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.securityfile.layout.ConversionPattern=%d %p [%c] [%X{user}] - %m [ndc: %x]%n

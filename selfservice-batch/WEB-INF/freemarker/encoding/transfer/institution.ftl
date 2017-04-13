@@ -1,5 +1,5 @@
-<@layout.head title="Transfer Articulation - ${instName!''}" />
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<@layout.head title="Transfer Articulation - ${instName}" />
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <@layout.body>
 		<!-- Title Row -->
@@ -13,7 +13,7 @@
 	    	<div class="col-md-5">
 	    		<span style="font-size: 14px; font-weight: 500;">Transfer Articulation</span>
 	    		<br>
-		    		<span style="font-size: 14px; font-weight: 500;">${instName!''}</span> 
+		    		<span style="font-size: 14px; font-weight: 500;">${instName}</span> 
 	    		</div>
 	    		<div class="col-md-3">
 	    			<br>
@@ -33,7 +33,7 @@
 	     <hr>
 	    <!-- Body -->
 	    <div class="row">
-	    	<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=r">
+	    	<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=r">
 	    	<div class="col-md-12">
 	    		<div class="row">
 		    		<div class="col-md-10">	
@@ -43,9 +43,9 @@
 			    	<div class="col-md-2">
 
 		    			<span class="pull-right">
-							<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=c"> 
+							<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=c"> 
 			    			<a href="<@s.url "/encoding/transfer/irefWizard.html" />" class="btn btn-success btn-sm" type="button" title="Add new IREF Table"><i class="fa fa-plus" aria-hidden="true"></i> Add IREF Table</a>
-		    				</@security.authorize>
+		    				</@redauth.authorize>
 						</span>
 	    			</div>
     			</div>
@@ -79,23 +79,23 @@
 				        <tr id="irefRow-${mastref_index}" >
 				          <td>${mastref.iname!''}</td>
 				          <td>${mastref.comp_id.sourceId}</td>
-				          <td id="iref-sourceCd">${mastref.comp_id.sourceCd}</td>
-				          <td id="iref-fyt">${mastref.comp_id.mrfyt}</td>
+				          <td>${mastref.comp_id.sourceCd}</td>
+				          <td>${mastref.comp_id.mrfyt}</td>
 				          <td>${mastref.lyt}</td>
 				          <td class="aligncenter">
-				          	<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=c">
+				          	<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=c">
 				          	<a class="btn btn-default btn-xs" href="iref.html?sourceCd=${mastref.comp_id.sourceCd?url}&fyt=${mastref.comp_id.mrfyt?url}&clone=true"><i class="fa fa-copy"></i></a>
-						  	</@security.authorize>
+						  	</@redauth.authorize>
 						  </td>
 				          <td class="aligncenter">
-				          	<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r,SS_ENCODING_TA_IREF=u">
+				          	<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r,SS_ENCODING_TA_IREF=u">
 				          	<a class="btn btn-default btn-xs" href="iref.html?sourceCd=${mastref.comp_id.sourceCd?url}&fyt=${mastref.comp_id.mrfyt?url}"><i class="fa fa-edit"></i></a>
-							</@security.authorize>				          	
+							</@redauth.authorize>				          	
 							</td>
 				          <td class="aligncenter">
-				          	<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=d">	
-							<a class="btn btn-danger btn-xs" href="#" onclick="deleteIref('irefRow-${mastref_index}');return false;" ><i class="fa fa-trash-o"></i></a>
-						  	</@security.authorize>
+				          	<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=d">	
+							<a class="btn btn-danger btn-xs" href="#" onclick="deleteIref('irefRow-${mastref_index}','${mastref.comp_id.mrfyt}','${mastref.comp_id.sourceCd}');return false;" ><i class="fa fa-trash-o"></i></a>
+						  	</@redauth.authorize>
 						  </td>
 				        </tr>
 				        </#list>
@@ -105,9 +105,9 @@
 		    	
 		    		
 		    </div>
-			</@security.authorize>	
+			</@redauth.authorize>	
 		    <br>
-		    <@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=r">
+		    <@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=r">
 		   	<div class="col-md-12"> 
 		   		<div class="row">
 		    		<div class="col-md-10">	
@@ -116,9 +116,9 @@
 			    	
 			    	<div class="col-md-2">
 			    		<span class="pull-right"> 
-							<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=c"> 
+							<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=c"> 
 			    			<a href="<@s.url "/encoding/transfer/taWizard.html" />" type="button" class="btn btn-success btn-sm" title="Add new TA Table" style="width: 118px;"><i class="fa fa-plus" aria-hidden="true"></i> Add TA Table</a>
-			    			</@security.authorize>
+			    			</@redauth.authorize>
 			    		</span>
 	    			</div>
     			</div>
@@ -154,24 +154,24 @@
 				        <tr id="taRow-${tcaMaster_index}">
 				          <td>${tcaMaster.iname!''}</td>
 				          <td>${tcaMaster.comp_id.sourceId}</td>
-				          <td id="ta-sourceCd">${tcaMaster.comp_id.sourceCd}</td>
-						  <td id="ta-dpmask">${tcaMaster.comp_id.dpmask}</td>
-				          <td id="ta-fyt">${tcaMaster.comp_id.fyt}</td>
+				          <td>${tcaMaster.comp_id.sourceCd}</td>
+						  <td>${tcaMaster.comp_id.dpmask}</td>
+				          <td>${tcaMaster.comp_id.fyt}</td>
 				          <td>${tcaMaster.lyt}</td>
 				          <td class="aligncenter">
-				          	<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=c">
+				          	<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=c">
 				          	<a class="btn btn-default btn-xs" href="<@s.url "/encoding/transfer/ta.html?sourceCd=${tcaMaster.comp_id.sourceCd?url}&fyt=${tcaMaster.comp_id.fyt?url}&dpmask=${tcaMaster.comp_id.dpmask?url}&clone=true" />"><i class="fa fa-copy"></i></a>
-                          	</@security.authorize>
+                          	</@redauth.authorize>
 						  </td>
 				          <td class="aligncenter">
-							<@security.authorize ifAnyGranted="SS_ENCODING_TA_RULE=r,SS_ENCODING_TA_RULE=u">
+							<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_RULE=r,SS_ENCODING_TA_RULE=u">
 							<a class="btn btn-default btn-xs" href="<@s.url "/encoding/transfer/ta.html?sourceCd=${tcaMaster.comp_id.sourceCd?url}&fyt=${tcaMaster.comp_id.fyt?url}&dpmask=${tcaMaster.comp_id.dpmask?url}" />"><i class="fa fa-edit"></i></a>
-	      				    </@security.authorize>
+	      				    </@redauth.authorize>
 	      				  </td>
 				          <td class="aligncenter">
-				          	<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=d">
-							<a class="btn btn-danger btn-xs" href="#" onclick="deleteTA('taRow-${tcaMaster_index}'); return false;" ><i class="fa fa-trash-o" ></i></a>
-						  	</@security.authorize>
+				          	<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=d">
+							<a class="btn btn-danger btn-xs" href="#" onclick="deleteTA('taRow-${tcaMaster_index}','${tcaMaster.comp_id.fyt}','${tcaMaster.comp_id.sourceCd}','${tcaMaster.comp_id.dpmask}'); return false;" ><i class="fa fa-trash-o" ></i></a>
+						  	</@redauth.authorize>
 						  </td>
 				        </tr>
 				        </#list>
@@ -180,7 +180,7 @@
 				  </div>		
     		
     		</div>
-			</@security.authorize>
+			</@redauth.authorize>
     	</div>
 	    <!-- /Body -->
 	    

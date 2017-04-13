@@ -1,0 +1,64 @@
+# ==============================================================================
+# log4j configuration
+# ==============================================================================
+
+log4j.rootLogger=info, logfile
+
+
+# ========================= LOG LEVELS =========================
+# CollegeSource Classes
+log4j.logger.com.collegesource.security=debug
+log4j.logger.com.collegesource=warn
+
+
+# Hibernate
+log4j.logger.org.hibernate.hql.ast.tree.FromElementType=error
+log4j.logger.org.hibernate=warn
+# uncomment the following two lines to print out query parameters
+#log4j.logger.org.hibernate.SQL=debug
+#log4j.logger.org.hibernate.type=trace
+
+# Spring
+log4j.logger.org.springframework=warn
+log4j.logger.org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver=error
+log4j.logger.org.springframework.web.servlet.view.AbstractCachingViewResolver=error
+
+# Spring Security
+log4j.logger.org.springframework.security=warn
+
+# FreeMarker
+log4j.logger.freemarker=warn
+
+# Sitemesh
+#log4j.logger.com.opensymphony.module.sitemesh=warn
+
+# Jakarta Commons
+log4j.logger.org.apache.commons.io=warn
+
+
+# ========================= APPENDERS =========================
+# Standard Out
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - %m%n
+
+# Log File
+log4j.appender.logfile=org.apache.log4j.RollingFileAppender
+log4j.appender.logfile.File=/home/tomcat/UAchieve/logs/Dashboard.log
+log4j.appender.logfile.MaxFileSize=10000KB
+# Keep three backup files.
+log4j.appender.logfile.MaxBackupIndex=3
+# Pattern to output: date priority [category] - message
+log4j.appender.logfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.logfile.layout.ConversionPattern=%d %p [%c] - %m%n
+
+##########################################################################
+################## Appender for Security Logger  ############################
+##########################################################################
+log4j.logger.SecurityLog=info, securityfile
+log4j.additivity.SecurityLog=false
+
+log4j.appender.securityfile=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.securityfile.File=/home/tomcat/UAchieve/logs/DashboardSecurity.log
+log4j.appender.securityfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.securityfile.layout.ConversionPattern=%d{dd/MM/yyyy HH:mm:ss} %c %m%n

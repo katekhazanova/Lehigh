@@ -903,9 +903,6 @@ function runDeclaredPrograms()
 {
 	// submit audit request
 	$j( 'form[name="auditRequest"]' ).submit();
-	$j( '#runAudit' ).prop( "disabled", true );
-	$j('#runAudit').text('Running...');
-	
 }
 
 // Validates and submits the What if Audit
@@ -920,8 +917,6 @@ function runDifferentProgram()
 		
 		// submit audit request
 		$j( 'form[name="auditRequest"]' ).submit();
-		$j('#runAudit').prop( "disabled", true );
-		$j('#runAudit').text('Running...');
 	} else {
 		// show the error box
 		$j( '#auditRunError' ).attr( 'tabindex', '0' );
@@ -937,11 +932,9 @@ function sendPlan()
 	$j( '#createPlanButton' ).attr( 'type', 'submit' );
 	$j( '#createPlanButton' ).attr( 'onclick', '' );
 	validateFields($j( '#requiredMarker' ).valid());
-	if ($j( '#whatIfDegreeProgram' ).valid() && $j( '#requiredMarker' ).valid()  && $j( '#catalogYearTerm' ).valid()  && $j( '#planName' ).valid()) {
+	if ($j( '#requiredMarker' ).valid()) {
 		$j( '#createPlanButton' ).click();
 		$j( 'form[name="auditRequest"]' ).submit();
-		$j('#createPlanButton').prop( "disabled", true );
-		$j('#createPlanButton').text('Running...');
 	}
 	$j( '#createPlanButton' ).attr( 'type', 'button' );
 	$j( '#createPlanButton' ).attr( 'onclick', 'sendPlan()' );

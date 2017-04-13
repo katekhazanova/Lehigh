@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+  	<bean id="criteria" class="uachieve.bas.area.batch.model.Criteria">
+  	
+  		<!-- Used as main student query -->
+		<property name="studentNameQuery">
+			<value>
+				select 		sm.stuno as stuno, a.stuname as name
+				from 		stu_demo a, stu_master sm 
+				where 		sm.int_seq_no = a.stu_mast_no
+			</value>
+		</property>
+  	
+  		<!-- Query used to retrieve unique list of students for Preview screen -->
+		<property name="studentQuery">
+			<value>
+				select 		sm.stuno, sd.stuname 
+				from 		stu_master sm, stu_demo sd 
+				where 		sm.int_seq_no = sd.stu_mast_no 
+			</value>
+		</property>	
+		
+		
+		<!-- Keyword for where statement -->
+		<property name="studentQueryKeyword">
+			<value>
+				and
+			</value>
+		</property>
+		
+		<property name="previewOrderby">
+		<value>stuname</value>
+		</property>
+		
+		<property name="auditOrderby">
+		<value>stuname, dprog, catlyt</value>
+		</property>
+		
+		
+		<property name="operands">
+			<map>
+					
+				<entry key="StudentDegree">
+				
+					<bean id="studentDegree" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Student Degree</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								sm.int_seq_no in (select stu_mast_no from stu_dprog where dprog {operator} {value})
+							</value>
+						</property>
+						
+						<property name="lov">
+							<value>
+								select 	    (dprog + ' '),
+											(dprog + ' - ' + dptitle1) value
+								from 		dprog 
+								where 		instidq = '73' 
+											and rtrim(instid) = 'TEST40'
+											and rtrim(instcd) = ''
+											and lyt like '999999' 
+								order by	dprog
+							</value>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				
+				
+				
+				<entry key="StudentException">
+				
+					<bean id="studentException" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Student Exception</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								sm.int_seq_no in (select stu_mast_no from stu_exceptions where ctlcd {operator} {value})
+							</value>
+						</property>
+						
+						<property name="lov">
+							<value>
+								select		distinct ctlcd,
+											ctlcd value
+    							from		gmaster
+   								where 		line_type = 'E'
+   											and ctlcd is not null
+   								order by	ctlcd
+							</value>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				
+				
+				<entry key="StudentCollege">
+				
+					<bean id="StudentCollege" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Student College</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								sm.int_seq_no in (select stu_mast_no from stu_dprog where dprog in (select distinct dprog from dprog where college {operator} {value}))
+							</value>
+						</property>
+						
+						<property name="lov">
+							<value>
+								select 		distinct college,
+											college value
+								from 		dprog 
+								where 		college is not null
+							</value>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				
+				
+				<entry key="StudentDegreeDate">
+				
+					<bean id="studentDegreeDate" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Student Degree Date</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								sm.int_seq_no in (select stu_mast_no from stu_dprog where degree_date {operator} {value})
+							</value>
+						</property>
+						
+						<property name="valueList">
+							<map>
+								<entry key="201010" value="Fall 2010"/>
+								<entry key="201130" value="Spring 2011"/>
+								<entry key="201140" value="Summer 2011"/>
+								<entry key="201110" value="Fall 2011"/>
+								<entry key="201230" value="Spring 2012"/>
+								<entry key="201240" value="Summer 2012"/>
+								<entry key="201210" value="Fall 2012"/>
+								<entry key="201330" value="Spring 2013"/>
+								<entry key="201340" value="Summer 2013"/>
+							</map>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				
+				
+				<entry key="AppliedForGraduation">
+				
+					<bean id="appliedForGraduation" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Applied for Graduation</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								sm.int_seq_no in (select stu_mast_no from stu_dprog where isnull(degreestatus,'N') {operator} {value})
+							</value>
+						</property>
+						
+						<property name="valueList">
+							<map>
+								<entry key="Y" value="Y"/>
+								<entry key="N" value="N"/>
+							</map>
+						</property>
+					</bean>
+						
+					
+				</entry>
+				
+				<entry key="CumGPA">
+				
+					<bean id="cumGpa" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Cum GPA</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								1 = 1
+							</value>
+						</property>
+						<property name="valueList">
+							<map>
+								<entry key="4.0" value="4.0"/>
+								<entry key="3.5" value="3.5"/>
+								<entry key="3.0" value="3.0"/>
+								<entry key="2.5" value="2.5"/>
+								<entry key="2.0" value="2.0"/>
+								<entry key="1.5" value="1.5"/>
+								<entry key="1.0" value="1.0"/>
+							</map>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				
+				<entry key="CumHRS">
+				
+					<bean id="cumHrs" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Cum Hrs</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query"> 
+							<value>
+								1 = 1
+							</value>
+						</property>
+						<property name="valueList">
+							<map>
+								<entry key="15" value="15"/>
+								<entry key="30" value="30"/>
+								<entry key="60" value="60"/>
+								<entry key="80" value="80"/>
+								<entry key="100" value="100"/>
+								<entry key="120" value="120"/>
+								<entry key="150" value="150"/>
+							</map>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				<entry key="StudentNumber">
+				
+					<bean id="studentNumber" class="uachieve.bas.area.batch.model.Operand">
+					
+						<property name="name">
+							<value>Student Number</value>
+						</property>
+						
+						<property name="type">
+							<value>string</value>
+						</property>
+						
+						<property name="query">
+							<value>
+								sm.stuno {operator} {value}
+							</value>
+						</property>
+						
+					</bean>
+					
+				</entry>
+				
+			</map>
+		</property>
+	</bean>	
+	
+</beans>

@@ -26,19 +26,12 @@
 	<table width="50%" class="admin-table">
 	<tr><td><span class="admin-table-rowh">Current re-index Schedule</span></td>
 		<td>
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_A DMIN_EDIT=u, UDIR_Admin=u  ">
 			<input id="idx_time" name="idx_time" value="${DPROG_INDEX_RUN_TIME}"/>
-		</@security.authorize>
-		<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-			<input id="idx_time" name="idx_time" disabled value="${DPROG_INDEX_RUN_TIME}"/>
-		</@security.authorize>
 			<#if index_error??>
 				<br/>
 				<span style="color: red">Invalid Chron value.</span>
 			</#if><br />
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_A DMIN_EDIT=u, UDIR_Admin=u  ">
 			<button type="submit" class="btn btn-primary" style="margin-top: 10px">Save</button> <br />
-		</@security.authorize>
 		</td></tr></table>
 		
 	</form>
@@ -57,13 +50,11 @@ $j("#cronHelp").toggle("slow");
 	<#assign index_now_url>
 		<@s.url relativeUrl="/admin/dprog_index_now.html"/>
 	</#assign>
-
-	<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
+	
 	<h2 style="width: 100%; text-align: left;">Re-Index Now</h2>
 	<form action='${index_now_url}'>
 		<button type="submit" name="submit_now" class="btn btn-primary">Go</button>
 	</form>
-	</@security.authorize>
 	
 	
 <#include "admin_bot.ftl">

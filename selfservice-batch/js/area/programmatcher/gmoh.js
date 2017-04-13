@@ -82,7 +82,7 @@ function loadPrograms(ngram, divid) {
 								"<div class=\"progress-bar progress-bar-applied\" style=\"width: " + firstBar + "%;\"><span class=\"sr-only\">" + firstBar +
 								"% of your courses</span></div><div class=\"progress-bar progress-bar-completed\" style=\"width: " + (secondBar-firstBar) + 
 								"%;\"><span class=\"sr-only\">" + secondBar + "% of your courses</span></div></td></tr></table>" + items[i].courseHours + 
-								" of your " + items[i].completedHours + " completed course hours match the " + items[i].totalHours + " minimum hours needed to complete this program. Please run an audit to confirm." +
+								" of your " + items[i].completedHours + " completed course hours match the " + items[i].totalHours + " minimum hours needed to complete this program" +
 								"</td><td width=\"20%\"> <a href=\"#\" onclick=\"runProgram('"+items[i].name+"')\" class=\"btn btn-primary\">Run Audit</a></td></tr></table></div>";
 						} else {
 							var text = "<div tabindex=\"0\" class=\"list-base prog-list\" data-name=\""+items[i].displayText+"\"><table width=\"100%\"><tr>" +
@@ -90,7 +90,7 @@ function loadPrograms(ngram, divid) {
 								"<div class=\"progress-bar progress-bar-applied\" style=\"width: " + firstBar + "%;\"><span class=\"sr-only\">" + firstBar +
 								"% of your courses</span></div><div class=\"progress-bar progress-bar-completed\" style=\"width: " + (secondBar-firstBar) +
 								"%;\"><span class=\"sr-only\">" + secondBar + "% of your courses</span></div></td></tr></table>" + items[i].courseHours + 
-								" of your " + items[i].completedHours + " completed course hours match the " +	items[i].totalHours + " minimum hours needed to complete this program. Please run an audit to confirm." +
+								" of your " + items[i].completedHours + " completed course hours match the " +	items[i].totalHours + " minimum hours needed to complete this program" +
 								"</td><td width=\"20%\"> <a href=\"#\" onclick=\"runProgram('"+items[i].name+"')\" class=\"btn btn-primary\">Run Audit</a></td></tr></table></div>";
 						}
 						elem.append(text);

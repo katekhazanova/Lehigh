@@ -18,7 +18,6 @@
 		<script type='text/javascript'>
 		
 			$j(document).ready(function() {
-				$j.ajaxSetup({ cache: false });
 				loadTranscriptGraph("${auditViewRequest.servletPath}?id=${Compressor.compress(AuditViewRequest.getDrillDownTranscriptRequest(auditViewRequest))}&filter.stabx=", { complete: "<@s.message 'uachieve.selfservice.status.complete' />", inProgress: "<@s.message 'uachieve.selfservice.status.inprogress' />", unfulfilled: "<@s.message 'uachieve.selfservice.status.unfulfilled' />", planned: "<@s.message 'uachieve.selfservice.status.planned' />", hours: "${graphConfig.hoursLabel}", gpa: "${graphConfig.gpaLabel}" }, ${transcriptGraphHtml});
 			});
 		</script>

@@ -1,5 +1,5 @@
 <@layout.head title="Transfer Articulation" />
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <@layout.body>
 	<div class="row"><div id="content" class="col-md-12">
@@ -12,15 +12,15 @@
 		    	<div class="col-md-9">
 		    		<form role="form">
 				    <div class="form-group">
-				      <input type="text" class="form-control" id="transferInstSearch" placeholder="Search by School Name or Source ID (Minimum 3 Characters case-sensitive)">
+				      <input type="text" class="form-control" id="transferInstSearch" placeholder="Search by School Name or Source ID (Minimum 3 Characters)">
 			      </div> 
 			      </form>
 		      	</div>
 		      	<div class="col-md-3">
 		      		<span class="pull-right">
-		      		<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=c">	
+		      		<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=c">	
 		    		<a href="#createSchoolModal" data-toggle="modal" type="button" class="btn btn-success" style="margin-right: 5px;"><i class="fa fa-plus" aria-hidden="true"></i> Add New School</a>
-		    	  	</@security.authorize>
+		    	  	</@redauth.authorize>
 		    	  	</span>
 		    	  </div>
 	      	</div>
@@ -68,15 +68,15 @@
 							class="recentInstsRow"
 						</#if>
 						>
-	    					<td><span class="instName" id="instName-${transferInst.comp_id.sourceId}">${transferInst.instName!''}</span>
-	    						<@security.authorize ifAllGranted="SS_ENCODING_TA_IREF=u">
+	    					<td><span id="instName-${transferInst.comp_id.sourceId}">${transferInst.instName!''}</span>
+	    						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_IREF=u">
 								 <a href="#" class="pull-right btn btn-xs btn-default"  onclick="loadEditTransferModal('${transferInst.comp_id.sourceId}'); return false;">Rename</a>
-								</@security.authorize>
+								</@redauth.authorize>
 							</td>
 	    					<td class="aligncenter">${transferInst.comp_id.sourceId}</td>
 	    					<td class="aligncenter">${transferInst.mastrefCount}</td>
 	    					<td class="aligncenter">${transferInst.tcaMasterCount}</td>
-	    					<td class="aligncenter"><a id="instLink-${transferInst.comp_id.sourceId}"class="btn btn-default btn-xs" href="<@s.url "/encoding/transfer/institution.html?sourceId=${transferInst.comp_id.sourceId}" />"><i class="fa fa-folder-open"></i></a></td>
+	    					<td class="aligncenter"><a id="instLink-${transferInst.comp_id.sourceId}"class="btn btn-default btn-xs" href="<@s.url "/encoding/transfer/institution.html?sourceId=${transferInst.comp_id.sourceId}&instName=${transferInst.instName!''}" />"><i class="fa fa-folder-open"></i></a></td>
 	    					<td class="aligncenter"><a class="btn btn-danger btn-xs" href="#"  
 								<#if transferInst.mastrefCount gt 0 ||transferInst.tcaMasterCount gt 0>
 									disabled="disabled"

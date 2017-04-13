@@ -25,7 +25,7 @@
 /* =============== Miscellaneous ============================ */
 
 
-/* MAIN COLOR: #55ccdd */
+/* MAIN COLOR: #572001 */
 
 
 /* ***************************************  Site wide general css  ************************************ */
@@ -59,7 +59,7 @@ h4 {font-size: 16px;}
 
 hr {
 	border-style: none; 
-	border-top: solid #55ccdd 1px;
+	border-top: solid #572001 1px;
 }
 
 .subtle { 
@@ -159,8 +159,8 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
 	color: #ffffff;
-  	background-color: #55ccdd;
-  	border-color: #55ccdd;
+  	background-color: #572001;
+  	border-color: #572001;
 }
 
 .btn-primary:hover,
@@ -625,7 +625,7 @@ table tr th a, table tr th a:hover,
 /* Main Menu */
 
 .main-menu {
-	background-color: #55ccdd ;
+	background-color: #572001 ;
 }
 
 .main-menu .navbar-nav > .active > a,
@@ -708,7 +708,7 @@ table tr th a, table tr th a:hover,
 }
 
 .navbar {
-	background-color: #55ccdd;
+	background-color: #572001;
 }
 
 
@@ -728,7 +728,7 @@ table tr th a, table tr th a:hover,
 }
 
 div.greyBar {
-	background-color: #55ccdd;
+	background-color: #572001;
 	color: #ffffff;
 }
 
@@ -1131,14 +1131,14 @@ a.dashboard-link:focus {
 /* =============== Dashboard Tabs ============================ */
 
 .yui-skin-sam .yui-navset .yui-nav,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav{
-	border:solid #55ccdd;
+	border:solid #572001;
 	border-width:0 0 5px;zoom:1;
 }
 
 .yui-skin-sam .yui-navset .yui-nav .selected a,
 .yui-skin-sam .yui-navset .yui-nav .selected a:focus,
 .yui-skin-sam .yui-navset .yui-nav .selected a:hover{
-	background:#55ccdd;
+	background:#572001;
 	color:#fff;
 }
 
@@ -1230,7 +1230,7 @@ a.dashboard-link:focus {
 .dashboard-link:active,
 .dashboard-link.active,
 .open .dropdown-toggle.dashboard-link {
-	color: #55ccdd;
+	color: #572001;
 }
 
 .dashboard-link:active,
@@ -1403,7 +1403,7 @@ a.dashboard-link:focus {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   	color: #ffffff;
-  	background-color: #55ccdd;
+  	background-color: #572001;
 }
 
 /* =============== Batch ==================================== */
@@ -1418,7 +1418,7 @@ a.dashboard-link:focus {
 }
 
 #completed a {
-	background-color: #55ccdd;
+	background-color: #572001;
 	color: #ffffff;
 }
 
@@ -1516,7 +1516,7 @@ pre#memo, pre {
 
 .p_sel {
 	color: #ffffff;
-	background-color: #55ccdd;
+	background-color: #572001;
 }
 
 .p_sel:focus {

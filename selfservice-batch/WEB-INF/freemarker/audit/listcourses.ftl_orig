@@ -1,0 +1,61 @@
+<#import "_macros.ftl" as auditMacros>
+<@layout.head title="My Audit - Course History Tab" />
+
+<@layout.body>
+<input type="hidden" id="pageGroup" value="audits"/>
+	<#include '/audit/common/_auditheader.ftl' />
+	
+	<@t.setSelectedTab tab='audit/listcourses' />
+	<@t.printAuditTabs auditQueryParams />
+
+	<#assign linkText><@s.message 'uachieve.selfservice.audit.courseHistory.title' /></#assign>
+<#if showCourseHistory>
+	<#if showCharts>
+		<div class="graphs aligncenter" style="width: 480px; margin-left: auto; margin-right: auto;">
+			<h3 class="alignleft"><i class="fa fa-bar-chart-o" title="${linkText} Icon"><span class="sr-only">${linkText}</span></i> ${linkText}</h3>
+			<div id="transcriptGraphHtml" style="height: 250px;"><i class="fa fa-spinner fa-spin" title="Still Loading"></i></div>
+		</div>
+		<script type='text/javascript'>
+		
+			$j(document).ready(function() {
+				loadTranscriptGraph("${auditViewRequest.servletPath}?id=${Compressor.compress(AuditViewRequest.getDrillDownTranscriptRequest(auditViewRequest))}&filter.stabx=", { complete: "<@s.message 'uachieve.selfservice.status.complete' />", inProgress: "<@s.message 'uachieve.selfservice.status.inprogress' />", unfulfilled: "<@s.message 'uachieve.selfservice.status.unfulfilled' />", planned: "<@s.message 'uachieve.selfservice.status.planned' />", hours: "${graphConfig.hoursLabel}", gpa: "${graphConfig.gpaLabel}" });
+			});
+		</script>
+	</#if>
+	
+	<br />
+	<@s.message 'uachieve.selfservice.course.transcript.text' />
+	<br />
+		<#if auditViewRequest.stabx != 'null'>
+		<#assign resetUrl = auditMacros.transcriptResetUrl(auditViewRequest) />
+		  <@h.link href="${resetUrl}" title="View All Courses" />
+		</#if>
+	
+	
+	<@p.masterView pageContext />
+	<div class="well col-md-3">
+			<div class="row">
+				<h2 style="margin-top: 0px;">Legend</h2>
+				<ul class="list-unstyled">
+					<li>
+						<span class ="audittype1-complete" style="float: left;" title="Complete Course">
+							<i class="fa fa-complete-1"><span class="sr-only">Complete Course Image</span></i>
+						</span>  - Completed Course
+					</li> 
+				
+					<li>
+						<span class ="audittype1-in_progress" style="float: left;" title="In Progress Course">
+							<i class="fa fa-in_progress-1"><span class="sr-only">In Progress Course Image</span></i> 
+						</span> - In Progress Course
+					</li> 
+					
+					<li>
+						<span class ="audittype1-planned" style="float: left;" title="Planned Courses">
+							<i class="fa fa-planned-1"><span class="sr-only">Planned Courses Image</span></i> 
+						</span> - Planned Course
+					</li>
+				</ul>
+			</div>
+		</div>
+</#if>
+</@layout.body>

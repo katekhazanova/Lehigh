@@ -1,4 +1,4 @@
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <@layout.head title='Student Search' />
 

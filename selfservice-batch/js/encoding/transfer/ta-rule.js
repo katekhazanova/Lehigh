@@ -111,7 +111,6 @@ function updateTaNumbers($jlist,rowId) {
 function sortRules(){
 	
 	var intSeqNos = [];
-	var tseg = $j("#segment-dd").val();;
 	
 	$j("#ta-rules tbody tr").each(function(i, row) {
 		
@@ -128,7 +127,7 @@ function sortRules(){
 		type: "POST",
 		url: "sort-rules.html",
 		traditional: true,
-		data: {"intSeqNos": intSeqNos,"tseg": tseg},
+		data: {"intSeqNos": intSeqNos},
 		dataType: "json",
 		success : function(json) {	
 			 rulesSorted = true;
@@ -203,20 +202,7 @@ function deleteSelectedRule() {
 	
 	//remove the rule from the rule list
 	$j(".selectedRule").parent("tr").remove();
-	$j("#rule-userSeqNo").val(-1);
 	updateTaNumbers($j( "#sortableRules" ),'ruleRow-');
-	
-	changeSegment();
-}
-
-function moveSelectedRule(){
-	
-	taChanges = true;
-	ruleChanges = true;
-	
-	ta.redirect = "edit";
-	ta.ruleId = $j("#rule-intSeqNo").val();
-	ta.editSeg = $j("#rule-segment").val();
 	
 	changeSegment();
 }
@@ -985,12 +971,10 @@ function validateSourceCourses(){
 			row.find('.course').css('color', 'red');
 			row.find('.crsMskError').show();
 			row.find('.form-control-feedback').show();
-			row.find(".has-feedback").attr("title","Course does not match the course mask. May be intentional - articulation still valid.");
 		} else {
 			row.find('.course').css('color', 'black');
 			row.find('.crsMskError').hide();
 			row.find('.form-control-feedback').hide();
-			row.find(".has-feedback").attr("title","Course");
 		}
 	});
 }
@@ -1017,14 +1001,10 @@ function validateTargetCourses(){
 		
 		if (!courseOk) {
 			row.find('.course').css('color', 'red');
-			row.find('.crsMskError').show();
 			row.find('.form-control-feedback').show();
-			row.find(".has-feedback").attr("title","Course does not match the course mask. May be intentional - articulation still valid.");
 		} else {
 			row.find('.course').css('color', 'black');
-			row.find('.crsMskError').hide();
 			row.find('.form-control-feedback').hide();
-			row.find(".has-feedback").attr("title","Course");
 		}
 	});
 }

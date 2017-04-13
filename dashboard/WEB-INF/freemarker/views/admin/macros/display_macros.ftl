@@ -1,6 +1,3 @@
-<#assign security=JspTaglibs["/WEB-INF/tlds/red-auth.tld"]>
-
-
 <#macro cancelButton>
 	<#assign admin_cancel_url><@spring.url relativeUrl="/admin/admin_menu.html"/></#assign>
 	<a href="${admin_cancel_url}" class="btn btn-default">Cancel</a>
@@ -40,41 +37,6 @@
 	</div>
 </#macro>
 
-<#macro inputRowAdminCheck name label max value="" tooltip=false >
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-	<div class="form-group">
-		<span class="col-sm-3 control-label">${label}
-		<#if tooltip>
-			<#assign tooltip_img_url><@spring.url relativeUrl="/images/tooltip.gif"/></#assign>
-			<br /><a href="http://clients.collegesource.com/home/display/SB/SIS+Course+Formatting"><img src="${tooltip_img_url}" title="CollegeSource Help" alt="CollegeSource help"/></a></td>
-		</#if>
-		</span>
-		<div class="col-sm-9">
-			<input type="text" class="form-control"  name="${name}" id="${name}" 
-			onKeyDown="limitText(this.form.${name}, ${max});"
-			onKeyUp="limitText(this.form.${name}, ${max});" value="${value}"/>
-			<font size="1">(Maximum characters: ${max})</font>
-		</div>
-	</div>
-	</@security.authorize>
-		<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<div class="form-group">
-		<span class="col-sm-3 control-label">${label}
-		<#if tooltip>
-			<#assign tooltip_img_url><@spring.url relativeUrl="/images/tooltip.gif"/></#assign>
-			<br /><a href="http://clients.collegesource.com/home/display/SB/SIS+Course+Formatting"><img src="${tooltip_img_url}" title="CollegeSource Help" alt="CollegeSource help"/></a></td>
-		</#if>
-		</span>
-		<div class="col-sm-9">
-			<input type="text" class="form-control" disabled   name="${name}" id="${name}" 
-			onKeyDown="limitText(this.form.${name}, ${max});"
-			onKeyUp="limitText(this.form.${name}, ${max});" value="${value}"/>
-			<font size="1">(Maximum characters: ${max})</font>
-		</div>
-	</div>
-	</@security.authorize>
-</#macro>
-
 <#macro numericalInputRow name label min max value="" tooltip=false >
 	<div class="form-group">
 		<span class="col-sm-3 control-label">${label}
@@ -92,41 +54,6 @@
 	</div>
 </#macro>
 
-<#macro numericalInputRowAdminCheck name label min max value="" tooltip=false >
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-	<div class="form-group">
-		<span class="col-sm-3 control-label">${label}
-		<#if tooltip>
-			<#assign tooltip_img_url><@spring.url relativeUrl="/images/tooltip.gif"/></#assign>
-			<br /><a href="http://clients.collegesource.com/home/display/SB/SIS+Course+Formatting"><img src="${tooltip_img_url}" title="CollegeSource Help" alt="CollegeSource help"/></a></td>
-		</#if>
-		</span>
-		<div class="col-sm-9">
-			<input type="text" class="form-control" name="${name}" id="${name}" 
-			onKeyDown="limitText(this.form.${name}, ${max});"
-			onKeyUp="limitText(this.form.${name}, ${max});" value="${value}"/>
-			<font size="1">(Choose a number between ${min} and ${max})</font>
-		</div>
-	</div>
-	</@security.authorize>
-		<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<div class="form-group">
-		<span class="col-sm-3 control-label">${label}
-		<#if tooltip>
-			<#assign tooltip_img_url><@spring.url relativeUrl="/images/tooltip.gif"/></#assign>
-			<br /><a href="http://clients.collegesource.com/home/display/SB/SIS+Course+Formatting"><img src="${tooltip_img_url}" title="CollegeSource Help" alt="CollegeSource help"/></a></td>
-		</#if>
-		</span>
-		<div class="col-sm-9">
-			<input type="text" class="form-control"  name="${name}"disabled  id="${name}" 
-			onKeyDown="limitText(this.form.${name}, ${max});"
-			onKeyUp="limitText(this.form.${name}, ${max});" value="${value}"/>
-			<font size="1">(Choose a number between ${min} and ${max})</font>
-		</div>
-	</div>
-	</@security.authorize>
-</#macro>
-
 <#macro textareaRow name label max value="" >
 	<div class="form-group">
 		<span class="col-sm-3 control-label">${label}</span>
@@ -139,62 +66,14 @@
 	</div>
 </#macro>
 
-<#macro textareaRowAdminCheck name label max value="" >
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-	<div class="form-group">
-		<span class="col-sm-3 control-label">${label}</span>
-		<div class="col-sm-9">
-		<textarea class="form-control"  name="${name}" 
-		onKeyDown="limitText(this.form.${name}, ${max});"
-		onKeyUp="limitText(this.form.${name}, ${max});">${value}</textarea>
-		<font size="1">(Maximum characters: ${max})</font>
-		</div>
-	</div>
-	</@security.authorize>
-		<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-	<div class="form-group">
-		<span class="col-sm-3 control-label">${label}</span>
-		<div class="col-sm-9">
-		<textarea class="form-control" disabled name="${name}" 
-		onKeyDown="limitText(this.form.${name}, ${max});"
-		onKeyUp="limitText(this.form.${name}, ${max});">${value}</textarea>
-		<font size="1">(Maximum characters: ${max})</font>
-		</div>
-	</div>
-	</@security.authorize>
-	
-</#macro>
-
 <#macro booleanRadioRow name label value="" >
 		<div class="form-group">
 				<span class="col-sm-3 control-label">${label}</span>
 			<div class="col-sm-9">
-				<input type="radio" name="${name}"   value="T" <#if value == "T"> checked</#if>/>T
-		    	<input type="radio" name="${name}" value="F" <#if value == "F"> checked</#if> />F 
+				<input type="radio" name="${name}"  value="T" <#if value == "T"> checked</#if>/>T
+		    	<input type="radio" name="${name}"   value="F" <#if value == "F"> checked</#if> />F 
 		    </div>
 		</div>
-</#macro>
-
-<#macro booleanRadioRowAdminCheck name label value="" >
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<div class="form-group">
-				<span class="col-sm-3 control-label">${label}</span>
-			<div class="col-sm-9">
-				<input type="radio" name="${name}"   value="T" <#if value == "T"> checked</#if>/>T
-		    	<input type="radio" name="${name}" value="F" <#if value == "F"> checked</#if> />F 
-		    </div>
-		</div>
-	</@security.authorize>
-		<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<div class="form-group">
-				<span class="col-sm-3 control-label">${label}</span>
-			<div class="col-sm-9">
-				<input type="radio" name="${name}"   value="T"  disabled <#if value == "T"> checked</#if>/>T
-		    	<input type="radio" name="${name}" value="F"  disabled <#if value == "F"> checked</#if> />F 
-		    </div>
-		</div>
-	</@security.authorize>
-
 </#macro>
 
 <#macro checkBox name label value="" checked=false >
@@ -204,25 +83,6 @@
 				<input type="checkbox" name="${name}"  value="${value}" <#if checked == "true"> checked</#if>/>
 		    </div>
 		</div>
-</#macro>
-
-<#macro checkBoxAdminCheck name label value="" checked=false >
-		<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<div class="form-group">
-				<span class="col-sm-3 control-label">${label}</span>
-			<div class="col-sm-9">
-				<input type="checkbox" name="${name}"  value="${value}" <#if checked == "true"> checked</#if>/>
-		    </div>
-		</div>
-	</@security.authorize>
-		<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-			<div class="form-group">
-				<span class="col-sm-3 control-label">${label}</span>
-			<div class="col-sm-9">
-				<input type="checkbox" name="${name}" disabled  value="${value}" <#if checked == "true"> checked</#if>/>
-		    </div>
-		</div>
-	</@security.authorize>
 </#macro>
 
 <#macro submitButtons >
@@ -253,50 +113,6 @@
 	<@d.textareaRow name="${id}Memo" label="Memo" max="255" value=memo />
 </#macro>
 
-<#macro ctlcdConfigsRows action ruflag pseudo force delig id label ctlcd="" note="" memo="" >
-	
-	<h3>${label}</h3>
-	<p> <span style="font-style:italic;">We recommend that you enter your control code that matches the following settings: </span>
-	<br>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Action: ${action}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">RU Flag: ${ruflag}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Pseudo: ${pseudo}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Force: ${force}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Delig: ${delig}</span>
-	</p>
-	
-	
-	
-	<@d.inputRow name="${id}Ctlcd" label="Ctlcd" max="2" value=ctlcd />
-	<@d.inputRow name="${id}Note" label="Note" max="27" value=note />
-	<@d.textareaRow name="${id}Memo" label="Memo" max="255" value=memo />
-</#macro>
-
-<#macro ctlcdConfigsRowsAdminCheck action ruflag pseudo force delig id label ctlcd="" note="" memo="" >
-	
-	<h3>${label}</h3>
-	<p> <span style="font-style:italic;">We recommend that you enter your control code that matches the following settings: </span>
-	<br>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Action: ${action}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">RU Flag: ${ruflag}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Pseudo: ${pseudo}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Force: ${force}</span>
-	<span class="label label-default" style="font-size:85%;background-color: #595959;">Delig: ${delig}</span>
-	</p>
-	
-	
-	<@security.authorize ifAnyGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<@d.inputRow name="${id}Ctlcd" label="Ctlcd" max="2" value=ctlcd />
-		<@d.inputRow name="${id}Note" label="Note" max="27" value=note />
-		<@d.textareaRow name="${id}Memo" label="Memo" max="255" value=memo />
-	</@security.authorize>
-	<@security.authorize ifNoneGranted="SS_AREA_ADMIN=u, SB_ADMIN_EDIT=u, UDIR_Admin=u  ">
-		<@d.inputRowAdminCheck name="${id}Ctlcd" label="Ctlcd" max="2" value=ctlcd />
-		<@d.inputRowAdminCheck name="${id}Note" label="Note" max="27" value=note />
-		<@d.textareaRowAdminCheck name="${id}Memo" label="Memo" max="255" value=memo />
-	</@security.authorize>
-	
-</#macro>
 <#macro cronTable>
 <div id="cronHelp">
 Values should be used in order separated by a space.  

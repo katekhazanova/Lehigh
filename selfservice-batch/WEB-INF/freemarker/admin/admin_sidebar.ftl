@@ -1,4 +1,4 @@
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 <#assign adminBaseUrl>
 	<@s.url relativeUrl="/admin/"/>
 </#assign>
@@ -11,7 +11,7 @@
 	<h2 style="margin-top: 0px;">Administration</h2>
 		<ul id="admin-sidebar" class="nav nav-pills nav-stacked">
 		
-			<@security.authorize ifAnyGranted="SB_ADMIN_EDIT=r  ">
+			<@redauth.authorize ifAnyGranted="SB_ADMIN_EDIT=crud">
 			<#if (scheduleBuilderURL?? && scheduleBuilderURL !="" ) || dashboardURL?? && dashboardURL !="">
 				<li style="font-weight: bold;">Schedule Builder </li>
 			</#if>
@@ -26,29 +26,27 @@
 				<li><a href="${scheduleURL}/admin/index_home?crossApp=${crossApp}">Course Indexing</a></li>
 				<li><a href="${scheduleURL}/admin/logging_viewall?crossApp=${crossApp}">Logging & Support</a></li>
 			</#if>
-			</@security.authorize>
+			</@redauth.authorize>
 			
-			<@security.authorize ifAnyGranted="SS_AREA_ADMIN=r ">
+			<@redauth.authorize ifAnyGranted="SS_AREA_ADMIN=crud">
 			<li style="font-weight: bold;">Self-Service </li>
 			<li><a href="<@h.url href='/admin/dprog_index_home.html' />">ProgramMatcher</a></li>
 			<#if dashboardURL?? && dashboardURL !="" >
 				<li><a href="${dashboardURL}/admin/admin_auditException.html">Audit Exceptions</a></li>
 			</#if>
-			</@security.authorize>
+			</@redauth.authorize>
 			
-			<@security.authorize ifAnyGranted="UDIR_Admin=r  ">
+			<@redauth.authorize ifAnyGranted="UDIR_Admin=crud">
 			<#if dashboardURL?? && dashboardURL !="" >
 				<li style="font-weight: bold;">u.direct</li>
 				<li><a href="${dashboardURL}/admin/admin_courseGrades.html">Catalog Course Grades</a></li>
-				<li><a href="${dashboardURL}/admin/admin_planNotes.html">Plan Messages</a></li>
+				<li><a href="${dashboardURL}admin_planNotes.html">Plan Messages</a></li>
 			</#if>
-			</@security.authorize>
-			<@security.authorize ifAnyGranted="SS_AREA_ADMIN=r, SB_ADMIN_EDIT=r, UDIR_Admin=r">
+			</@redauth.authorize>
 			<#if dashboardURL?? && dashboardURL !="" >
 				<li style="font-weight: bold;">Global</li>
-				<li><a href="${dashboardURL}/admin/admin_property.html">Property Configurations</a></li>		
+				<li><a href="${adminBaseUrl}admin_property.html">Property Configurations</a></li>
 			</#if>
-			</@security.authorize>
 
 			</ul>
 	</div>

@@ -22,13 +22,7 @@
 					 <label for="${param.name}" class="col-sm-3 control-label">${param.label}: </label>
 					 <div class="col-sm-9" style="margin-bottom: 10px;">
 					<#if param.inputType = "textbox">
-						<input class="form-control" name="${param.name}" type="text" 
-							<#if "${param.name}"== "offTrack" > value = '1' </#if> 
-							<#if "${param.name}"== "IDQ_Course_Search" || "${param.name}"== "instidq" > value = '${instidq}' </#if> 
-							<#if "${param.name}"== "InstID_Course_Search"|| "${param.name}"== "instid" > value = '${instid}' </#if> 						
-							<#if "${param.name}"== "CD_Course_Search" || "${param.name}"== "instcd"> value = '${instcd}' </#if>  
-							<#if "${param.name}"!= "CD"> 
-							<#if param.optional>placeholder="(OPTIONAL)" </#if></#if>>
+						<input class="form-control" name="${param.name}" type="text" <#if "${param.name}"== "IDQ_Course_Search"> value = '${instidq}' </#if> <#if "${param.name}"== "InstID_Course_Search"> value = '${instid}' </#if> <#if "${param.name}"== "CD_Course_Search"> value = '${instcd}' </#if>  <#if "${param.name}"!= "CD"> <#if param.optional>placeholder="(OPTIONAL)" </#if></#if>>
 					<#elseif param.inputType = "dropdown">
 						<#assign values = param.listOfValues>
 							<select class="form-control"  name="${param.name}">

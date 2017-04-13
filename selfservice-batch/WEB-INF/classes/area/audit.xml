@@ -156,11 +156,11 @@
   </page>
   
   <page name="JobQueueCourse" label="Course" urlBase="audit">
-    <masterView defaultSortBy="intSeqNo"> <!-- "tabx"--><!-- "editYt"-->
+    <masterView defaultSortBy="tabx"> <!-- "editYt"-->
       <!-- filter on="stabx" label="Term" displayProperty="stabx" / -->
       <!-- filter on="editYt" label="Year" /-->
       <!-- <filter on="credit" label="Hours" /> -->
-      <filter on="grade" label="Grade" />
+      <filter on="rgrade" label="Grade" />
       <filter on="stabx" label="Term" displayProperty="subreqTitle" />
     </masterView>
     
@@ -169,7 +169,7 @@
       <column name="editYt" label="Course Term" align="left" />
       <column name="xcourse" label="Course" align="left" />
       <column name="credit" label="Hours" format="number:#0.00" />
-      <column name="grade" label="Grade" />
+      <column name="rgrade" label="Grade" />
       <column name="ctitle" label="Title" align="left" />
       <column derived="true" label="Status" renderer="uachieve.selfservice.area.audit.web.renderer.CourseStatusColumnRenderer" />
     </columns>

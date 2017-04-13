@@ -7,7 +7,7 @@
 	    	<div class="col-md-5">
 	    		<span style="font-size: 14px; font-weight: 500;">Institutional Reference Table</span>
 	    		<br>
-		    		<span style="font-size: 14px; font-weight: 500;">${instName!''}</span> 
+		    		<span style="font-size: 14px; font-weight: 500;">${instName}</span> 
 	    		</div>
 	    		<div class="col-md-3">
 		      		<span style="font-size: 12px; font-weight: 500; color: gray;margin-right: 3px;">Source ID:

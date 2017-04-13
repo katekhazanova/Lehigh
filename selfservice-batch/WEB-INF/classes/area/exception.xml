@@ -194,8 +194,7 @@
         </detailView>
       </column>
       <column name="reqhrs" label="Required hours" default="0.00" format="number:#0.00">
-        <detailView maxLength="7">
-        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <detailView maxLength="10">
         <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
         </detailView>
       </column>
@@ -204,8 +203,7 @@
         <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99" />
       </column>
       <column name="reqgpa" label="Required GPA" default="0.000" format="number:#0.00">
-        <detailView maxLength="7">
-        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="3" />
+        <detailView maxLength="9">
         <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="999.999" />
         </detailView>
       </column>
@@ -222,8 +220,7 @@
         <detailView maxLength="1" />
       </column>
       <column name="maxhrs" label="Max Hours" default="0.00" format="number:#0.00">
-        <detailView maxLength="7">
-        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <detailView maxLength="10">
         <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
         </detailView>
       </column>
@@ -421,8 +418,7 @@
         <detailView maxLength="15" />
       </column>
       <column name="reqhrs" label="Hours Waived" default="0.000" format="number:#0.00">
-       <detailView maxLength="7" >
-       <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+       <detailView maxLength="10" >
         <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
         </detailView>
       </column>
@@ -501,8 +497,7 @@
         <detailView maxLength="6" inputType="menu" options="yearTerms" />
       </column>
       <column name="reqhrs" label="Hours Waived" default="0.000" format="number:#0.00">
-        <detailView maxLength="7" >
-        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <detailView maxLength="10" >
         <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
         </detailView>
       </column>
@@ -610,8 +605,7 @@
 		        <detailView maxLength="15" />
 		      </column>
 		      <column name="reqhrs" label="Reference Value" default="0.00" format="number:#0.00">
-		        <detailView maxLength="7" >
-		        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+		        <detailView maxLength="10" >
 		        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
 		        </detailView>
 		      </column>
@@ -654,8 +648,7 @@
 	        <detailView inputType="checkbox" checkboxMapping="maxhrsckMapping"/>
 	      </column>
 	      <column name="maxhrs" label="Max Hours" default="999.9" format="number:#0.0">
-	        <detailView maxLength="7" >
-	        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+	        <detailView maxLength="10" >
 	        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
 	        </detailView>
 	      </column>

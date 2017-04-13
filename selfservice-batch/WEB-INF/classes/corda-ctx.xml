@@ -32,7 +32,6 @@
     
     
     <bean id="graphConfig" class="uachieve.selfservice.GraphConfig">
-    	<property name="animateGraphs" value="${uachieve.selfservice.graph.animate}" />
         <property name="gpaGraphDecimalPlaces" value="${uachieve.selfservice.graph.gpa.decimalPlaces}" />
     	<property name="showAllGPADecimals" value="${uachieve.selfservice.graph.gpa.showAllDecimals}" />
     	<property name="hourGraphDecimalPlaces" value="${uachieve.selfservice.graph.hour.decimalPlaces}" />
@@ -40,6 +39,5 @@
     	<property name="truncateGPA" value="${uachieve.selfservice.graph.gpa.truncate}" />
     	<property name="hoursLabel" value="${uachieve.selfservice.graph.hour.label}" />
     	<property name="gpaLabel" value="${uachieve.selfservice.graph.gpa.label}" />
-    	<property name="maxGPA" value="${uachieve.selfservice.graph.gpa.max}" />
     </bean>
 </beans>

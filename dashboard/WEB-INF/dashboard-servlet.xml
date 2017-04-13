@@ -41,19 +41,6 @@
 				/admin/admin_planNotes.html=AdminPlanNotesController
 				/admin/admin_property.html=AdminGlobalController
 				
-				/auditviewer/home.html=AuditViewerHomeController
-				/auditviewer/listBatchIds.html=BatchListController
-				/auditviewer/compareAudits.html=CompareAuditsController
-				/auditviewer/listAudits.html=ListAuditsController
-				/auditviewer/listBatchStudents.html=ListBatchStudentsController
-				/auditviewer/listStudentsByName.html=ListStudentsByNameController
-				/auditviewer/listStudents.html=ListStudentsController
-				/auditviewer/auditViewSingle.html=SingleAuditController
-				/auditviewer/submitAudits.html=SubmitAuditController
-				/auditviewer/updateRunOptions.ajax=AjaxUpdateRunOptionsController
-				/auditviewer/updateStunoList.ajax=AjaxUpdateStunoListController
-				/auditProcessing.ajax=AjaxAuditProcessingController
-				
 				/reports/reports-console.html=reportsConsoleController
 				/reports/report-options.html=reportOptionsController
 				/reports/report-show.html=reportShowController
@@ -223,19 +210,6 @@
   	<bean name="AdminCourseGradesController" class="com.dashboard.controllers.admin.AdminCourseGradesController"/>
   	<bean name="AdminPlanNotesController" class="com.dashboard.controllers.admin.AdminPlanNotesController"/>
   	<bean name="AdminGlobalController" class="com.dashboard.controllers.admin.AdminGlobalController"/>
-  	
-  	<bean name="AuditViewerHomeController" class="com.dashboard.controllers.auditviewer.AuditViewerHomeController" parent="BaseAuditController"/>
-	<bean name="BatchListController" class="com.dashboard.controllers.auditviewer.BatchListController" parent="BaseAuditController"/>
-	<bean name="CompareAuditsController" class="com.dashboard.controllers.auditviewer.CompareAuditsController" parent="BaseAuditController"/>
-	<bean name="ListAuditsController" class="com.dashboard.controllers.auditviewer.ListAuditsController" parent="BaseAuditController"/>
-	<bean name="ListBatchStudentsController" class="com.dashboard.controllers.auditviewer.ListBatchStudentsController" parent="BaseAuditController"/>
-	<bean name="ListStudentsByNameController" class="com.dashboard.controllers.auditviewer.ListStudentsByNameController" parent="BaseAuditController"/>
-	<bean name="ListStudentsController" class="com.dashboard.controllers.auditviewer.ListStudentsController" parent="BaseAuditController"/>
-	<bean name="SingleAuditController" class="com.dashboard.controllers.auditviewer.SingleAuditController" parent="BaseAuditController"/>
-	<bean name="SubmitAuditController" class="com.dashboard.controllers.auditviewer.SubmitAuditController" parent="BaseAuditController"/>
-	<bean name="AjaxUpdateRunOptionsController" class="com.dashboard.controllers.auditviewer.AjaxUpdateRunOptionsController" parent="BaseAuditController"/>
-	<bean name="AjaxUpdateStunoListController" class="com.dashboard.controllers.auditviewer.AjaxUpdateStunoListController" parent="BaseAuditController"/>
-	<bean name="AjaxAuditProcessingController" class="com.dashboard.controllers.auditviewer.AjaxAuditProcessingController" parent="BaseAuditController"/>
   	
 	<bean name="reportsConsoleController" class="com.dashboard.controllers.reports.ReportsConsoleController"/>
 	<bean name="reportOptionsController" class="com.dashboard.controllers.reports.ReportOptionsController" >

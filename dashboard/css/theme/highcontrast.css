@@ -25,7 +25,7 @@
 /* =============== Miscellaneous ============================ */
 
 
-/* MAIN COLOR: #006270 */
+/* MAIN COLOR: #4C280F */
 
 
 /* ***************************************  Site wide general css  ************************************ */
@@ -59,7 +59,7 @@ h4 {font-size: 16px;}
 
 hr {
 	border-style: none; 
-	border-top: solid #006270 1px;
+	border-top: solid #4C280F 1px;
 }
 
 .subtle { 
@@ -159,8 +159,8 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
 	color: #ffffff;
-  	background-color: #006270;
-  	border-color: #006270;
+  	background-color: #4C280F;
+  	border-color: #4C280F;
 }
 
 .btn-primary:hover,
@@ -625,7 +625,7 @@ table tr th a, table tr th a:hover,
 /* Main Menu */
 
 .main-menu {
-	background-color: #006270 ;
+	background-color: #4C280F ;
 }
 
 .main-menu .navbar-nav > .active > a,
@@ -708,7 +708,7 @@ table tr th a, table tr th a:hover,
 }
 
 .navbar {
-	background-color: #006270;
+	background-color: #4C280F;
 }
 
 
@@ -728,7 +728,7 @@ table tr th a, table tr th a:hover,
 }
 
 div.greyBar {
-	background-color: #006270;
+	background-color: #4C280F;
 	color: #ffffff;
 }
 
@@ -1158,14 +1158,14 @@ input, textarea, select {
 /* =============== Dashboard Tabs ============================ */
 
 .yui-skin-sam .yui-navset .yui-nav,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav{
-	border:solid #006270;
+	border:solid #4C280F;
 	border-width:0 0 5px;zoom:1;
 }
 
 .yui-skin-sam .yui-navset .yui-nav .selected a,
 .yui-skin-sam .yui-navset .yui-nav .selected a:focus,
 .yui-skin-sam .yui-navset .yui-nav .selected a:hover{
-	background:#006270;
+	background:#4C280F;
 	color:#fff;
 }
 
@@ -1257,7 +1257,7 @@ input, textarea, select {
 .dashboard-link:active,
 .dashboard-link.active,
 .open .dropdown-toggle.dashboard-link {
-	color: #006270;
+	color: #4C280F;
 }
 
 .dashboard-link:active,
@@ -1430,7 +1430,7 @@ input, textarea, select {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   	color: #ffffff;
-  	background-color: #006270;
+  	background-color: #4C280F;
 }
 
 /* =============== Batch ==================================== */
@@ -1445,7 +1445,7 @@ input, textarea, select {
 }
 
 #completed a {
-	background-color: #006270;
+	background-color: #4C280F;
 	color: #ffffff;
 }
 
@@ -1543,7 +1543,7 @@ pre#memo, pre {
 
 .p_sel {
 	color: #ffffff;
-	background-color: #006270;
+	background-color: #4C280F;
 }
 
 .p_sel:focus {

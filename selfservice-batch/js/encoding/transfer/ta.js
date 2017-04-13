@@ -252,16 +252,16 @@ function createTA(){
 	});
 }
 
-function deleteTA(taId){
+function deleteTA(taId,fyt,sourceCd,dpmask){
 	if (confirm('Delete TA Table and all included information?')) {
 		$j.ajax({
 			type: "POST",
 			traditional: true,
 			url: "delete-ta.html",
 			data: {
-				"fyt": $j("#"+taId).find("#ta-fyt").text(),
-				"sourceCd": $j("#"+taId).find("#ta-sourceCd").text(),
-				"dpmask": $j("#"+taId).find("#ta-dpmask").text(),
+				"fyt": fyt,
+				"sourceCd": sourceCd,
+				"dpmask": dpmask,
 			  },
 			 dataType: "json",
 				success : function(json) {
@@ -280,7 +280,7 @@ function deleteTA(taId){
 function saveTa(){
 	taChangesConfirmed = true;
 	
-	if(taEditValidation() && (taChanges || unsavedChanges)){
+	if(taEditValidation()){
 		
 		if(ta.persist == true){
 			$j('#savingTAMessage').show();
@@ -309,7 +309,7 @@ function saveTa(){
 			sortRules();
 		}
 	}
-	else if(taChanges){
+	else{
 		
 		$j.pnotify({
 		    title: 'Unable to Save Transfer Articulation.',

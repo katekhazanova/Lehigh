@@ -26,7 +26,7 @@
 	<#-- ========== AUDIT NAVIGATION TABS ========== -->
 	<#if !printerFriendly>
 		<#if displayHtmlReport()>
-			<@sec.hasAppFnPerm appFn=AppFuncRole.SS_AREA_AUDITEXCEPTION perm="C">
+			<@sec.hasAppFnPerm appFn=AppFuncRole.SS_AREA_EXCEPTION perm="C">
 				<a class="btn btn-primary pull-right" href="<@s.url />/audit/exception_home.html">Enter Exception Mode</a>
 			</@sec.hasAppFnPerm>
 		</#if>
@@ -118,7 +118,6 @@
 							<script type='text/javascript'>
 							
 								$j(document).ready(function() {
-									$j.ajaxSetup({ cache: false });
 									loadAcademicProgressGraph(false, { complete: "<@s.message 'uachieve.selfservice.status.complete' />", inProgress: "<@s.message 'uachieve.selfservice.status.inprogress' />", unfulfilled: "<@s.message 'uachieve.selfservice.status.unfulfilled' />", planned: "<@s.message 'uachieve.selfservice.status.planned' />", hours: "${graphConfig.hoursLabel}", gpa: "${graphConfig.gpaLabel}" }, ${academicProgressGraphHtml});			
 								});
 							</script>

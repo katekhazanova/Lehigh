@@ -69,11 +69,5 @@
     <property name="transferEvalsw" value="${uachieve.selfservice.audit.transfer.evalsw}" />
     <property name="allowDuplicateDprogs" value="${uachieve.selfservice.audit.allowDuplicateDprogs}" />
   </bean>
-  
-  <bean id="auditExceptionConfig" class="uachieve.selfservice.area.audit.AuditExceptionConfig">
-  
-  	<property name="restrictToDprog" value="${uachieve.selfservice.audit.exception.restrictToDprog}" />
-    <property name="restricToReq" value="${uachieve.selfservice.audit.exception.restricToReq}" />
-  </bean>
 
 </beans>

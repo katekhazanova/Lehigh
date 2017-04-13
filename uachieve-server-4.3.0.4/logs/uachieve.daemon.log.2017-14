@@ -1,0 +1,162 @@
+03 Apr 2017 16:39:23 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+03 Apr 2017 16:39:24 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040316392348 was added to request queue.
+03 Apr 2017 16:39:24 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040316392348, userid=rw00], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+03 Apr 2017 16:39:24 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040316392348
+03 Apr 2017 16:39:24 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040316392348 Processing 2017040316392348 at Mon Apr 03 16:39:24 EDT 2017
+03 Apr 2017 16:39:25 : [WARN ] uachieve.apis.common.dao.hibernate.SimpleHibernateDao  - No requirement found (no rqfyt found actually) matching key: ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=GLOBAL   , rqfyt=201040]
+03 Apr 2017 16:39:25 : [ERROR] uachieve.apis.common.logger.DefaultLoggerImpl  - 2017040316392348::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+03 Apr 2017 16:39:28 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040316392348 End Processing Job 2017040316392348 - completed in [4316] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+03 Apr 2017 16:39:28 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040316392348, userid=rw00], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+03 Apr 2017 16:43:18 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+03 Apr 2017 16:43:18 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040316431545 was added to request queue.
+03 Apr 2017 16:43:18 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040316431545, userid=rw00], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+03 Apr 2017 16:43:18 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040316431545
+03 Apr 2017 16:43:18 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040316431545 Processing 2017040316431545 at Mon Apr 03 16:43:18 EDT 2017
+03 Apr 2017 16:43:24 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040316431545 End Processing Job 2017040316431545 - completed in [5484] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+03 Apr 2017 16:43:24 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040316431545, userid=rw00], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 00:21:33 : [INFO ] uachieve.daemon.DaemonController  - shutting down in 5 seconds, allowing jobs in process to complete
+06 Apr 2017 00:21:38 : [INFO ] uachieve.daemon.DaemonController  - Daemon Shutdown complete.
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - DaemonController started Thu Apr 06 00:26:26 EDT 2017
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Audit Executor thread pool properties: corePool=[2] maxPool=[2] keepAlive=[600]
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AuditExecutor started.  CorePoolSize [2], MaxPoolSize [2], KeepAliveTime [600]
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Creating Request Handlers.  3 to be created.
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Initiating Request Handler: ServerName:    Com Key: COM  Sleep Time: 3
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Initiating Request Handler: ServerName: SS  Com Key: COM  Sleep Time: 3
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler started: Thu Apr 06 00:26:26 EDT 2017  ServerName:    Com Key: COM  Sleep Time: 3
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Initiating Request Handler: ServerName: BATCH  Com Key: BAT  Sleep Time: 3
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler started: Thu Apr 06 00:26:26 EDT 2017  ServerName: SS  Com Key: COM  Sleep Time: 3
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler started: Thu Apr 06 00:26:26 EDT 2017  ServerName: BATCH  Com Key: BAT  Sleep Time: 3
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - u.achieve server started: CollegeSource Inc. uachieve-server 4.3.0.4 06/06/2016 12:18 PM
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Environment Details
+OS Name   : AIX
+OS Version: 6.1
+OS Arch   : ppc64
+Java Vers : 1.7.0
+Java Vend : IBM Corporation
+Java Home :/usr/java71_64/jre
+
+06 Apr 2017 00:26:26 : [INFO ] uachieve.daemon.DaemonController  - Server Lib  Details
+DB2Jcc4-4.14.111.jar
+antlr-2.7.6.jar
+aopalliance-1.0.jar
+asm-4.0.jar
+aspectjweaver-1.6.8.jar
+c3p0-0.9.1.2.jar
+cglib-nodep-2.2.jar
+commons-beanutils-1.8.0.jar
+commons-collections-3.2.2.jar
+commons-dbcp-1.2.jar
+commons-lang-2.4.jar
+commons-logging-1.0.4.jar
+commons-net-1.4.1.jar
+commons-pool-1.1.jar
+dbtools-4.3.jar
+dom4j-1.6.1.jar
+ehcache-core-2.4.3.jar
+flying-saucer-core-9.0.1.jar
+flying-saucer-pdf-9.0.1.jar
+freemarker-2.3.20.jar
+guava-13.0.1.jar
+hibernate-commons-annotations-4.0.1.Final.jar
+hibernate-core-3.5.6-Final.jar
+hibernate-ehcache-3.5.6-Final.jar
+hibernate-jpa-2.0-api-1.0.0.Final.jar
+hibernate-validator-3.1.0.GA.jar
+itext-4.2.0.jar
+javassist-3.13.0.GA.jar
+jboss-logging-3.1.0.GA.jar
+jboss-transaction-api_1.1_spec-1.0.0.Final.jar
+jta-1.1.jar
+log4j-1.2.15.jar
+quartz-1.8.3.jar
+redlantern-commons-model-1.0.1.jar
+redlantern-interfaces-4.0.10.jar
+regwizard-api-0.9.9.8.2.jar
+slf4j-api-1.7.2.jar
+slf4j-log4j12-1.7.2.jar
+spring-aop-3.1.4.RELEASE.jar
+spring-asm-3.1.4.RELEASE.jar
+spring-beans-3.1.4.RELEASE.jar
+spring-context-3.1.4.RELEASE.jar
+spring-context-support-3.1.4.RELEASE.jar
+spring-core-3.1.4.RELEASE.jar
+spring-expression-3.1.4.RELEASE.jar
+spring-jdbc-3.1.4.RELEASE.jar
+spring-orm-3.1.4.RELEASE.jar
+spring-test-3.1.4.RELEASE.jar
+spring-tx-3.1.4.RELEASE.jar
+uachieve-apis-4.3.0.4.jar
+uachieve-auditreport-4.3.0.4.jar
+uachieve-server-4.3.0.4.jar
+uachieve-slayer-4.3.0.4.jar
+util.jar-1.0.jar
+xpp3_min-1.1.4c.jar
+xstream-1.3.1.jar
+
+06 Apr 2017 11:27:35 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:27:35 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611273257 was added to request queue.
+06 Apr 2017 11:27:35 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611273257, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:27:36 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611273257
+06 Apr 2017 11:27:36 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611273257 Processing 2017040611273257 at Thu Apr 06 11:27:36 EDT 2017
+06 Apr 2017 11:27:50 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611273257 End Processing Job 2017040611273257 - completed in [14462] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:27:50 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611273257, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:28:17 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:28:18 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611281771 was added to request queue.
+06 Apr 2017 11:28:18 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611281771, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:28:18 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611281771
+06 Apr 2017 11:28:18 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611281771 Processing 2017040611281771 at Thu Apr 06 11:28:18 EDT 2017
+06 Apr 2017 11:28:24 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611281771 End Processing Job 2017040611281771 - completed in [5933] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:28:24 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611281771, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:32:36 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:32:36 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611323559 was added to request queue.
+06 Apr 2017 11:32:36 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611323559, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:32:36 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611323559
+06 Apr 2017 11:32:36 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611323559 Processing 2017040611323559 at Thu Apr 06 11:32:36 EDT 2017
+06 Apr 2017 11:32:41 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611323559 End Processing Job 2017040611323559 - completed in [5000] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:32:41 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611323559, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:33:42 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:33:42 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611334260 was added to request queue.
+06 Apr 2017 11:33:42 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611334260, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:33:42 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611334260
+06 Apr 2017 11:33:42 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611334260 Processing 2017040611334260 at Thu Apr 06 11:33:42 EDT 2017
+06 Apr 2017 11:33:45 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611334260 End Processing Job 2017040611334260 - completed in [2545] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:33:45 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611334260, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:34:03 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:34:03 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611340360 was added to request queue.
+06 Apr 2017 11:34:03 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611340360, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:34:03 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611340360
+06 Apr 2017 11:34:03 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611340360 Processing 2017040611340360 at Thu Apr 06 11:34:03 EDT 2017
+06 Apr 2017 11:34:05 : [WARN ] uachieve.apis.common.dao.hibernate.SimpleHibernateDao  - No requirement found (no rqfyt found actually) matching key: ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=GLOBAL   , rqfyt=201340]
+06 Apr 2017 11:34:05 : [ERROR] uachieve.apis.common.logger.DefaultLoggerImpl  - 2017040611340360::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+06 Apr 2017 11:34:07 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611340360 End Processing Job 2017040611340360 - completed in [3759] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:34:07 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611340360, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:35:22 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:35:22 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611352048 was added to request queue.
+06 Apr 2017 11:35:22 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611352048, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:35:22 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611352048
+06 Apr 2017 11:35:22 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611352048 Processing 2017040611352048 at Thu Apr 06 11:35:22 EDT 2017
+06 Apr 2017 11:35:25 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611352048 End Processing Job 2017040611352048 - completed in [3237] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:35:25 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611352048, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:45:16 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:45:17 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611451536 was added to request queue.
+06 Apr 2017 11:45:17 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611451536, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:45:17 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611451536
+06 Apr 2017 11:45:17 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611451536 Processing 2017040611451536 at Thu Apr 06 11:45:17 EDT 2017
+06 Apr 2017 11:45:18 : [WARN ] uachieve.apis.common.dao.hibernate.SimpleHibernateDao  - No requirement found (no rqfyt found actually) matching key: ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=GLOBAL   , rqfyt=201340]
+06 Apr 2017 11:45:18 : [ERROR] uachieve.apis.common.logger.DefaultLoggerImpl  - 2017040611451536::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+06 Apr 2017 11:45:20 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611451536 End Processing Job 2017040611451536 - completed in [3324] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:45:20 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611451536, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:45:59 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:45:59 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611455895 was added to request queue.
+06 Apr 2017 11:45:59 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611455895, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:45:59 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611455895
+06 Apr 2017 11:45:59 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611455895 Processing 2017040611455895 at Thu Apr 06 11:45:59 EDT 2017
+06 Apr 2017 11:46:02 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611455895 End Processing Job 2017040611455895 - completed in [2987] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:46:02 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611455895, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:56:57 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS loading com table COM
+06 Apr 2017 11:56:57 : [INFO ] uachieve.daemon.RequestHandler  - RequestHandler SS: jobid 2017040611565578 was added to request queue.
+06 Apr 2017 11:56:57 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - BeforeExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611565578, userid=acb211], status=Q, servername=SS, comkey=COM, logLevel=I, reportType=HTM]
+06 Apr 2017 11:56:57 : [INFO ] uachieve.daemon.control.ControllerFacade  - Single audit request received with jobid: 2017040611565578
+06 Apr 2017 11:56:57 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611565578 Processing 2017040611565578 at Thu Apr 06 11:56:57 EDT 2017
+06 Apr 2017 11:57:00 : [INFO ] uachieve.daemon.control.AuditRequestRunnable  - 2017040611565578 End Processing Job 2017040611565578 - completed in [2656] ms, Audit Info: listall =  , status = C, logLevel = I, extout = Z
+06 Apr 2017 11:57:00 : [INFO ] uachieve.daemon.AuditThreadPoolExecutor  - AfterExecute JobQueueList [comp_id=JobQueueListPK [instidq=72, instid=002365, instcd=, jobid=2017040611565578, userid=acb211], status=D, servername=SS, comkey=COM, logLevel=I, reportType=HTM]

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+  	<bean id="studentQueryUtil" class="com.collegesource.interfaces.student.util.StudentQueryUtil">
+  		
+  		<property name="pidmQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					spriden_pidm 
+				FROM 
+					spriden
+				WHERE 
+					spriden_id = ? 
+					AND spriden_change_ind IS NULL
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>
+  		
+  		<property name="nameQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					spriden_last_name || ', ' || spriden_first_name || ' ' || spriden_mi AS stuname 
+				FROM 
+					spriden 
+				WHERE 
+					spriden_pidm = ? 
+					AND spriden_change_ind IS NULL
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>
+  		
+  		<property name="szvinstQuery">
+  			<value>
+  				<![CDATA[
+  					select szvinst_dprog_flag, --ws-flag
+	    	      			szvinst_deg_ind --deg-ind
+	                from  szvinst
+	                where
+	                	szvinst_instidq = ?
+	            		and rpad(szvinst_instid,8,' ') = ?
+  				]]>
+  			</value>
+  		</property>
+  		
+  		<!-- Query for Banner program, we will use that to get the crosswalk dprog -->
+		<property name="dprogQuery">
+			<value>
+  			<![CDATA[
+			SELECT 
+				sovlcur_pidm,
+				sovlcur_program AS PROGRAM_CODE, 
+				sovlcur_term_code AS STRM, 
+				sovlcur_priority_no, 
+				sovlcur_levl_code as LEVEL_CODE, 
+				sovlcur_coll_code as COLLEGE_CODE,
+				sovlcur_camp_code, 
+				RPAD(sovlcur_degc_code,6,' ') AS DEGC_CODE,
+				sovlcur_term_code_ctlg AS CATLYT, 
+				sovlcur_term_code_end, 
+				sovlfos_priority_no, 
+				sovlfos_lfst_code, 
+				sovlfos_majr_code AS MAJOR_CODE, 
+				sovlfos_term_code_ctlg, 
+				sovlfos_dept_code, 
+				sovlfos_conc_attach_majr_code, 
+				sovlcur_seqno, 
+				sovlfos_lcur_seqno 
+			FROM 
+				sovlcur, sovlfos 
+			WHERE
+				sovlcur_pidm = ?  
+				AND sovlfos_pidm = sovlcur_pidm 
+				AND sovlfos_lcur_seqno = sovlcur_seqno 
+				AND sovlfos_current_ind = sovlcur_current_ind 
+				AND sovlfos_active_ind = sovlcur_active_ind
+				AND sovlcur_lmod_code = 'LEARNER' 
+				AND sovlcur_current_ind = 'Y' 
+				AND sovlcur_active_ind = 'Y'  
+			ORDER BY 
+				sovlcur_seqno, 
+				sovlcur_priority_no, 
+				sovlfos_priority_no
+			]]>
+			</value>
+  		</property>
+
+  		<!-- szbccmd_majr_code comes from sovlfos_majr_code -->
+  		<property name="crosswalkQuery">
+  			<value>
+  				select  
+  					SZBCCMD_DPROG AS DPROG
+  				from SZBCCMD
+  				where SZBCCMD_MAJR_CODE = ?
+  					and SZBCCMD_DEGC_CODE = ?
+  			</value>
+  		</property>  		
+
+		<property name="courseHistoryQuery">
+  			<value>
+  			<![CDATA[
+				select nvl(shrtckn_term_code,' ') 		AS YEARTERM,
+		              shrtckn_subj_code					AS DEPT,
+		              shrtckn_crse_numb					AS NUM,
+		              nvl(shrtckn_seq_numb,' ')			AS RTITLE,
+		              nvl(shrtckg_credit_hours,0)		AS RCREDIT,
+		              nvl(shrtckg_gmod_code,' ')		AS GMOD_CODE,
+		              nvl(shrtckg_grde_code_final,' ')	AS GRADE,
+		              nvl(shrtckn_crse_title,' ')		AS TITLE,
+		              nvl(shrtckn_repeat_course_ind,' ') AS REPEAT,
+		              nvl(shrattr_attr_code,' ')		AS ATTR_CODE,
+		              shrtckn_crn						AS CRN
+		         from saturn.shrattr,
+		              saturn.shrtckg,
+		              saturn.shrtckn
+		        where shrtckg_pidm = shrtckn_pidm
+		          and shrtckg_tckn_seq_no = shrtckn_seq_no
+		          and shrtckg_term_code = shrtckn_term_code
+		          and shrtckg_seq_no =
+		              (select max(shrtckg_seq_no) 
+		                from saturn.shrtckg
+		                where shrtckg_tckn_seq_no = shrtckn_seq_no
+		                  and shrtckg_term_code = shrtckn_term_code
+		                  and shrtckg_pidm = shrtckn_pidm )
+		          and shrattr_pidm (+) = shrtckn_pidm
+		          and shrattr_term_code (+) = shrtckn_term_code
+		          and shrattr_tckn_seq_no (+) = shrtckn_seq_no
+		          and shrattr_attr_code (+) = 'WRIT'
+		          and shrtckn_pidm = ?
+		        order by shrtckn_term_code, 
+		                 shrtckn_subj_code,
+		                 shrtckn_crse_numb
+			]]>
+  			</value>
+  		</property>  		
+
+		<property name="currentCourseQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					sfrstcr_term_code			AS YEARTERM,
+					ssbsect_subj_code			AS DEPT,
+					ssbsect_crse_numb			AS NUM,
+					ssbsect_seq_numb			AS SEQ_NUM,
+					sfrstcr_credit_hr			AS RCREDIT,
+					sfrstcr_gmod_code			AS GMOD_CODE,
+					sfrstcr_crn					AS CRN,   
+					NVL(stvrsts_auto_grade,'IP') AS GRADE,
+					NVL(ssbsect_crse_title, scbcrse_title) AS TITLE,
+					NVL(ssrattr_attr_code, ' ') AS ATTR_CODE
+				FROM 
+					ssbsect, sfrstcr, stvrsts, scbcrse, ssrattr
+				WHERE 
+					sfrstcr_pidm = ?					
+					AND ssbsect_crn = sfrstcr_crn
+					AND ssbsect_term_code = sfrstcr_term_code
+					AND sfrstcr_rsts_code = stvrsts_code
+					AND stvrsts_incl_sect_enrl = 'Y'
+					AND stvrsts_code != 'AU'
+					AND ssbsect_gradable_ind != 'N'
+					AND scbcrse_subj_code = ssbsect_subj_code
+					AND scbcrse_crse_numb = ssbsect_crse_numb
+					AND scbcrse_eff_term = 
+						(SELECT 
+							MAX(scbcrse_eff_term)
+						FROM 
+							scbcrse
+						WHERE 
+							scbcrse_subj_code = ssbsect_subj_code
+							AND scbcrse_crse_numb = ssbsect_crse_numb                
+							AND scbcrse_eff_term <= sfrstcr_term_code
+						)
+					AND ssrattr_term_code (+) = sfrstcr_term_code
+					AND ssrattr_crn (+) = sfrstcr_crn
+					AND ssrattr_attr_code (+) in ('NS', 'HU', 'SS', 'MA', 'WRIT', 'BUG', 'BUD', 'LS')
+				order by
+					sfrstcr_term_code,
+					ssbsect_subj_code,
+					ssbsect_crse_numb
+			]]>
+  			</value>
+  		</property> 
+
+		<property name="transferCourseQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					shrtrce_term_code_eff		AS YEARTERM,
+					shrtrce_subj_code			AS DEPT,
+					shrtrce_crse_numb			AS NUM,
+					shrtrce_credit_hours		AS RCREDIT,
+					shrtrce_grde_code			AS GRADE,
+					shrtrce_crse_title			AS TITLE,
+					shrtrit_sbgi_code || substr(shrtrcr_trans_course_numbers,1,15) AS RTITLE,
+					decode(shrtrit_sbgi_code,stvsbgi_fice, shrtrit_sbgi_code,stvsbgi_fice) AS RINSTID,
+					substr(shrtrcr_trans_course_numbers,1,15) AS RCOURSE,
+					shrtrce_repeat_course		AS REPEAT,
+					rownum				 		AS CRN,
+					NVL(shrtatt_attr_code, ' ') AS ATTR_CODE
+				FROM
+					shrtrce, shrtrcr, shrtrit, stvsbgi, shrtram, shrtatt
+				WHERE
+					shrtrce_pidm = ?
+					AND shrtrce_pidm = shrtrcr_pidm
+					AND shrtrcr_pidm = shrtram_pidm
+					AND shrtram_pidm = shrtrit_pidm
+					AND shrtrce_trit_seq_no = shrtrit_seq_no
+					AND shrtrce_tram_seq_no = shrtram_seq_no
+					AND shrtrce_trcr_seq_no = shrtrcr_seq_no
+					AND shrtrcr_trit_seq_no = shrtrit_seq_no
+					AND shrtrcr_tram_seq_no = shrtram_seq_no
+					AND shrtram_trit_seq_no = shrtrit_seq_no
+					AND shrtrit_sbgi_code = stvsbgi_code					
+					AND shrtatt_pidm (+) = shrtrce_pidm
+					AND shrtatt_trit_seq_no (+) = shrtrce_trit_seq_no
+					AND shrtatt_tram_seq_no (+) = shrtrce_tram_seq_no
+					AND shrtatt_trcr_seq_no (+) = shrtrce_trcr_seq_no
+					AND shrtatt_trce_seq_no (+) = shrtrce_seq_no
+					AND shrtatt_attr_code (+) in ('NS', 'HU', 'SS', 'MA', 'BUG', 'BUD', 'LS')
+				ORDER BY 
+					shrtrce_term_code_eff,
+					shrtrce_subj_code,
+					shrtrce_crse_numb
+			]]>
+  			</value>
+  		</property>
+  		
+  		<property name="dprogFlagQuery">
+  			<value>
+  				<![CDATA[
+					select szvinst_dprog_flag,
+	    	      			szvinst_deg_ind
+                	from  szvinst
+                	where
+                		szvinst_instidq = ?
+            			and rtrim(szvinst_instid) = ?  				
+  				]]>
+  			</value>
+  		</property>
+  		
+  		<property name="ncaaCountQuery">
+  			<value>
+  				<![CDATA[
+  					SELECT a.sgrsprt_pidm 
+					FROM saturn.sgrsprt a 
+					WHERE a.sgrsprt_pidm = ?
+						AND a.sgrsprt_spst_code IN ('AC','IA','IM','IT','IW') 
+						AND a.sgrsprt_term_code = (	SELECT MAX(b.sgrsprt_term_code) 
+													FROM saturn.sgrsprt b 
+													WHERE b.sgrsprt_pidm = a.sgrsprt_pidm )
+  				]]>
+  			</value>
+  		</property>
+  		
+  		  		<property name="findAthleteYearCountQuery">
+  			<value>
+  				<![CDATA[
+					SELECT sgrathe_pidm 
+					FROM sgrathe 
+					WHERE sgrathe_pidm = ?
+						AND sgrathe_initial_enroll_date IS NOT NULL
+  				]]>
+  			</value>
+  		</property>
+  		
+  		  		<property name="findAthleteYearEnrollQuery">
+  			<value>
+  				<![CDATA[
+					SELECT stvterm_acyr_code
+					FROM stvterm,
+						sgrathe 
+					WHERE sgrathe_pidm = ?
+						AND sgrathe_initial_enroll_date BETWEEN stvterm_start_date 
+						AND stvterm_end_date 
+						AND stvterm_code <> '000000'
+  				]]>
+  			</value>
+  		</property>
+  		
+  		  		<property name="findAthleteYearNotEnrollQuery">
+  			<value>
+  				<![CDATA[
+					SELECT stvterm_acyr_code
+					FROM stvterm,
+						sgbstdn a 
+					WHERE a.sgbstdn_pidm = ?
+						AND a.sgbstdn_levl_code = substr( ? /*:ws-levels*/,1,2) //From nvl(sgbstdn_levl_code,' ') || nvl(sgbstdn_levl_code_2,' ')
+						AND a.sgbstdn_term_code_eff = (	SELECT MIN(b.sgbstdn_term_code_eff) 
+														FROM sgbstdn b 
+														WHERE b.sgbstdn_pidm = a.sgbstdn_pidm 
+															AND b.sgbstdn_levl_code = a.sgbstdn_levl_code ) 
+						AND a.sgbstdn_term_code_admit = stvterm_code
+  				]]>
+  			</value>
+  		</property>
+  		
+  		<property name="findAdvisorNameQuery">
+  			<value>
+  				<![CDATA[
+					select substr(rtrim(spriden_last_name) || ', ' || rtrim(spriden_first_name) || ' ' || rtrim(spriden_mi),1,30) as name
+					from saturn.spriden,
+					     saturn.sgradvr a
+					where spriden_pidm = a.sgradvr_advr_pidm
+					      and spriden_change_ind is null
+					      and a.sgradvr_pidm = ?
+					      and sgradvr_term_code_eff =
+					        ( select max(sgradvr_term_code_eff)
+					          from saturn.sgradvr b
+					          where b.sgradvr_pidm = a.sgradvr_pidm )
+					      and sgradvr_prim_ind = 'Y'
+  				]]>
+  			</value>
+  		</property>
+  			
+  		<property name="findShrdgmrDataQuery">
+  			<value>
+  				<![CDATA[
+					SELECT nvl(to_char(shrdgmr_grad_date,'MMDDYY'),' ') AS GRAD_CATLYT,
+						nvl(to_char(shrdgmr_grad_date,'MON DD, YYYY'),' ') AS GRAD_DATE
+					FROM shrdgmr
+					WHERE shrdgmr_pidm = ?
+					UNION
+					SELECT nvl(to_char(sgbstdn_exp_grad_date, 'MMDDYY'), ' ') AS GRAD_CATLYT,
+						nvl(to_char(sgbstdn_exp_grad_date, 'MON DD, YYYY'), 'UNKNOWN') AS GRAD_DATE
+					FROM saturn.sgbstdn,
+						saturn.stvterm a,
+						saturn.stvterm b,
+						saturn.spriden
+					WHERE spriden_pidm = ?
+						AND spriden_change_ind IS NULL
+						AND sgbstdn_term_code_grad = a.stvterm_code(+)
+						AND sgbstdn_term_code_admit = b.stvterm_code(+)
+						AND sgbstdn_pidm = spriden_pidm
+						/*AND sgbstdn_term_code_eff = (	SELECT MAX(s1.sgbstdn_term_code_eff)
+														FROM saturn.sgbstdn s1
+														WHERE s1.sgbstdn_pidm = spriden_pidm
+															AND s1.sgbstdn_term_code_eff <= ?)*/
+					ORDER BY grad_date DESC
+  				]]>
+  			</value>
+  		</property>
+	
+		<property name="findByStunoQuery">
+			<value>
+  			<![CDATA[
+				SELECT 
+					spriden_id,
+					spriden_last_name || ', ' || spriden_first_name || ' ' || spriden_mi as stuname
+				FROM 
+					spriden 
+				WHERE 
+					spriden_id = ?
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>
+
+		<property name="findByNameQuery">
+			<value>
+  			<![CDATA[
+				SELECT 
+					spriden_id,
+					spriden_last_name || ', ' || spriden_first_name || ' ' || spriden_mi as stuname
+				FROM 
+					spriden 
+				WHERE 
+					UPPER(spriden_first_name) LIKE UPPER(?) 
+					AND UPPER(spriden_last_name) LIKE UPPER(?) 
+					AND spriden_change_ind IS NULL
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>	
+	
+	</bean>
+
+</beans>

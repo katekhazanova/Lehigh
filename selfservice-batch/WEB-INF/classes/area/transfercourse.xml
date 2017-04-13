@@ -28,18 +28,6 @@
 	    <option name="201301" label="Spring 2013" />
 	    <option name="201306" label="Summer 2013" />
 	    <option name="201308" label="Fall 2013" />
-	   	<option name="201401" label="Spring 2014" />
-	    <option name="201406" label="Summer 2014" />
-	    <option name="201408" label="Fall 2014" />
-	    <option name="201501" label="Spring 2015" />
-	    <option name="201506" label="Summer 2015" />
-	    <option name="201508" label="Fall 2015" />
-	    <option name="201601" label="Spring 2016" />
-	    <option name="201606" label="Summer 2016" />
-	    <option name="201608" label="Fall 2016" />
-	    <option name="201701" label="Spring 2017" />
-	    <option name="201706" label="Summer 2017" />
-	    <option name="201708" label="Fall 2017" />
   	</options>
   	
   	<options name="transferGradeTable">
@@ -104,45 +92,6 @@
       	<masterView>
           <permissions edit="nobody" />
         </masterView>
-      </column>
-      <column name="iflg2" label="iflg2" align="left">
-      	<detailView inputType="text" maxLength="3" width="5"/>
-      	<masterView>
-          <permissions edit="nobody" />
-        </masterView>
-      </column>
-      <column name="iflg3" label="iflg3" align="left">
-      	<detailView inputType="text" maxLength="3" width="5"/>
-      	<masterView>
-          <permissions edit="nobody" />
-        </masterView>
-      </column>
-      <column name="iflg4" label="iflg4" align="left">
-      	<detailView inputType="text" maxLength="3" width="5"/>
-      	<masterView>
-          <permissions edit="nobody" />
-        </masterView>
-      </column>
-      <column name="iflg5" label="iflg5" align="left">
-      	<detailView inputType="text" maxLength="3" width="5"/>
-      	<masterView>
-          <permissions edit="nobody" />
-        </masterView>
-      </column>
-      <column name="bacc" label="Bacc" align="left">
-      	<detailView inputType="menu" options="bacc"/>
-      </column>
-      <column name="agclc" label="Agclc" align="left">
-      	<detailView inputType="menu" options="agclc"/>
-      </column>
-      <column name="repeatf" label="Repeatf" align="left">
-      	<detailView inputType="menu" options="repeatf"/>
-      </column>
-      <column name="actc" label="Actc" align="left">
-      	<detailView inputType="menu" options="actc"/>
-      </column>
-       <column name="honors" label="Honors" align="left">
-      	<detailView inputType="menu" options="honors"/>
       </column>
       <column name="comp_id.crsSeq" label="Course Sequence">
         <permissions read="advisor" edit="advisor" />

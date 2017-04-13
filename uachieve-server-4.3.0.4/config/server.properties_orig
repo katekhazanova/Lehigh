@@ -1,0 +1,74 @@
+#
+# Please see the documentation for information on configuring this file.
+#
+# All time properties are in seconds unless otherwise specified.
+#
+
+### Database Connection Parameters
+
+############################
+# JDBC (database) properties
+# (leave blank if using JNDI (see below))
+###
+# SQL Server Settings
+uachieveapi.jdbc.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+uachieveapi.jdbc.url=jdbc:sqlserver://<your.server.edu>:<port>;databaseName=<u.achieve 4.0 database>
+uachieveapi.jdbc.username=<userid>
+uachieveapi.jdbc.password=<password>
+
+uachieveapi.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+# END SQL Server Settings
+###
+
+###
+# Oracle Settings
+# uachieveapi.jdbc.driver=oracle.jdbc.driver.OracleDriver
+# uachieveapi.jdbc.url=jdbc:oracle:thin:@<hostname>:<port>:<sid>
+# uachieveapi.jdbc.username=<userid>
+# uachieveapi.jdbc.password=<password>
+
+# uachieveapi.hibernate.dialect=org.hibernate.dialect.Oracle9Dialect
+# uachieveapi.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+# END Oracle Settings
+###
+
+
+### Audit Processing Threads
+uachieve.server.daemon.corePoolSize = 2
+uachieve.server.daemon.maxPoolSize = 2
+uachieve.server.daemon.keepAliveTime = 600
+
+
+### Batch Processing Threads
+uachieve.server.batch.batchCoreSize = 4
+uachieve.server.batch.batchMaxSize = 4
+#number of minutes to wait before terminating a batch
+uachieve.server.batch.batchWaitTime = 300
+
+
+### Student Loading
+uachieve.server.student.loadByPidm = false
+
+
+### Database Connection Pooling
+uachieveapi.c3p0.minPoolSize=5
+uachieveapi.c3p0.maxPoolSize=30 
+# checkoutTimeout specified in milliseconds
+uachieveapi.c3p0.checkoutTimeout=4500 
+uachieveapi.c3p0.acquireIncrement=2 
+uachieveapi.c3p0.maxStatements=150 
+uachieveapi.c3p0.idleConnectionTestPeriod=300
+uachieveapi.c3p0.maxIdleTime=120
+
+
+# Cache Properties
+uachieveapi.hibernate.use_second_level_cache=false
+
+### Troubleshooting Parameters
+# typically no need to change the following hibernate settings
+uachieveapi.hibernate.generate_statistics=false
+
+uachieveapi.hibernate.useViews=false
+
+uachieve.server.currentJobsTimeout=60000
+

@@ -58,73 +58,6 @@ function addAuditException(runAudit){
 	});
 }
 
-function addAltException(runAudit){
-	
-	var input = $j("<input>").attr("type", "hidden")
-    	.attr("name", "runAudit").val(runAudit);
-	
-	$j('#row').append($j(input));
-	$j('#row').submit();
-}
-
-function loadAlternateException(event, id){
-	
-	jQuery.fn.notExists = function(){return this.length == 0;}
-	
-	 var e = $j.event.fix(event);
-		e.stopPropagation();
-	
-	 var url = "add-alt-exception.html";
-	 
-	 var reqId = null;
-	 eData = new Object();
-	
-	 if(id.indexOf("subreq") >= 0){
-	 	reqId = $j("#"+id).parents('.requirement').attr('id');
-	 	
-	 	var pseudoList = $j('#'+id).attr('pseudoList');
-	 	
-	 	if(pseudoList != null){
-	 		eData.pseudoList = JSON.parse(pseudoList);
-	 	}
-	 }
-	 else{
-		 reqId = id;
-	 }
-	
-	 eData.dpmask = $j('#audit').attr('dpmask');
-	 eData.dprog = $j('#audit').attr('dprog');
-	 eData.rname = $j('#'+reqId).attr('rname');
-	 eData.pseudo =	$j('#'+id).attr('pseudo');
-	 eData.selectedReqId = id;
-	 
-	 eData.authCode = ' ';
-	 
-	 var authCode = checkReqAuthCodes(reqId,'id');
-	 
-	 if(authCode != "failed"){
-		 eData.authCode = authCode;
-	 }
-	
-	$j.ajax({
-		type: "POST",
-		url: url,
-		traditional: true,
-		data: eData,
-		 dataType: "json",
-			success : function(json) {
-				
-				var url = $j('#contextPath').val() + "/exception/listctlcds.html";
-				window.location.replace(url);
-			},
-			error : function(json) {
-				
-				notifyExceptionAddError();
-			}
-	});
-	
-}
-
 function loadReqModOptions(){
 	
 	 eData.subCount = $j('#req-sub-count-edit').val();
@@ -218,7 +151,6 @@ function loadGeneralOptions(){
 	 eData.dpmask = $j('#audit').attr('dpmask');
 	 eData.evalsw = $j('#audit').attr('evalsw');
 	 eData.soprid = $j('#audit').attr('soprid');
-	 eData.dprog = $j('#audit').attr('dprog');
 	 eData.authCode = ' ';
 	 
 	 var authCode = checkReqAuthCodes(reqId,'id');
@@ -229,10 +161,10 @@ function loadGeneralOptions(){
 	 
 	 
 	 if($j('#includeDprog').is(':checked')) {
-		 eData.includeDprog = $j('#audit').attr('dprog');
+		 eData.dprog = $j('#audit').attr('dprog');
 	 }
 	 else{
-		 eData.includeDprog = "";
+		 eData.dprog = "";
 	 }
 	 
 	 if($j('#includeRname').is(':checked')) {
@@ -247,15 +179,9 @@ function notifyAuditLoading(){
 	
 	$j('#loadingAudit').show();
 	
-	var text = 'Attempting to Save Exception';
-	
-	if(eData.note != null){
-		text = 'Attempting to Save Exception with note: ' + eData.note;
-	}
-	
 	$j.pnotify({
 	    title: 'Attempting to Save Exception and Run Audit...',
-	    text: text,
+	    text: 'Attempting to Save Exception with note: ' + eData.note,
     	addclass: 'custom',
 		opacity: .8,
 		nonblock: true,
@@ -312,15 +238,9 @@ function notifyExceptionAddError(){
 	
 	$j('#loadingAudit').hide();
 	
-	var text = 'There was an error saving the exception.';
-	
-	if(eData.note != null){
-		text = 'There was an error saving the exception with note: '+ eData.note;
-	}
-	
 	$j.pnotify({
 	    title: 'Unable to Save New Exeception.',
-	    text: text,
+	    text: 'There was an error saving the exception with note: '+ eData.note,
     	addclass: 'warning',
 		opacity: .8,
 		nonblock: true,

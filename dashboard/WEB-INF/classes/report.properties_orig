@@ -1,0 +1,20 @@
+uachieve.report.driver=${security.jdbc.driver}
+uachieve.report.url=${security.jdbc.url}
+uachieve.report.user=${security.jdbc.username}
+uachieve.report.password=${security.jdbc.password}
+uachieve.report.jndi=
+uachieve.report.directory=
+
+uachieve.report.image.directory=/dashboard/images/
+uachieve.report.pdf.image.directory=
+uachieve.report.force.reports.compile=false
+
+# The SQL query that will be used to validate connections from this pool
+# before returning them to the caller.  If specified, this query
+# MUST be an SQL SELECT statement that returns at least
+# one row.
+#
+# MSSQL: select 1
+# DB/2: SELECT 1 FROM sysibm.sysdummy1
+# Oracle: select 'validationQuery' from dual
+uachieve.report.validation.query=${security.jdbc.validationQuery}

@@ -15,8 +15,8 @@
 			classpath:ctx/security-ctx.xml
 			classpath:ctx/report-ctx.xml
 			classpath:udirect/apis/context/udirect-daoContext.xml
+			
 			classpath:udirect/apis/context/udirect-hibernateContext.xml
-			classpath:ctx/auditviewer-ctx.xml
 			
 			classpath:ctx/actionservice-app-ctx.xml
 			classpath:ctx/actionservice-jdbc.xml

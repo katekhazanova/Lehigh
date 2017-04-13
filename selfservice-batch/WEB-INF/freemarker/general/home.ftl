@@ -1,4 +1,4 @@
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <@layout.head "Home" />
 <@layout.body>
@@ -10,6 +10,17 @@
 		<h1>Home</h1>
 		<p><@s.message 'uachieve.selfservice.message'/></p>
 		
+	<!--		<@redauth.authorize ifAnyGranted="UDIR_Advisor=R">
+					<#if udirectRemoteLogin??>
+						<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
+							<a href="${udirectRemoteLogin}/secure/udirect/notifications.html?crossApp=${crossApp}" class="dashboard-link" role="button" title="Notifications">
+								<div><i class="fa fa-notifications fa-5x"></i><br>
+									Notifications</div>
+							</a>
+						</div>
+					</#if>
+			</@redauth.authorize> -->
+		
 		<@sec.hasAppFn appFn=AppFuncRole.SS_MISC_STUDENTSEARCH>
 			<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 				<a href="<@h.url href='/student/search.html' />"  class="dashboard-link" role="button" title="Students">
@@ -20,24 +31,24 @@
 		</@sec.hasAppFn>
 		
 		<#if udirectRemoteLogin??>
-			<@security.authorize ifAnyGranted="UDIR_Roadmaps=r, UDIR_Publisher=u">
+			<@redauth.authorize ifAnyGranted="UDIR_Roadmaps=r, UDIR_Publisher=u">
 				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 					<a href="${udirectRemoteLogin}/roadmap/manage/display-roadmaps.html?crossApp=${crossApp}" class="dashboard-link" role="button" title="Roadmaps">
 						<div><i class="fa fa-roadmaps fa-5x"></i><br>
 							Roadmaps</div>
 					</a>
 				</div>
-			</@security.authorize>
+			</@redauth.authorize>
 		</#if>	
 		
-		<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">
+		<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">
 		<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 				<a href="<@s.url "/encoding/transfer/transferhome.html" />" class="dashboard-link" role="button" title="Encoding">
 					<div><i class="fa fa-encoding fa-5x"></i><br>
 						Encoding</div>
 				</a>
 			</div>
-		</@security.authorize>
+		</@redauth.authorize>
 		
 		<@sec.hasAppFn AppFuncRole.SS_AREA_BATCHES >
 			<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
@@ -47,17 +58,6 @@
 				</a>
 			</div>
 		</@sec.hasAppFn>
-		
-		<#if dashboardURL?? && dashboardURL != "">		
-			<@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r">
-				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
-					<a href="${dashboardURL}/auditviewer/home.html?crossApp=${crossApp}" class="dashboard-link" role="button" title="Audit Comparison">
-						<div><i class="fa fa-file-text-o fa-5x"></i> <i class="fa fa-file-text-o fa-5x"></i><br>
-							Audit Comparison</div>
-					</a>
-				</div>
-            </@security.authorize>
-		</#if>
 		
 		
 		<@sec.hasAppFn AppFuncRole.SS_AREA_CROSSWALK>
@@ -71,25 +71,36 @@
 		
 		
 		<#if dashboardURL?? && dashboardURL != "">
-			<@security.authorize ifAnyGranted="DASH_Reports=R">
+			<@redauth.authorize ifAnyGranted="DASH_Reports=R">
 				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 					<a href="${dashboardURL}/reports/reports-console.html?crossApp=${crossApp}" class="dashboard-link" role="button" title="Reports">
 						<div><i class="fa fa-reports fa-5x"></i><br>
 							Reports</div>
 					</a>
 				</div>
-			</@security.authorize>
+			</@redauth.authorize>
+		</#if>
+		
+		<#if dashboardURL?? && dashboardURL != "">				
+			<@redauth.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r"> 
+				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
+					<a href="${dashboardURL}/security-console.html?crossApp=${crossApp}" class="dashboard-link" role="button" title="Security">
+						<div><i class="fa fa-security fa-5x"></i><br>
+							Security</div>
+					</a>
+				</div>
+			</@redauth.authorize>
 		</#if>
 			
 		<#if dashboardURL?? && dashboardURL !="" >
-			<@security.authorize ifAnyGranted="SB_ADMIN_EDIT=r, SS_AREA_ADMIN=r">
+			<@redauth.authorize ifAnyGranted="SB_ADMIN_EDIT=crud, SS_AREA_ADMIN=crud">
 				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 					<a href="${dashboardURL}/admin/admin_menu.html?crossApp=${crossApp}" class="dashboard-link" role="button" title="Admin">
 						<div><i class="fa fa-admin fa-5x"></i><br>
 							Admin</div>
 					</a>
 				</div>
-			</@security.authorize>
+			</@redauth.authorize>
 		</#if>
 	</div> <#-- /col-md-8 -->
 </div> <#-- /row -->	

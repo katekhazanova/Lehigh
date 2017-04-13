@@ -1,0 +1,28 @@
+write from xml file
+=====================================
+Processing institution: LehighDProg
+reading data/LehighDProg-Dprog-0.xml
+
+
+Reader:
+
+
+Results for: LehighDProg
+
+Object                                                Replication Count
+-----------------------------------------------------
+
+
+
+Writer:
+
+
+Results for: LehighDProg
+
+Object                                                Replication Count
+-----------------------------------------------------
+uachieve.apis.requirement.Dprog                   :   959
+uachieve.apis.requirement.DprogReq                :   11709
+
+ WARN 12:32:07,672 [redlantern.dbtools.manager.ReplicationStation] Institution: LehighReq skipped.  Not specified in parameters.
+Institution: LehighReq skipped.  Not specified in parameters.

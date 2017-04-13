@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:sec="http://www.springframework.org/schema/security" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  		   				   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						   http://www.springframework.org/schema/security
+						   http://www.springframework.org/schema/security/spring-security-3.0.xsd
+						   http://www.springframework.org/schema/aop 
+					  	   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">	
+	<!-- 
+		==============================================================================
+		===================== CollegeSource Security Context (DAO) ===================
+		==============================================================================
+	
+		This file contains all the beans needed to configure u.direct to run a database 
+		security (DAO) implementation of Spring Security.
+	
+		==============================================================================
+	-->
+	
+	<!-- 
+		==============================================================================
+		============================= Filter Chain Proxy =============================
+		==============================================================================
+	
+		This filter chain proxy is defined in the web.xml and must also be defined 
+		here in a Spring XML file for reference. It targets the filterChainProxy. This
+		causes a request to all URL's (pattern = /*) to go through the filter chain. 
+	
+		==============================================================================
+	-->
+	<bean id="springFilterChainProxy" class="org.springframework.web.filter.DelegatingFilterProxy">
+		<property name="targetBeanName" value="filterChainProxy"/>
+	</bean>
+		
+	<!-- 
+		==============================================================================
+		================================ Filter Chain ================================
+		==============================================================================
+	
+		Note that the order that entries are placed against the filterChainMap is 
+		critical. The FilterSecurityInterceptor will work from the top of the list down 
+		to the FIRST pattern that matches the request URL.
+	
+		==============================================================================
+	-->
+	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
+	    <sec:filter-chain-map path-type="ant">
+	        <sec:filter-chain pattern="/**" filters="securityContextFilter, logoutFilter, authenticationFilter, servletApiFilter, exceptionTranslationFilter, filterSecurityInterceptor"/>
+	    </sec:filter-chain-map>			
+	</bean>
+
+	<bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
+	    <property name="securityContextRepository">
+	    	<bean class="org.springframework.security.web.context.HttpSessionSecurityContextRepository" />
+	    </property>
+	</bean>
+	 
+	<bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		<constructor-arg value="/index.jsp" />
+		<constructor-arg>
+			<list>
+				<bean class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="servletApiFilter" class="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter" />
+	
+	<bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+		<property name="authenticationEntryPoint" ref="authenticationEntryPoint" />
+		<property name="accessDeniedHandler">
+			<bean class="org.springframework.security.web.access.AccessDeniedHandlerImpl">
+				<property name="errorPage" value="/accessdenied.html" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="authenticationFilter" class="com.dashboard.web.security.DashboardDCPAuthFilter">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="filterProcessesUrl" value="/j_spring_security_check" />
+		<property name="authenticationFailureHandler">
+			<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<property name="defaultFailureUrl" value="/login.html?login_error=1" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<property name="loginFormUrl" value="/login.html" />
+		<property name="forceHttps" value="false" />
+	</bean>
+
+	<bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+	    <property name="securityMetadataSource">
+	        <sec:filter-security-metadata-source lowercase-comparisons="true" >
+	        	<sec:intercept-url pattern="/security-console.html" access="SEC_Advisees, SEC_Domains, SEC_Users"/>
+	            <sec:intercept-url pattern="/users.html" access="SEC_Advisees, SEC_Domains, SEC_Users"/>
+	            <sec:intercept-url pattern="/user-details.html" access="SEC_Advisees, SEC_Domains, SEC_Users" />
+	            <sec:intercept-url pattern="/properties.html" access="SEC_Users, SEC_Groups"/>
+	            <sec:intercept-url pattern="/roles.html" access="SEC_Roles" />
+	            <sec:intercept-url pattern="/groups.html" access="SEC_Domains, SEC_Group_Members, SEC_Groups" />
+	            <sec:intercept-url pattern="/home.html" access="SEC_Advisees, SEC_Domains, SEC_Users, SEC_Roles, SEC_Group_Members, SEC_Groups,UDIR_Roadmaps, UDIR_Plans, UDIR_Advisor, UDIR_Publisher, UDIR_Admin, SS_ROLE_ANONYMOUS, SS_ROLE_USER, SS_AREA_ADMIN, DASH_Reports,SB_ADMIN_EDIT" />
+	            <sec:intercept-url pattern="/changepassword.html" access="SEC_Change_Password" />
+	            <sec:intercept-url pattern="/advisor/**" access="SS_MISC_STUDENTSEARCH,UDIR_Advisor" />
+	            <sec:intercept-url pattern="/reports/**" access="DASH_Reports" />
+	            <sec:intercept-url pattern="/admin/**" access="SB_ADMIN_EDIT, SS_AREA_ADMIN, UDIR_Admin" />
+	            <sec:intercept-url pattern="/comments_notifications.html" access="SS_AREA_COMMENTS, UDIR_Notes" />
+	        </sec:filter-security-metadata-source>    
+	    </property>		
+		<property name="accessDecisionManager">
+			<bean class="org.springframework.security.access.vote.AffirmativeBased">
+				<property name="decisionVoters">
+					<list>
+						<bean class="org.springframework.security.access.vote.RoleVoter">
+							<property name="rolePrefix" value="" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+		</property>		
+	</bean>
+	
+	<!-- =============================== End of Filters =============================== -->
+	
+	<!-- 
+		==============================================================================
+		=========================== Authentication Manager ===========================
+		==============================================================================
+	
+		This bean is the central point of authentication done by the CollegeSource 
+		Security API. All of the Spring Security objects are converted to CollegeSource
+		specific versions needed by CollegeSource applications. Depending upon the type
+		of security implementation you're doing, your authentication provider will 
+		differ. Your options are:
+		
+			<ref bean="databaseAuthenticationProvider" />
+			<ref bean="ldapAuthenticationProvider" />
+			<ref bean="casAuthenticationProvider" />
+		
+		==============================================================================
+		=============== Optional properties for Authentication Manager ===============
+		==============================================================================	
+		
+		<property name="userPopulator" ref="userPopulator" />
+		
+		To use the user populator, you would need to develop a custom implementation 
+		of the com.collegesource.security.model.UserPopulator class. The purpose is to
+		populate some details about the user that cannot be retrieved with the user 
+		lookup service(s) you define. 
+				
+		==============================================================================
+	-->	
+	<bean id="authenticationManager" class="com.collegesource.security.authentication.CollegeSourceAuthenticationManager">
+		<property name="providers">
+			<list>
+				<ref bean="databaseAuthenticationProvider" />
+			</list>
+		</property>
+		<property name="userDetailDecorators">
+			<list>
+				<bean class="com.collegesource.security.decorator.impl.DomainDecorator"/>
+				<bean class="com.collegesource.security.decorator.impl.RealmDecorator"/>
+				<bean class="com.collegesource.security.decorator.impl.UserDProgsDecorator"/>
+				<bean class="com.collegesource.security.decorator.impl.PropertiesDecorator">
+					<property name="appId" value="${uachieve.security.appid}" />
+				</bean>				
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 
+		==============================================================================
+		====================== Database Authentication Provider ======================
+		==============================================================================
+	
+		This bean facilitates database (DAO) authentication and authorization. 
+	
+		==============================================================================
+	-->		
+	<bean id="databaseAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userCache" ref="userCache" />
+		<property name="passwordEncoder">
+			<bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+		</property>
+		<property name="userDetailsService" ref="daoUserDetailsService" />
+	</bean>
+
+	<!-- 
+		==============================================================================
+		========================== DAO User Details Service ==========================
+		==============================================================================
+	
+		This bean allows user details to be pulled from the database. It is used in 
+		large part as the database authorities populator.
+	
+		==============================================================================
+	-->			
+	<bean id="daoUserDetailsService" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+		<property name="dataSource" ref="security.dataSource" />
+		<property name="usersByUsernameQuery">
+			<value>
+				SELECT 
+					user_id AS username, password, 1 AS enabled 
+				FROM 
+					red_user
+				WHERE 
+					user_id = ?
+			</value>
+		</property>
+		<property name="authoritiesByUsernameQuery">
+			<value>
+				SELECT 
+					user_id AS username, group_id AS authority 
+				FROM 
+					red_user_group
+				WHERE 
+					user_id = ?
+			</value>
+		</property>
+	</bean>
+	
+	<!-- 
+		==============================================================================
+		============================ Cache Configuration =============================
+		==============================================================================
+	
+		These beans define the cache configuration to be used with database tables.
+	
+		==============================================================================
+	-->		
+	<bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
+		<property name="cache"  ref="userCacheBackend" />
+	</bean>
+	
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ctx/ehcache.xml" />
+	</bean>
+
+	<bean id="userCacheBackend" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+		<property name="cacheManager" ref="cacheManager" />
+		<property name="cacheName" value="userCache" />
+	</bean>			
+
+	<!-- 
+		==============================================================================
+		========================= User Lookup Service Utility ========================
+		==============================================================================
+	
+		This utility allows for the use of multiple user lookup services if you need
+		to lookup users in multiple places. The available options are:  
+		
+			<ref bean="daoUserLookupService" />
+			<ref bean="ldapUserLookupService" />
+			<ref bean="sisLdapUserLookupService" />			
+			<ref bean="stuMasterUserLookupService" />
+			
+		You must include at least one of them in the list of userLookupServices. List
+		them in order of desired evaluation. Please see the bean definition of each 
+		for more details.
+		
+		For details on sisLdapUserLookupService, please see:
+		http://clients.collegesource.com/support/browse/SECAPI-5
+		
+		==============================================================================
+		============================= Optional properties ============================
+		==============================================================================		
+		
+		<property name="useAlternateLdapUserName" value="${security.ldap.useAlternateLdapUserName}" />
+				
+		==============================================================================
+	-->	 
+	<bean id="userLookupServiceUtil" class="com.collegesource.security.service.UserLookupServiceUtil">
+		<property name="userLookupServices">
+			<list>
+				<ref bean="daoUserLookupService" />
+			</list>
+		</property>
+	</bean>					  	   
+					  	   
+	<!-- 
+		==============================================================================
+		========================= Database User Lookup Service =======================
+		==============================================================================
+	
+		This user lookup service can be used to lookup users from your CollegeSource
+		security database tables.
+		
+		This bean is also the parent object for the LDAP User Lookup Service. If you
+		plan on using that, you'll also need to make sure this bean definition is not 
+		commented out.
+				
+		==============================================================================
+	-->			  	   
+	<bean id="daoUserLookupService" class="com.collegesource.security.service.impl.DaoUserLookupService">
+		<property name="dataSource" ref="security.dataSource" />
+		<property name="dprogField" value="dprog"/>
+  		<property name="catlytField" value="drcatlyt"/> 
+  		<property name="instidqField" value="instidq" />
+		<property name="instidField" value="instid" />
+		<property name="instcdField" value="instcd" />
+	</bean>
+
+	<!-- 
+		==============================================================================
+		============================== Security Service ==============================
+		==============================================================================
+	
+		This bean supports the CollegeSource security database table administration.
+	
+		==============================================================================
+	-->		
+	<bean id="securityService" class="com.collegesource.security.service.impl.DefaultSecurityService">
+		<property name="securityDao">
+			<bean class="com.collegesource.security.dao.impl.JdbcSecurityDao" init-method="populateRoleDefinitionsForApplication">
+				<property name="dataSource" ref="security.dataSource" />
+				<property name="passwordEncoder">
+					<bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 
+		==============================================================================
+		=============================== Domain Service ===============================
+		==============================================================================
+	
+		This bean supports the CollegeSource security domain administration.
+	
+		==============================================================================
+	-->				
+	<bean id="domainService" class="com.collegesource.security.service.impl.DefaultDomainService">
+		<property name="domainDao">
+			<bean class="com.collegesource.security.dao.impl.JdbcDomainDao">
+				<property name="dataSource" ref="security.dataSource" />
+			</bean>
+		</property>
+	</bean>	  
+		   
+	<!-- 
+		==============================================================================
+		=============================== Domain Labels ================================
+		==============================================================================
+	
+		This bean defines the CollegeSource security domain labels that you will use
+		for your institution.
+	
+		==============================================================================
+	-->		
+	<bean id="domainLabels" class="com.collegesource.security.domain.DomainLabels">
+		<property name="labelOne" value="${security.domains.levelOne}" />
+		<property name="labelTwo" value="${security.domains.levelTwo}" />
+		<property name="labelThree" value="${security.domains.levelThree}" />
+		<property name="labelFour" value="${security.domains.levelFour}" />
+		<property name="labelFive" value="${security.domains.levelFive}" />
+		<property name="labelSix" value="${security.domains.levelSix}" />
+	</bean>
+	
+	<!-- 
+		==============================================================================
+		=========================== Security Authorization ===========================
+		==============================================================================
+	
+		These beans control user authorization to different parts of the application.
+		It shouldn't be confused with an authorities populator, which pulls user groups 
+		for authorization upon login. These specific pieces are defined in the XML file
+		of the respective type of authorization you're doing (i.e. DAO or LDAP).
+	
+		==============================================================================
+	-->	
+	<bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" />
+	
+	<bean id="advisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="methodAuthorizationAdvice" />
+		<property name="pattern" value=".+Service\..+" />
+	</bean>
+	
+	<bean id="methodAuthorizationAdvice" class="com.collegesource.security.authorization.MethodAuthorizationAdvice">
+		<property name="securityService" ref="securityService" />
+	</bean>					  	  
+	
+	<!-- 
+		==============================================================================
+		========================== Security JDBC Data Source =========================
+		==============================================================================
+	
+		This data source is used to access to the CollegeSource security database schema.
+	
+		==============================================================================
+	-->
+	<bean id="security.dataSource" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
+		<property name="driverClassName" value= "${security.jdbc.driver}" />
+		<property name="url" value="${security.jdbc.url}" />
+		<property name="username" value="${security.jdbc.username}" />
+		<property name="password" value="${security.jdbc.password}" />
+		<property name="initialSize" value="${security.jdbc.initialNumberOfConnections}" />
+        <property name="maxActive" value="${security.jdbc.maxActiveConnections}" />
+        <property name="minIdle" value="${security.jdbc.minIdleConnections}" />
+        <property name="maxWait" value="30000" />
+        <property name="validationQuery" value="${security.jdbc.validationQuery}" />
+	</bean>
+	
+	<!-- 
+		==============================================================================
+		========================== Security JNDI Data Source =========================
+		==============================================================================
+	
+		Use this data source definition if you want to use JNDI to lookup a predefined
+		data source.
+	
+		==============================================================================
+	-->
+	<!-- 
+	<bean id="security.dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    	<property name="jndiName"><value>${security.jdbc.jndi}</value></property>
+  	</bean>
+  	-->		
+	
+</beans>	

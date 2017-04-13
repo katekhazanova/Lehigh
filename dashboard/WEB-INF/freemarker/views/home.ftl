@@ -17,7 +17,7 @@
 			
 			
 			<#if selfserviceURL != "">
-				<@security.authorize ifAllGranted="SS_MISC_STUDENTSEARCH=R,SS_ROLE_ADVISOR=r">
+				<@security.authorize ifAllGranted="SS_MISC_STUDENTSEARCH=R,SS_ROLE_ADVISOR=crud">
 				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 					<a href="${selfserviceURL}/student/search.html?crossApp=${crossApp}"
 							class="dashboard-link" role="button" title="Students">
@@ -72,15 +72,6 @@
 				</@security.authorize>
 			</#if>
 			
-			<@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r">
-				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
-					<a href="<@spring.url relativeUrl="/auditviewer/home.html" />" class="dashboard-link" role="button" title="Audit Comparison">
-						<div><i class="fa fa-file-text-o fa-5x"></i> <i class="fa fa-file-text-o fa-5x"></i><br>
-							Audit Comparison</div>
-					</a>
-				</div>
-            </@security.authorize>
-			
 			<#if selfserviceURL != "">
 				<@security.authorize ifAnyGranted="SS_AREA_CROSSWALK=R">
 				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
@@ -93,7 +84,7 @@
 			</#if>
 			
 			
-			<@security.authorize ifAnyGranted="DASH_Reports=C">
+			<@security.authorize ifAnyGranted="DASH_Reports=R">
 			<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 				<a href="<@spring.url relativeUrl="/reports/reports-console.html" />" class="dashboard-link" role="button" title="Reports">
 					<div><i class="fa fa-reports fa-5x"></i><br>
@@ -102,7 +93,16 @@
 			</div>
 			</@security.authorize>
 			
-			<@security.authorize ifAnyGranted="SB_ADMIN_EDIT=r, SS_AREA_ADMIN=r, UDIR_Admin=r"> 
+			<@security.authorize ifAnyGranted="SEC_Users=r,SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r"> 
+			<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
+				<a href="<@spring.url relativeUrl="/security-console.html" />" class="dashboard-link" role="button" title="Security">
+					<div><i class="fa fa-security fa-5x"></i><br>
+						Security</div>
+				</a>
+			</div>
+			</@security.authorize>
+			
+			<@security.authorize ifAnyGranted="SB_ADMIN_EDIT=crud, SS_AREA_ADMIN=crud, UDIR_Admin=crud"> 
 				<div class="col-md-3 col-sm-6 col-xs-6 dashboard">
 					<a href="<@spring.url relativeUrl="/admin/admin_menu.html" />" class="dashboard-link" role="button" title="Admin">
 						<div><i class="fa fa-admin fa-5x"></i><br>
@@ -130,7 +130,7 @@
 							</div>
 							<div class="col-md-7" >
 								<h2>Student Access</h2>
-							<a href="${studentLandingPageUrl}?crossApp=${Compressor.compress(crossAppAttributes)}">View your profile</a>
+							<a href="${studentLandingPageUrl}?student=crossApp=${crossApp}">View your profile</a>
 							</div>
 						</div>
 					</div>
@@ -150,7 +150,7 @@
 							</div>
 							<div class="col-md-7" >
 								<h2>Student Access</h2>
-							<a href="${studentLandingPageUrl}?crossApp=${Compressor.compress(crossAppAttributes)}">View your profile</a>
+							<a href="${studentLandingPageUrl}?student=crossApp=${crossApp}">View your profile</a>
 							</div>
 						</div>
 					</div>

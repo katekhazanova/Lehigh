@@ -1,6 +1,6 @@
 /* Themes */
 .badge-defaultCSS {
-	background-color: #55ccdd;
+	background-color: #572001;
 	color: #ffffff;
 	font-size: 10px;
 }
@@ -8,13 +8,13 @@
 .badge-defaultCSS:hover,
 .badge-defaultCSS:focus,
 .badge-defaultCSS:active {
-	background-color: #2299aa;
+	background-color: #572001;
 	color: #ffffff;
 	font-size: 10px;
 }
 
 .badge-highContrastCSS {
-	background-color: #006270;
+	background-color: #4C280F;
 	color: #ffffff;
 	font-size: 10px;
 }
@@ -22,7 +22,7 @@
 .badge-highContrastCSS:hover,
 .badge-highContrastCSS:focus,
 .badge-highContrastCSS:active {
-	background-color: #004c57;
+	background-color: #4C280F;
 	color: #ffffff;
 	font-size: 10px;
 }

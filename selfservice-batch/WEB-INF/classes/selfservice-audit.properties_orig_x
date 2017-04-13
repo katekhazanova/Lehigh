@@ -1,0 +1,273 @@
+# Audit settings consist of 3 categories:
+# * general settings
+# * settings that affect the appearance of the audit request screen
+# * settings that affect how an audit request is submitted to the u.achieve server
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# GENERAL SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Determines how many completed audit requests will be displayed
+#
+# If the total number of audits is less than the audit preserve count, 
+# all audits will be displayed.
+# To display all completed audits, set audit preserve count to -1
+# No audits will be automatically deleted.
+# Schools are encouraged to configure batch audit deletion using
+# the u.achieve server.
+#uachieve.selfservice.audit.auditDisplayCount=-1
+
+# Determines if the jobid will be displayed when viewing an audit.
+#uachieve.selfservice.audit.showJobId=true
+
+# Determines if the interactive charts are displayed. 
+#uachieve.selfservice.audit.showCharts=true
+
+# Determines if the course history tab is displayed on the audit results screen
+#uachieve.selfservice.audit.showCourseHistory=true
+
+# Determines if the applied markers tab is displayed on the audit results screen
+#uachieve.selfservice.audit.showMarkers=true
+
+# Determines if the applied exceptions tab is displayed on the audit results screen
+#uachieve.selfservice.audit.showExceptions=true
+
+#set the delimiter for the data used on the what if markers page
+#must be something not used in the audit data to work properly
+#uachieve.selfservice.audit.delimiter=|
+
+# Determines what titles are shown at the top of the audit view screen and on Program Matcher.
+# Possible values are dptitle1, dptitle2, and webtitle
+#uachieve.selfservice.audit.dpTitles=webtitle
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# VIEW SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# The following settings concern the appearance of the audit request screen.
+
+# Configures which COM key should be used when running audits.
+#
+# There are five different strategies available for resolving the appropriate
+# comKey to use when running audits:
+# * sync - the comKey used will be the current user's instcd
+# * dropdown - the comKey used will be chosen by the user from a dropdown
+# * mapped - the comKey used will be determined by the user's instcd via a lookup
+# * static - the comKey used will be the one configured
+# * instidMapped - the comKey used will be determined by the user's instid and instcd via a lookup.
+# Examples:
+#
+# Use the sync option:
+#       uachieve.selfservice.audit.advisor.comKey=sync
+#
+# Use the dropdown option:
+#       uachieve.selfservice.audit.advisor.comKey=dropdown:999:DARSweb,\
+#                                                  BUS:Business,\
+#                                                  ENG:Engineering,\
+#                                                  WIP:No IP Courses
+#
+# Use the mapped option:
+#       uachieve.selfservice.audit.advisor.comKey=mapped:TST:999,\
+#                                                MU:MU,\
+#                                                BUS:BUS,\
+#                                                ENG:ENG
+#
+# Use the static option:
+#       uachieve.selfservice.audit.comKey=BUS
+#
+# Use the instid mapped option:
+#uachieve.selfservice.audit.advisor.advisor.comKey=instidMapped:TEST40-\ :SSIKE,TEST40-TST:SSIKE,TEST40-MU:SSIKE,TEST40-BUS:SSIKE,\
+#											TEST40-ENG:SSIKE,007104-\ :SSFER
+#
+
+uachieve.selfservice.audit.student.comKey=ONL
+uachieve.selfservice.audit.advisor.comKey=ONL
+
+# Backup comKey strategy to be used when a comkey is requried, but cannot be immediately determined because the strategy is dropdown.
+# THE STRATEGY CANNOT BE DROPDOWN
+#uachieve.selfservice.audit.dropdown.comKey=ONL
+
+
+# Designate a default COMKEY to be used, when not found in users COM, that MUST HAVE the following COM values defined :
+#
+# instidq
+# instid
+# instcd
+# deptbgn
+# deptend
+# crsbgn
+# crsend
+# cmprbgn
+# cmprend
+# 
+# Default COMKEY may be used in Program Matcher and loading of Student Default Degree programs when above COMKEY strategy is dropdown.
+
+#uachieve.selfservice.audit.default.comKey=ONL
+
+# Determines whether or not to look at the COM for CURYT for Program Matcher. False will use the Term Service instead.
+#uachieve.selfservice.audit.getCurytFromCom=false
+
+# Determines which condition codes will trigger Program Matcher to ignore a course.
+# They should not be separated by any character.
+#uachieve.selfservice.audit.ignoreCONDC=
+
+# Determines the maximum time in milliseconds that Program Matcher will run for a student.
+#uachieve.selfservice.audit.programMatcherTimeout=60000
+
+# Determines how often the "Manage Audits" and "Audit Loading" pages will automatically 
+# refresh.  Time specified is in seconds.
+#uachieve.selfservice.audit.auditPollingRate=3
+
+# Determines how many times an audit will be polled for completion before an error
+# screen is shown that warns the audit is taking a long time.
+#uachieve.selfservice.audit.maxPollCount=5
+
+# Experimental. Determines if the audit view will use special effects when expanding and 
+# collapsing requirements.  If set to true, requirements will smoothly "fade out" 
+# when closed.  If set to false, requirements will disappear with no animation.
+#uachieve.selfservice.audit.specialEffects=false
+
+# How many times to check for a complete audit before throwing an error.
+# This property works in tandem with the sleepBetweenTries property below.
+# For example, if tries is set to 5 and sleepBetweenTries is set to 2000 (2 seconds), 
+# an error will be thrown if the requested audit doesn't complete in 10 seconds.
+#uachieveapi.audit.request.tries=4
+
+# How long to wait between checks for audit completion (in milliseconds, so 1000 = 1 second).
+# Tune this according to the specific environment u.achieve is running in.
+# This property works in tandem with the tries property above.
+#uachieveapi.audit.request.sleepBetweenTries=2000
+
+# Allow users to run audits using the student's default degree programs.
+#uachieve.selfservice.audit.allowDefaultDegreePrograms=true
+
+# Allow users to run what-if audits.
+# permit_custom_audit
+#uachieve.selfservice.audit.allowWhatIfDegreePrograms=true
+
+# Allow users to toggle major/minor functionality for what-if audits.
+#uachieve.selfservice.audit.allowWhatIfMajorMinor=true
+
+# Determines how the degree program will be selected by the user when submitting an audit.
+# There are three settings: manual, dropdown, and cascade.
+#
+# * manual:   user must manually type in a degree program code
+# * dropdown: user can choose a degree program from a dropdown list generated 
+#				based on the current instcd
+# * cascade:  user can choose a degree program from a series of hierarchical 
+#				dropdown lists (college/major/degree)
+#				NOTE: the cascade option requires that information be encoded 
+#				in the Degree Programs within DARwin.
+#
+# In addition, the dropdown and cascade settings allow additional settings that influence
+# what data is displayed in the dropdown(s).
+#   
+# The first extra setting determines the dpstatus value(s) that degree programs must
+# have to be included in the dropdown list.  Available options are: "W", "P", "T", and "A".
+# You may use as many of these as you like by separating each one with a comma.
+#
+# The second extra setting determines which columns of the degree program will be displayed
+# in the dropdown.  Available options are: "dprog", "dptitle1", "dptitle2", and "webtitle".
+# You may use as many of these as you like by separating each one with a comma.
+#
+# The final extra setting only applies to the "cascade" option.  It determines the
+# dropdowns that will be displayed.  Available options are: "college", "major", and "degree".
+# You may use as many of these as you like by separating each one with a comma.
+#
+# Example of using the "manual" setting:
+#	uachieve.selfservice.audit.degreeProgramEntry=manual
+#
+# Example of using "dropdown" setting, only showing degree programs with a dpstatus of
+# "P" or "A" and displaying the dptitle1 and dprog fields in the dropdown:
+#	uachieve.selfservice.audit.degreeProgramEntry=dropdown:P,A:dptitle1,dprog
+#
+# Example of using "cascade" setting, only showing degree programs with a dpstatus of
+# "W", "P", or "T", displaying the webtitle fields in the dropdown, and displaying all 
+# three dropdowns (college/major/degree):
+#	uachieve.selfservice.audit.degreeProgramEntry=cascade:W,P,T:webtitle,dprog:college,major,degree
+uachieve.selfservice.audit.degreeProgramEntry=dropdown:W,P,T,A:dptitle1,webtitle,dptitle2,dprog
+#uachieve.selfservice.audit.degreeProgramEntry=cascade:W,A:webtitle:dprog,college,major,degree
+#uachieve.selfservice.audit.degreeProgramEntry=cascade:W,P,T,A:dptitle1,webtitle,dprog:college,major,degree
+#uachieve.selfservice.audit.degreeProgramEntry=manual
+
+# Determines which TYPE_CODEs that Program Matcher will use to determine which Programs to show
+#uachieve.selfservice.audit.programMatcherTypeCodes=PRG,,MAJ,MIN
+
+# Determines whether the audit requirements should be collapsed when the audit 
+# initially loads (standard view)
+uachieve.selfservice.audit.standardView.autoCollapse=true
+
+# Determines whether the audit requirements should be collapsed when the audit 
+# initially loads (printer-friendly view)
+uachieve.selfservice.audit.printerView.autoCollapse=false
+
+#Label identifying degree programs
+#uachieve.selfservice.audit.degree.label=Degree
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# SUBMIT SETTINGS
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# The following settings concern how audits are submitted to the u.achieve server.
+
+# Determines what type of audits students and advisors can run. 
+# A will run an audit and evaluate transfer courses.
+# D will run an audit only.
+# E will evaluate transfer courses only.
+# S will run an audit with a course sort
+# C will run a course gpa and credit conversion
+# H will run a home articulation
+# evalsw settings are defined using an actual evalsw value, plus a name to describe that setting to the user 
+# (like "A" and "Audit and Evaluation").  The value and name are seperated by a colon (:) and each value/name
+# pair is separated by a comma (,).  
+# Optionally, you can have a single evalsw/name pair per line by using the backslash (\) to continue
+# the definitions on the next line.  
+# Here's the formal syntax: 
+# 	<evalsw1>:<name1>,<evalsw2>:<name2>, etc...
+#
+# Here's an example of several settings configured:
+# uachieve.selfservice.audit.evalsw.student=D:Degree Audit,A:Audit and Evaluation,H:Home Articulation
+
+#uachieve.selfservice.audit.evalsw.student=D:D-Degree Audit
+#uachieve.selfservice.audit.evalsw.advisor=D:D-Degree Audit
+
+# Default evalsw is used in Program Matcher when requesting Audits.
+uachieve.selfservice.audit.default.evalsw=D
+
+# The evalsw value to use when submitting transfer evaluations
+uachieve.selfservice.audit.transfer.evalsw=E
+
+# Log level to use in the server when running an audit
+# Possible values are:
+# T - Trace
+# D - Debug (produces a full dump)
+# I - Info
+# W - Warn
+# E - Error
+# F - Fatal
+# O - Off (none)
+#uachieve.selfservice.audit.serverLogLevel=D
+
+# The operator ID to use when running an audit for a student or advisor.  
+# Also, users can only see audits run by the same operator ID.
+# Set to {{*}} to allow users to see audits run by any operator ID.
+# Maximum of 8 characters allowed.
+# Can be overridden using SECURE_SOPRID properties in the 
+# CollegeSource security application.
+uachieve.selfservice.audit.soprid.student=*
+uachieve.selfservice.audit.soprid.advisor=*
+#uachieve.selfservice.audit.soprid.student=student
+#uachieve.selfservice.audit.soprid.advisor=advisor
+
+# The same name as your u.achieve Server daemon server name.
+uachieve.selfservice.audit.serverName=SS
+
+# The priority of audits submitted through Self Service
+#uachieve.selfservice.audit.priority=100
+
+#Allow the audit to submit with duplicate Dprogs
+#uachieve.selfservice.audit.allowDuplicateDprogs=true
+
+#Label identifying degree programs
+#uachieve.selfservice.audit.degree.label=Degree
+
+# The status of the audit when it enters the job_queue_list table.  This should
+# be set to N unless you need to do custom preprocessing.  
+uachieve.selfservice.audit.startingStatus=N

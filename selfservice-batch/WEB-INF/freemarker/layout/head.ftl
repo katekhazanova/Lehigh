@@ -29,4 +29,3 @@
 <script type="text/javascript"> if (top.frames.length!=0) top.location=self.document.location; </script>
 </#if>
 
-<input type="hidden" id="contextPath" value="${springMacroRequestContext.getContextPath()}" />

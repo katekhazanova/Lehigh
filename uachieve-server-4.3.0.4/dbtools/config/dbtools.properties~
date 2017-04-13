@@ -1,0 +1,37 @@
+# ORIGIN jdbc properties
+ origin.jdbc.driver=oracle.jdbc.driver.OracleDriver
+ origin.jdbc.url=jdbc:oracle:thin:@louie.cc.lehigh.edu:1526:blev
+ origin.jdbc.username=dars
+ origin.jdbc.password=baboon
+ origin.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+
+
+# DESTINATION jdbc properties
+ destination.jdbc.driver=oracle.jdbc.driver.OracleDriver
+ destination.jdbc.url=jdbc:oracle:thin:@louie.cc.lehigh.edu:1526:hmrt
+ destination.jdbc.username=dars
+ destination.jdbc.password=monkey
+ destination.hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+
+# ################################################
+# Replication Properties
+#
+# ################################################
+redlantern.dbtools.replicate.jdbc_batch_size=100
+redlantern.dbtools.replicate.max_megabytes_file_size=100
+redlantern.dbtools.replicate.data_directory=data
+redlantern.dbtools.enable_gzip_file_compression=false
+
+
+
+# ==================================================
+# below properties should be ok left alone
+# ==================================================
+uachieveapi.hibernate.show_sql=FALSE
+uachieveapi.hibernate.useViews=false
+
+
+
+
+
+

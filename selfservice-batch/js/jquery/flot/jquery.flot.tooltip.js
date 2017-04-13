@@ -18,7 +18,6 @@
             content: "%s | X: %x | Y: %y",
             // allowed templates are:
             // %s -> series label,
-            // %a -> alternative ticks label,
             // %lx -> x axis label (requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels),
             // %ly -> y axis label (requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels),
             // %x -> X value,
@@ -228,7 +227,7 @@
 	        var $tip = that.getDomElement();
 
 	        // convert tooltip content template to real tipText
-	        var tipText = that.stringFormat(that.tooltipOptions.content, target, plot);
+	        var tipText = that.stringFormat(that.tooltipOptions.content, target);
 
 	        $tip.html(tipText);
 	        if ( position == null ) {
@@ -287,12 +286,10 @@
      * @param  {object} item - Flot item
      * @return {string} real tooltip content for current item
      */
-    FlotTooltip.prototype.stringFormat = function (content, item, plot) {
+    FlotTooltip.prototype.stringFormat = function (content, item) {
 
         var percentPattern = /%p\.{0,1}(\d{0,})/;
         var seriesPattern = /%s/;
-        var altXticksPattern = /%axt/;
-        var altYticksPattern = /%ayt/;
         var xLabelPattern = /%lx/; // requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels, will be ignored if plugin isn't loaded
         var yLabelPattern = /%ly/; // requires flot-axislabels plugin https://github.com/markrcote/flot-axislabels, will be ignored if plugin isn't loaded
         var xPattern = /%x\.{0,1}(\d{0,})/;
@@ -346,12 +343,6 @@
             //remove %s if label is undefined
             content = content.replace(seriesPattern, "");
         }
-        
-        // alternative x ticks match
-        content = content.replace(altXticksPattern, getAltXtick(x, plot));
-        
-        // alternative y ticks match
-        content = content.replace(altYticksPattern, getAltYtick(y, plot));
 
         // x axis label match
         if (this.hasAxisLabel('xaxis', item)) {
@@ -485,37 +476,6 @@
     var init = function (plot) {
       new FlotTooltip(plot);
     };
-    
-    // get alternitve x tick given an value for x
-    function getAltXtick(x, plot) {
-    	if (plot.getOptions().altTicks != null && plot.getOptions().altTicks.x != null) {
-    		for (var i = 0; i < plot.getOptions().altTicks.x.length; i++) {
-    			if (plot.getOptions().altTicks.x[i][0] == x) {
-    				return plot.getOptions().altTicks.x[i][1];
-    			}
-    		}
-    	}
-    	return "";
-    }
-    
-    // get alternitve y tick given an value for y
-    function getAltYtick(y, plot) {
-    	if (plot.getOptions().altTicks != null && plot.getOptions().altTicks.y != null) {
-    		for (var i = 0; i < plot.getOptions().altTicks.y.length; i++) {
-    			if (plot.getOptions().altTicks.y[i][0] == y) {
-    				return plot.getOptions().altTicks.y[i][1];
-    			}
-    		}
-    	}
-    	return "";
-    }
-    
-    function clone(obj){
-        if(obj === null || typeof(obj) !== 'object'){ return obj;}
-        var temp = new obj.constructor();
-        for(var key in obj){temp[key] = clone(obj[key]); }
-        return temp;
-    }
 
     // define Flot plugin
     $.plot.plugins.push({

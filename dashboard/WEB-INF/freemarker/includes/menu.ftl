@@ -3,7 +3,7 @@
 
 <nav class="navbar navbar-default main-menu" role="navigation">
 	<div class="navbar-header" id="navbar-default">
-		<@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=r, SB_ADMIN_EDIT=r,DASH_AUDIT_COMPARE=r">  
+		<@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=crud, SB_ADMIN_EDIT=crud">  
 		<#if userCommand?? && userCommand.student??>
 		 	<#assign student = userCommand.student />
 		 	<@security.authorize ifAnyGranted="UDIR_Advisor=r, UDIR_Publisher=u, UDIR_Roadmaps=u,SS_ROLE_ADVISOR=r">
@@ -18,7 +18,7 @@
 				<span class="sr-only">Toggle navigation</span> <span>Main Menu</span>
 			</button>
 		</@security.authorize> 
-		<@security.authorize ifNoneGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=r, SB_ADMIN_EDIT=r,DASH_AUDIT_COMPARE=r">  
+		<@security.authorize ifNoneGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=crud, SB_ADMIN_EDIT=crud">  
 			<button type="button" class="navbar-toggle" data-toggle="collapse"
 				data-target="#mainmenu">
 				<span class="sr-only">Toggle navigation</span> <span>Menu</span>
@@ -26,7 +26,7 @@
 		</@security.authorize>
 	</div>
 	
-<@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=r, SB_ADMIN_EDIT=r,SS_ROLE_ADVISOR=r,DASH_AUDIT_COMPARE=r">
+<@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=crud, SB_ADMIN_EDIT=crud,SS_ROLE_ADVISOR=r">
 	<div class="collapse navbar-collapse main-menu" id="mainmenu">
 		<ul class="nav navbar-nav" style="height: auto;">
 				<li id="home" class="hidden-xs">
@@ -130,52 +130,29 @@
 			
 				<#if selfserviceURL != "">
 				<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">
-					<li id="encoding"><a href="${selfserviceURL}/encoding/transfer/transferhome.html?crossApp=${crossApp}"  role="menuitem">Encoding</a></li> 
+					<li id="encoding" class="hidden-sm hidden-xs"><a href="${selfserviceURL}/encoding/transfer/transferhome.html?crossApp=${crossApp}"  role="menuitem">Encoding</a></li> 
 				</@security.authorize>    
 			    </#if>  
 			
 			
 			<@security.authorize ifAllGranted="SS_AREA_BATCHES=r"> 
 			<#if selfserviceURL != "">
-				<li>
+				<li class="hidden-sm hidden-xs">
 					<a href="${selfserviceURL}/batch/list.html?crossApp=${crossApp}" role="menuitem">Batch</a>
 				</li> 
 			</#if> 
 			</@security.authorize> 
 			
-			<@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r,SS_AREA_CROSSWALK=R">
-			<li id="tools" class="dropdown hidden-xs"><a href="#" id="tools" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
-				<ul class="dropdown-menu" id="toolsDD">
-					<@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r">
-					<li>
-                      <a href="<@spring.url relativeUrl="/auditviewer/home.html" />">Audit Comparison</a>
-                    </li>
-                    </@security.authorize>
-                    <@security.authorize ifAllGranted="SS_AREA_CROSSWALK=r">
-					<#if selfserviceURL != "">
-						<li>
-							<a href="${selfserviceURL}/crosswalk/list.html?crossApp=${crossApp}" role="menuitem">Program Mappings</a>
-						</li> 
-					</#if> 
-					</@security.authorize> 
-				</ul>
-			</li>
-			</@security.authorize>
-			
-			<@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r">
-			<li class="hidden-sm hidden-md hidden-lg"><a href="<@spring.url relativeUrl="/auditviewer/home.html" />">Audit Comparison</a></li>
-			</@security.authorize>
-			
 			<@security.authorize ifAllGranted="SS_AREA_CROSSWALK=r">
 			<#if selfserviceURL != "">
-				<li class="hidden-sm hidden-md hidden-lg">
+				<li class="hidden-sm hidden-xs">
 					<a href="${selfserviceURL}/crosswalk/list.html?crossApp=${crossApp}" role="menuitem">Program Mappings</a>
 				</li> 
 			</#if> 
 			</@security.authorize> 
 			
-			<@security.authorize ifAnyGranted="DASH_Reports=C">
-				<li class="hidden-sm" id="reports">
+			<@security.authorize ifAnyGranted="DASH_Reports=R">
+				<li class="hidden-sm hidden-xs" id="reports">
 					<a href="<@spring.url relativeUrl="/reports/reports-console.html" />" role="menuitem">Reports</a>
 				</li> 
 			</@security.authorize> 
@@ -209,93 +186,11 @@
 				</ul>
 			</li> 
 			</@security.authorize> 
-			
-			
-			
-			<!-- this section displays in the xs menu -->
-                      <@security.authorize ifAnyGranted="SEC_Roles=r">
-                        <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                          <a href="<@spring.url relativeUrl="/roles.html" />">Security Roles</a>
-                        </li>
-                      </@security.authorize>
-                      <@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Users=r,SEC_Domains=r">
-                          <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                            <a href="<@spring.url relativeUrl="/users.html" />">Security Users</a>
-                          </li>
-                      </@security.authorize>
-			
-					  <@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-                        <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                          <a href="<@spring.url relativeUrl="/groups.html" />"> Security Groups</a>
-                        </li>
-                      </@security.authorize>
-					  
-					  <@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-                        <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                          <a href="<@spring.url relativeUrl="/properties.html" />">Security Properties</a>
-                        </li>
-                      </@security.authorize>
-      			
-
-                  <@security.authorize ifAnyGranted="SS_AREA_ADMIN=r, SB_ADMIN_EDIT=r, UDIR_Admin=r">
-                     <li class="visible-xs hidden-sm hidden-md hidden-lg"><a  href="$<@spring.url relativeUrl="/admin/admin_home.html" />" tabindex="-1">Admin</a></li>
-                  </@security.authorize>
-					
 			<li class="visible-xs">
 				<a  href="<@spring.url relativeUrl="/j_spring_security_logout"/>"  role="menuitem">
 					<i class="fa fa-sign-out fa-lg"></i> Log Out 
 				</a>
 			</li>
-			
-			
-			
-			  <!-- this section displays in the sm menu -->
-            <@security.authorize ifAnyGranted="DASH_Reports=R,SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r">
-            <li class="dropdown hidden-xs visible-sm hidden-md hidden-lg" id="overflow">
-                <a id="overflowMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"  title="More">
-                  More...
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu"  aria-labelledby="overflowMenu">
-                	
-                	
-                	<@security.authorize ifAnyGranted="DASH_Reports=C">
-						<li class="" id="reports">
-							<a href="<@spring.url relativeUrl="/reports/reports-console.html" />" role="menuitem">Reports</a>
-						</li> 
-						<li role="separator" class="divider"></li>
-					</@security.authorize> 
-                 
-                 	<@security.authorize ifAnyGranted="SEC_Roles=r">
-                        <li>
-                          <a href="<@spring.url relativeUrl="/roles.html" />">Security Roles</a>
-                        </li>
-                      </@security.authorize>
-                      <@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Users=r,SEC_Domains=r">
-                          <li>
-                            <a href="<@spring.url relativeUrl="/users.html" />">Security Users</a>
-                          </li>
-                      </@security.authorize>
-			
-					  <@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-                        <li>
-                          <a href="<@spring.url relativeUrl="/groups.html" />"> Security Groups</a>
-                        </li>
-                      </@security.authorize>
-					  
-					  <@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-                        <li>
-                          <a href="<@spring.url relativeUrl="/properties.html" />">Security Properties</a>
-                        </li>
-                      </@security.authorize>
-                  
-                  
-            			    	
-        						
-                </ul>
-            </li>
-            </@security.authorize>
-			
 
 		</ul>
 
@@ -328,7 +223,7 @@
 			<li class="dropdown" id="settings">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Settings"><span class="sr-only">Settings</span><i class="fa fa-cog fa-lg"></i> <b class="caret"></b></a>
 				<ul class="dropdown-menu" id="settingsDD">
-					<@security.authorize ifAnyGranted="UDIR_Admin=r, SB_ADMIN_EDIT=r, SS_AREA_ADMIN=r"> 
+					<@security.authorize ifAnyGranted="UDIR_Admin=crud, SB_ADMIN_EDIT=crud, SS_AREA_ADMIN=crud"> 
 						<li>
 							<a href="<@spring.url relativeUrl="/admin/admin_menu.html" />" id="admin">Admin</a>
 						</li> 
@@ -542,7 +437,7 @@
 
 
 
-<@security.authorize ifNoneGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=r, SB_ADMIN_EDIT=r,SS_ROLE_ADVISOR=r,DASH_AUDIT_COMPARE=r">
+<@security.authorize ifNoneGranted="SEC_Advisees=r,SEC_Domains=r,SEC_Users=r,SEC_Roles=r,SEC_Group_Members=r,SEC_Groups=r, UDIR_Advisor=r,UDIR_Publisher=r,DASH_Reports=r,UDIR_Admin=crud, SB_ADMIN_EDIT=crud,SS_ROLE_ADVISOR=r">
 	<div class="collapse navbar-collapse main-menu" id="mainmenu">
 		<ul class="nav navbar-nav" style="height: auto;">
 			<#if selfserviceURL !="" >
@@ -740,7 +635,7 @@
 					   		<#assign helpUrl = "/general/helloworld.html#help" />
 							<li><@h.link href='${helpUrl}' title='Help' target='_blank' /></li>
 						</#if>	
-
+					<li><a href="${helpURL}"  target="_blank" title="Help" alt="Help">Help</a></li>
 					<li><a  href="<@spring.url relativeUrl="/j_spring_security_logout"/>"> <i class="fa fa-sign-out fa-lg"></i> Log Out </a></li>
 				</ul>
 			</li>

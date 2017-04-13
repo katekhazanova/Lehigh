@@ -1,4 +1,4 @@
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 <ul class="skiplist dontprint">
     		<li class="skip"><a href="#main" id="skpnav" role="link">Skip navigation links.</a></li>
     	</ul>
@@ -68,12 +68,12 @@
 			  </@sec.isAdvisor>
 			  
 			  <#if encoding??>
-				<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">	
+				<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">	
 			  	<button type="button" role="button" class="navbar-toggle" data-toggle="collapse" data-target="#encodingMenu">
 				   <span class="sr-only">Toggle navigation</span>
 				   <span>Encoding Menu</span>
 			  	</button>
-			  	</@security.authorize>
+			  	</@redauth.authorize>
 			  </#if>
 			  
 			  
@@ -107,13 +107,13 @@
 	    		<#assign showNotifications = "${NOTIFICATIONS_VISIBLE}" />
 			
 				<#if showNotifications == "T" >
-			    		<@security.authorize ifAnyGranted="UDIR_Advisor=r, UDIR_Publisher=u, UDIR_Roadmaps=u, UDIR_Notes=r">
+			    		<@redauth.authorize ifAnyGranted="UDIR_Advisor=r, UDIR_Publisher=u, UDIR_Roadmaps=u, UDIR_Notes=r">
 							<#if udirectRemoteLogin?? && udirectRemoteLogin !="">
 							<li role="presentation">
 								<a  href="${udirectRemoteLogin}/secure/udirect/notifications/notifications.html?crossApp=${crossApp}"  role="menuitem">Notifications</a>
 							</li>
 							</#if>
-						</@security.authorize>
+						</@redauth.authorize>
 				</#if>
 					
 						
@@ -136,7 +136,7 @@
 				    </@sec.hasAppFn>
 				    
 				    <#if udirectRemoteLogin?? && udirectRemoteLogin !="">
-					<@security.authorize ifAnyGranted="UDIR_Roadmaps=r, UDIR_Publisher=u">
+					<@redauth.authorize ifAnyGranted="UDIR_Roadmaps=r, UDIR_Publisher=u">
 				    	<li class="dropdown hidden-xs">
 				            <a id="roadmapMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" >Roadmaps <b class="caret"></b></a>
 					            <ul class="dropdown-menu"  aria-labelledby="roadmapMenu">
@@ -148,163 +148,62 @@
 			            <li class="visible-xs"><a href="${udirectRemoteLogin}/roadmap/manage/display-roadmaps.html?crossApp=${crossApp}"  role="menuitem">Manage Roadmaps</a></li>
 						<li class="visible-xs"><a href="${udirectRemoteLogin}/roadmap/manageall/display-roadmaps.html?crossApp=${crossApp}"  role="menuitem">View All Roadmaps</a></li>
 					            
-					</@security.authorize>
+					</@redauth.authorize>
 					</#if>    
 					
-					<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">
-					<li id="encoding" class=""><a href="<@s.url "/encoding/transfer/transferhome.html" />" role="menuitem">Encoding</a></li>
-					</@security.authorize>
-
-					<@sec.hasAppFn AppFuncRole.SS_AREA_BATCHES >
-			            <li id="batch" class=""><a  href="<@s.url "/batch/list.html" />" role="menuitem">Batch</a>
+					<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">
+					<li id="encoding" class="hidden-sm hidden-xs"><a href="<@s.url "/encoding/transfer/transferhome.html" />" role="menuitem">Encoding</a></li>     
+					</@redauth.authorize>
+				            
+					<@sec.hasAppFn AppFuncRole.SS_AREA_BATCHES >  
+			            <li id="batch" class="hidden-sm hidden-xs"><a  href="<@s.url "/batch/list.html" />" role="menuitem">Batch</a>
 						</li>
 					</@sec.hasAppFn>
-					
-					
-					<@security.authorize ifAnyGranted="SS_AREA_CROSSWALK=R,DASH_AUDIT_COMPARE=r">
-		            <li id="tools" class="dropdown hidden-xs"><a href="#" id="tools" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
-		                <ul class="dropdown-menu"  aria-labelledby="toolsMenu">
-		                  
-		                  <#if dashboardURL?? && dashboardURL !="" >
-		        					     <@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r">
-		        			            <li><a  href="${dashboardURL}/auditviewer/home.html?crossApp=${crossApp}"  id="Audit Comparison" role="menuitem">Audit Comparison</a></li>
-		                         
-		  			               </@security.authorize>
-							</#if>
-							
-							<@sec.hasAppFn AppFuncRole.SS_AREA_CROSSWALK>
-		                    <li class=""><a  href="<@s.url "/crosswalk/list.html" />" role="menuitem">Program Mappings</a>
-		                    </li>
-		                  </@sec.hasAppFn>
-	                  </ul>
-	                  </li>
-	                  </@security.authorize>
-					
-					<#if dashboardURL?? && dashboardURL !="" >
-					     <@security.authorize ifAnyGranted="DASH_AUDIT_COMPARE=r">
-			           		<li class="hidden-sm hidden-md hidden-lg"><a  href="${dashboardURL}/auditviewer/home.html?crossApp=${crossApp}"  id="Audit Comparison" role="menuitem">Audit Comparison</a></li>
-			             </@security.authorize>
-					</#if>
-
-			    <@sec.hasAppFn AppFuncRole.SS_AREA_CROSSWALK>
-						<li id="crosswalk" class="hidden-sm hidden-md hidden-lg"><a  href="<@s.url "/crosswalk/list.html" />" role="menuitem">Program Mappings</a>
-						</li>
+			            
+			        <@sec.hasAppFn AppFuncRole.SS_AREA_CROSSWALK>
+						<li id="crosswalk" class="hidden-sm hidden-xs"><a  href="<@s.url "/crosswalk/list.html" />" role="menuitem">Program Mappings</a>
+						</li> 
 					</@sec.hasAppFn>
 			        
 			        <#if dashboardURL?? && dashboardURL !="" >
-					         <@security.authorize ifAnyGranted="DASH_Reports=R">
-      			            <li class="hidden-sm"><a  href="${dashboardURL}/reports/reports-console.html?crossApp=${crossApp}"  id="Reports" role="menuitem">Reports</a></li>
-      			        </@security.authorize>
-
-
-      			    	<@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r">
-      			            <li class="dropdown hidden-sm hidden-xs">
-      				           <a id="securityMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" >Security <b class="caret"></b></a>
-      					            <ul class="dropdown-menu"  aria-labelledby="securityMenu">
-      						            <li role="presentation">
-      						            	<a  href="${dashboardURL}/security-console.html?crossApp=${crossApp}" tabindex="-1">Console</a>
-      					            	</li>
-      					      <@security.authorize ifAnyGranted="SEC_Roles=r">
-      									<li role="presentation">
-      										<a  href="${dashboardURL}/roles.html?crossApp=${crossApp}" tabindex="-1">Roles</a>
-      									</li>
-      								</@security.authorize>
-      						    <@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Users=r,SEC_Domains=r">
-      										<li role="presentation">
-      											<a  href="${dashboardURL}/users.html?crossApp=${crossApp}" tabindex="-1">Users</a>
-      										</li>
-      								</@security.authorize>
-
-      								<@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-      									<li role="presentation">
-      										<a  href="${dashboardURL}/groups.html?crossApp=${crossApp}" tabindex="-1" >Groups</a>
-      									</li>
-      								</@security.authorize>
-
-      								<@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-      									<li role="presentation">
-      										<a  href="${dashboardURL}/properties.html?crossApp=${crossApp}" tabindex="-1">Properties</a>
-      									</li>
-      								</@security.authorize>
-      							</ul>
-      						</li>
-                  <!-- this section displays in the xs menu -->
-                      <@security.authorize ifAnyGranted="SEC_Roles=r">
-                        <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                          <a  href="${dashboardURL}/roles.html?crossApp=${crossApp}" tabindex="-1">Security Roles</a>
-                        </li>
-                      </@security.authorize>
-                      <@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Users=r,SEC_Domains=r">
-                          <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                            <a  href="${dashboardURL}/users.html?crossApp=${crossApp}" tabindex="-1">Security Users</a>
-                          </li>
-                      </@security.authorize>
-
-                      <@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-                        <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                          <a  href="${dashboardURL}/groups.html?crossApp=${crossApp}" tabindex="-1" >Security Groups</a>
-                        </li>
-                      </@security.authorize>
-
-                      <@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-                        <li class="visible-xs hidden-sm hidden-md hidden-lg">
-                          <a  href="${dashboardURL}/properties.html?crossApp=${crossApp}" tabindex="-1">Security Properties</a>
-                        </li>
-                      </@security.authorize>
-      						</@security.authorize>
-
-                  <@security.authorize ifAnyGranted="SS_AREA_ADMIN=r, SB_ADMIN_EDIT=r, UDIR_Admin=r">
-                     <li class="visible-xs hidden-sm hidden-md hidden-lg"><a  href="${dashboardURL}/admin/admin_menu.html?crossApp=${crossApp}" tabindex="-1">Admin</a></li>
-                  </@security.authorize>
+					<@redauth.authorize ifAnyGranted="DASH_Reports=R">    
+			            <li class="hidden-sm hidden-xs"><a  href="${dashboardURL}/reports/reports-console.html?crossApp=${crossApp}"  id="Reports" role="menuitem">Reports</a></li>
+			        </@redauth.authorize>    
+			            
+					
+			    	<@redauth.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r"> 
+			            <li class="dropdown hidden-sm hidden-xs">
+				           <a id="securityMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown" >Security <b class="caret"></b></a>
+					            <ul class="dropdown-menu"  aria-labelledby="securityMenu">
+						            <li role="presentation">
+						            	<a  href="${dashboardURL}/security-console.html?crossApp=${crossApp}" tabindex="-1">Console</a>
+					            	</li>
+					            <@redauth.authorize ifAnyGranted="SEC_Roles=r">
+									<li role="presentation">
+										<a  href="${dashboardURL}/roles.html?crossApp=${crossApp}" tabindex="-1">Roles</a>
+									</li>
+								</@redauth.authorize>
+						            <@redauth.authorize ifAnyGranted="SEC_Advisees=r,SEC_Users=r,SEC_Domains=r">  
+										<li role="presentation">
+											<a  href="${dashboardURL}/users.html?crossApp=${crossApp}" tabindex="-1">Users</a>
+										</li>
+								</@redauth.authorize>
+						
+								<@redauth.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
+									<li role="presentation">
+										<a  href="${dashboardURL}/groups.html?crossApp=${crossApp}" tabindex="-1" >Groups</a>
+									</li>
+								</@redauth.authorize>
+						
+								<@redauth.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
+									<li role="presentation">
+										<a  href="${dashboardURL}/properties.html?crossApp=${crossApp}" tabindex="-1">Properties</a>
+									</li>
+								</@redauth.authorize>
+							</ul>
+						</li>
+						</@redauth.authorize>
 						</#if>
-            <#if currentUser?? && currentUser.institutions.size gt 1>
-              <li class="visible-xs hidden-sm hidden-md hidden-lg"><a  href="<@h.url href='/general/selectinstitution.html' />" tabindex="-1">Select Institution</a></li>
-            </#if>
-            <!-- this section displays in the sm menu -->
-            <@security.authorize ifAnyGranted="SS_AREA_CROSSWALK=R,DASH_Reports=R,SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r">
-            <li class="dropdown hidden-xs visible-sm hidden-md hidden-lg" id="overflow">
-                <a id="overflowMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"  title="More">
-                  More...
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu"  aria-labelledby="overflowMenu">
-                 
-                  <#if dashboardURL?? && dashboardURL !="" >
-        					     <@security.authorize ifAnyGranted="DASH_Reports=R">
-        			            <li><a  href="${dashboardURL}/reports/reports-console.html?crossApp=${crossApp}"  id="Reports" role="menuitem">Reports</a></li>
-                          <li role="separator" class="divider"></li>
-  			               </@security.authorize>
-
-            			    	<@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r,SEC_Advisees=r,SEC_Roles=r">
-    					              <@security.authorize ifAnyGranted="SEC_Roles=r">
-            									<li role="presentation">
-            										<a  href="${dashboardURL}/roles.html?crossApp=${crossApp}" tabindex="-1">Security Roles</a>
-            									</li>
-            								</@security.authorize>
-            						            <@security.authorize ifAnyGranted="SEC_Advisees=r,SEC_Users=r,SEC_Domains=r">
-            										<li role="presentation">
-            											<a  href="${dashboardURL}/users.html?crossApp=${crossApp}" tabindex="-1">Security Users</a>
-            										</li>
-            								</@security.authorize>
-
-            								<@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-            									<li role="presentation">
-            										<a  href="${dashboardURL}/groups.html?crossApp=${crossApp}" tabindex="-1" >Security Groups</a>
-            									</li>
-            								</@security.authorize>
-
-            								<@security.authorize ifAnyGranted="SEC_Domains=r,SEC_Group_Members=r,SEC_Groups=r">
-            									<li role="presentation">
-            										<a  href="${dashboardURL}/properties.html?crossApp=${crossApp}" tabindex="-1">Security Properties</a>
-            									</li>
-            								</@security.authorize>
-          						</@security.authorize>
-        						</#if>
-                </ul>
-            </li>
-            </@security.authorize>
-
-
 						<li class="visible-xs">
 			    			<a href="<@h.url href='/general/logout.html' />"  role="menuitem">
 			    				<i class="fa fa-sign-out fa-lg"></i> Log Out
@@ -318,13 +217,13 @@
 			    		
 			    		<#else>
 			    			<#if dashboardURL?? && dashboardURL !="" >	
-			    			<@security.authorize ifAllGranted="SS_AREA_COMMENTS=r">
+			    			<@redauth.authorize ifAllGranted="SS_AREA_COMMENTS=r">
 								<li class="dropdown" id="notifications">
 				        			<a id="notificationsMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"  title="Notifications">
 				        				<i class="fa fa-bell fa-lg"><span class="sr-only">Notifications</span></i> 
 				        				<b class="caret"></b>
 			        				</a>
-					        		<ul class="dropdown-menu"  aria-labelledby="notificationsMenu">
+					        		<ul class="dropdown-menu"  aria-labelledby="notificationsMenu"">
 					    				<li role="presentation">
 					    					<a  href="${dashboardURL}/comments_notifications.html?crossApp=${crossApp}" tabindex="-1">
 					    						<@s.message 'uachieve.selfservice.comment.label'/>s
@@ -332,17 +231,18 @@
 			    						</li>
 				    				</ul>
 			    				</li>
-		    				</@security.authorize>
+		    				</@redauth.authorize>
 		    				</#if>
 						</#if>
+			    	
 				     	<li class="dropdown" id="settings">
 				        	<a id="settingsMenu" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"  title="Settings"><i class="fa fa-cog fa-lg"><span class="sr-only">Settings</span></i> <b class="caret"></b></a>
 					        <ul class="dropdown-menu"  aria-labelledby="settingsMenu" >
-						       <@security.authorize ifAnyGranted="SS_AREA_ADMIN=r, SB_ADMIN_EDIT=r, UDIR_Admin=r">
+						        <@redauth.authorize ifAnyGranted="UDIR_Admin, SB_ADMIN_EDIT=crud, SS_AREA_ADMIN=crud">
 								<#if dashboardURL?? && dashboardURL !="" >
 									<li role="presentation"><a  href="${dashboardURL}/admin/admin_menu.html?crossApp=${crossApp}" tabindex="-1">Admin</a></li>
 								</#if>
-								</@security.authorize>
+								</@redauth.authorize>
 								<@sec.hasAppFn AppFuncRole.SS_MISC_PWCHANGE>
 									<li role="presentation"><a  href="<@h.url href='/general/changepassword.html' />" tabindex="-1">Change Password</a></li>
 								</@sec.hasAppFn>
@@ -375,9 +275,9 @@
 								</span>
 							</p>
 							</li>
-							<@security.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">	
+							<@redauth.authorize ifAnyGranted="SS_ENCODING_TA_IREF=r, SS_ENCODING_TA_RULE=r">	
 							<li class="active"><a href="<@s.url "/encoding/transfer/transferhome.html" />" role="menuitem">Transfer Articulation</a></li>
-							</@security.authorize>
+							</@redauth.authorize>
 						</ul>
 
 				</div>
@@ -412,10 +312,10 @@
 										<@sec.hasAppFn AppFuncRole.SS_AREA_AUDIT>
 											<li><@h.link href='/audit/list.html' title='Manage' /></li>
 										</@sec.hasAppFn>
-										<@security.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
+										<@redauth.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
 											<li><a href="<@s.url "/programmatcher/viewSearchResults.html" />" >Program Matcher</a>
 											</li>
-										</@security.authorize>
+										</@redauth.authorize>
 									</ul>
 								</li>
 								<@sec.hasAppFnPerm AppFuncRole.SS_AREA_AUDIT 'C'>
@@ -424,39 +324,39 @@
 								<@sec.hasAppFn AppFuncRole.SS_AREA_AUDIT>
 									<li class="visible-xs manageAudits"><@h.link href='/audit/list.html' title='Manage Audits'  role="menuitem"/></li>
 								</@sec.hasAppFn>
-								<@security.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
+								<@redauth.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
 									<li class="visible-xs programMatcher"><a href="<@s.url "/programmatcher/viewSearchResults.html" />" role="menuitem" >Program Matcher</a>
 									</li>
-								</@security.authorize>
+								</@redauth.authorize>
 							</@sec.hasAppFn>
-							<@security.authorize ifAnyGranted="UDIR_Plans=r">
+							<@redauth.authorize ifAnyGranted="UDIR_Plans=r">
 								<#if udirectRemoteLogin?? && udirectRemoteLogin !="">
 									<li><a href="${udirectRemoteLogin}/plan/manage/display-plans.html?crossApp=${crossApp}" role="menuitem">
 										<@s.message 'udirect.plans.header'/>s</a>
 									</li>
 								</#if>
-							</@security.authorize>
+							</@redauth.authorize>
 							
 							<#if scheduleURL?? && scheduleURL != "" && allowSchedule>
-								<@security.authorize ifAnyGranted="SB_USER=r">
+								<@redauth.authorize ifAnyGranted="SB_USER=crud">
 									<li class="dropdown hidden-xs">
 										<a href="#" id="schedule" class="dropdown-toggle" data-toggle="dropdown">Schedules <b class="caret"></b></a>
 										<ul class="dropdown-menu"  id="scheduleDD">
 											<li><a href="${scheduleURL}/sec/home_id?crossApp=${crossApp}" >Schedule Home</a></li>
 											<li><a href="${scheduleURL}/sec/sched_show?crossApp=${crossApp}" >My Current Schedule</a></li>
 											<li><a href="${scheduleURL}/sec/search?crossApp=${crossApp}" >Find Courses</a></li>
-											<@security.authorize ifAnyGranted="SB_AUTOGENERATESCHEDULE=r">
+											<@redauth.authorize ifAnyGranted="SB_AUTOGENERATESCHEDULE=crud">
 												<li><a href="${scheduleURL}/sec/preferences?crossApp=${crossApp}">Preferences</a></li>
-											</@security.authorize> 
+											</@redauth.authorize> 
 					
 										</ul>
 									</li>
 									
 											<li class="visible-xs"><a href="${scheduleURL}/sec/sched_show?crossApp=${crossApp}"  role="menuitem">My Current Schedule</a></li>
-								</@security.authorize>
+								</@redauth.authorize>
 							</#if>
 							
-							<@security.authorize ifAnyGranted="SS_AREA_COURSE=r,SS_AREA_TRANSFERCOURSE=r,SS_AREA_PLANNEDCOURSE=r">
+							<@redauth.authorize ifAnyGranted="SS_AREA_COURSE=r,SS_AREA_TRANSFERCOURSE=r,SS_AREA_PLANNEDCOURSE=r">
 								<li id="courses" class="dropdown hidden-xs">
 									<a href="#"  class="dropdown-toggle" data-toggle="dropdown">Courses <b class="caret"></b></a>
 									<ul class="dropdown-menu" id="coursesDD">
@@ -481,7 +381,7 @@
 									<li class="visible-xs plannedCourses"><@h.link href='/plannedcourse/list.html' title='Planned Courses'  role="menuitem"/></li>
 								</@sec.hasAppFn>
 
-							</@security.authorize>
+							</@redauth.authorize>
 							<@sec.hasAppFn AppFuncRole.SS_AREA_COMMENTS>
 								<#assign commentLabel><@s.message 'uachieve.selfservice.comment.label'/>s</#assign>
 								<li id="comments"><@h.link href='/comment/list.html' title="${commentLabel}"  role="menuitem"/></li>
@@ -494,7 +394,7 @@
 							<li id="exception" class="hidden-sm hidden-xs"><a href="<@s.url "/exception/list.html" />"  role="menuitem">Exceptions</a>
 							</li>
 							</@sec.hasAppFn>
-							<@security.authorize ifAnyGranted="SS_AREA_DPROG=r,SS_AREA_STUDENT=r">
+							<@redauth.authorize ifAnyGranted="SS_AREA_DPROG=r,SS_AREA_STUDENT=r">
 							<li id="profile" class="dropdown hidden-xs">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
 								<ul class="dropdown-menu"  id="profileDD">
@@ -506,7 +406,7 @@
 									</@sec.hasAppFn>
 								</ul>
 							</li>
-							</@security.authorize>
+							</@redauth.authorize>
 							
 						</ul>
 
@@ -517,11 +417,11 @@
 				     	<li class="dropdown hidden-xs" id="settings">
 				        	<a href="#" id="settings" class="dropdown-toggle" data-toggle="dropdown" title="Settings"><span class="sr-only">Settings</span><i class="fa fa-cog fa-lg"></i> <b class="caret"></b></a>
 					        <ul class="dropdown-menu" id="settingsDD" >
-						        <@security.authorize ifAnyGranted="SB_ADMIN_EDIT=r, SS_AREA_ADMIN=r">
+						        <@redauth.authorize ifAnyGranted="SB_ADMIN_EDIT=crud, SS_AREA_ADMIN=crud">
 								<#if dashboardURL?? && dashboardURL !="" >
 									<li><a href="${dashboardURL}/admin/admin_menu.html?crossApp=${crossApp}" >Admin</a></li>
 								</#if>
-								</@security.authorize>
+								</@redauth.authorize>
 								<@sec.hasAppFn AppFuncRole.SS_MISC_PWCHANGE>
 									<li><@h.link href='/general/changepassword.html' title='Change Password' /><li>
 								</@sec.hasAppFn>
@@ -578,10 +478,10 @@
 											<@sec.hasAppFn AppFuncRole.SS_AREA_AUDIT>
 												<li><@h.link href='/audit/list.html' title='Manage' /></li>
 											</@sec.hasAppFn>
-											<@security.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
+											<@redauth.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
 												<li id="programMatcher"><a href="<@s.url "/programmatcher/viewSearchResults.html" />" >Program Matcher</a>
 												</li>
-											</@security.authorize>
+											</@redauth.authorize>
 										</ul>
 									</li>
 									<@sec.hasAppFnPerm AppFuncRole.SS_AREA_AUDIT 'C'>
@@ -590,40 +490,40 @@
 									<@sec.hasAppFn AppFuncRole.SS_AREA_AUDIT>
 										<li class="visible-xs manageAudits"><@h.link href='/audit/list.html' title='Manage Audits'  role="menuitem"/></li>
 									</@sec.hasAppFn>
-									<@security.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
+									<@redauth.authorize ifAnyGranted="SS_AREA_PROGRAMMATCHER=c">
 										<li class="visible-xs programMatcher" id="programMatcher"><a href="<@s.url "/programmatcher/viewSearchResults.html" />"  role="menuitem">Program Matcher</a>
 										</li>
-									</@security.authorize>
+									</@redauth.authorize>
 								</@sec.hasAppFn>
 								
 								<#if udirectRemoteLogin?? && udirectRemoteLogin !="">
-									<@security.authorize ifAnyGranted="UDIR_Plans=r">
+									<@redauth.authorize ifAnyGranted="UDIR_Plans=r">
 										<li><a href="${udirectRemoteLogin}/plan/manage/display-plans.html?crossApp=${crossApp}" role="menuitem">
 											<@s.message 'udirect.plans.header'/>s</a>
 										</li>
-									</@security.authorize>
+									</@redauth.authorize>
 								</#if>
 								
 								<#if scheduleURL?? && scheduleURL != "">
-								<@security.authorize ifAnyGranted="SB_USER=r">
+								<@redauth.authorize ifAnyGranted="SB_USER=crud">
 									<li class="dropdown hidden-xs">
 										<a href="#" id="schedule" class="dropdown-toggle" data-toggle="dropdown">Schedules <b class="caret"></b></a>
 										<ul class="dropdown-menu"  id="scheduleDD">
 											<li><a href="${scheduleURL}/sec/home_id?crossApp=${crossApp}" >Schedule Home</a></li>
 											<li><a href="${scheduleURL}/sec/sched_show?crossApp=${crossApp}" >My Current Schedule</a></li>
 											<li><a href="${scheduleURL}/sec/search?crossApp=${crossApp}" >Find Courses</a></li>
-											<@security.authorize ifAnyGranted="SB_AUTOGENERATESCHEDULE=r">
+											<@redauth.authorize ifAnyGranted="SB_AUTOGENERATESCHEDULE=crud">
 												<li><a href="${scheduleURL}/sec/preferences?crossApp=${crossApp}">Preferences</a></li>
-											</@security.authorize>
+											</@redauth.authorize>
 										</ul>
 									</li>
 									<li class="visible-xs"><a href="${scheduleURL}/sec/sched_show?crossApp=${crossApp}" role="menuitem">My Current Schedule</a></li>
-								</@security.authorize>
+								</@redauth.authorize>
 								</#if>
 									
 									
 								<#if udirectRemoteLogin?? && udirectRemoteLogin !="">
-									<@security.authorize ifAnyGranted="UDIR_Roadmaps=r">
+									<@redauth.authorize ifAnyGranted="UDIR_Roadmaps=r">
 										<li class="dropdown hidden-xs">
 											<a href="#" id="roadmaps" class="dropdown-toggle" data-toggle="dropdown">Roadmaps <b class="caret"></b></a>
 											<ul class="dropdown-menu"  id="roadmapsDD">
@@ -631,9 +531,9 @@
 												<li><a href="${udirectRemoteLogin}/roadmap/manageall/display-roadmaps.html?crossApp=${crossApp}" >View All </a></li>
 											</ul>
 										</li>
-									</@security.authorize>
+									</@redauth.authorize>
 								</#if>
-								<@security.authorize ifAnyGranted="SS_AREA_COURSE=r,SS_AREA_TRANSFERCOURSE=r,SS_AREA_PLANNEDCOURSE=r">
+								<@redauth.authorize ifAnyGranted="SS_AREA_COURSE=r,SS_AREA_TRANSFERCOURSE=r,SS_AREA_PLANNEDCOURSE=r">
 									<li id="courses" class="dropdown hidden-xs">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="#" >Courses <b class="caret"></b></a>
 										<ul class="dropdown-menu" id="coursesDD">
@@ -657,7 +557,7 @@
 									<@sec.hasAppFn AppFuncRole.SS_AREA_PLANNEDCOURSE>
 										<li class="visible-xs plannedCourses"><@h.link href='/plannedcourse/list.html' title='Planned Courses'  role="menuitem"/></li>
 									</@sec.hasAppFn>
-								</@security.authorize>
+								</@redauth.authorize>
 								<@sec.hasAppFn AppFuncRole.SS_AREA_COMMENTS>
 									<#assign commentLabel><@s.message 'uachieve.selfservice.comment.label'/>s</#assign>
 									<li id="comments"><@h.link href='/comment/list.html' title="${commentLabel}"  role="menuitem"/></li>
@@ -676,7 +576,7 @@
 								<@sec.hasAppFn AppFuncRole.SS_AREA_TRANSFEREVAL>
 									<li id="transferEvals" class="hidden-xs hidden-sm"><@h.link href='/transfereval/list.html' title='Transfer Evaluations'  role="menuitem"/></li>
 								</@sec.hasAppFn>
-								<@security.authorize ifAnyGranted="SS_AREA_DPROG=r,SS_AREA_STUDENT=r">
+								<@redauth.authorize ifAnyGranted="SS_AREA_DPROG=r,SS_AREA_STUDENT=r">
 								
 								
 								<li id="profile" class="dropdown hidden-xs hidden-sm">
@@ -690,7 +590,7 @@
 											</@sec.hasAppFn>
 									</ul>
 								</li>
-								</@security.authorize>
+								</@redauth.authorize>
 								
 								<li class="visible-xs">
 					    			<a href="<@h.url href='/general/logout.html' />" role="menuitem">

@@ -22,11 +22,10 @@
 /* =============== Batch ==================================== */
 /* =============== Comments ================================= */
 /* =============== Program Matcher ========================== */
-/* =============== Course Catalog =========================== */
 /* =============== Miscellaneous ============================ */
 
 
-/* MAIN COLOR: #55ccdd */
+/* MAIN COLOR: #572001 */
 
 
 /* ***************************************  Site wide general css  ************************************ */
@@ -36,7 +35,7 @@
 /* Body */
  @media print {
 	a[href]:after { content: none !important; }
-
+	
 	.hidden-print,
 	  tr.hidden-print,
 	  th.hidden-print,
@@ -59,21 +58,21 @@ h3 {font-size: 18px;}
 h4 {font-size: 16px;}
 
 hr {
-	border-style: none;
-	border-top: solid #55ccdd 1px;
+	border-style: none; 
+	border-top: solid #572001 1px;
 }
 
-.subtle {
+.subtle { 
 	color: #888888;
 	font-weight: normal;
 }
 
-.locked {
+.locked { 
 	background-color: #999999;
 }
 
-.redText {
-	color: #6f3d05;
+.redText { 
+	color: #6f3d05; 
 }
 
 .navbar-default .navbar-text {
@@ -160,8 +159,8 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
 	color: #ffffff;
-  	background-color: #55ccdd;
-  	border-color: #55ccdd;
+  	background-color: #572001;
+  	border-color: #572001;
 }
 
 .btn-primary:hover,
@@ -535,8 +534,8 @@ fieldset[disabled] .btn-want.active {
 
 /* Tables */
 table tr th a, table tr th a:hover,
-.navarea a, .navarea a:hover {
-	color: #000000;
+.navarea a, .navarea a:hover { 
+	color: #000000; 
 }
 
 .table-striped > tbody > tr:nth-child(odd) > td,
@@ -544,11 +543,11 @@ table tr th a, table tr th a:hover,
 	background-color: #f9f9f9;
 }
 
-.table-bordered>thead>tr>th,
-.table-bordered>tbody>tr>th,
-.table-bordered>tfoot>tr>th,
-.table-bordered>thead>tr>td,
-.table-bordered>tbody>tr>td,
+.table-bordered>thead>tr>th, 
+.table-bordered>tbody>tr>th, 
+.table-bordered>tfoot>tr>th, 
+.table-bordered>thead>tr>td, 
+.table-bordered>tbody>tr>td, 
 .table-bordered>tfoot>tr>td {
 	border: 1px solid #dddddd;
 }
@@ -574,48 +573,48 @@ table tr th a, table tr th a:hover,
 }
 
 /* Success, Notice and Error Boxes */
-.error, .notice, .success {
-	border: 2px solid #dddddd;
+.error, .notice, .success { 
+	border: 2px solid #dddddd; 
 }
 
-.error {
-	background: #FBE3E4;
-	color: #8a1f11;
-	border-color: #FBC2C4;
+.error { 
+	background: #FBE3E4; 
+	color: #8a1f11; 
+	border-color: #FBC2C4; 
 }
 
 .alert-danger {
     color: #b94a48;
 }
 
-.notice {
-	background: #FFF6BF;
-	color: #514721;
-	border-color: #FFD324;
+.notice { 
+	background: #FFF6BF; 
+	color: #514721; 
+	border-color: #FFD324; 
 }
 
-.success {
-	background: #E6EFC2;
-	color: #264409;
-	border-color: #C6D880;
+.success { 
+	background: #E6EFC2; 
+	color: #264409; 
+	border-color: #C6D880; 
 }
 
 .alert-success {
     color: #468847;
 }
 
-.error a {
-	color: #8a1f11;
+.error a { 
+	color: #8a1f11; 
 	text-decoration: underline;
 }
 
-.notice a {
-	color: #514721;
+.notice a { 
+	color: #514721; 
 	text-decoration: underline;
 }
 
 .success a {
-	color: #264409;
+	color: #264409; 
 	text-decoration: underline;
 }
 
@@ -626,7 +625,7 @@ table tr th a, table tr th a:hover,
 /* Main Menu */
 
 .main-menu {
-	background-color: #55ccdd ;
+	background-color: #572001 ;
 }
 
 .main-menu .navbar-nav > .active > a,
@@ -645,8 +644,8 @@ table tr th a, table tr th a:hover,
   background-color: #e7e7e7 ;
 }
 
-.main-menu .navbar-nav > .open > a,
-.main-menu .navbar-nav > .open > a:hover,
+.main-menu .navbar-nav > .open > a, 
+.main-menu .navbar-nav > .open > a:hover, 
 .main-menu .navbar-nav > .open > a:focus {
 	color: #333333;
 }
@@ -691,8 +690,8 @@ table tr th a, table tr th a:hover,
   background-color: transparent ;
 }
 
-.studentMenu .navbar-nav > .open > a,
-.studentMenu .navbar-nav > .open > a:hover,
+.studentMenu .navbar-nav > .open > a, 
+.studentMenu .navbar-nav > .open > a:hover, 
 .studentMenu .navbar-nav > .open > a:focus {
 	background-color: #bbbbbb;
 	color: #333333;
@@ -709,7 +708,7 @@ table tr th a, table tr th a:hover,
 }
 
 .navbar {
-	background-color: #55ccdd;
+	background-color: #572001;
 }
 
 
@@ -719,17 +718,17 @@ table tr th a, table tr th a:hover,
 }
 
 #headerContainer {
-	background-color: #ffffff;
-	color:#000000;
+	background-color: #ffffff; 
+	color:#000000; 
 }
 
-#footerContainer {
-	background-color: #ffffff;
-	color: #333;
+#footerContainer { 
+	background-color: #ffffff;  
+	color: #333; 
 }
 
 div.greyBar {
-	background-color: #55ccdd;
+	background-color: #572001;
 	color: #ffffff;
 }
 
@@ -747,7 +746,7 @@ div.greyBar {
   	outline: black solid 2px;
 	outline-offset: 0px;
   	text-decoration: none;
-  	box-shadow: none;
+  	box-shadow: none; 
   	transition: none;
 }
 
@@ -755,7 +754,7 @@ a:focus {
 	outline: black solid 2px;
 	outline-offset: 0px;
   	text-decoration: none;
-  	box-shadow: none;
+  	box-shadow: none; 
   	transition: none;
 }
 
@@ -763,7 +762,7 @@ a.dashboard-link:focus {
 	outline: black solid 0px;
 	outline-offset: -2px;
   	text-decoration: none;
-  	box-shadow: none;
+  	box-shadow: none; 
   	transition: none;
 }
 
@@ -780,33 +779,33 @@ a.dashboard-link:focus {
 
 /* =============== Graphs =============================================== */
 
-.graphStatusOK {
-	color: #39ca74 !important;
+.graphStatusOK { 
+	color: #39ca74 !important; 
 	background-color: #39ca74 !important;
 	border-color: #33b668 !important;
 }
-.graphStatusNO {
-	color: #eb766e !important;
+.graphStatusNO { 
+	color: #eb766e !important;  
 	background-color: #eb766e !important;
 	border-color: #d46a63 !important;
 }
-.graphStatusPL {
-	color: #9a5cb4 !important;
+.graphStatusPL { 
+	color: #9a5cb4 !important;  
 	background-color: #9a5cb4 !important;
 	border-color: #8b53a2 !important;
 }
-.graphStatusIP {
-	color: #3a99d8 !important;
+.graphStatusIP { 
+	color: #3a99d8 !important;  
 	background-color: #3a99d8 !important;
 	border-color: #348ac2 !important;
 }
-.graphGPA {
-	color: #39ca74 !important;
+.graphGPA { 
+	color: #39ca74 !important; 
 	background-color: #39ca74 !important;
 	border-color: #33b668 !important;
 }
-.graphCumGPA {
-	color: #39ca74 !important;
+.graphCumGPA { 
+	color: #39ca74 !important; 
 	background-color: #39ca74 !important;
 	border-color: #33b668 !important;
 }
@@ -832,7 +831,7 @@ a.dashboard-link:focus {
 }
 
 /* =============== Audit Icon styling =================================== */
-/* These class names control the icons used on the audit */
+/* These class names control the icons used on the audit */ 
 /* The content attribute is the Font Awesome icon we're using. To use something else, find the icon you want to use and replace it.  */
 /* Example: \f073 is the code for the calendar icon,  if you want to use the folder icon instead replace \f073 with \f07b (the code for folder) */
 /* Codes can be found in the font-awesome.css file or at http://fontawesome.github.io/Font-Awesome/cheatsheet/  */
@@ -908,7 +907,7 @@ a.dashboard-link:focus {
 	font-size: 8px !important;
 	/* padding: .2em 1em .3em !important; */
 	text-decoration: none !important;
-	color: white;
+	color: white;	
 }
 
 .whatif {
@@ -920,7 +919,7 @@ a.dashboard-link:focus {
 }
 
 /* =============== Audit Type formatting ================================ */
-/* These class names control the icons used on the Manage Audits ( .audittype2 and .fa-___-2 classes) page and the Course History tab ( .audittype1 and .fa-___-1 classes) on the audit */
+/* These class names control the icons used on the Manage Audits ( .audittype2 and .fa-___-2 classes) page and the Course History tab ( .audittype1 and .fa-___-1 classes) on the audit */ 
 /* The content attribute is the Font Awesome icon we're using. To use something else, find the icon you want to use and replace it.  */
 /* Example: \f073 is the code for the calendar icon,  if you want to use the folder icon instead replace \f073 with \f07b (the code for folder) */
 /* Codes can be found in the font-awesome.css file or at http://fontawesome.github.io/Font-Awesome/cheatsheet/  */
@@ -1021,26 +1020,6 @@ a.dashboard-link:focus {
   	height: 22px;
 }
 
-.btn-req1 {
-  	color: #ffffff;
-  	background-color: #645a50;
-  	border-color: #474039;
-  	width: 24px;
-  	height: 22px;
-}
-
-.btn-req1:hover,
-.btn-req1:focus,
-.btn-req1:active,
-.btn-req1.active,
-.open .dropdown-toggle.btn-req1 {
-	color: #ffffff;
-  	background-color: #2a2622;
-  	border-color: #2a2622;
-  	width: 24px;
-  	height: 22px;
-}
-
 .btn-subreq {
   	color: #f28e51;
   	background-color: #ffffff;
@@ -1057,26 +1036,6 @@ a.dashboard-link:focus {
 	color: #ffffff;
   	background-color: #f28e51;
   	border-color: #f28e51;
-  	width: 24px;
-  	height: 22px;
-}
-
-.btn-subreq1 {
-  	color: #ffffff;
-  	background-color: #f28e51;
-  	border-color: #ef752a;
-  	width: 24px;
-  	height: 22px;
-}
-
-.btn-subreq1:hover,
-.btn-subreq1:focus,
-.btn-subreq1:active,
-.btn-subreq1.active,
-.open .dropdown-toggle.btn-subreq1 {
-	color: #ffffff;
-  	background-color: #ed6612;
-  	border-color: #ed6612;
   	width: 24px;
   	height: 22px;
 }
@@ -1165,19 +1124,6 @@ a.dashboard-link:focus {
 	color: #777777;
 }
 
-.auditHighlight {
-  border: 2px solid orange;
-}
-
-.auditAutoPopulate {
-	margin-right: 5px;
-	font-size: 18px;
-	color: orange;
-}
-
-.auditAutoPopulate:focus, .auditAutoPopulate:hover {
-	color: #cc8500;
-}
 
 
 /* **************************************** App/Page specific css  ************************************ */
@@ -1185,14 +1131,14 @@ a.dashboard-link:focus {
 /* =============== Dashboard Tabs ============================ */
 
 .yui-skin-sam .yui-navset .yui-nav,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav{
-	border:solid #55ccdd;
+	border:solid #572001;
 	border-width:0 0 5px;zoom:1;
 }
 
 .yui-skin-sam .yui-navset .yui-nav .selected a,
 .yui-skin-sam .yui-navset .yui-nav .selected a:focus,
 .yui-skin-sam .yui-navset .yui-nav .selected a:hover{
-	background:#55ccdd;
+	background:#572001;
 	color:#fff;
 }
 
@@ -1209,7 +1155,7 @@ a.dashboard-link:focus {
 .selectedSegment {
 	background-color: #FFFFCC!important;
 }
-
+	
 .selectedRuleText {
 	color: #707070;
 }
@@ -1284,7 +1230,7 @@ a.dashboard-link:focus {
 .dashboard-link:active,
 .dashboard-link.active,
 .open .dropdown-toggle.dashboard-link {
-	color: #55ccdd;
+	color: #572001;
 }
 
 .dashboard-link:active,
@@ -1314,49 +1260,49 @@ a.dashboard-link:focus {
 .fa-precoreqIcon:before {
 	content: " \f05a";
 	color: #00CED1;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-courseCompleteIcon:before {
 	content: " \f058";
 	color: #1b7403;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-termAvailableIcon:before {
 	content: " \f058";
 	color: #1b7403;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-termNAIcon:before {
 	content: " \f057";
 	color: #d9534f;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-termUnknownIcon:before {
 	content: " \f128";
 	color: #DA8049;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-statusCompleteIcon:before {
 	content: " \f00c";
 	color: #1b7403;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-statusIncompleteIcon:before {
 	content: " \f00d";
 	color: transparent;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-plannedCompleteIcon:before {
 	content: " \f00c";
 	color: #1b7403;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 
@@ -1394,61 +1340,61 @@ a.dashboard-link:focus {
 .fa-rejectCourseIcon:before {
 	content: " \f05e";
 	color: #9E0000;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-plannedCourseFlagIcon:before {
 	content: " \f056";
 	color: red;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-requiredIcon:before {
 	content: " \f06a";
 	color: green;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-requiredGrayIcon:before {
 	content: " \f06a";
 	color: #cccccc;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-preferredIcon:before {
 	content: " \f024";
 	color: blue;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-preferredGrayIcon:before {
 	content: " \f024";
 	color: #cccccc;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-criticalIcon:before {
 	content: " \f071";
 	color: #f5d852;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-criticalGrayIcon:before {
 	content: " \f071";
 	color: #cccccc;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-courseListIcon:before {
 	content: " \f0f6";
 	color: #000000;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 .fa-courseListGrayIcon:before {
 	content: " \f15c";
 	color: #cccccc;
-	font-size: 14px;
+	font-size: 14px; 
 }
 
 
@@ -1457,7 +1403,7 @@ a.dashboard-link:focus {
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
   	color: #ffffff;
-  	background-color: #55ccdd;
+  	background-color: #572001;
 }
 
 /* =============== Batch ==================================== */
@@ -1465,14 +1411,14 @@ a.dashboard-link:focus {
 	color: #A6AAAA ;
 	background-color: #EDF3F3;
 }
-
+		   
 .batchMenu a:hover {
 	background-color: #daf7fc;
 	color: #666666;
 }
 
 #completed a {
-	background-color: #55ccdd;
+	background-color: #572001;
 	color: #ffffff;
 }
 
@@ -1495,7 +1441,7 @@ a.dashboard-link:focus {
 }
 
 .commentOptions	{
-	border: solid 1px #dddddd;
+	border: solid 1px #dddddd; 
 	background-color: #ffffff;
 }
 
@@ -1570,58 +1516,13 @@ pre#memo, pre {
 
 .p_sel {
 	color: #ffffff;
-	background-color: #55ccdd;
+	background-color: #572001;
 }
 
 .p_sel:focus {
 	color: white;
 }
 
-
-
-/* =============== Course Catalog =========================== */
-
-#coursePreview {background-color: #fff;}
-#courseHeader 	{background-color:  #55ccdd;}
-#departmentTitle{background-color: #55ccdd;	color: #000000;}
-#hoursTitle 	{background-color: #55ccdd;	color: #000000;}
-#courseAvailabilityTitle {background-color: #55ccdd; color: #000000;}
-
-#courseCatalog {
-	border: 2px #D9E0E6 solid;
-	border-bottom-color: #C3CDD2;
-	border-right-color: #C3CDD2;
-}
-
-#courseCatalogPlan {
-	border: 2px #D9E0E6 solid;
-	border-bottom-color: #C3CDD2;
-	border-right-color: #C3CDD2;
-}
-
-#courseTitle {
-	background-color:#CCC;
-}
-
-.propertyName {
-	background-color: #CCCCCC;
-	font-weight: bold;
-	color:  #000;
-}
-
-.availabilityYears {
-	border: 1px solid #CCC;
-	background-color: #FFFF66;
-}
-
-.availabilityTerms {
-	background-color:#FFFFCC;
-	border: 1px solid black;
-}
-
-.availabilityBox {
-	border: 1px solid black;
-}
 
 /* =============== Miscellaneous ============================ */
 
@@ -1649,3 +1550,13 @@ pre#memo, pre {
 .collapsed .fa-collapseArrow:before {
 	content: " \f054";
 }
+
+
+
+
+
+
+
+
+
+

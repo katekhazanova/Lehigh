@@ -32,14 +32,12 @@ function loadGpaDetailGraph(test, labels, json) {
 				gpa: {
 					decimalPlaces: 3,
 					showAllDecimals: true,
-					truncate: true,
-					maxGPA: 4.0
+					truncate: true
 				},
 				hour: {
 					decimalPlaces: 3,
 					showAllDecimals: true
-				},
-				animate: true
+				}
 		};
 		unfulfilledData = [[0, 6.00]];
 		plannedData = [[1, 80.00]];
@@ -52,7 +50,6 @@ function loadGpaDetailGraph(test, labels, json) {
 
 function printGpaDetailGraph(gpaData, unfulfilledData, plannedData, inProgressData, completeData, labels, options) {
 	var graphColors = getGraphColors();
-	var gpaTicksObj = getGPATicksObj(options);
 	var gpaDetailPieGraphOptions = {
 			legend: {
 				show: false
@@ -108,17 +105,17 @@ function printGpaDetailGraph(gpaData, unfulfilledData, plannedData, inProgressDa
 				show: false
 			},
 			yaxis: {
-				ticks: gpaTicksObj.ticks,
+				ticks: [0.0, 2.0, 4.0],
 				color: '#000000'
 			},
 			xaxes: [ {min: -0.5, max: 0.5} ],
-			yaxes: [ { position: "right", min: 0, max: gpaTicksObj.max, tickDecimals: 1 } ],
+			yaxes: [ { position: "right", min: 0, max: 4, tickDecimals: 1 } ],
 			grid: {
 				borderWidth: 0,
 				markings: function (axes) {
 					var markings = [];
 					for (var x = -0.5; x <= 0.5; x+=0.2) {
-						for (var y = gpaTicksObj.low; y <= gpaTicksObj.high; y+=gpaTicksObj.step) {
+						for (var y = 1; y <= 3; y+=2) {
 							markings.push({ xaxis: { from: x, to: x + 0.04}, yaxis: { from: y, to: y}, color: '#000000', lineWidth: 1});
 						}
 					}
@@ -136,9 +133,6 @@ function printGpaDetailGraph(gpaData, unfulfilledData, plannedData, inProgressDa
 	};
 	if (!options.gpa.showAllDecimals) {
 		gpaDetailBarGraphOptions.tooltipOpts.content = '%y %s';
-	}
-	if (!options.animate) {
-		gpaDetailBarGraphOptions.series.grow.steps = 1;
 	}
 	var unfulfilledSeries = {
 			highlightColor: graphColors.NOborderColor,
@@ -175,8 +169,7 @@ function loadAcademicProgressGraph(test, labels, json) {
 	var plannedData = [];
 	var inProgressData = [];
 	var completeData = [];
-	var gpaData = [];
-	var seriesNames =[];
+	var gpaData= [];
 	var urls = [];
 	var ors = [];
 	var optionals = [];
@@ -206,7 +199,6 @@ function loadAcademicProgressGraph(test, labels, json) {
 			if (data[i].gpa.value != 0) {
 				gpaData[gpaData.length] = [padDecimals(cleanNumber(data[i].gpa, options.gpa.decimalPlaces, options.gpa.truncate), options.gpa.decimalPlaces), 0 - i];
 			}
-			seriesNames[i] = [0 - i, data[i].seriesName];
 			if (data[i].rtabx.length > 0) {
 				urls[i] = data[i].rtabx;
 			}
@@ -214,20 +206,18 @@ function loadAcademicProgressGraph(test, labels, json) {
 			optionals[i] = data[i].optional;
 		}
 		yMin = -1 * (data.length - 0.5);
-		printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, plannedData, inProgressData, completeData, seriesNames, urls, ors, optionals, yMin, labels, options);
+		printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, plannedData, inProgressData, completeData, urls, ors, optionals, yMin, labels, options);
 	} else {
 		options = {
 				gpa: {
 					decimalPlaces: 3,
 					showAllDecimals: true,
-					truncate: true,
-					maxGPA: 4.0
+					truncate: true
 				},
 				hour: {
 					decimalPlaces: 3,
 					showAllDecimals: true
-				},
-				animate: true
+				}
 		};
 		ticksData = [[0, "Cummulative"], [-1, "University"], [-2, "College"], [-3, "Major"], [-4, "Minor"]]
 		unfulfilledData = [[28.00, 0], [19.00, -1], [6.00, -2], [6.00, -3]];
@@ -235,18 +225,16 @@ function loadAcademicProgressGraph(test, labels, json) {
 		inProgressData = [[36.00, 0], [15.00, -1], [15.00, -2], [6.00, -3], [3.00, -4]];
 		completeData = [[50.00, 0], [54.00, -1], [24.00, -2], [12.00, -3], [6.00, -4]];
 		gpaData = [['3.840', 0], ['3.500', -1], ['2.200', -2], ['3.900', -3], ['1.200', -4]];
-		seriesNames = [[0, ""], [-1, ""], [-2, ""], [-3, ""], [-4, "Series Name"]];
 		urls = [];
 		ors = [1, 1, 1, 1, 1];
 		optionals = [1, 1, 1, 1, 1];
 		yMin = -4.5;
-		printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, plannedData, inProgressData, completeData, seriesNames, urls, ors, optionals, yMin, labels, options)
+		printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, plannedData, inProgressData, completeData, urls, ors, optionals, yMin, labels, options)
 	}
 }
 
-function printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, plannedData, inProgressData, completeData, seriesNames, urls, ors, optionals, yMin, labels, options) {
+function printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, plannedData, inProgressData, completeData, urls, ors, optionals, yMin, labels, options) {
 	var graphColors = getGraphColors();
-	var gpaTicksObj = getGPATicksObj(options);
 	var academicProgressGraphOptions = {
 			legend: {
 				show: false
@@ -302,16 +290,12 @@ function printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, planned
 			colors: [graphColors.OKborderColor, graphColors.IPborderColor, graphColors.PLborderColor, graphColors.NOborderColor],
 			tooltip: true,
 			tooltipOpts: {
-				content: '%x.' + options.hour.decimalPlaces +' %s: %ayt'
+				content: '%x.' + options.hour.decimalPlaces +' %s'
 			},
-			accessibility: { level: 1, label: 'Academic Progress Bar Graph', srData: generateYBeforeSRData( [], [ convertLabels(optionals, 'Optional', false), convertLabels(ors, 'OR', false) ], 0) },
-			altTicks: { y: seriesNames}
+			accessibility: { level: 1, label: 'Academic Progress Bar Graph', srData: generateYBeforeSRData( [], [ convertLabels(optionals, 'Optional', false), convertLabels(ors, 'OR', false) ], 0) }
 	};
 	if (!options.hour.showAllDecimals) {
 		academicProgressGraphOptions.tooltipOpts.content = '%x %s';
-	}
-	if (!options.animate) {
-		academicProgressGraphOptions.series.grow.steps = 1;
 	}
 	var academicProgressGPAGraphOptions = {
 			legend: {
@@ -338,7 +322,7 @@ function printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, planned
 				}
 			},
 			xaxis: {
-				ticks: gpaTicksObj.ticks,
+				ticks: [0.0, 2.0, 4.0],
 				color: '#000000'
 			},
 			yaxis: {
@@ -351,14 +335,14 @@ function printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, planned
 					color: "#000000"
 				}
 			},
-			xaxes: [ { min: 0, max: gpaTicksObj.max, tickDecimals: 1 } ],
+			xaxes: [ { min: 0, max: 4, tickDecimals: 1 } ],
 			yaxes: [ {min: yMin, max: 0.5} ],
 			grid: {
 				borderWidth: 1,
 				markings: function (axes) {
 					var markings = [];
 					for (var y = 0.5; y >= yMin; y-=0.2) {
-						for (var x = gpaTicksObj.low; x <= gpaTicksObj.high; x+=gpaTicksObj.step) {
+						for (var x = 1; x <= 3; x+=2) {
 							markings.push({ yaxis: { from: y, to: y - 0.04}, xaxis: { from: x, to: x }, color: '#000000', lineWidth: 1});
 						}
 					}
@@ -376,9 +360,6 @@ function printAcademicProgressGraph(ticksData, gpaData, unfulfilledData, planned
 	};
 	if (!options.gpa.showAllDecimals) {
 		academicProgressGPAGraphOptions.tooltipOpts.content = '%x %s';
-	}
-	if (!options.animate) {
-		academicProgressGPAGraphOptions.series.grow.steps = 1;
 	}
 	var unfulfilledSeries = {			
 			bars: { show: true, barWidth: 0.6 , align: 'center', horizontal:true, fillColor: graphColors.NOcolor, lineWidth: 2},
@@ -465,14 +446,12 @@ function loadTranscriptGraph(url, labels, json) {
 				gpa: {
 					decimalPlaces: 3,
 					showAllDecimals: true,
-					truncate: true,
-					maxGPA: 4.0
+					truncate: true
 				},
 				hour: {
 					decimalPlaces: 3,
 					showAllDecimals: true
-				},
-				animate: true
+				}
 		};
 		ticksData = [[0, "s1"], [1, "s2"], [2, "s3"], [3, "s4"]];
 		gpaData = [[0, 2.4], [1, 2.7], [2, 3], [3, 3.1]];
@@ -509,7 +488,7 @@ function printTranscriptGraph(ticksData, gpaData, plannedData, inProgressData, c
 				color: '#000000'
 			},
 			xaxes: [ {min: -0.5, max: xMax} ],
-			yaxes: [ {}, { position: "right", min: 0, max: options.gpa.maxGPA, tickDecimals: 1 } ],
+			yaxes: [ {}, { position: "right", min: 0, max: 4, tickDecimals: 1 } ],
 			grid: {
 				color: '#000000',
 				backgroundColor: { colors: ['#FFFFFF', '#EEFFFF'] },
@@ -533,9 +512,6 @@ function printTranscriptGraph(ticksData, gpaData, plannedData, inProgressData, c
 	};
 	if (!options.gpa.showAllDecimals) {
 		transcriptGraphOptions.tooltipOpts.content = '%y %s';
-	}
-	if (!options.animate) {
-		transcriptGraphOptions.series.grow.steps = 1;
 	}
 	var gpaSeries = {
 			lines: {
@@ -754,26 +730,11 @@ function padDecimals(number, decimalPlaces) {
 		paddedNum += "0";
 	}
 	return paddedNum;
-}
+	}
 
 function clone(obj){
     if(obj === null || typeof(obj) !== 'object'){ return obj;}
     var temp = new obj.constructor();
     for(var key in obj){temp[key] = clone(obj[key]); }
     return temp;
-}
-
-function getGPATicksObj(options) {
-	var maxGPA = options.gpa.maxGPA;
-	// GPA scale can be no less than 4.0
-	if (maxGPA < 4.0) {
-		maxGPA = 4.0;
-	}
-	var highBar = Math.floor(maxGPA);
-	var GPAticks = [0.0, (highBar/2).toFixed(1), highBar.toFixed(1)];
-	if (highBar < maxGPA) {
-		GPAticks[3] = maxGPA.toFixed(1);
-	}
-	
-	return {max: maxGPA, ticks: GPAticks, low: (highBar/4), high: ((highBar/4)*3), step: (highBar/2)};	
 }

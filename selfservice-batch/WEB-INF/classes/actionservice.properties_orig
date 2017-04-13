@@ -1,0 +1,38 @@
+# ==============================================================================
+# Action Service Configuration
+# ==============================================================================
+
+
+
+# ================================================
+# Action Service database connection
+# ================================================
+
+# JDBC driver and connection pool
+#actionservice.jdbc.driver=
+#actionservice.jdbc.url=
+#actionservice.jdbc.username=
+#actionservice.jdbc.password=
+actionservice.jdbc.jndi=
+
+actionservice.jdbc.initialNumberOfConnections=5
+actionservice.jdbc.maxActiveConnections=50
+actionservice.jdbc.minIdleConnections=3
+
+# Hibernate properties
+# For actionservice.hibernate.dialect, enter one of the following:
+#   org.hibernate.dialect.DB2Dialect
+#   org.hibernate.dialect.SQLServerDialect
+#   org.hibernate.dialect.OracleDialect 
+actionservice.hibernateProperties=actionservice.defaultProperties
+actionservice.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+actionservice.hibernate.show_sql=false
+actionservice.hibernate.bytecode.use_reflection_optimizer=true
+actionservice.hibernate.generate_statistics=true
+
+#selfservice app name
+app.config.code=SS
+
+#wild card character used when looking up catalogcourse information
+wildcard.character=*
+

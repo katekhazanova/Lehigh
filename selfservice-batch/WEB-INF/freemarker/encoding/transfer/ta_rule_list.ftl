@@ -56,11 +56,11 @@
     				<a href="#" onclick="editRule('${tcaRule.intSeqNo?c}');return false;" style="color: #398E6B;"> 
 						<i class="fa fa-edit"></i>
 					</a>
-					<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+					<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 					<a href="#" onclick="delTaRow(event,'#sortableRules','#insertRule','ruleRow-');return false;" style="color: #ac2222;"> 
 						<i class="fa fa-trash"></i>
 					</a>
-					</@security.authorize>
+					</@redauth.authorize>
 				</span>
 				</#if>
 			</div>

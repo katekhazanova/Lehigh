@@ -1,0 +1,32 @@
+read to xml file
+ WARN 12:23:38,145 [redlantern.dbtools.manager.ReplicationStation] Institution: LehighDProg skipped.  Not specified in parameters.
+Institution: LehighDProg skipped.  Not specified in parameters.
+=====================================
+Processing institution: LehighReq
+ReqMain: 0%.. 12%.. 25%.. 38%.. 51%.. 63%.. 76%.. 89%.. 100% complete!
+
+
+Reader:
+
+
+Results for: LehighReq
+
+Object                                                Replication Count
+-----------------------------------------------------
+uachieve.apis.requirement.ReqText                 :   1158
+uachieve.apis.requirement.ReqXy                   :   0
+uachieve.apis.requirement.SubReqAr                :   69164
+uachieve.apis.requirement.SubReq                  :   8377
+uachieve.apis.requirement.ReqMain                 :   3130
+uachieve.apis.requirement.SubReqText              :   11753
+
+
+
+Writer:
+
+
+Results for: LehighReq
+
+Object                                                Replication Count
+-----------------------------------------------------
+

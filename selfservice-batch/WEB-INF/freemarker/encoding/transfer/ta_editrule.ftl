@@ -12,10 +12,10 @@
 	</div>
 	<div class="col-md-6">
 		<span class="pull-right">
-			<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+			<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 			Add new rule to this segment at line <input type="text" class="" id="insertRule" maxlength="9"  value="${ruleCount+1}" style="width: 30px;">
 			<a href="#" onclick="addRule()" class="btn btn-success btn-xs" accesskey="r"><i class="fa fa-plus"></i> Add</a>
-			</@security.authorize>
+			</@redauth.authorize>
 		</span>
 	</div>
 </div>
@@ -41,9 +41,9 @@
 				</div>
 				<div class="col-md-4 collapse in" id="deleteRule">
 					<span class="pull-right">
-						<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 						<button type="button" class="btn btn-danger btn-xs" title="Delete Rule" onclick="deleteSelectedRule()"><i class="fa fa-trash"></i> Delete Rule</button>
-						</@security.authorize>
+						</@redauth.authorize>
 					</span>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 						</div>
 						<div class="form-group col-md-2">
 							<label for="segment">Segment</label>
-							<select class="form-control input-sm" id="rule-segment" name="rule-segment" onchange="moveSelectedRule()"
+							<select class="form-control input-sm" id="rule-segment" name="rule-segment"
 							onfocus="setVisibility('ta_tsegHelp','inline')" onBlur="setVisibility('ta_tsegHelp','none')">
 							<#list segList as segment>
 								<option <#if selectedRule.tseg = segment.tseg>selected</#if>  value="${segment.tseg}">${segment.tseg} - ${segment.hint!''}</option>
@@ -140,7 +140,7 @@
 					</div>
 					<div class="col-md-4 ruleBody collapse in" id="addSource">
 						<span class="pull-right">
-							<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+							<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 							<#if selectedSources?size  gt 0>
 							 	<#assign sourceCount = selectedSources?size + 1 />
 							<#else>
@@ -148,7 +148,7 @@
 							</#if>
 							Add source course at line <input type="text" class="" id="insertSource" value="${sourceCount}" style="width: 30px;">
 							<button accesskey="t" type="button" class="btn btn-success btn-xs" onclick="addSourceRow()" title="Add Row"><i class="fa fa-plus"></i> Add</button>
-							</@security.authorize>
+							</@redauth.authorize>
 						</span>
 					</div>
 				</div>
@@ -229,9 +229,9 @@
 									<input type="hidden" class="last_mod_user" name="last_mod_user" value="${source.lastModUser!''}"/>
 								</td>
 								<td class="aligncenter">
-									<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+									<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 									<button type="button" class="btn btn-danger btn-xs" onclick="delTaRow(event,'#sortableSource','#insertSource','sourceRow-')" title="Delete Course"><i class="fa fa-trash-o"></i></button>
-									</@security.authorize>
+									</@redauth.authorize>
 								</td>
 							</tr>
 							</#list>
@@ -272,9 +272,9 @@
 									<input type="hidden" class="last_mod_user" name="last_mod_user"/>	
 								</td>
 								<td class="aligncenter">
-									<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+									<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 									<button type="button" class="btn btn-danger btn-xs" onclick="delTaRow(event,'#sortableSource','#insertSource','sourceRow-')" title="Delete Course"><i class="fa fa-trash-o"></i></button>
-									</@security.authorize>
+									</@redauth.authorize>
 								</td>
 							</tr>
 							</#if>
@@ -315,7 +315,7 @@
 					</div>
 					<div class="col-md-4 collapse in" id="addTarget">
 						<span class="pull-right">
-							<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+							<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 							<#if selectedTargets?size  gt 0>
 							 	<#assign targetCount = selectedTargets?size + 1 />
 							<#else>
@@ -323,7 +323,7 @@
 							</#if>
 							Add target course at line <input type="text" class="" id="insertTarget" value="${targetCount}" style="width: 30px;">
 							<a accesskey="h" type="button" class="btn btn-success btn-xs" onclick="addTargetRow()" title="Add Row"><i class="fa fa-plus"></i> Add</a>
-							</@security.authorize>
+							</@redauth.authorize>
 						</span>
 					</div>
 				</div>
@@ -364,7 +364,7 @@
 										<span class="form-control-feedback" aria-hidden="true" style="color: red; line-height: 24px!important;display:none;">
 											<i class="fa fa-exclamation-triangle"></i>
 										</span>
-										<span class="targetCrsMskStatus crsMskError sr-only" style="display:none;">Course does not match the course mask. May be intentional - articulation still valid.</span>
+										<span class="targetCrsMskStatus crsMskError sr-only" style="display:none;">Course does not match the course mask.</span>
 									</div>
 									</td>
 									<td class="aligncenter">
@@ -466,9 +466,9 @@
 										<input type="hidden" class="last_mod_user" name="last_mod_user" value="${target.lastModUser!''}"/>
 									</td>
 									<td class="aligncenter">
-										<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+										<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 										<button type="button" class="btn btn-danger btn-xs" onclick="delTaRow(event,'#sortableTarget','#insertTarget','targetRow-')" title="Delete Course"><i class="fa fa-trash-o"></i></button>
-										</@security.authorize>
+										</@redauth.authorize>
 									</td>
 								</tr>
 							</#list>
@@ -482,7 +482,7 @@
 											<span class="form-control-feedback" aria-hidden="true" style="color: red; line-height: 24px!important;display:none;">
 												<i class="fa fa-exclamation-triangle"></i>
 											</span>
-											<span class="targetCrsMskStatus crsMskError sr-only" style="display:none;">Course does not match the course mask. May be intentional - articulation still valid.</span>
+											<span class="targetCrsMskStatus crsMskError sr-only" style="display:none;">Course does not match the course mask.</span>
 										</div>
 									</td>
 									<td class="aligncenter">
@@ -525,9 +525,9 @@
 										<input type="hidden" class="last_mod_user" name="last_mod_user"/>
 									</td>
 									<td class="aligncenter">
-										<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+										<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 										<button type="button" class="btn btn-danger btn-xs" onclick="delTaRow(event,'#sortableTarget','#insertTarget','targetRow-')" title="Delete Course"><i class="fa fa-trash-o"></i></button>
-										</@security.authorize>
+										</@redauth.authorize>
 									</td>
 								</tr>
 							</#if>

@@ -263,27 +263,6 @@ selfservice.audit = function () {
 			if(collapseReqs)
 			{
 				collapseAll();
-				
-				
-				//if in exception mode show the selected requirement
-				var exceptionMode = $j('#exceptionMode').val();
-				var auditExceptionMode = $j('#auditExceptionMode').val();
-				
-				if(exceptionMode || auditExceptionMode){
-					var reqId = $j('#selectedReqId').val();
-					
-					if(reqId != null){
-						var req = document.getElementById(reqId);
-						
-						if(reqId.indexOf("subreq") >= 0){
-							
-							reqId = $j("#"+reqId).parents('.requirement').attr('id');
-							req = document.getElementById(reqId);
-						}
-
-						expandRequirement(req);
-					}
-				}
 			}
 		}
 	};

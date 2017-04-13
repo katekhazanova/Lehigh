@@ -1,0 +1,88 @@
+ERROR [128625532] - 2017031010352782::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [128757657] - 2017031010374119::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129043258] - 2017031010422568::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129178570] - 2017031010444081::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129238824] - 2017031010454249::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129461299] - 2017031010492415::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129485638] - 2017031010494860::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSTELEC , rqfyt=201340]
+ERROR [129485638] - 2017031010494860::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSTELEC , rqfyt=201340]
+ERROR [129485638] - 2017031010494860::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [129485639] - 2017031010494860::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [129485639] - 2017031010494860::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [129485639] - 2017031010494860::  ST java.lang.Thread:857
+ERROR [129485731] - 2017031010494860::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSTELEC , rqfyt=201340]
+ERROR [129485737] - 2017031010494860::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSTELEC , rqfyt=201340]
+ERROR [129485737] - 2017031010494860::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [129485737] - 2017031010494860::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [129485737] - 2017031010494860::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [129485737] - 2017031010494860::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [129485737] - 2017031010494860::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [129485737] - 2017031010494860::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]  java.lang.Thread:857
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [129485738] - 2017031010494860::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [129551500] - 2017031010505474::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129722824] - 2017031010534727::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129785991] - 2017031010544935::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129879343] - 2017031010562431::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [129933425] - 2017031010571586::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [130225120] - 2017031011020737::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [130234189] - 2017031011021932::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=UNIVAP   , rqfyt=201440]
+ERROR [130234189] - 2017031011021932::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=UNIVAP   , rqfyt=201440]
+ERROR [130234189] - 2017031011021932::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [130234189] - 2017031011021932::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [130234190] - 2017031011021932::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [130234190] - 2017031011021932::  ST java.lang.Thread:857
+ERROR [130234269] - 2017031011021932::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=UNIVAP   , rqfyt=201440]
+ERROR [130234269] - 2017031011021932::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=UNIVAP   , rqfyt=201440]
+ERROR [130234269] - 2017031011021932::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [130234269] - 2017031011021932::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [130234269] - 2017031011021932::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [130234269] - 2017031011021932::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [130234269] - 2017031011021932::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]  java.lang.Thread:857
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [130234270] - 2017031011021932::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [130306348] - 2017031011033168::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [130625156] - 2017031011084789::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [130697320] - 2017031011100216::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [131015954] - 2017031011152027::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [131073117] - 2017031011161636::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [131166259] - 2017031011175064::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [131247477] - 2017031011191244::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [133615269] - 2017031011583958::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [133825633] - 2017031012021065::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [133996884] - 2017031012050069::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [134060030] - 2017031012060372::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [134138269] - 2017031012072184::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [134862785] - 2017031012192647::BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [WGSS           ] CATLYT [201540]
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:400
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:294
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:217
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:174
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [134862786] - 2017031012192647::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [134862786] - 2017031012192647::  ST java.lang.Thread:857
+ERROR [134862877] - 2017031012192647::     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [WGSS           ] CATLYT [201540]
+ERROR [134862877] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+ERROR [134862877] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+ERROR [134862877] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+ERROR [134862877] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+ERROR [134862877] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+ERROR [134862878] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+ERROR [134862878] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+ERROR [134862878] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+ERROR [134862878] - 2017031012192647::  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+ERROR [134862878] - 2017031012192647::  [STACKTRACE]  java.lang.Thread:857

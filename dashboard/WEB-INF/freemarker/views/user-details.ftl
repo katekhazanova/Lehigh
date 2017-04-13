@@ -513,10 +513,10 @@
 								<#if users??>
 								<#list users as usr>
 								<tr>
-									<td>${usr.firstName!''}</td>
-									<td>${usr.lastName!''}</td>
-									<td>${usr.username!''}</td>
-									<td>${usr.sisId!''}</td>
+									<td>${usr.firstName}</td>
+									<td>${usr.lastName}</td>
+									<td>${usr.username}</td>
+									<td>${usr.sisId}</td>
 								</tr>
 								</#list>
 								</#if>

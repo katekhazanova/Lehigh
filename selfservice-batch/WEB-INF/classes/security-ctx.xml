@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:sec="http://www.springframework.org/schema/security" xmlns:aop="http://www.springframework.org/schema/aop"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
   		   				   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 						   http://www.springframework.org/schema/security
 						   http://www.springframework.org/schema/security/spring-security-3.0.xsd
-						   http://www.springframework.org/schema/aop 
-					  	   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">	
-	
+						   http://www.springframework.org/schema/aop
+					  	   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
 	<sec:global-method-security pre-post-annotations="enabled"  proxy-target-class="true" />
-	<!-- 
+	<!--
 		==============================================================================
 		===================== Self-Service Security Context (CAS) ====================
 		==============================================================================
-	
+
 		This file contains all the beans needed to configure u.achieve Self-Service to
 		run a CAS implementation of Spring Security.
-	
+
 		This security context file is compliant with CollegeSource Security API 2.0.1.
 		==============================================================================
 	-->
 
-	<!-- 
+	<!--
 		==============================================================================
 		============================= Filter Chain Proxy =============================
 		==============================================================================
-	
-		This filter chain proxy is defined in the web.xml and must also be defined 
+
+		This filter chain proxy is defined in the web.xml and must also be defined
 		here in a Spring XML file for reference. It targets the filterChainProxy. This
-		causes a request to all URL's (pattern = /*) to go through the filter chain. 
-	
+		causes a request to all URL's (pattern = /*) to go through the filter chain.
+
 		==============================================================================
 	-->
 	<bean id="springFilterChainProxy" class="org.springframework.web.filter.DelegatingFilterProxy">
 		<property name="targetBeanName" value="filterChainProxy"/>
 	</bean>
-		
-	<!-- 
+
+	<!--
 		==============================================================================
 		================================ Filter Chain ================================
 		==============================================================================
-	
-		Note that the order that entries are placed against the filterChainMap is 
-		critical. The FilterSecurityInterceptor will work from the top of the list down 
+
+		Note that the order that entries are placed against the filterChainMap is
+		critical. The FilterSecurityInterceptor will work from the top of the list down
 		to the FIRST pattern that matches the request URL.
-	
+
 		==============================================================================
 	-->
 	<bean id="filterChainProxy" class="org.springframework.security.web.FilterChainProxy">
 	    <sec:filter-chain-map path-type="ant">
 	        <sec:filter-chain pattern="/**" filters="securityContextFilter, logoutFilter, casAuthenticationFilter, setCurrentUserFilter, servletApiFilter, rememberMeFilter, exceptionTranslationFilter, filterSecurityInterceptor"/>
-	    </sec:filter-chain-map>			
-	</bean>  
-	
+	    </sec:filter-chain-map>
+	</bean>
+
 	<bean id="securityContextFilter" class="org.springframework.security.web.context.SecurityContextPersistenceFilter">
 	    <property name="securityContextRepository">
 	    	<bean class="org.springframework.security.web.context.HttpSessionSecurityContextRepository" />
@@ -68,8 +68,8 @@
 			</list>
 		</constructor-arg>
 		<property name="filterProcessesUrl" value="/general/logout.html" />
-	</bean>	
-	
+	</bean>
+
 	<bean id="casAuthenticationFilter" class="org.springframework.security.cas.web.CasAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager"/>
         <property name="filterProcessesUrl" value="/general/logincheck.html"/>
@@ -82,40 +82,40 @@
 				</property>
 				<property name="defaultTargetUrl" value="/general/loginroute.html"/>
 			</bean>
-		</property>        
+		</property>
         <property name="authenticationFailureHandler">
         	<bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
         		<property name="defaultFailureUrl" value="/general/accessdenied.html"/>
         	</bean>
-        </property>	
+        </property>
     </bean>
 
 	<bean id="setCurrentUserFilter" class="uachieve.selfservice.security.filter.SetCurrentUserFilter">
 		<property name="userSessionAwareSupport" ref="userSessionAwareSupport" />
 	</bean>
-    
-	<bean id="servletApiFilter" class="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter" /> 
-  
+
+	<bean id="servletApiFilter" class="org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter" />
+
   	<bean id="rememberMeFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="rememberMeServices" ref="rememberMeServices" />
 	</bean>
-	
+
 	<bean id="rememberMeServices" class="uachieve.selfservice.security.support.UserSessionAwareTokenBasedRememberMeServices">
 		<!-- tokens are valid for 31 days -->
 		<property name="tokenValiditySeconds" value="2678400" />
 		<property name="userDetailsService" ref="daoUserDetailsService" />
 		<property name="key" value="a983ahahalk38989g897ygADSF#" />
-	</bean>		
-	
+	</bean>
+
 	<bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
         <property name="authenticationEntryPoint"><ref local="casAuthenticationEntryPoint"/></property>
     </bean>
-    
+
     <bean id="casAuthenticationEntryPoint" class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
         <property name="loginUrl" value="${security.cas.server.host}/login" />
         <property name="serviceProperties" ref="serviceProperties" />
-    </bean>    
+    </bean>
 
     <bean id="serviceProperties" class="org.springframework.security.cas.ServiceProperties">
 		<property name="service" value="${security.cas.selfservice.host}/general/logincheck.html" />
@@ -133,7 +133,7 @@
 					</list>
 				</property>
 			</bean>
-		</property>			
+		</property>
 	    <property name="securityMetadataSource">
 	        <sec:filter-security-metadata-source lowercase-comparisons="true" path-type="ant">
 				<sec:intercept-url pattern="/general/auditroute.html" access="SS_ROLE_USER" />
@@ -152,7 +152,7 @@
 				<sec:intercept-url pattern="/audit/listcourses.html" access="SS_AREA_AUDIT:R" />
 				<sec:intercept-url pattern="/audit/delete.html" access="SS_AREA_AUDIT:D" />
 				<sec:intercept-url pattern="/audit/view.html" access="SS_AREA_AUDIT:R" />
-				<sec:intercept-url pattern="/audit/exception_home.html" access="SS_AREA_AUDITEXCEPTION:R" />
+				<sec:intercept-url pattern="/audit/exception_home.html" access="SS_AREA_AUDIT:R, SS_AREA_EXCEPTION:C" />
 				<sec:intercept-url pattern="/audit/*" access="SS_AREA_AUDIT" />
 				<sec:intercept-url pattern="/comment/create.html" access="SS_AREA_COMMENTS:C" />
 				<sec:intercept-url pattern="/comment/edit.html" access="SS_AREA_COMMENTS:U" />
@@ -185,7 +185,7 @@
 				<sec:intercept-url pattern="/exception/listctlcds.html" access="SS_AREA_EXCEPTION:R" />
 				<sec:intercept-url pattern="/exception/edit.html" access="SS_AREA_EXCEPTION:U" />
 				<sec:intercept-url pattern="/exception/delete.html" access="SS_AREA_EXCEPTION:D" />
-				<sec:intercept-url pattern="/exception/create_stuexccourse.html" access="SS_AREA_EXCEPTION:C,SS_AREA_EXCEPTION:U" />
+				<sec:intercept-url pattern="/exception/create_stuexccourse.html" access="SS_AREA_EXCEPTION:C" />
 				<sec:intercept-url pattern="/exception/edit_stuexccourse.html" access="SS_AREA_EXCEPTION:U" />
 				<sec:intercept-url pattern="/exception/delete_stuexccourse_from_exc.html" access="SS_AREA_EXCEPTION:D" />
 				<sec:intercept-url pattern="/exception/delete_stuexccourse_from_excCourse.html" access="SS_AREA_EXCEPTION:D" />
@@ -216,42 +216,42 @@
 				<sec:intercept-url pattern="/crosswalk/edit.html" access="SS_AREA_CROSSWALK:U" />
 				<sec:intercept-url pattern="/crosswalk/delete.html" access="SS_AREA_CROSSWALK:D" />
 				<sec:intercept-url pattern="/crosswalk/read.html" access="SS_AREA_CROSSWALK:R" />
-				<sec:intercept-url pattern="/**" access="SS_ROLE_USER" />	            
-	        </sec:filter-security-metadata-source>	        
-	    </property>			
+				<sec:intercept-url pattern="/**" access="SS_ROLE_USER" />
+	        </sec:filter-security-metadata-source>
+	    </property>
 	</bean>
-	
+
 	<!-- =============================== End of Filters =============================== -->
 
 
-	<!-- 
+	<!--
 		==============================================================================
 		=========================== Authentication Manager ===========================
 		==============================================================================
-	
-		This bean is the central point of authentication done by the CollegeSource 
+
+		This bean is the central point of authentication done by the CollegeSource
 		Security API. All of the Spring Security objects are converted to CollegeSource
 		specific versions needed by CollegeSource applications. Depending upon the type
-		of security implementation you're doing, your authentication provider will 
+		of security implementation you're doing, your authentication provider will
 		differ. Your options are:
-		
+
 			<ref bean="databaseAuthenticationProvider" />
 			<ref bean="ldapAuthenticationProvider" />
 			<ref bean="casAuthenticationProvider" />
-		
+
 		==============================================================================
 		============================= Optional properties ============================
-		==============================================================================	
-		
-		<property name="userPopulator" ref="userPopulator" />
-		
-		To use the user populator, you would need to develop a custom implementation 
-		of the com.collegesource.security.model.UserPopulator class. The purpose is to
-		populate some details about the user that cannot be retrieved with the user 
-		lookup service(s) you define. 
-				
 		==============================================================================
-	-->	
+
+		<property name="userPopulator" ref="userPopulator" />
+
+		To use the user populator, you would need to develop a custom implementation
+		of the com.collegesource.security.model.UserPopulator class. The purpose is to
+		populate some details about the user that cannot be retrieved with the user
+		lookup service(s) you define.
+
+		==============================================================================
+	-->
 	<bean id="authenticationManager" class="com.collegesource.security.authentication.CollegeSourceAuthenticationManager">
 		<property name="providers">
 			<list>
@@ -270,24 +270,24 @@
 				<bean class="com.collegesource.security.decorator.impl.RealmDecorator"/>
 				<bean class="com.collegesource.security.decorator.impl.PropertiesDecorator">
 					<property name="appId" value="${uachieve.security.appid}" />
-				</bean>				
+				</bean>
 			</list>
 		</property>
-	</bean>	
+	</bean>
 
-	<!-- 
+	<!--
 		==============================================================================
 		========================= CAS Authentication Provider ========================
 		==============================================================================
-	
+
 		This bean facilitates CAS authentication and authorization. The Spring Security
-		API takes care of the CAS authentication, but since the nature of CAS is to 
-		only provide authentication, you must use an alternate means of authorization. 
+		API takes care of the CAS authentication, but since the nature of CAS is to
+		only provide authentication, you must use an alternate means of authorization.
 		You have two options available:
-		
+
 			<property name="authenticationUserDetailsService" ref="daoCasUserDetailsService"/>
 			<property name="authenticationUserDetailsService" ref="ldapCasUserDetailsService"/>
-	
+
 		==============================================================================
 	-->
     <bean id="casAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
@@ -298,14 +298,14 @@
         <property name="serviceProperties" ref="serviceProperties" />
     </bean>
 
-	<!-- 
+	<!--
 		==============================================================================
 		============================ CAS Ticket Validator ============================
 		==============================================================================
-	
-		This bean is the CAS ticket validator, which is used to check the CAS tickets 
-		to make sure that users are authenticated. 
-	
+
+		This bean is the CAS ticket validator, which is used to check the CAS tickets
+		to make sure that users are authenticated.
+
 		==============================================================================
 	-->
     <bean id="casTicketValidator" class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
@@ -320,85 +320,89 @@
         <property name="cacheManager" ref="cacheManager"/>
         <property name="cacheName" value="ticketCache" />
     </bean>
-    
-   	<!-- 
+
+   	<!--
 		==============================================================================
 		======================== DAO CAS User Details Service ========================
 		==============================================================================
-	
-		This bean pulls user details from the CollegeSource Security database for 
+
+		This bean pulls user details from the CollegeSource Security database for
 		authorization purposes when using CAS for authentication.
-	
+
 		==============================================================================
 	-->
     <bean id="daoCasUserDetailsService" class="com.collegesource.security.authorization.CollegeSourceDaoCasUserDetailsService">
         <property name="userDetailsService"><ref bean="daoUserDetailsService"/></property>
     </bean>
-    
-	<!-- 
+
+	<!--
 		==============================================================================
 		========================== DAO User Details Service ==========================
 		==============================================================================
-	
-		This bean allows user details to be pulled from the database. It is used in 
+
+		This bean allows user details to be pulled from the database. It is used in
 		large part as the database authorities populator.
-	
+
 		==============================================================================
 		============================= Optional properties ============================
 		==============================================================================
-		
+
 		<property name="defaultUserGroup" value="${security.defaultUserGroup}"/>
-		
+
 		This property should be added if you want a user that logs in but has no
-		authorities to be populated with a default user group.			
-	
+		authorities to be populated with a default user group.
+
 		==============================================================================
-	-->			
-	<bean id="daoUserDetailsService" class="com.collegesource.security.authorization.CollegeSourceDaoUserDetailsService">
+	-->
+	<bean id="daoUserDetailsService" class="com.collegesource.security.custom.authorization.CustomDaoUserDetailsService">
 		<property name="dataSource" ref="security.dataSource" />
 		<property name="usersByUsernameQuery">
 			<value>
-				SELECT 
-					user_id AS username, password, 1 AS enabled 
-				FROM 
-					red_user
-				WHERE 
-					user_id = ?
+				SELECT B.USER_ID  AS USERNAME, ' ' AS PASSWORD, 1 AS ENABLED
+				FROM RED_USER_GROUP B
+				WHERE LOWER(b.user_id) = LOWER(?)
+				UNION
+				SELECT A.USER_ID    AS USERNAME, ' ' AS PASSWORD, 1 AS ENABLED
+				FROM LU_UACHIEVE_SECURITY A
+				WHERE LOWER(a.user_id) = LOWER(?)
 			</value>
 		</property>
 		<property name="authoritiesByUsernameQuery">
 			<value>
-				SELECT 
-					user_id AS username, group_id AS authority 
-				FROM 
-					red_user_group
-				WHERE 
-					user_id = ?
+				SELECT B.USER_ID  AS USERNAME,
+					B.GROUP_ID AS AUTHORITY
+				FROM RED_USER_GROUP B
+				WHERE LOWER(b.user_id) = LOWER(?)
+				UNION
+				SELECT A.USER_ID    AS USERNAME,
+					A.GROUP_CODE AS AUTHORITY
+				FROM LU_UACHIEVE_SECURITY A
+				WHERE LOWER(a.user_id) = LOWER(?)
 			</value>
 		</property>
 		<property name="defaultUserGroup" value="${security.defaultUserGroup}"/>
-	</bean> 
-    
-  	<!-- 
+	</bean>
+
+  	<!--
 		==============================================================================
 		======================== LDAP CAS User Details Service =======================
 		==============================================================================
-	
-		This bean pulls user details from LDAP for authorization purposes when using 
-		CAS for authentication. With it, you need to make sure that you have the proper 
+
+		This bean pulls user details from LDAP for authorization purposes when using
+		CAS for authentication. With it, you need to make sure that you have the proper
 		LDAP context source also defined.
-	
+
 		==============================================================================
 		============================= Optional properties ============================
-		==============================================================================	
-		
+		==============================================================================
+
 		Use these properties if you want to manipulate the values coming from LDAP with
-		a prefix or by converting to upper case. By default, the rolePrefix is blank and 
+		a prefix or by converting to upper case. By default, the rolePrefix is blank and
 		convertToUpperCase is false.
-	
+
 		<property name="rolePrefix" value="${security.ldap.groupPrefix}" />
-		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}" />			
-	
+		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}" />
+
 		==============================================================================
 	-->
 	<!--
@@ -409,17 +413,17 @@
 		<property name="groupSearchFilter" value="${security.ldap.userNameSearchFilter}" />
 		<property name="rolePrefix" value="${security.ldap.groupPrefix}"/>
 		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}"/>
-    </bean> 
+    </bean>
   	-->
-  	
-	<!-- 
+
+	<!--
 		==============================================================================
 		============================ LDAP Context Source =============================
 		==============================================================================
-	
+
 		This bean defines the LDAP context source. It is essentially the LDAP connection
 		information. The url, userDn, and password are specified here.
-	
+
 		==============================================================================
 	-->
 	<!--
@@ -429,14 +433,14 @@
     	<property name="password" value="${security.ldap.password}"/>
   	</bean>
  	-->
- 	
-	<!-- 
+
+	<!--
 		==============================================================================
 		============================ LDAP User Name Search ===========================
 		==============================================================================
-	
-		This bean defines the LDAP search that is configured to search by user name. 
-	
+
+		This bean defines the LDAP search that is configured to search by user name.
+
 		==============================================================================
 	-->
 	<!--
@@ -447,14 +451,14 @@
 		<property name="searchSubtree" value="true" />
 	</bean>
 	-->
-	
-	<!-- 
+
+	<!--
 		==============================================================================
 		============================= LDAP SIS Id Search =============================
 		==============================================================================
-	
+
 		This bean defines the LDAP search that is configured to search by SIS Id.
-	
+
 		==============================================================================
 	-->
 	<!--
@@ -462,51 +466,51 @@
 		<property name="searchBase" value="${security.ldap.searchBase}" />
 		<property name="searchFilter" value="${security.ldap.sisIdSearchFilter}" />
 		<property name="contextSource" ref="ldapContextSource" />
-		<property name="searchSubtree" value="true" />		
+		<property name="searchSubtree" value="true" />
 	</bean>
 	-->
-	
-	<!-- 
+
+	<!--
 		==============================================================================
 		========================= LDAP Authorities Populator =========================
 		==============================================================================
-	
-		This bean provides the authorities for an LDAP user. The CollegeSource Security 
-		API controls user authorities through groups. This bean looks up groups from 
-		LDAP to assign to the user. The LDAP attribute(s) that contain the user's groups 
+
+		This bean provides the authorities for an LDAP user. The CollegeSource Security
+		API controls user authorities through groups. This bean looks up groups from
+		LDAP to assign to the user. The LDAP attribute(s) that contain the user's groups
 		should be configured in the "security.ldap.groupAttribute" property.
-		
+
 		There are two methods supported to lookup these groups for an LDAP user.
-		
+
 		1) 	You can pull the group attribute values directly from the user details that
 			were found when performing the search done by the LDAP authenticator.
-			
+
 		2) 	If for some reason your group attribute values cannot be found on the user
 			details found by the first search, a new LDAP search can be done to
-			explicitly look for those group attribute values. 
-		
+			explicitly look for those group attribute values.
+
 		==============================================================================
-		
+
 		To use the first approach, you only need to have the "groupAttribute" property.
-		To use the second approach, you must also include the "contextSource", 
+		To use the second approach, you must also include the "contextSource",
 		"groupSearchBase", and "groupSearchFilter" properties.
-		
+
 		==============================================================================
 		============================= Optional properties ============================
 		==============================================================================
-		
+
 		<property name="defaultUserGroup" value="${security.defaultUserGroup}" />
-		
+
 		For more details on the above property, see:
 		http://clients.collegesource.com/support/browse/SECAPI-20
-		
-		Use these next two properties if you want to manipulate the values coming from 
-		LDAP with a prefix or by converting to upper case. By default, the rolePrefix is 
+
+		Use these next two properties if you want to manipulate the values coming from
+		LDAP with a prefix or by converting to upper case. By default, the rolePrefix is
 		blank and convertToUpperCase is false.
-	
+
 		<property name="rolePrefix" value="${security.ldap.groupPrefix}" />
-		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}" />	
-	
+		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}" />
+
 		==============================================================================
 	-->
 	<!--
@@ -516,19 +520,19 @@
 		<property name="groupSearchFilter" value="${security.ldap.userNameSearchFilter}" />
 		<property name="groupAttribute" value="${security.ldap.groupAttribute}" />
 		<property name="rolePrefix" value="${security.ldap.groupPrefix}" />
-		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}" />			
-	</bean> 
+		<property name="convertToUpperCase" value="${security.ldap.convertGroupToUpperCase}" />
+	</bean>
   	-->
-  	
-	<!-- 
+
+	<!--
 		==============================================================================
 		============================ Cache Configuration =============================
 		==============================================================================
-	
+
 		These beans define the cache configuration to be used with database tables.
-	
+
 		==============================================================================
-	-->		
+	-->
   	<bean id="userCache" class="org.springframework.security.core.userdetails.cache.EhCacheBasedUserCache">
 		<property name="cache">
 			<bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
@@ -537,69 +541,105 @@
 			</bean>
 		</property>
 	</bean>
-	
+
 	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
 		<property name="configLocation" value="classpath:/ehcache-spring.xml" />
 	</bean>
-  
-  	<!-- 
+
+  	<!--
 		==============================================================================
 		========================= User Lookup Service Utility ========================
 		==============================================================================
-	
+
 		This utility allows for the use of multiple user lookup services if you need
-		to lookup users in multiple places. The available options are:  
-		
+		to lookup users in multiple places. The available options are:
+
 			<ref bean="daoUserLookupService" />
 			<ref bean="ldapUserLookupService" />
-			
+
 		You must include at least one of them in the list of userLookupServices. List
-		them in order of desired evaluation. Please see the bean definition of each 
+		them in order of desired evaluation. Please see the bean definition of each
 		for more details.
-		
+
 		==============================================================================
 		============================= Optional properties ============================
-		==============================================================================		
-		
-		<property name="useAlternateLdapUserName" value="${security.ldap.useAlternateLdapUserName}" />
-				
 		==============================================================================
-	-->	 
+
+		<property name="useAlternateLdapUserName" value="${security.ldap.useAlternateLdapUserName}" />
+
+		==============================================================================
+	-->
 	<bean id="userLookupServiceUtil" class="com.collegesource.security.service.UserLookupServiceUtil">
 		<property name="userLookupServices">
 			<list>
 				<ref bean="daoUserLookupService" />
+				<ref bean="sisUserLookupService" />
 				<ref bean="stuMasterLookupService" />
 			</list>
 		</property>
-	</bean>					  	   
-					  	   
-	<!-- 
+	</bean>
+
+	<!--
 		==============================================================================
 		========================= Database User Lookup Service =======================
 		==============================================================================
-	
+
 		This user lookup service can be used to lookup users from your CollegeSource
 		security database tables.
-		
+
 		This bean is also the parent object for the LDAP User Lookup Service. If you
-		plan on using that, you'll also need to make sure this bean definition is not 
+		plan on using that, you'll also need to make sure this bean definition is not
 		commented out.
-				
+
 		==============================================================================
-	-->			  	   
+	-->
 	<bean id="daoUserLookupService" class="com.collegesource.security.service.impl.DaoUserLookupService">
 		<property name="dataSource" ref="security.dataSource" />
 	</bean>
-		
-	<!-- 
+
+	<!--
+	==============================================================================
+	=========================== SIS User Lookup Service ==========================
+	==============================================================================
+
+	This user lookup service can be used to lookup users from your student
+	information system (Banner, PeopleSoft, or other). Just configure the queries
+	in the sisJdbcSecurityDao to pull the needed data.
+
+	==============================================================================
+-->
+	<bean id="sisUserLookupService" class="com.collegesource.security.service.impl.SisUserLookupService">
+              <property name="sisJdbcSecurityDao" ref="sisJdbcSecurityDao"/>
+        </bean>
+
+<!--
+	==============================================================================
+	============================== SIS JDBC Security Dao =========================
+	==============================================================================
+
+	This bean is used (autowired) by sisUserLookupService. Configure the queries
+	to pull data from your SIS.
+
+	==============================================================================
+-->
+	<bean id="sisJdbcSecurityDao" class="com.collegesource.security.dao.impl.SisJdbcSecurityDao">
+		<property name="dataSource" ref="security.dataSource" />
+		<property name="lookupAllUsersQuery" value="${security.sis.lookupAllUsersQuery}" />
+		<property name="lookupUsersQuery" value="${security.sis.lookupUsersQuery}" />
+		<property name="lookupUserByNameQuery" value="${security.sis.lookupUserByNameQuery}"/>
+		<property name="lookupUserByUsernameQuery" value="${security.sis.lookupUserByUsernameQuery}" />
+		<property name="lookupUserBySisIdQuery" value="${security.sis.lookupUserBySisIdQuery}" />
+		<property name="lookupUsersBySisIdQuery" value="${security.sis.lookupUsersBySisIdQuery}" />
+	</bean>
+
+	<!--
 		==============================================================================
 		=========================== LDAP User Lookup Service =========================
 		==============================================================================
-	
+
 		This user lookup service can be used to lookup users from your LDAP
 		service provider instead of the security database tables.
-		
+
 		==============================================================================
 	-->
 	<!--
@@ -618,16 +658,16 @@
 	</bean>
 	-->
 
-	<!-- 
+	<!--
 		==============================================================================
 		=========================   STU_MASTER Lookup Service  =======================
 		==============================================================================
-	
+
 		This user lookup service can be used to lookup users from your CollegeSource
 		STU_MASTER table.
 		==============================================================================
-	-->			
-	
+	-->
+
 		<bean id="uachieveapi.parentDao" abstract="true">
                 <property name="sessionFactory" ref="uachieveapi.sessionFactory"/>
         </bean>
@@ -641,15 +681,15 @@
         </bean>
 
 
-	<!-- 
+	<!--
 		==============================================================================
 		============================== Security Service ==============================
 		==============================================================================
-	
+
 		This bean supports the CollegeSource security database table administration.
-	
+
 		==============================================================================
-	-->	
+	-->
 	<bean id="securityService" class="com.collegesource.security.service.impl.DefaultSecurityService">
 		<property name="securityDao">
 			<bean class="com.collegesource.security.dao.impl.JdbcSecurityDao" init-method="populateRoleDefinitionsForApplication">
@@ -661,15 +701,15 @@
 		</property>
 	</bean>
 
-	<!-- 
+	<!--
 		==============================================================================
 		=============================== Domain Service ===============================
 		==============================================================================
-	
+
 		This bean supports the CollegeSource security domain administration.
-	
+
 		==============================================================================
-	-->		
+	-->
 	<bean id="domainService" class="com.collegesource.security.service.impl.DefaultDomainService">
 		<property name="domainDao">
 			<bean class="com.collegesource.security.dao.impl.JdbcDomainDao">
@@ -678,16 +718,16 @@
 		</property>
 	</bean>
 
-	<!-- 
+	<!--
 		==============================================================================
 		=============================== Domain Labels ================================
 		==============================================================================
-	
+
 		This bean defines the CollegeSource security domain labels that you will use
 		for your institution.
-	
+
 		==============================================================================
-	-->	
+	-->
 	<bean id="domainLabels" class="com.collegesource.security.domain.DomainLabels">
 		<property name="labelOne" value="1" />
 		<property name="labelTwo" value="2" />
@@ -697,7 +737,7 @@
 		<property name="labelSix" value="6" />
 	</bean>
 
-	<!-- 
+	<!--
 		==============================================================================
 		=============================== General Purpose ==============================
 		==============================================================================
@@ -723,5 +763,5 @@
 	</bean>
 
 	<bean id="userSessionAwareSupport" class="uachieve.selfservice.security.support.UserSessionAwareSupportImpl" />
-  	
+
 </beans>

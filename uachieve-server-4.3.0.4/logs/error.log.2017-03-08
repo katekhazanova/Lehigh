@@ -1,0 +1,25 @@
+ERROR [778541909] - 2017030814020686::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [778720600] - 2017030814050531::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201640]
+ERROR [778720600] - 2017030814050531::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201640]
+ERROR [778720601] - 2017030814050531::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [778720601] - 2017030814050531::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [778720601] - 2017030814050531::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [778720601] - 2017030814050531::  ST java.lang.Thread:857
+ERROR [778720697] - 2017030814050531::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201640]
+ERROR [778720708] - 2017030814050531::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201640]
+ERROR [778720709] - 2017030814050531::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [778720709] - 2017030814050531::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [778720709] - 2017030814050531::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [778720709] - 2017030814050531::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [778720709] - 2017030814050531::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [778720710] - 2017030814050531::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [778720710] - 2017030814050531::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [778720710] - 2017030814050531::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [778720710] - 2017030814050531::  [STACKTRACE]  java.lang.Thread:857
+ERROR [778720710] - 2017030814050531::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [778720711] - 2017030814050531::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [778720711] - 2017030814050531::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [778720711] - 2017030814050531::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [783636330] - 2017030815270034::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [809147562] - 2017030822321195::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [131192] - 2017030822534734::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED

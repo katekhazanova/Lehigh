@@ -32,7 +32,6 @@
 				<value>classpath:dashboard-default.properties</value>
 				<value>classpath:report.properties</value>
 				<value>classpath:actionservice.properties</value>
-				<value>classpath:audit-comparison.properties</value>
 			</list>
 		</property> 
 	</bean>

@@ -32,7 +32,7 @@ function forceReqComplete(event,reqId){
 
 function setupReqEdit(reqId){
 	
-	$j('#'+reqId).find('.reqText').addClass("auditHighlight");
+	$j('#'+reqId).find('.reqText').css({border:'2px solid orange'});
 	
 	var reqTitle = $j('#'+reqId).find('.reqTitle').html();
 	$j(".exceptMod-reqText").html(reqTitle);
@@ -85,7 +85,7 @@ function forceSubreqComplete(event,subreqId){
 
 function setupSubreqEdit(subreqId){
 	
-	$j('#'+subreqId).find('.subreqTitle').addClass("auditHighlight");
+	$j('#'+subreqId).find('.subreqTitle').css({border:'2px solid orange'});
 	
 	var subreqTitle = $j('#'+subreqId).find('.subreqTitle').html();
 	$j(".exceptMod-reqText").html(subreqTitle);
@@ -131,7 +131,7 @@ function forceCourseSubrequirement(event, subreqId){
 	$j('#exceptMod-coursePrompt').show();
 	$j('#exceptMod-requirements').html('Select at least one course');
 	
-	$j('#'+subreqId).find('.subreqTitle').addClass("auditHighlight");
+	$j('#'+subreqId).find('.subreqTitle').css({border:'2px solid orange'});
 	
 	showCourseModForm(event,subreqId,null);
 }
@@ -148,7 +148,7 @@ function addCourseSubrequirement(event, subreqId, fromId){
 	
 	$j('#exceptionType').val("addCourse");
 	
-	$j('#'+fromId).addClass("auditHighlight");
+	$j('#'+fromId).css({border:'2px solid orange'});
 	
 	$j('.manaul-add-course').show();
 	$j('#course-taken-list').show();
@@ -170,7 +170,7 @@ function removeCourseSubrequirement(event, subreqId,fromId){
 	
 	$j('#exceptionType').val("removeCourse");
 	
-	$j('#'+fromId).addClass("auditHighlight");
+	$j('#'+fromId).css({border:'2px solid orange'});
 	
 	//load the course list courses for removal 
 	loadRemoveListCourses(fromId);
@@ -201,7 +201,7 @@ function swapCourseSubrequirement(event, subreqId,fromId){
 	
 	$j('#exceptionType').val("swapCourse");
 	
-	$j('#'+fromId).addClass("auditHighlight");
+	$j('#'+fromId).css({border:'2px solid orange'});
 	
 	//load the course list courses for removal 
 	loadRemoveListCourses(fromId);
@@ -313,6 +313,8 @@ function showExceptionList(){
 	$j('.req-count-edit-decimal').val((0).toFixed(2));
 	$j("input#numberSearch").val('');
 	$j("input#departSearch").val('');
+	$j('#includeDprog').prop('checked', true);
+	$j('#includeRname').prop('checked', true);
 	
 	//reset general workflow
 	$j('#exceptMod-next').hide();
@@ -513,7 +515,7 @@ function addDateRangeLinks(){
 		var html = $j(this).html();
 		var courseId = $j(this).parents('.chosen-course-row').attr('courseid');
 		
-		$j(this).after("<a class=\"dateRange-link\" onclick=\"showDateRange('"+courseId+"'); return false;\" style=\"text-decoration: underline; cursor: pointer;\">"+html+"</a>");
+		$j(this).after("<a class=\"dateRange-link\" onclick=\"showDateRange('"+courseId+"')\" style=\"text-decoration: underline; cursor: pointer;\">"+html+"</a>");
 		$j(this).remove();
 	});
 	
@@ -521,7 +523,7 @@ function addDateRangeLinks(){
 		
 		var courseId = $j(this).parents('.chosen-course-row').attr('courseid');
 		
-		$j(this).after("<a class=\"addDate-link\" href=\"#\" onclick=\"showDateRange('"+courseId+"');return false;\" style=\"text-decoration: underline; cursor: pointer;\">Add Date</a>");
+		$j(this).after("<a class=\"addDate-link\" href=\"#\" onclick=\"showDateRange('"+courseId+"')\" style=\"text-decoration: underline; cursor: pointer;\">Add Date</a>");
 		$j(this).remove();
 	});
 }
@@ -660,16 +662,14 @@ function addChosenCourse(courseId){
 function createChosenCourse(courseId){
 	
 	if(cDate == ""){
-		cDate = "<a  class=\"addDate-link\" href=\"#\" onclick=\"showDateRange('"+courseId+"'); return false;\" style=\"text-decoration: underline; cursor: pointer;\">Add Date</a>";
+		cDate = "<a  class=\"addDate-link\" href=\"#\" onclick=\"showDateRange('"+courseId+"')\" style=\"text-decoration: underline; cursor: pointer;\">Add Date</a>";
 	}
-	
-	var dateRange = "<a class=\"dateRange-link\" href=\"#\" tabindex=\"0\" onclick=\"showDateRange('"+courseId+"');return false;\" style=\"text-decoration: underline; cursor: pointer;\">" +
-					"<span id=\"chosen-course-fyt-"+courseId+"\"  class=\"chosen-course-fyt exc-term3\" ></span>-" +
-					"<span id=\"chosen-course-lyt-"+courseId+"\"  class=\"chosen-course-lyt exc-term3\" ></span></a>";
 	
 	var chosenRow = "<tr  class=\"chosen-course-row\"id=\"chosen-course-"+courseId+"\" courseid=\""+courseId+"\"><td>"+
 		"<span id=\"chosen-course-name-"+courseId+"\" class=\"chosen-course-name exc-course\">"+cName+"</span><br>"+
-		"<span id=\"chosen-course-dateRange-"+courseId+"\" style=\"display:none;\">"+dateRange+"</span>"+
+		"<a  class=\"dateRange-link\" href=\"#\" tabindex=\"0\" onclick=\"showDateRange('"+courseId+"')\" style=\"text-decoration: underline; cursor: pointer;\">" +
+		"<span id=\"chosen-course-fyt-"+courseId+"\"  class=\"chosen-course-fyt exc-term3\" style=\"display: none;\"></span><span id=\"date-dash-"+courseId+"\"  style=\"display: none;\">-</span>" +
+		"<span id=\"chosen-course-lyt-"+courseId+"\"  class=\"chosen-course-lyt exc-term3\" style=\"display: none;\"></span></a>"+
 		"<span id=\"chosen-course-date-"+courseId+"\"  class=\"chosen-course-date exc-term3\">"+cDate+"</span><br>"+
 		"<span id=\"chosen-course-hours-"+courseId+"\"  class=\"chosen-course-hours exc-hours\">"+cHours+"</span>" +
 		"<span id=\"chosen-course-grade-"+courseId+"\"  class=\"chosen-course-grade exc-grade\">"+cGrade+"</span><br>"+
@@ -699,7 +699,9 @@ function showDateRange(courseId){
 	
 	$j("[id='chosen-course-date-"+courseId+"']").hide();
 	$j("[id='remove-chosen-"+courseId+"']").hide();
-	$j("[id='chosen-course-dateRange-"+courseId+"']").hide();
+	$j("[id='chosen-course-lyt-"+courseId+"']").hide();
+	$j("[id='chosen-course-fyt-"+courseId+"']").hide();
+	$j("[id='date-dash-"+courseId+"']").hide();
 	$j('#exceptMod-next').hide();
 }
 
@@ -720,10 +722,12 @@ function addDateRange(courseId){
 	else{
 		$j("[id='chosen-course-fyt-"+courseId+"']").text(fyt);
 		$j("[id='chosen-course-lyt-"+courseId+"']").text(lyt);
+		$j("[id='date-dash-"+courseId+"']").show();
 		
 		$j('[class="dateRange-'+courseId+'"]').remove();
 		$j("[id='remove-chosen-"+courseId+"']").show();
-		$j("[id='chosen-course-dateRange-"+courseId+"']").show();
+		$j("[id='chosen-course-fyt-"+courseId+"']").show();
+		$j("[id='chosen-course-lyt-"+courseId+"']").show();
 		
 		if($j('tr[class*=dateRange]').length == 0){
 			$j('#exceptMod-next').show();
@@ -743,7 +747,9 @@ function cancelDateRange(courseId){
 		$j("[id='chosen-course-date-"+courseId+"']").show();
 	}
 	else{
-		$j("[id='chosen-course-dateRange-"+courseId+"']").show();
+		$j("[id='chosen-course-fyt-"+courseId+"']").show();
+		$j("[id='chosen-course-lyt-"+courseId+"']").show();
+		$j("[id='date-dash-"+courseId+"']").show();
 	}
 	
 	if($j('tr[class*=dateRange]').length == 0){
@@ -903,8 +909,6 @@ function loadExceptionConfigs(exceptionType){
 					$j('.inputMemo').val(json.memo);
 					$j('.inputAuthorized ').val(json.name);
 					$j('.inputBy').val(json.date);
-					$j('#includeDprog').prop('checked', json.restrictToDprog);
-					$j('#includeRname').prop('checked', json.restrictToReq);
 				},
 				error : function(json) {}
 		});

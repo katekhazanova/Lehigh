@@ -1,5 +1,5 @@
 <@layout.head title="Transfer Articulation Table - ${tcaMaster.iname!''}" />
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 
 <@layout.body autoScroll=true>
 
@@ -35,19 +35,19 @@
 					</a>
 					<a href="<@s.url "/encoding/transfer/ta.html?sourceCd=${tcaMaster.comp_id.sourceCd?url}&fyt=${tcaMaster.comp_id.fyt?url}&dpmask=${tcaMaster.comp_id.dpmask?url}&refresh=true" />" type="button" id="ta-refresh" class="btn btn-default btn-sm"><i class="fa fa-undo"></i> Restore</a>
 					<#if clone=="false">
-						<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 						<a href="#" type="button" id="ta-save" onclick="saveTa()" class="btn btn-primary btn-sm" accesskey="s" <#if !unsavedChanges>disabled</#if>><i class="fa fa-save"></i> Save</a>
-						</@security.authorize>
+						</@redauth.authorize>
 					<#else>
-						<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=c">
+						<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=c">
 						<a href="#" type="button" id="ta-save" onclick="cloneTa()" class="btn btn-primary btn-sm" accesskey="s" <#if !unsavedChanges>disabled</#if>><i class="fa fa-copy"></i> Clone</a>
-    					</@security.authorize>
+    					</@redauth.authorize>
 					</#if>
 					<input type="hidden" id="unsavedChanges" value="${unsavedChanges?string("true","false")}" /> 
     				<a href="<@s.url "/encoding/transfer/institution.html" />" id="ta-exit"  type="button" class="btn btn-default btn-sm" accesskey="x"><i class="fa fa-arrow-left"></i> Exit Table</a>
-						<@security.authorize ifNoneGranted="SS_ENCODING_TA_RULE=u,SS_ENCODING_TA_RULE=c">
+						<@redauth.authorize ifNoneGranted="SS_ENCODING_TA_RULE=u,SS_ENCODING_TA_RULE=c">
 							<input type="hidden" id="disableTAInputs"value="true" />
-						</@security.authorize>
+						</@redauth.authorize>
 					</span>
 		    	</div>
 	    	</div>
@@ -207,9 +207,9 @@
 			        	<div class="row" style="padding-bottom: 5px;">
 							<div class="col-md-4 col-md-offset-8">
 								<span class="pull-right">
-									<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+									<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 									<button accesskey="n" type="button" class="btn btn-success btn-xs" onclick="popNewSegmentModal()" title="Add Row"><i class="fa fa-plus"></i> Add Row</button>
-									</@security.authorize>
+									</@redauth.authorize>
 								</span>
 							</div>
 						</div>
@@ -251,10 +251,10 @@
 										</a> 
 									</td>
 									<td class="aligncenter vAlignMid <#if segment.tseg == selectedRule.tseg>selectedSegment</#if>">
-										<@security.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
+										<@redauth.authorize ifAllGranted="SS_ENCODING_TA_RULE=u">
 										<button type="button" class="btn btn-danger btn-xs" onclick="delTaRow(event,'#sortableSegment','none')" title="Delete Segment"
 											<#if segment.tseg == selectedRule.tseg>disabled="disabled"</#if>><i class="fa fa-trash-o"></i></button>
-										</@security.authorize>
+										</@redauth.authorize>
 									</td>
 									<#if segment.intSeqNo??><input type="hidden" class="intSeqNo" value="${segment.intSeqNo?c}" /></#if>
 									<input type="hidden" class="tsegDesc" value="${segment.description!''}" />

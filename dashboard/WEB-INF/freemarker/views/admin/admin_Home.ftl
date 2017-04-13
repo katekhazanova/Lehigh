@@ -5,10 +5,9 @@
 	<br />
 	<form name="updateHome" class="form-horizontal" role="form" action="admin_Home.html" method="POST" >
 	
-		<@d.textareaRowAdminCheck name="welcomeText" label="Welcome text" max="750" value=welcomeText />
-		<@security.authorize ifAnyGranted="SB_ADMIN_EDIT=u">
-			<@d.submitButtons />
-		</@security.authorize>	</form>
+		<@d.textareaRow name="welcomeText" label="Welcome text" max="750" value=welcomeText />
+		<@d.submitButtons />
+	</form>
 	
 
 <#include "admin_bot.ftl">

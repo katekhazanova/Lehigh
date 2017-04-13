@@ -80,9 +80,11 @@ $j(document).ready(function() {
     
     $j("#transferInstSearch").keyup(function () {
     	
-        var seachText = this.value;
+        //split the current value of searchInput
+        var data = this.value.split(" ");
         
         //create a jquery object of the rows
+        var jo = $j("#trasferInstBody").find("tr");
         if (this.value == "" || this.value.length < 3) {
         	$j("#searchMessage").show();
         	
@@ -91,7 +93,12 @@ $j(document).ready(function() {
         	}
         	else{
         		
-        		$j("#trasferInstBody tr").hide();
+        		$j(jo).each(function(){
+                    if(! $j(this).is(":hidden")){
+                    	$j(this).hide();
+                    }
+        		});
+
             	$j(".recentInstsRow").show();
         	}
 
@@ -103,10 +110,26 @@ $j(document).ready(function() {
         $j("#transferInstTable").show();
         $j("#noSchools").hide();
 
-        $j("#trasferInstBody tr").hide();
-        $j("#trasferInstBody tr:contains('" + seachText + "') ").show();
+        var found = 0;
+        //Recusively filter the jquery object to get results.
+        jo.filter(function (i, v) {
+            var $jt = $j(this);
         
-        var found = $j('#trasferInstBody').find('tr:visible').length;
+            for (var d = 0; d < data.length; ++d) {
+                if ($jt.is(":containsIngnoreCase('" + data[d] + "')")) {
+                	
+                	++found;
+                    return true;
+                }
+            }
+            
+            if(!$jt.is(":hidden")){
+            	$jt.hide();
+            }
+            return false;
+        })
+        //show the rows that match.
+        .show();
         
         if(found == 0){
         	 $j("#noSchools").show();

@@ -6,78 +6,74 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
 
 		<util:list id="institution-list">
-			<ref bean="institution-1"/>
+			<ref bean="LehighDProg"/>
+                        <ref bean="LehighReq"/>
 		</util:list>
-		
-		<bean id="institution-1" class="redlantern.dbtools.id.Institution">
-			<property name="name" value="institution-1" />
-			<property name="rbeanManagers">
-				<list>
-					<ref bean="chartcategory.bm" />		
-					<ref bean="com.bm"/>
-					<ref bean="convert.bm"/>
-					<ref bean="dprog.bm"/>
-					<ref bean="gmaster.bm"/>
-					<ref bean="mastref.bm"/>
-					<ref bean="requirement.bm"/>
-					<ref bean="repeat.bm"/>
-					<ref bean="string.bm"/>
-					<ref bean="student.bm"/>
-					<ref bean="transfer.bm"/>
-					
-				</list>
-			</property>
-		</bean>
-		
-		<!-- 
-			EXAMPLE WITH ALL OPTIONAL PARAMATERS
-			
-			
-		<util:map id="instidq-map">
-			<entry key="73" value="93" />
-		</util:map>
-		<util:map id="instid-map">
-			<entry key="ADVANCED" value="EXTREME" />
-			<entry key="TEST40" value="TEST93" />
-		</util:map>
-		<util:map id="instcd-map">
-			<entry key="TCD" value="TCR" />
-			<entry key="MCD" value="MCR" />
+ 
+<!--================================================================================--> 
+ 
+		<util:map id="instidq-dprogmap">
+			<entry key="72" value="73" />
 		</util:map>
 
-		<bean id="inst1" class="redlantern.dbtools.id.Institution">
-			<property name="name" value="inst1" />
-			<property name="instidqMap" ref="instidq-map" />
-			<property name="instidMap" ref="instid-map" />
-			<property name="instcdMap" ref="instcd-map" />
+		<util:map id="instid-dprogmap">
+			<entry key="002365" value="003289" />
+		</util:map>
+
+
+		<bean id="LehighDProg" class="redlantern.dbtools.id.Institution">
+			<property name="name" value="LehighDProg" />
+			<property name="instidqMap" ref="instidq-dprogmap" />
+			<property name="instidMap" ref="instid-dprogmap" />
 			
-			<property name="sourceIdMap" ref="instid-map" />
-			<property name="sourceCdMap" ref="instcd-map" />
 			<property name="dbParams">
 				<value><![CDATA[
-				instidq='73'
-				instid='TEST40'
+				instidq='72'
+				instid='002365'
  			]]></value>
 			</property>
 			<property name="rbeanManagers">
 				<list>
-					<ref bean="chartcategory.bm" />		
-					<ref bean="com.bm"/>
-					<ref bean="convert.bm"/>
 					<ref bean="dprog.bm"/>
-					<ref bean="gmaster.bm"/>
-					<ref bean="mastref.bm"/>
-					<ref bean="requirement.bm"/>
-					<ref bean="repeat.bm"/>
-					<ref bean="string.bm"/>
-					<ref bean="student.bm"/>
-					<ref bean="transfer.bm"/>
+				<!--	<ref bean="requirement.bm"/> -->
 					
 				</list>
 			</property>
 		</bean>
+
+<!--================================================================================-->
+
+                <util:map id="instidq-reqmap">
+                        <entry key="72" value="73" />
+                </util:map>
+ 
+                <util:map id="instid-reqmap">
+                        <entry key="002365" value="003289" />
+                </util:map>
+ 
+ 
+                <bean id="LehighReq" class="redlantern.dbtools.id.Institution">
+                        <property name="name" value="LehighReq" />
+                        <property name="instidqMap" ref="instidq-reqmap" />
+                        <property name="instidMap" ref="instid-reqmap" />
+
+                        <property name="dbParams">
+                                <value><![CDATA[
+                                instidq='72'
+                                instid='002365'
+                        ]]></value>
+                        </property>
+                        <property name="rbeanManagers">
+                                <list>
+                                <!--    <ref bean="dprog.bm"/> -->
+                                        <ref bean="requirement.bm"/>
+
+                                </list>
+                        </property>
+                </bean>
+ 
+<!--================================================================================--> 
+                 
 		
-		
-		 -->
 		
 </beans>

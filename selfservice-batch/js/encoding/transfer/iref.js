@@ -252,15 +252,15 @@ function createIref(){
 	});
 }
 
-function deleteIref(irefId){
+function deleteIref(irefId,fyt,sourceCd){
 	if (confirm('Delete IREF Table and all included information?')) {
 		$j.ajax({
 			type: "POST",
 			traditional: true,
 			url: "delete-iref.html",
 			data: {
-				"fyt": $j("#"+irefId).find("#iref-fyt").text(),
-				"sourceCd": $j("#"+irefId).find("#iref-sourceCd").text(),
+				"fyt": fyt,
+				"sourceCd": sourceCd,
 			  },
 			 dataType: "json",
 				success : function(json) {

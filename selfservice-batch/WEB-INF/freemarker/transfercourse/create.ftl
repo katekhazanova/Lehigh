@@ -62,7 +62,7 @@
 			</div>
 			<div class="form-group col-md-3">
 				<label for="ctitle">Title</label>
-				<textarea id="ctitle" class="form-control" name="ctitle" style="height: 34px;" maxlength="29"></textarea>
+				<textarea id="ctitle" class="form-control" name="ctitle" style="height: 34px;" maxlength="30"></textarea>
 			</div>
 			<div class="form-group col-md-05">
 				<label for="pflg">Pflg</label> <br>

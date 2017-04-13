@@ -47,12 +47,6 @@
             <property name="source" value="com.dashboard.web.security.AppFuncRole" />
           </bean>
         </entry>
-         <entry key="Compressor">
-          <bean class="com.dashboard.web.freemarker.FreeMarkerModelFactoryBean">
-            <property name="exposeStatics" value="true" />
-            <property name="source" value="com.dashboard.util.CompressorUtils" />
-          </bean>
-        </entry>
       </map>
     </property>
   </bean>

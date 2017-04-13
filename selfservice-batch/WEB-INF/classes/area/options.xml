@@ -115,35 +115,29 @@
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                YEAR TERMS
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-   <options name="yearTerms">
+  <options name="yearTerms">
     <option name="201310" label="Spring 2013" />
     <option name="201320" label="Summer 2013" />  
-    <option name="201330" label="Fall 2013" />
+    <option name="201340" label="Fall 2013" />
     <option name="201410" label="Spring 2014" />
     <option name="201420" label="Summer 2014" />  
-    <option name="201430" label="Fall 2014" />
+    <option name="201440" label="Fall 2014" />
     <option name="201510" label="Spring 2015" />
     <option name="201520" label="Summer 2015" />  
-    <option name="201530" label="Fall 2015" />    
+    <option name="201540" label="Fall 2015" />    
     <option name="201610" label="Spring 2016" />
     <option name="201620" label="Summer 2016" />
-    <option name="201630" label="Fall 2016" />
+    <option name="201640" label="Fall 2016" />
   </options>
   
   <options name="auditRequestYearTerms">
-     <option name="201310" label="Spring 2013" />
-    <option name="201320" label="Summer 2013" />  
-    <option name="201330" label="Fall 2013" />
-    <option name="201410" label="Spring 2014" />
-    <option name="201420" label="Summer 2014" />  
-    <option name="201430" label="Fall 2014" />
-    <option name="201510" label="Spring 2015" />
-    <option name="201520" label="Summer 2015" />  
-    <option name="201530" label="Fall 2015" />    
-    <option name="201610" label="Spring 2016" />
-    <option name="201620" label="Summer 2016" />
-    <option name="201630" label="Fall 2016" />
+   	<option name="201240" label="2012-2013 Catalog" /> 
+	<option name="201340" label="2013-2014 Catalog" /> 
+	<option name="201440" label="2014-2015 Catalog" /> 
+	<option name="201540" label="2015-2016 Catalog" /> 
+	<option name="201640" label="2016-2017 Catalog" />   
   </options>
+
   <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                   TRUE/FALSE
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
@@ -495,106 +489,4 @@
     <option name="WY" label="Wyoming" />
   </options>
 
-
-  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                               COURSE SPEEDE FIELD OPTIONS
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-  <options name="bacc">
-    <option name=" " label=" - Default" />
-    <option name="A" label="A - AP Program" />  
-    <option name="B" label="B - Credit by Exam" />
-    <option name="C" label="C - CLEP" />
-    <option name="D" label="D - DANTES Program" />  
-    <option name="E" label="E - Life Experience" />
-    <option name="F" label="F - Study Abroad" />
-    <option name="G" label="G - CEEB Credit" />  
-    <option name="H" label="H - Removal of Incomplete" />    
-    <option name="I" label="I - International Baccalaureate" />
-    <option name="M" label="M - Military Credit" />
-    <option name="N" label="N - Correspondence" />
-    <option name="R" label="R - Regular Enrollment" />
-    <option name="T" label="T - Credits Transferred In" />
-    <option name="V" label="V - Audit or Visitor Status" />
-    <option name="W" label="W - Work Experience" />
-    <option name="X" label="X - Not Applicable" />
-    <option name="Z" label="Z - Other " />
-    <option name="2" label="2 - 2nd Baccalaureate" />
-    <option name="J" label="J - Abitur" />
-    <option name="P" label="P - ACE Credit" />
-    <option name="O" label="O - ADV Int Cam Program" />
-    <option name="L" label="L - Defense Language Inst." />
-    <option name="Q" label="Q - French Baccalaureate" />
-    <option name="S" label="S - Graduate Level Course" />
-    <option name="K" label="K - Italian Lyceium" />
-    <option name="U" label="U - Undergrad Level Course" />
-    <option name="Y" label="Y - Writing Across the Curriculum" />
-  </options>
-  
-   <options name="agclc">
-    <option name=" " label=" - Default" />
-    <option name="A" label="A - Summary - all crses, all institutions" />
-    <option name="B" label="B - Summary - all crses, sending institution" />
-    <option name="D" label="D - Dual Level (Upper Division And Graduate)" />  
-    <option name="E" label="E - Sum - all crses, all Inst Excl Repeated/Forgiven" />
-    <option name="F" label="F - Sum - all crses, Sending Inst Excl. Repeated/Forgiven" />
-    <option name="G" label="G - Graduate (postsecondary)" />  
-    <option name="H" label="H - Higher or Upper division (postsecondary)" />    
-    <option name="I" label="I - Institutional Credit" />
-    <option name="L" label="L - Lower division (postsecondary)" />
-    <option name="M" label="W - Work in the Major or Program" />
-    <option name="P" label="P - Professional" />
-    <option name="R" label="R - Remedial (postsecondary)" />
-    <option name="T" label="T - Summary of Transfer Work Only" />
-    <option name="U" label="U - Undergraduate (postsecondary)" />
-    <option name="V" label="V - Summ of Transfer Work Excl. Repeated/Forgiven" />
-    <option name="1" label="1 - Remedial" />
-    <option name="2" label="2 - Basic" />
-    <option name="3" label="3 - Teacher's Aide" />
-    <option name="4" label="4 - General" />
-    <option name="5" label="5 - Applied" />
-    <option name="6" label="6 - Survey" />
-    <option name="7" label="7 - Regular" />
-    <option name="8" label="8 - Specialized Topics" />
-    <option name="9" label="9 - Advanced" />
-    <option name="10" label="10 - Honors" />
-    <option name="11" label="11 - Gifted And Talented" />
-    <option name="12" label="12 - Advanced Placement" />
-    <option name="13" label="13 - Special Education" />
-    <option name="14" label="14 - Vocational Education" />
-    <option name="15" label="15 - Independent Study" />
-    <option name="16" label="16 - Work Experience" />
-    <option name="17" label="17 - Adult Basic" />
-    <option name="18" label="18 - Adult Secondary" />
-    <option name="19" label="19 - International Baccalaureate" />
-    <option name="AR" label="AR - Academic Renewal" />
-    <option name="DL" label="DL - Dual Level (Graduate And Professional)" />                                       
-  </options>
-
-  <options name="actc">
-    <option name=" " label=" - Default" />
-    <option name="Q" label="Q - Quarter Credit" />  
-    <option name="S" label="S - Semester Credit" />
-    <option name="U" label="U - Unit Credit" />
-    <option name="C" label="C - CEU Credit" />  
-    <option name="N" label="N - No Credit" />
-    <option name="A" label="A - Adult" />
-    <option name="V" label="V - Vocational" />  
-    <option name="G" label="G - Carnegie Units (Pre K - 12)" />    
-    <option name="X" label="X - Other" />
-  </options>
-  
-  <options name="repeatf">
-    <option name=" " label=" - Default" />
-    <option name="R" label="R - Repeated And included in GPA" />  
-    <option name="N" label="N - Repeated but not incl in GPA" />
-    <option name="X" label="X - Other (Clemency)" />
-  </options>
-  
-  <options name="honors">
-    <option name=" " label=" - Default" />
-    <option name="Y" label="Y - Yes" />  
-    <option name="N" label="N - No" />
-  </options>
-  
-  
 </pages>

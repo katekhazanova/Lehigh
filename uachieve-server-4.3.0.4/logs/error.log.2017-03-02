@@ -1,0 +1,24 @@
+ERROR [261200439] - 2017030214194654::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED
+ERROR [261747071] - 2017030214285389::BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBU0000       ] CATLYT [201710]
+ERROR [261747072] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:400
+ERROR [261747072] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [261747072] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:294
+ERROR [261747072] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:217
+ERROR [261747072] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:174
+ERROR [261747073] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [261747073] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [261747073] - 2017030214285389::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [261747073] - 2017030214285389::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [261747074] - 2017030214285389::  ST java.lang.Thread:857
+ERROR [261747203] - 2017030214285389::     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBU0000       ] CATLYT [201710]
+ERROR [261747209] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+ERROR [261747209] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+ERROR [261747210] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+ERROR [261747210] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+ERROR [261747210] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+ERROR [261747211] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+ERROR [261747211] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+ERROR [261747212] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+ERROR [261747212] - 2017030214285389::  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+ERROR [261747212] - 2017030214285389::  [STACKTRACE]  java.lang.Thread:857
+ERROR [261990629] - 2017030214325525::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED

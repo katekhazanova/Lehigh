@@ -1,4 +1,4 @@
-<#assign security=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
+<#assign redauth=JspTaglibs["/WEB-INF/tld/red-auth.tld"]>
 <@layout.head title="${pageContext.page.label}s" />
 
 <@layout.body>
@@ -12,7 +12,7 @@
 		This toolbar is hidden initially (display:none;) and is only displayed to user agents that have javascript enabled.
 		See selfservice.transfereval.initTransferEvals() javascript for more info.
 	-->
-	<@security.authorize ifAnyGranted="SS_AREA_TRANSFEREVAL=U">
+	<@redauth.authorize ifAnyGranted="SS_AREA_TRANSFEREVAL=U">
 		<@p.masterViewBeforeAddButton>
 			<span id="transferEvalListToolbar" style="display:none;">
 				<a id="transferEvalListExportAll" href="#"><i class="fa fa-external-link"></i> Export All</a>
@@ -20,7 +20,7 @@
 				<a id="transferEvalListLockUnlockAll" href="#"><i class="fa fa-lock"></i> Lock / <i class="fa fa-unlock-alt"></i> Unlock All</a>
 			</span>
 		</@p.masterViewBeforeAddButton>
-	</@security.authorize>
+	</@redauth.authorize>
 
 	<#-- adds the "Save" button next to the delete button -->
 	<@p.masterViewBeforeDeleteButton>

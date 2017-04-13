@@ -28,13 +28,8 @@
 				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#config" />">Configuration Verification</a></li>
 				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#dbconnect" />">Database Connection</a></li>
 				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#security" />">Security</a></li>
-				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#URLs" />">Application URLs</a></li>
-				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#version" />">Version Information</a></li>
 				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#help" />">Help Configuration</a></li>
 				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#styles" />">Styles</a></li>
-
-	
-				
 				<br>
 				<li><a href="<@spring.url relativeUrl="/general/helloworld.html#top" />"> <i class="fa fa-caret-up"></i> Back to top</a></li>
 			</ul>		
@@ -72,7 +67,6 @@
 		<p>A database query was run to check for database connectivity.</p>
 		<p>Query: <strong>${query}</strong></p>
 		<p>Result: <strong>${queryResult}</strong></p>
-		<p>Java Version: <strong>${javaVersion}</strong></p>
 	</div>
 	
 	<hr />
@@ -87,56 +81,17 @@
 						<h3>Application Functions</h3>
 					</th>
 				</tr>
-				<tr>
-					<th>
-					</th>
-					<th>
-						Create
-					</th>
-					<th>
-						Read
-					</th>
-					<th>
-						Update
-					</th>
-					<th>
-						Delete
-					</th>
-				</tr>
 				
 				<#list AppFunRoleValues.values() as ss>
 					<#assign v = ss?string>
 					<tr>
 						<th>${v}</th>
 						<td>
-							<@security.authorize ifAllGranted=v+"=c">
-								<i class="fa fa-check" style="color: green;font-size: 16px;" title="True"><span class="sr-only">You have this application function</span></i>
-							</@security.authorize>
-							<@security.authorize ifNoneGranted=v+"=c">
-								<i class="fa fa-times" style="color: red;font-size: 16px;" title="False"><span class="sr-only">You do not have this application function</span></i>
-							</@security.authorize>
-						</td>
-						<td>
+							
 							<@security.authorize ifAllGranted=v+"=r">
 								<i class="fa fa-check" style="color: green;font-size: 16px;" title="True"><span class="sr-only">You have this application function</span></i>
 							</@security.authorize>
 							<@security.authorize ifNoneGranted=v+"=r">
-								<i class="fa fa-times" style="color: red;font-size: 16px;" title="False"><span class="sr-only">You do not have this application function</span></i>
-							</@security.authorize>
-						</td>
-						<td>
-							<@security.authorize ifAllGranted=v+"=u">
-								<i class="fa fa-check" style="color: green;font-size: 16px;" title="True"><span class="sr-only">You have this application function</span></i>
-							</@security.authorize>
-							<@security.authorize ifNoneGranted=v+"=u">
-								<i class="fa fa-times" style="color: red;font-size: 16px;" title="False"><span class="sr-only">You do not have this application function</span></i>
-							</@security.authorize>
-						</td>
-						<td>
-							<@security.authorize ifAllGranted=v+"=d">
-								<i class="fa fa-check" style="color: green;font-size: 16px;" title="True"><span class="sr-only">You have this application function</span></i>
-							</@security.authorize>
-							<@security.authorize ifNoneGranted=v+"=d">
 								<i class="fa fa-times" style="color: red;font-size: 16px;" title="False"><span class="sr-only">You do not have this application function</span></i>
 							</@security.authorize>
 						</td>
@@ -147,34 +102,6 @@
 	</div>
 	
 	<hr />
-					
-	<h2 id="general">Application URLs</h4>
-		 
-			  <table  id="URLs" class="table table-striped table-bordered">
-		   	  		<thead>
-						<tr>
-						<#if selfserviceURL??>
-						<th> Selfservice URL </th>
-						<td>${selfserviceURL}  </td>
-						</#if>
-						</tr>
-						<tr>
-						<#if udirectURL??>
-						<th> Udirect URL </th>
-						<td> ${udirectURL}  </td>
-						</tr>
-						</#if>
-						<tr>
-						<#if regLink??>
-						<th> Schedule Builder Url </th> 
-						<td> ${regLink} </td>
-						</tr>
-						</#if>
-					</thead>
-			  </table>
-
-			  <h4 id="version">Version Information</h4>
-			  		<#include "/layout/build.ftl" />
 	<h2 id="help">Help Configuration</h2>
 	<div class="section">
 		<p>Configure the help URL for students and advisors within Dashboard at the following location.</p>
@@ -491,8 +418,6 @@
 						</div>
 					</div> 
 				</div>
-
-	   	  		
 	   	  		
 		  </div> <!-- /Styles -->
   

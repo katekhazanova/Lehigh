@@ -9,8 +9,28 @@
 
   <!-- ============== Dao's -->
   <bean id="studentDao" class="uachieve.selfservice.area.student.dao.StudentHibernateDao" />
- <bean id="plannedCourseDao" class="uachieve.selfservice.area.plannedcourse.dao.hibernate.PlannedCourseHibernateDao" /> 
- <bean id="studentFinder" class="uachieve.selfservice.area.student.UachieveStudentFinder" />
+ <bean id="plannedCourseDao" class="uachieve.selfservice.area.plannedcourse.dao.hibernate.PlannedCourseHibernateDao" />
+ <!--<bean id="studentFinder" class="uachieve.selfservice.area.student.UachieveStudentFinder" />-->
+
+ <!-- START CUSTOM SDL BEANS -->
+
+ <bean id="studentFinder" class="com.collegesource.interfaces.student.BannerStudentFinder" >
+ 	<property name="bannerDao" ref="bannerDao" />
+ 	<property name="studentInstidq" value="${uachieve.selfservice.instidq}" />
+ 	<property name="studentInstid" value="${uachieve.selfservice.instid}" />
+ 	<property name="datasource" ref="uachieveapi.dataSource" />
+ </bean>
+
+ 	<import resource="classpath:studentQueries.xml" />
+
+	<bean id="bannerDao" class="com.collegesource.interfaces.student.dao.BannerDaoImpl">
+       <property name="bannerJdbcTemplate" ref="uaJdbcTemplate"/><!-- Located in jdbc-ctx.xml -->
+       <property name="studentQueryUtil" ref="studentQueryUtil" />
+    </bean>
+
+<!-- END CUSTOM SDL BEANS -->
+
+
  <!-- bean id="studentFinder" class="com.redlantern.interfaces.student.BannerStudentFinder" >
  	<property name="bannerDao" ref="bannerDao" />
  	<property name="studentInstidq" value="${uachieve.selfservice.instidq}" />
@@ -25,7 +45,7 @@
  	<property name="searchByNameQuery">
  		<value>
  			<![CDATA[
- 				select 
+ 				select
  					stuno, stuname
  				from
  					STU_MASTER sm, STU_DEMO sd
@@ -38,13 +58,13 @@
  	<property name="searchBySisidQuery">
  		<value>
  			<![CDATA[
- 				select 
+ 				select
  					stuno, 'TEST' as stuname
  				from
  					STU_MASTER sm, STU_DEMO sd
  				WHERE
  					sm.int_seq_no = sd.stu_mast_no
- 					AND stuno = ? 
+ 					AND stuno = ?
  			]]>
  		</value>
  	</property>
@@ -54,7 +74,7 @@
 
   <!-- ============== Services -->
   <bean id="studentService" class="uachieve.selfservice.area.student.StudentServiceImpl" />
-  
+
   <!-- ============== Transformer -->
   <bean id="transformer" class="uachieve.selfservice.util.iref.DefaultIrefTransformer"/>
 
@@ -66,5 +86,5 @@
     <property name="displayAdvisees" value="${uachieve.selfservice.student.displayAdvisees}" />
     <property name="uppercaseStuno" value="${uachieve.selfservice.student.uppercaseStuno}"/>
   </bean>
-  
+
 </beans>

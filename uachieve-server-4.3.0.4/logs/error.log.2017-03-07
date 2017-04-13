@@ -1,0 +1,92 @@
+ERROR [682149279] - 2017030711153220::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201440]
+ERROR [682149281] - 2017030711153220::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201440]
+ERROR [682149281] - 2017030711153220::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [682149281] - 2017030711153220::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [682149281] - 2017030711153220::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [682149281] - 2017030711153220::  ST java.lang.Thread:857
+ERROR [682149346] - 2017030711153220::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201440]
+ERROR [682149354] - 2017030711153220::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=MEMJRCRS , rqfyt=201440]
+ERROR [682149354] - 2017030711153220::  [STACKTRACE]  uachieve.server.control.Controller:604
+ERROR [682149354] - 2017030711153220::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [682149354] - 2017030711153220::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [682149355] - 2017030711153220::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [682149355] - 2017030711153220::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [682149355] - 2017030711153220::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [682149355] - 2017030711153220::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [682149355] - 2017030711153220::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [682149356] - 2017030711153220::  [STACKTRACE]  java.lang.Thread:857
+ERROR [682149356] - 2017030711153220::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [682149356] - 2017030711153220::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [682149356] - 2017030711153220::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [682149356] - 2017030711153220::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [684789826] - 2017030711593529::BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [WMST           ] CATLYT [201540]
+ERROR [684789833] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:400
+ERROR [684789833] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [684789833] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:294
+ERROR [684789833] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:217
+ERROR [684789834] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:174
+ERROR [684789834] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [684789834] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [684789834] - 2017030711593529::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [684789834] - 2017030711593529::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [684789834] - 2017030711593529::  ST java.lang.Thread:857
+ERROR [684789895] - 2017030711593529::     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [WMST           ] CATLYT [201540]
+ERROR [684789895] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+ERROR [684789895] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+ERROR [684789896] - 2017030711593529::  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+ERROR [684789897] - 2017030711593529::  [STACKTRACE]  java.lang.Thread:857
+ERROR [685093662] - 2017030712043934::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSMINHDR, rqfyt=201540]
+ERROR [685093662] - 2017030712043934::BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSMINHDR, rqfyt=201540]
+ERROR [685093663] - 2017030712043934::  ST uachieve.server.rules.requirement.RequirementTable:452
+ERROR [685093663] - 2017030712043934::  ST uachieve.server.rules.requirement.RequirementTable:122
+ERROR [685093663] - 2017030712043934::  ST uachieve.server.rules.program.ProgramLoader:57
+ERROR [685093663] - 2017030712043934::  ST java.lang.Thread:857
+ERROR [685093791] - 2017030712043934::     java.lang.IllegalStateException: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSMINHDR, rqfyt=201540]
+ERROR [685093791] - 2017030712043934::     Caused By: BQ09S: No requirement found matching ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=WMSMINHDR, rqfyt=201540]
+ERROR [685093791] - 2017030712043934::  [STACKTRACE]  uachieve.server.control.Controller:572
+ERROR [685093791] - 2017030712043934::  [STACKTRACE]  uachieve.server.control.Controller:370
+ERROR [685093791] - 2017030712043934::  [STACKTRACE]  uachieve.server.control.Controller:266
+ERROR [685093791] - 2017030712043934::  [STACKTRACE]  uachieve.daemon.control.AuditRequestRunnable:56
+ERROR [685093791] - 2017030712043934::  [STACKTRACE]  uachieve.daemon.control.ControllerFacade:124
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]  uachieve.daemon.AuditProcessor:79
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor:1177
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]  java.util.concurrent.ThreadPoolExecutor$Worker:642
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]  java.lang.Thread:857
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:452
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.requirement.RequirementTable:122
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]-[CAUSE]   uachieve.server.rules.program.ProgramLoader:57
+ERROR [685093792] - 2017030712043934::  [STACKTRACE]-[CAUSE]   java.lang.Thread:857
+ERROR [685123830] - 2017030712050995::   BQ34E: NO COPY COURSE LIST: WGSS3**  .  SKIPPED
+ERROR [685123831] - 2017030712050995::   BQ34E: NO COPY COURSE LIST: WGSS***  .  SKIPPED
+ERROR [685965528] - 2017030712190988::BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [RUS            ] CATLYT [201340]
+ERROR [685965528] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:400
+ERROR [685965528] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:147
+ERROR [685965528] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:294
+ERROR [685965529] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:217
+ERROR [685965529] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:174
+ERROR [685965529] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:97
+ERROR [685965529] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:73
+ERROR [685965529] - 2017030712190988::  ST uachieve.server.rules.program.ProgramTable:62
+ERROR [685965529] - 2017030712190988::  ST uachieve.server.rules.program.ProgramLoader:53
+ERROR [685965529] - 2017030712190988::  ST java.lang.Thread:857
+ERROR [685965757] - 2017030712190988::     BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [RUS            ] CATLYT [201340]
+ERROR [685965757] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:400
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:147
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:294
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:217
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:174
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:97
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:73
+ERROR [685965758] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramTable:62
+ERROR [685965759] - 2017030712190988::  [STACKTRACE]  uachieve.server.rules.program.ProgramLoader:53
+ERROR [685965759] - 2017030712190988::  [STACKTRACE]  java.lang.Thread:857
+WARN  [686056148] - 2017030712204169::   BQ36E: Course list not of type 'L' ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ARTELEC  , rqfyt=201340].  Loading of course list will be attempted.
+WARN  [686056226] - 2017030712204169::   BQ36E: Course list not of type 'L' ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ARTELEC  , rqfyt=201340].  Loading of course list will be attempted.
+WARN  [686056275] - 2017030712204169::   BQ36E: Course list not of type 'L' ReqMainPK [instidq=72, instid=002365  , instcd=   , rname=ARTELEC  , rqfyt=201340].  Loading of course list will be attempted.
+ERROR [696829838] - 2017030715201527::   BQ34E: NO COPY COURSE LIST: GLOBAL   .  SKIPPED

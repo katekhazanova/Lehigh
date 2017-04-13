@@ -1,0 +1,18 @@
+7782     : [ERROR]  - BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBIBIOL       ] CATLYT [201340]
+7785     : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:400
+7785     : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:147
+7786     : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:97
+7786     : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:73
+7786     : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:62
+7787     : [ERROR]  -   ST uachieve.server.rules.program.ProgramLoader:53
+7787     : [ERROR]  -   ST java.lang.Thread:857
+8627     : [ERROR]  - Program [BSBIBIOL] not found-- continuing audit with additional programs
+13908    : [ERROR]  - BQ01S: No degree program found matching:                    INST{ IDQ [72] ID [002365  ] CD [   ]}                      DPROG [BSBU           ] CATLYT [201340]
+13909    : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:400
+13909    : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:147
+13909    : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:97
+13910    : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:73
+13910    : [ERROR]  -   ST uachieve.server.rules.program.ProgramTable:62
+13910    : [ERROR]  -   ST uachieve.server.rules.program.ProgramLoader:53
+13910    : [ERROR]  -   ST java.lang.Thread:857
+14037    : [ERROR]  - Program [BSBU] not found-- continuing audit with additional programs
