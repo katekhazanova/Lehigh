@@ -1,0 +1,78 @@
+/* COMMENTS FORMATTING */
+#commentsDiv            {width: 55%;}
+#commentsTable          {float:left; overflow: auto; width: 100%; position: relative; border: 0px;}
+#commentsTop            {float:left ; padding: 6px 8px 4px 5px;}
+.commentsHeader         {width: 100%; font: 180% "arial";font-weight: bold; text-decoration: none; float:left; margin: 5px;}
+#commentsButton         {width: 20%; float:right; }
+#commentsButton button  {font: 110% "arial";}
+.commentsText           {width: 70%; float:left; margin: 5px; }
+#commentsExpandCollapse {width: 75%; float:left; margin: 5px; }
+
+#commentsExpandCollapse a{
+	text-decoration: underline;
+}
+
+.hidden {
+display: none;
+visibility: hidden;
+}
+
+
+
+
+.commentsBox		    {
+	width: 100%;
+	min-width: 400px;
+	position: relative;
+	float:left;
+	margin: 2px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	border-radius: 4px;
+	border:solid 1px #dddddd;
+	}
+.altCommentsBox    {
+	width: 100%;
+	min-width: 400px;
+	position: relative;
+	float:left;
+	margin: 2px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border:solid 1px #dddddd; 
+	background-color: #eeeeee; 
+	border-radius: 4px;
+	}
+.commentSays		    {margin: 0px 10px 0px 10px; overflow: hidden;}
+.commentOption			{margin: 5px; padding: 5px 5px 5px 10px; }
+.commentsBox textArea   {margin: 10px; width: 95%;}
+#commentLink            {margin: 0px 5px 5px 10px;}
+#commentLink span       {font: 100% "arial";font-weight: bold; float:left; margin: 0px 5px 0px 0px;}
+#commentLink button     {font: 100% "arial"; float:right; margin: 0px 5px 0px 5px;}
+.commentToAdvisors		{margin: 0px 5px 0px 0px; color: #428bca; font: bold 100% "arial" !important;}
+.commentToStudent		{margin: 0px 5px 0px 0px; color: #6666c5; font: bold 100% "arial" !important;}
+.commentToPublic		{margin: 0px 5px 0px 0px; color: #5cb85c; font: bold 100% "arial" !important;}
+.commentToPrivate		{margin: 0px 5px 0px 0px; color: #d9534f; font: bold 100% "arial" !important;}
+.commentDate    		{ font: 95% "arial"; font-style:italic; font-variant:small-caps; margin: 0px 5px 0px 0px; }
+.historicalCommentText  {float: left; width: 95%; margin: 5px 5px 5px 10px;  }
+#historicalCommentLink  {margin: 0px 5px 5px 10px; width: 97%;}
+#historicalCommentLink span {font: 95% "arial"; font-weight: bold; float:left; margin: 0px 0px 5px 0px;}
+#commentActions         {float: right;}
+#commentActions img     {margin: 2px}
+#memo                   {min-height:40px; max-height: 150px;  max-width: 500px; overflow: auto;}
+
+/* COMMENTS COLORS */
+.commentOptions	{border:solid 1px #C7B89C; background-color: #E0E0E0;}
+
+.commentAltRowColor     {background-color:#C3E0FF !important;}
+
+
+table.noteTable{width:100%;}
+
+table.noteTable th{border-width: 0px; text-align:right;}
+table.noteTable td{border-width: 0px; text-align:left;}
+
+table.noteTable tr.privateRow{background-color:#D8CCD7;}
+table.noteTable td.underlineRow{border-bottom:1px solid #91278F;}

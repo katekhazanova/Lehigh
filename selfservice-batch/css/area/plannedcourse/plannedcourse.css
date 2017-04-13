@@ -1,0 +1,114 @@
+@charset "utf-8";
+/* ========================================================================== */
+/* preview - course catalog data */
+
+#coursePreview {width:500px; overflow:auto;}
+
+
+#courseHeader 	{text-align: center;}
+
+#courseCatalog {
+	width:500px;
+	font-family: Tahoma, serifSansSerifMonospace;
+	float:left;
+}
+
+#courseCatalogPlan {
+	width:200px;
+	font-family: Tahoma, serifSansSerifMonospace;
+	float:left;
+}
+
+#departmentTitle {
+	font-weight: bold;
+	font-size: 110%;
+	line-height:25px;
+}
+
+#hoursTitle {
+	font-weight: bold;
+	font-size: 70%;
+	line-height: 18px;
+}
+
+
+#courseAvailabilityTitle {
+	font-weight:  bold;
+	text-align: center;
+	line-height: 25px;
+	border: 1px solid black;
+}
+
+#courseTitle {
+	text-align: center;
+	vertical-align:middle;
+	line-height: 18px;
+	font-size: 90%;
+	font-weight: bold;
+	padding: 5px;
+}
+
+#courseDescription {
+	font-size: 80%;
+	padding: 5px;
+	text-align: center;
+}
+
+#coursePreCoRequirements {
+	font-size: 80%;
+	padding: 5px;
+	font-weight: bold;
+}
+
+#courseOther {
+
+}
+
+.propertyName {
+	text-align: right;
+	padding-right: 10px;
+	font-size: 80%;
+}
+
+.preCoReqName {
+	font-weight: bold;
+	text-align: right;
+	padding-right: 10px;
+	font-size: 90%;
+	border: none
+}
+
+.propertyValue {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 80%;
+}
+
+.preCoReqValue {
+	text-align: left;
+	padding-left: 10px;
+	font-size: 90%;
+	border: none
+}
+
+#courseAvailability {
+	overflow: auto;
+}
+
+
+.availabilityYears {
+	text-align:  center;
+	font-weight: bold;
+	font-size: 80%;
+}
+
+.availabilityTerms {
+	font-size: 80%;
+	width: 39px;
+	text-align: center;
+	padding: 0px;
+}
+
+.availabilityBox {
+	text-align: center;
+}

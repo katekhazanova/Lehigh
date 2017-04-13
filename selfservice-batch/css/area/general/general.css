@@ -1,0 +1,33 @@
+.buttonDiv{
+	float:left; 
+	width:20%; 
+	height:140px; 
+	align:center; 
+	text-align:center; 
+	font-size:125%;
+	background-repeat:no-repeat;
+	background-position:center top;
+	position:relative;
+	margin-top: 30px;
+}
+
+
+.titleSpan{display:block; width:100%; margin-left:auto; margin-right:auto;position:absolute; bottom:0;}
+
+
+
+.myStuff{
+	border:1px solid #55ccdd; 
+	width:35%; 
+	float:left;
+	clear:both; 
+	height:66px; 
+	margin:25px 0px 25px 4px;}
+.myStuff h2{
+	text-align:left;
+	padding:0px;
+	margin:8px 5px 5px 5px;
+}
+.myStuff a{
+	margin:0px 0px 0px 10px; 
+	}

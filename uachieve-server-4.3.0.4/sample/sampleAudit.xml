@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uachieve.apis.audit.JobQueueList>
+  <comp__id>
+    <instidq>73</instidq>
+    <instid>TEST40</instid>
+    <instcd></instcd>
+    <jobid>2S96135737446607</jobid>
+    <userid>audit_test</userid>
+  </comp__id>
+  <status>N</status>
+  <priority>1</priority>
+  <comkey>ONL</comkey>
+  <logLevel>D</logLevel>
+  <reportType>PDF</reportType>
+  <jobQueueSysins/>
+  <jobQueueDetails>
+    <uachieve.apis.audit.JobQueueDetail>
+      <userSeqNo>0</userSeqNo>
+      <stuno>123456</stuno>
+      <comkey>40TST</comkey>
+      <evalsw>D</evalsw>
+      <report></report>
+      <pntreq></pntreq>
+      <listall></listall>
+      <test></test>
+      <fdprog>BA COMPSCIENCE</fdprog>
+      <fcatlyt>2007</fcatlyt>
+      <sinstcd></sinstcd>
+      <fdpmask></fdpmask>
+      <lasertext></lasertext>
+      <revart></revart>
+      <binstid></binstid>
+      <binstcd></binstcd>
+      <bytaken></bytaken>
+      <soprid></soprid>
+      <dwhatif> </dwhatif>
+      <jobQueueList reference="../../.."/>
+    </uachieve.apis.audit.JobQueueDetail>
+  </jobQueueDetails>
+</uachieve.apis.audit.JobQueueList>

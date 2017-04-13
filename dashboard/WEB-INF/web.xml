@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+						http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>CollegeSource Dashboard</display-name>
+	<description>CollegeSource Dashboard Application</description>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:ctx/dashboard-app-ctx.xml
+			classpath:ctx/freemarker-ctx.xml
+			classpath:ctx/security-ctx.xml
+			classpath:ctx/report-ctx.xml
+			classpath:udirect/apis/context/udirect-daoContext.xml
+			classpath:udirect/apis/context/udirect-hibernateContext.xml
+			classpath:ctx/auditviewer-ctx.xml
+			
+			classpath:ctx/actionservice-app-ctx.xml
+			classpath:ctx/actionservice-jdbc.xml
+			classpath:redlantern/actions/apis/context/actionservice-daoContext.xml
+			classpath:redlantern/actions/apis/context/actionservice-hibernateContext.xml
+		</param-value>
+	</context-param>
+	
+	<context-param>
+	     <description>Spring Expression Language Support</description>
+	     <param-name>springJspExpressionSupport</param-name>
+	     <param-value>false</param-value>
+	</context-param>
+	
+	 <!-- CAS Single Sign Out -->
+	 <filter>
+		<filter-name>CAS Single Sign Out Filter</filter-name>
+		<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+	 </filter>
+	 
+	 <filter>
+		<filter-name>Open Session In View Filter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+	</filter>
+
+	<filter>
+    <filter-name>Open UD Session In View Filter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+    <init-param>
+      <param-name>sessionFactoryBeanName</param-name>
+      <param-value>udirect.sessionFactory</param-value>
+    </init-param>
+  </filter>
+	 
+	  <!-- sitemesh filter that is responsible for the page decoration process -->
+	 <filter>
+	  <filter-name>SiteMesh Decorating Filter</filter-name>
+	  <filter-class>com.dashboard.web.sitemesh.SitemeshLoggingPageFilter</filter-class>
+	 </filter>
+
+	<!-- Sanitize requests -->
+	<filter>
+		<filter-name>ParameterSanitizationFilter</filter-name>
+		<filter-class>com.dashboard.web.filter.ParameterSanitizationFilter</filter-class>
+	</filter>
+
+	<!-- Logs Requests -->
+	<filter>
+		<filter-name>Log4jLoggingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.Log4jNestedDiagnosticContextFilter</filter-class>
+	</filter>
+
+	<!-- Loads Spring Security Startup -->
+	<filter>
+		<filter-name>springFilterChainProxy</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+ 	
+	<filter-mapping>
+		<filter-name>SiteMesh Decorating Filter</filter-name>
+		<servlet-name>dashboard</servlet-name>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>CAS Single Sign Out Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+    <filter-name>Open UD Session In View Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  
+	<filter-mapping>
+		<filter-name>ParameterSanitizationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>Log4jLoggingFilter</filter-name>
+		<servlet-name>dashboard</servlet-name>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>springFilterChainProxy</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- Loads Spring WebApplicationContext at startup -->
+	<!-- CAS Single Sign Out Listener -->
+	<listener>
+		<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+	</listener>
+	
+  <listener>
+  	<listener-class>net.sf.ehcache.constructs.web.ShutdownListener</listener-class>
+  </listener>
+	
+	
+	<listener>
+		<listener-class>com.dashboard.web.listener.StartupCompleteListener</listener-class>
+	</listener>
+	
+	 <!-- the servlet that handles requests from 
+		the sitemesh filter for decorator files.  that is, 
+		the sole purpose of this servlet will be to 
+		take internal requests from the sitemesh filter 
+		for decorator files and render the freemarker decorator templates.
+	-->
+	 <servlet>
+		  <servlet-name>sitemesh</servlet-name>
+		  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		  <load-on-startup>1</load-on-startup>
+	 </servlet>
+	 <servlet-mapping>
+		  <servlet-name>sitemesh</servlet-name>
+		  <url-pattern>/sitemesh/*</url-pattern>
+	 </servlet-mapping>
+	 
+	<servlet>
+		<servlet-name>dashboard</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dashboard</servlet-name>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>dashboard</servlet-name>
+		<url-pattern>*.ajax</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>dashboard</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>dashboard</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+  		<servlet-name>dashboard</servlet-name>
+  		<url-pattern>/soap</url-pattern>
+ 	</servlet-mapping>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= PLANNED COURSE RELATED DEFINITIONS ======================== -->
+
+  <!-- ============== Dao's -->
+ <bean id="plannedCourseDao" class="uachieve.selfservice.area.plannedcourse.dao.hibernate.PlannedCourseHibernateDao">
+ 	<property name="dataSource" ref="uachieveapi.dataSource" />
+ </bean>
+ 
+  <!-- ============== Repositories -->
+
+  <!-- ============== Services -->
+  <bean id="plannedCourseService" class="uachieve.selfservice.area.plannedcourse.PlannedCourseServiceImpl" />
+
+  	<!-- ========================= YEAR TERM DEFINITION ========================= -->
+  	<!--
+   - This file defines the terms that make up an institition's academic year.  Instead of explicitly
+   - specifying each semester and year combination, you use this file to describe how you want to
+   - display the term in the application and how you currently store its generated ID.
+   -
+   - This file is also part of a configuration for the Spring Framework which the application
+   - uses to manage code dependencies.  In order to add terms, you will add "bean" elements between
+   - the comments stating where the term definitions start and end.  For each TermTemplate, it is
+   - required to start each definition with the xml element:
+   -
+   -     <bean class="redlantern.actions.yearterm.TermTemplate">
+   -        [Template properties go here]
+   -     </bean>
+   -
+   -
+   - Properties are then added to the year term definition to specify the display details and
+   - ID generation.  All properties should be considered required.  They are case sensitive.
+   - The properties include:
+   -
+   - startMonth		A Number (1-12) The calendar month in which the semester begins.  (For those 
+   -				familiar with Java,	calendar months begin at 0 for January.  That is NOT the 
+   -				case with this property.  January is 1, February 2, etc.)
+   -
+   - termCode		Any text value.  The identifier for the code.  This value is appended to the 
+   -				year to formulate the term ID in most, if not all, auditing systems.  So if Fall 
+   -				has a term code	of "08", the term ID for Fall 2007 would be "200708".
+   -
+   - yearOffset		A number.  Sometimes schools will want to associate a semester with a different 
+   -				display year than stored year.  For example, a school may wish to say Fall 
+   -				2008 displayed but store it as 2007.  Therefore, the Fall 
+   -				semester (with a term code of "01") should have a saved ID of 200701 instead of 
+   -				200801.  The yearOffset will be subtracted from the display year in order to generate the ID.  
+   -				So for the example given, the Fall yearOffset would be "-1".
+   -
+   - displayName	Text value.  This is the name that would show up in the Student Plan tree.  If 
+   -				you're creating	the Fall semester with a termCode of "08", the display name 
+   -				would just be "Fall".  It will then be stored in the database as 200708, but it 
+   -				will be	displayed to the student using the friendly name.
+   -
+   - defaultTerm	true/false.  This indicates that by default, when a plan is initially created 
+   -				for the student, this particular term should be included for each year of the 
+   -				plan.  For example,	Fall and Spring are typically considered default terms.  
+   -				When plans are created for students, they'll have Fall and Spring semesters for 
+   -				every year.  However, Summer I and Summer II will usually have defaultTerm set 
+   -				to "false".
+   -					
+   - order			A number.  This is the order in which the term falls within the calendar year.  
+   -				It is important that you give the first term the value of "0".  The order should  
+   -				mimic the ascending order of the defined termCodes.
+   -
+   - show			Determines whether to show the term in menus as a valid term option. Some
+   -				terms that are defined are not intended to be visible for user's to
+   -				select from. This offers a way to remove it from the view. Defaults to true.
+   -
+   - calendarOffset	A number.  Sometimes schools will want to associate a semester with a different 
+   -				academic year than calendar year.  For example, a school may wish to say Fall 
+   -				2007 and Spring 2008 are in the 2008 academic year. The term may be stored with
+   -				with the academic year 2008, but we need to know what calendar year it actually 
+   -				takes place in. So if the term is to stored as 2008 but takes place in 2007
+   -				you would define a 1 here. 
+   -
+   - regCutoffMonth	A Number (1-12) The calendar month in which the last day of the month is the 
+   -				closest to when registration ends.  Term is no longer considered "current"
+   -				once date is past last day of registration cutoff month. (For those 
+   -				familiar with Java,	calendar months begin at 0 for January.  That is NOT the 
+   -				case with this property.  January is 1, February 2, etc.)
+   -				Set this to month prior to start of next term month if you want the
+   -				behavior to be the same as in releases prior to 4.2. Default is ZERO if not set. 
+   -				This means the current term will be treated as a past term until set.
+   -->
+	
+    <bean id="termSet" class="org.springframework.beans.factory.config.ListFactoryBean">
+		<property name="sourceList">
+
+        <!-- Start editing here:  You can add as many 'bean' term templates as necessary. -->
+		
+		
+          <list>
+			<bean class="redlantern.actions.yearterm.TermTemplate">
+				<property name="startMonth" value="8" />
+				<property name="yearOffset" value="0" />
+				<property name="termCode" value="30" />
+				<property name="displayName" value="Fall" />
+				<property name="defaultTerm" value="true" />
+				<property name="regCutoffMonth" value="12" />
+				<property name="calendarOffset" value="0" />
+                <property name="order" value="2" />
+			</bean>
+		  	<bean class="redlantern.actions.yearterm.TermTemplate">
+				<property name="startMonth" value="1" />
+				<property name="yearOffset" value="0" />
+				<property name="termCode" value="10" />
+				<property name="displayName" value="Spring" />
+				<property name="defaultTerm" value="true" />
+				<property name="regCutoffMonth" value="4" />
+				<property name="calendarOffset" value="0" />
+                <property name="order" value="0" />
+			</bean>
+			
+			<bean class="redlantern.actions.yearterm.TermTemplate">
+				<property name="startMonth" value="6" />
+				<property name="yearOffset" value="0" />
+				<property name="termCode" value="20" />
+				<property name="displayName" value="Summer" />
+				<property name="defaultTerm" value="false" />
+				<property name="regCutoffMonth" value="7" />
+				<property name="calendarOffset" value="0" />
+                <property name="order" value="1" />
+			</bean>
+			
+			<!-- Stop editing -->
+			
+			
+          </list>
+        </property>
+    </bean>
+</beans>

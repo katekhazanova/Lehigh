@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= EXCEPTION RELATED DEFINITIONS ============================= -->
+
+  <!-- ============== Dao's -->
+	<bean id="authCodeDao" class="uachieve.selfservice.area.exception.dao.jdbc.AuthCodeJdbcDao">
+    	<property name="dataSource" ref="security.dataSource" />
+	</bean>
+	<bean id="reqMainDao" class="uachieve.selfservice.area.exception.dao.hibernate.ReqMainHibernateDao" />
+
+  <!-- ============== Repositories -->
+
+  <!-- ============== Services -->
+  <bean id="exceptionService" class="uachieve.selfservice.area.exception.ExceptionServiceImpl" />
+
+  <!-- ============== Entities -->
+
+</beans>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="auditViewerQueryUtil" class="com.dashboard.controllers.auditviewer.util.AuditViewerQueryUtil">
+
+		<property name="intSeqNo_Query">
+			<value>
+      		<![CDATA[
+				select int_seq_no from job_queue_run where jobid=?
+						and (report_type='   ' or report_type is null)
+						order by dprog
+      		]]>
+			</value>
+		</property>
+		
+		<property name="darout_Query">
+			<value>
+      		<![CDATA[
+				 select lasera, darout from job_queue_out where jobq_seq_no=?
+					order by user_seq_no
+      		]]>
+			</value>
+		</property>
+
+		<property name="jobID_Query">
+			<value>
+      		<![CDATA[
+				 select jobid, instcd, dprog, catlyt, rundate, userid from job_queue_run where UPPER(stuno)=?
+					and (report_type='   ' or report_type is null)
+					and complete != 'D' 
+					and instidq = ?
+					and instid = ?
+					order by int_seq_no desc
+      		]]>
+			</value>
+		</property>
+
+		<property name="stunos_Query">
+			<value>
+			<![CDATA[
+					select sm.stuno, dm.stuname from stu_master sm, stu_demo dm 
+						where UPPER(stuno) like ? 
+						and sm.instidq = ?
+						and sm.instid = ?
+						and sm.int_seq_no = dm.stu_mast_no order by stuno 
+			]]></value>
+		</property>	
+
+		<property name="stuname_Query">
+			<value>
+			<![CDATA[
+					select sm.stuno, dm.stuname from stu_master sm, stu_demo dm 
+						where UPPER(stuname) like ?
+						and sm.instidq = ?
+						and sm.instid = ? 
+						and sm.int_seq_no = dm.stu_mast_no order by stuname 
+			]]>
+			</value>
+		</property>
+		
+		<property name="insertInto_JQL">
+			<value>
+      		<![CDATA[
+  				 insert into job_queue_list (instidq, instid, instcd, jobid, userid, status, priority, servername, comkey, log_level, report_type) 
+                    values (?,?,?,?,?,?,?,?,?,?,?)
+      		]]>
+			</value>
+		</property>
+		
+		<property name="insertInto_JQD">
+			<value>
+      		<![CDATA[
+  				 insert into job_queue_detail (INSTIDQ, INSTID, INSTCD, JOBID, USERID, USER_SEQ_NO, STUNO,EVALSW,COMKEY,SOPRID)
+                    values (?,?,?,?,?,?,?,?,?,?)
+      		]]>
+			</value>
+		</property>
+
+		<property name="auditStatus_Query">
+			<value>
+      		<![CDATA[
+  				 select status from job_queue_list
+  				 where jobid = ?
+      		]]>
+			</value>
+		</property>
+
+		<property name="update_JQL">
+			<value>
+      		<![CDATA[
+  				 update job_queue_list set status = 'N'
+  				 where jobid = ?
+      		]]>
+			</value>
+		</property>
+
+		<property name="gpa_Query">
+			<value>
+      		<![CDATA[
+  				 select GOTGPA, GOTGPAHRS, GOTGPAPTS
+  				 from job_queue_req
+  				 where jobq_seq_no = ?
+  				 and (total_hour = 'T' or total_gpa = 'T')
+      		]]>
+			</value>
+		</property>
+		
+		<property name="secondary_Gpa_Query">
+			<value>
+      		<![CDATA[
+  				select GOTGPAHRS, GOTGPAPTS, GOTGPA
+  				from job_queue_req
+                where jobq_seq_no = ?
+                and GOTGPAHRS = (select max(GOTGPAHRS) from job_queue_req where jobq_seq_no = ?)
+                and GOTGPAHRS != '0'
+      		]]>
+			</value>
+		</property>
+		
+	</bean>
+
+</beans>

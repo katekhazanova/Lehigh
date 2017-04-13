@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+  <!-- freeMarkerConfiguration configures FreeMarker for use by the Corda layer -->
+  <bean id="freeMarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+    <property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
+    <property name="freemarkerVariables" ref="freemarkerVariables" />
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="default_encoding">ISO-8859-1</prop>
+        <prop key="url_escaping_charset">ISO-8859-1</prop>
+        <!-- tell FreeMarker how many seconds between checking for updated templates -->
+        <prop key="template_update_delay">${uachieve.selfservice.freemarker.templateUpdateDelay}</prop>
+      </props>
+    </property>  
+  </bean>
+
+
+  <!-- freeMarkerConfigurer configures FreeMarker for the web layer -->
+  <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
+    <property name="freemarkerVariables" ref="freemarkerVariables" />
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="auto_import">
+          "/html_macros.ftl" as h, "/pages_macros.ftl" as p, "/general/help_macros.ftl" as help, "/spring_mod.ftl" as s, "/layout/_macros.ftl" as layout, "/security_macros.ftl" as sec, "/tab_macros.ftl" as t
+        </prop>
+        <prop key="default_encoding">ISO-8859-1</prop>
+        <prop key="url_escaping_charset">ISO-8859-1</prop>
+        <!-- tell FreeMarker how many seconds between checking for updated templates -->
+        <prop key="template_update_delay">${uachieve.selfservice.freemarker.templateUpdateDelay}</prop>
+      </props>
+    </property>
+  </bean>
+
+
+  <!-- common definition of FreeMarker variables that are shared between the separate FreeMarker configurations -->
+  <bean id="freemarkerVariables" class="org.springframework.beans.factory.config.MapFactoryBean">
+    <property name="sourceMap">
+      <map>
+        <entry key="xhtmlCompliant">
+          <!-- the value of "true" must be done as a Boolean reference b/c FreeMarker 
+            will interpret the setting value="true" as a String, not a boolean -->
+          <bean class="java.lang.Boolean">
+            <constructor-arg index="0" value="true" />
+          </bean>
+        </entry>
+        <entry key="selfServiceConfig" value-ref="selfServiceConfig" />
+        <entry key="auditConfig" value-ref="auditConfig" />
+        <entry key="studentConfig" value-ref="studentConfig" />
+        <entry key="courseConfig" value="courseConfig"/>
+        <entry key="graphConfig" value-ref="graphConfig" />
+        
+        <entry key="readerDumper">
+          <bean class="uachieve.selfservice.util.web.freemarker.ReaderDumper" />
+        </entry>
+        
+        <!-- the following entries expose statics and enums to freemarker.
+           if you want to expose more statics or enums to freemarker, this is 
+           the place to do it.  add a new entry and configure the FreeMarkerModelFactoryBean
+           with the class and either exposeEnums or exposeStatics set to true. -->
+        <entry key="AppFuncRole">
+          <bean class="uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeEnums" value="true" />
+            <property name="source" value="uachieve.selfservice.security.red.AppFuncRole" />
+          </bean>
+        </entry>
+        <entry key="AppFunRoleValues">
+          <bean class="uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeStatics" value="true" />
+            <property name="source" value="uachieve.selfservice.security.red.AppFuncRole" />
+          </bean>
+        </entry>
+        <entry key="AuditReportType">
+          <bean class="uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeEnums" value="true" />
+            <property name="source" value="uachieve.selfservice.area.audit.AuditReportType" />
+          </bean>
+        </entry>
+        <entry key="DegreeProgramEntryConfigStrategy">
+          <bean class="uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeEnums" value="true" />
+            <property name="source" value="uachieve.selfservice.area.audit.DegreeProgramEntryConfig$Strategy" />
+          </bean>
+        </entry>
+        <entry key="Compressor">
+          <bean class="uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeStatics" value="true" />
+            <property name="source" value="uachieve.selfservice.util.compress.CompressorUtils" />
+          </bean>
+        </entry>
+        <entry key="AuditViewRequest">
+          <bean class="uachieve.selfservice.util.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeStatics" value="true" />
+            <property name="source" value="uachieve.selfservice.area.audit.AuditViewRequest" />
+          </bean>
+        </entry>
+      </map>
+    </property>
+  </bean>
+
+</beans>

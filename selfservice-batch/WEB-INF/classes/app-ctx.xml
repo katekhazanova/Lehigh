@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+  <!-- ========================= PROPERTY DEFINITIONS ========================== -->
+  <bean id="propertyConfigurer"
+    class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+      <list>
+      	<value>classpath:default-selfservice.properties</value>
+        <value>classpath:selfservice-audit.properties</value>
+        <value>classpath:selfservice-batch.properties</value>
+        <value>classpath:selfservice-database.properties</value>
+        <value>classpath:selfservice-debug.properties</value>
+        <value>classpath:selfservice-general.properties</value>
+        <value>classpath:selfservice-graph.properties</value>
+        <value>classpath:selfservice-misc.properties</value>
+        <value>classpath:selfservice-security.properties</value>
+        <value>classpath:selfservice-student.properties</value>
+        <value>classpath:actionservice.properties</value>
+        <value>classpath:quartz.properties</value>
+        <value>classpath:email.properties</value>
+      </list>
+    </property>
+  </bean>
+
+
+  <!-- ========================= MESSAGE SOURCE DEFINITIONS ==================== -->
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+      	<value>messages</value>	
+        <value>default-messages</value>
+      </list>
+    </property>
+  </bean>
+
+
+  <!-- ========================= COMPRESSOR DEFINITIONS ===================== -->
+  <bean name="compressor" class="redlantern.util.compress.CompressorManager">
+    <property name="compressors">
+      <list>
+        <bean class="uachieve.selfservice.util.compress.CrosswalkMappingCompressor" />
+        <bean class="uachieve.selfservice.util.compress.DprogPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.GmasterPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.JobQueueRunPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.JobQueueListPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuAcadRecPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuDemoPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuDprogPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuEgrpCoursePKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuEvalgrpPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuExcCoursePKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuExceptionPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuMarkerReqPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuMasterCompressor" />
+        <bean class="uachieve.selfservice.util.compress.StuTransferCourseViewPKCompressor" />
+        <bean class="uachieve.selfservice.util.compress.WhatifCoursePKCompressor" />
+        <bean class="uachieve.selfservice.area.dprog.dao.StudentDegreeProgramCompressor" />
+        <bean class="uachieve.selfservice.area.audit.web.AuditTokenCompressor" />
+        <bean class="uachieve.selfservice.area.audit.AuditViewRequestCompressor" />
+        <bean class="uachieve.bas.util.compress.BatchDisplayCriteriaPKCompressor" />
+        <bean class="uachieve.bas.util.compress.BatchPKCompressor" />
+        <bean class="uachieve.bas.util.compress.BlackoutPKCompressor" />
+        <bean class="uachieve.bas.util.compress.ScheduledJobPKCompressor" />
+        <bean class="uachieve.bas.util.compress.BatchSharePKCompressor" />
+        <bean class="uachieve.selfservice.InstcdCompressor" />
+        <bean class="redlantern.util.compress.CrossAppUrlCompressor" />
+      </list>
+    </property>
+  </bean>
+
+  <!-- ========================= MISCELLANEOUS DEFINITIONS ===================== -->
+  <bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+  <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+
+</beans>

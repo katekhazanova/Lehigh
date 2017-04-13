@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= AUDIT RELATED DEFINITIONS ============================= -->
+
+  <!-- ============== Dao's -->
+  <bean id="auditDao" class="uachieve.selfservice.area.audit.dao.AuditHibernateDao" />
+
+  <!-- ============== Repositories -->
+
+  <!-- ============== Services -->
+  <bean id="auditRequester" class="uachieve.selfservice.area.audit.DefaultAuditRequester" >
+  	 	<property name="studentCompletedCourses" ref="studentCompletedCourses" />
+  </bean>
+  
+  <bean id="auditService" class="uachieve.selfservice.area.audit.AuditServiceImpl" />
+  
+  <bean id="uachieveapi.requestAuditFacade" class="uachieve.apis.audit.request.DefaultRequestAuditFacade">
+    <property name="dao" ref="uachieveapi.dao" />
+    <property name="jobQueueRunDao" ref="uachieveapi.jobQueueRunDao" />
+    <property name="tries" value="${uachieveapi.audit.request.tries}" />
+    <property name="sleepBetweenTries" value="${uachieveapi.audit.request.sleepBetweenTries}" />
+  </bean>
+  
+  <bean id="breadCrumbAssembler" class="uachieve.selfservice.area.audit.graph.servlet.crumbs.BreadCrumbAssembler" />
+  
+  <!-- ============== Entities -->
+  <bean id="auditConfig" class="uachieve.selfservice.area.audit.AuditConfig">
+    <!-- general settings -->
+    <property name="auditDisplayCount" value="${uachieve.selfservice.audit.auditDisplayCount}"/>
+    <property name="showJobId" value="${uachieve.selfservice.audit.showJobId}" />
+    <property name="showCharts" value="${uachieve.selfservice.audit.showCharts}" />
+    <property name="showCourseHistory" value="${uachieve.selfservice.audit.showCourseHistory}" />
+    <property name="showMarkers" value="${uachieve.selfservice.audit.showMarkers}" />
+    <property name="showExceptions" value="${uachieve.selfservice.audit.showExceptions}" />
+    <property name="auditDelimiter" value="${uachieve.selfservice.audit.delimiter}"/> 
+    <property name="dpTitleConfig" value="${uachieve.selfservice.audit.dpTitles}" />
+    
+    <!-- view settings -->
+    <property name="auditPollingRate" value="${uachieve.selfservice.audit.auditPollingRate}" />
+    <property name="maxPollCount" value="${uachieve.selfservice.audit.maxPollCount}" />
+    <property name="specialEffects" value="${uachieve.selfservice.audit.specialEffects}" />
+    <property name="studentComKeyConfig" value="${uachieve.selfservice.audit.student.comKey}" />
+    <property name="advisorComKeyConfig" value="${uachieve.selfservice.audit.advisor.comKey}" />
+    <property name="dropdownComKeyConfig" value="${uachieve.selfservice.audit.dropdown.comKey}" />
+    <property name="allowDefaultDegreePrograms" value="${uachieve.selfservice.audit.allowDefaultDegreePrograms}" />
+    <property name="allowWhatIfDegreePrograms" value="${uachieve.selfservice.audit.allowWhatIfDegreePrograms}" />
+    <property name="allowWhatIfMajorMinor" value="${uachieve.selfservice.audit.allowWhatIfMajorMinor}" />
+    <property name="degreeProgramEntryConfig" value="${uachieve.selfservice.audit.degreeProgramEntry}" />
+	<property name="autoCollapseStandardView" value="${uachieve.selfservice.audit.standardView.autoCollapse}" />
+	<property name="autoCollapsePrinterView" value="${uachieve.selfservice.audit.printerView.autoCollapse}" />
+	<property name="auditRequestDegreeLabel" value="${uachieve.selfservice.audit.degree.label}" />
+
+    <!-- submit settings -->
+    <property name="studentEvalswConfig" value="${uachieve.selfservice.audit.evalsw.student}" />
+    <property name="advisorEvalswConfig" value="${uachieve.selfservice.audit.evalsw.advisor}" />
+    <property name="serverLogLevel" value="${uachieve.selfservice.audit.serverLogLevel}" />
+    <property name="serverName" value="${uachieve.selfservice.audit.serverName}" />
+    <property name="sopridStudent" value="${uachieve.selfservice.audit.soprid.student}" />
+    <property name="sopridAdvisor" value="${uachieve.selfservice.audit.soprid.advisor}" />
+    <property name="startingStatus" value="${uachieve.selfservice.audit.startingStatus}" />
+    <property name="priority" value="${uachieve.selfservice.audit.priority}" />
+    <property name="transferEvalsw" value="${uachieve.selfservice.audit.transfer.evalsw}" />
+    <property name="allowDuplicateDprogs" value="${uachieve.selfservice.audit.allowDuplicateDprogs}" />
+  </bean>
+  
+  <bean id="auditExceptionConfig" class="uachieve.selfservice.area.audit.AuditExceptionConfig">
+  
+  	<property name="restrictToDprog" value="${uachieve.selfservice.audit.exception.restrictToDprog}" />
+    <property name="restricToReq" value="${uachieve.selfservice.audit.exception.restricToReq}" />
+  </bean>
+
+</beans>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <bean id="coursesArea" class="sandbox.security.Area">
+    <property name="studentEnabled" value="false" />
+    <property name="advisorEnabled" value="true" />
+  </bean>
+
+  <bean id="exceptionsArea" class="sandbox.security.Area">
+    <property name="studentEnabled" value="true" />
+    <property name="advisorEnabled" value="false" />
+  </bean>
+
+
+  <bean id="areas" class="java.util.HashMap">
+    <constructor-arg>
+      <map>
+        <entry key="courses" value-ref="coursesArea" />
+        <entry key="exceptions" value-ref="exceptionsArea" />
+      </map>
+    </constructor-arg>
+  </bean>
+
+</beans>

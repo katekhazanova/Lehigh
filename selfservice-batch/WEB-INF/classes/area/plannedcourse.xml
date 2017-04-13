@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<pages>
+
+  <page name="WhatifCourse" label="Planned Course" urlBase="plannedcourse">
+    <permissions create="SS_AREA_PLANNEDCOURSE" edit="SS_AREA_PLANNEDCOURSE" delete="SS_AREA_PLANNEDCOURSE" />
+    <masterView defaultSortBy="comp_id.crsYt">
+      <filter on="comp_id.crsYt" label="Term" />
+    </masterView>
+    <columns>
+      <column name="comp_id.crsYt" label="Term" width="5" align="left" renderer="uachieve.selfservice.area.plannedcourse.web.renderer.PlannedCourseTermColumnRenderer">
+        <detailView inputType="menu" options="yearTerms" />
+      </column>
+      <column name="comp_id.crsNum" label="Course" 
+      renderer="uachieve.selfservice.area.plannedcourse.web.renderer.ViewCourseLinkColumnRenderer" 
+      description="Adding a \ between the department and the course number allows u.achieve to calculate the 
+      correct number of spaces between department and course" align="left" width="10">
+      	<detailView allowBlank="false" maxLength="15"/>
+      </column>
+      <column name="comp_id.crsSeq" label="Seq" default="001" width="3">
+      	<detailView>
+          <permissions read="nobody" edit="nobody" />
+        </detailView>
+      </column>
+      <column name="ctitle" label="Title" default="" align="left">
+        <detailView inputType="textarea" maxLength="29" />
+      </column>
+     <column name="grade" label="Grade" width="5">
+        <detailView inputType="menu" options="gradeTable" allowBlank="false" />
+      </column>
+     <column name="rcredit" label="Credits" width="5" format="number:#0.00" default="0.00">
+            <detailView allowBlank="false">
+        	<rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99.99" />
+        </detailView>
+      </column>
+      <!-- column name="comp_id.cdpmask" label="Degree Program Mask" >
+		<detailView maxLength="15" />
+      </column -->
+      <!-- column name="comp_id.sourceCd" label="School">
+        <detailView>
+          <permissions edit="nobody" />
+        </detailView>
+      </column -->
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa" width="15">
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+        <detailView>
+          <permissions edit="nobody" />
+        </detailView>
+      </column> 
+    </columns>
+  </page>
+</pages>

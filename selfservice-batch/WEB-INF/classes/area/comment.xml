@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<pages>
+
+  <page name="Comment" label="Comment" urlBase="comment">
+  </page>
+
+</pages>

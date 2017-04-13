@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+  <!-- 
+        This configuration pertains to SiteMesh only.  For regular application controllers
+        and such, see /WEB-INF/dcp-servlet.xml
+    -->
+
+  <import resource="classpath:ctx/dashboard-app-ctx.xml" />
+
+  <!-- ========================= URL MAPPING DEFINITIONS ========================= -->
+  <bean
+    class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <value>
+        /*.ftl=sitemeshController
+      </value>
+    </property>
+    <property name="interceptors">
+      <list>
+        <ref bean="menuInterceptor" />
+        <ref bean="userLookupServiceCheckInterceptor"/>
+      </list>
+    </property>
+  </bean>
+
+  <!-- ========================= INTERCEPTOR DEFINITIONS ======================== -->
+  <bean name="menuInterceptor" class="com.dashboard.web.interceptor.MenuInterceptor" />
+  <bean name="userLookupServiceCheckInterceptor" class="com.dashboard.web.interceptor.UserLookupServiceCheckInterceptor" >
+  		<property name="userLookupService" ref="userLookupServiceUtil" />
+  </bean>
+
+  <!-- ========================= CONTROLLER DEFINITIONS ========================= -->
+  <!-- =============== general controllers -->
+  <bean name="sitemeshController"
+    class="com.dashboard.web.sitemesh.SitemeshController">
+  </bean>
+
+
+  <!-- ========================= VIEW DEFINITIONS AND RESOLVERS ============== -->
+  <bean id="viewResolver"
+    class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    <property name="cache" value="false" />
+    <property name="prefix" value="" />
+    <property name="suffix" value="" />
+    <property name="exposeSpringMacroHelpers" value="true" />
+  </bean>
+
+
+  <!-- ========================= EXCEPTION RESOLVERS ========================= -->
+
+
+  <!-- ============================ VIEW NAME TRANSLATOR ============================= -->
+  <bean id="viewNameTranslator"
+    class="org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator" />
+
+
+  <!-- ========================= METHOD NAME RESOLVERS ========================= -->
+
+</beans>

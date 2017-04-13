@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<pages>
+
+  <page name="StuDemo" label="Student" urlBase="student">
+    <permissions create="nobody" read="SS_AREA_STUDENT" edit="SS_AREA_STUDENT" delete="nobody" />
+    <masterView defaultSortBy="comp_id.sourceId" />
+    <columns>
+<!--       <column name="comp_id.stuMaster.instidq" label="Code" width="2">
+      	<permissions create="nobody" edit="nobody" />
+      </column>
+     <column name="comp_id.stuMaster.instid" label="Instid" width="5">
+      	<permissions create="nobody" edit="nobody" /> 
+      </column> -->
+      <column name="comp_id.sourceId" label="School" align="left" width="8">
+        <permissions edit="nobody" create="nobody" />
+      </column>
+      <column name="comp_id.stuMaster.stuno" label="Student" width="10">
+        <detailView maxLength="13" />
+      </column>
+      <column name="stuname" label="Name" align="left" width="10">
+        <detailView maxLength="35" />
+      </column>
+      <!--  column name="stuidq" label="Student ID" width="3">
+        <detailView maxLength="2" />
+      </column
+      <column name="stuiddesc" label="Description">
+        <detailView maxLength="80" />
+      </column>
+      <column name="dob" label="Birth Date" description="Enter a date in the format MMDDYY" align="left" width="5">
+        <detailView maxLength="6">
+          <rule name="uachieve.selfservice.util.validation.ValidDateRule" dateFormat="MMddyy" />
+        </detailView>
+      </column>
+      <column name="birthcity" label="Birth City">
+        <detailView maxLength="30" />
+      </column>
+      <column name="birthcounty" label="Birth County" width="5">
+        <detailView maxLength="3" />
+      </column>
+      <column name="birthstate" label="Birth State" width="5">
+        <detailView inputType="menu" options="usStates" maxLength="2" />
+      </column>
+      <column name="birthcountry" label="Birth Country" width="5">
+        <detailView inputType="menu" options="countries" maxLength="3" />
+      </column>
+      < column name="citizenstatus" label="Citizen Status" align="left" width="3">
+        <detailView maxLength="2" />
+      </column>
+      <column name="citizencountry" label="Citizen Country" align="left" width="3">
+        <detailView inputType="menu" options="countries" maxLength="3" />
+      </column> -->
+      <column name="memo" label="Notes" align="left" width="25">
+        <detailView inputType="textarea" maxLength="255" />
+      </column>
+      <column name="lastModUser" label="Last Mod User" width="10">
+      	<permissions create="nobody" edit="nobody" />
+      </column>
+      <column name="lastModDate" label="Last Mod Date"  format="date:MM/dd/yyyy h:mm aaa" width="15">
+      	<permissions create="nobody" edit="nobody" />
+      </column>
+    </columns>
+  </page>
+
+  <page name="StuMaster" label="Student" urlBase="student">
+    <permissions create="nobody" read="SS_AREA_STUDENT" edit="nobody" delete="nobody" />
+    <masterView defaultSortBy="stuDemos[0].stuname" />
+    <columns>
+      <column derived="true" label="Select" renderer="uachieve.selfservice.area.student.web.renderer.SelectStudentColumnRenderer" />
+      <column name="stuDemos[0].stuname" label="Name" />
+      <column name="stuno" label="Student Id" />
+    </columns>
+  </page>
+
+</pages>

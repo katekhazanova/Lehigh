@@ -1,0 +1,53 @@
+<s:beans
+    xmlns="http://www.dars.muohio.edu/uachieve.selfservice/4.0/schema/forms"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:s="http://www.springframework.org/schema/beans"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dars.muohio.edu/uachieve.selfservice/4.0/schema/forms http://www.dars.muohio.edu/uachieve.selfservice/4.0/schema/forms/forms.xsd
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+<!-- 
+  <form id="form1" table="table1">
+    <field id="intParam" label="Int Param" description="The infamous intParam"/>
+    <field id="stringParam" case="upper" maxLength="5" />
+    <field id="dateParam" />
+    <field id="s0" type="textarea" case="lower" maxLength="2"/>
+    <field id="s1" case="lower" maxLength="2" type="menu" options="crsYt"/>
+    <field id="s2" display="locked" type="menu" options="crsYt"/>
+    <field id="s3" case="lower" maxLength="2" description="fo barlkj"/>
+    <field id="s4" case="upper" maxLength="2"/>
+    <field id="s5" maxLength="2"/>
+    <field id="s6" case="lower" maxLength="2" label="blah" description="test test test"/>
+    <field id="s7" case="lower" maxLength="2"/>
+    <field id="s8" case="lower" maxLength="2" description="lkjasdlfkjalksdjflkajs dflkaj dfslk jalskdfj kalsj dklsajd lkfjklasj f"/>
+    <field id="s9" case="lower" maxLength="2" display="locked" description="&lt;strong&gt;lkajdflkjaslkfjlasklkaj&lt;/strong&gt;sdflkjaslfkj"/>
+  </form>
+ -->
+
+    
+<!-- 
+  <field id="formField1" table="table1" case="upper" type="menu" display="true" maxLength="5" options="crsYt" label="Course Year/Term" description="description"/>
+
+  <field id="formField2" table="table2" case="lower" type="text" display="false" maxLength="10" />
+
+  <field id="formField3" table="table3" type="textarea" display="locked" maxLength="10" />
+  
+  <field id="formField4" table="table4" type="textarea"/>
+  
+  <field id="formField5" table="1" type="text" maxLength="3" label="what?" />
+  
+  <field id="formField6" table="1" type="textarea" display="locked"/>
+ -->
+
+
+  <util:map id="crsYt">
+    <s:entry value="Fall 04" key="20048" />
+    <s:entry value="Winter 05" key="20051" />
+    <s:entry value="Summer 05" key="20056" />
+    <s:entry value="Fall 05" key="20058" />
+    <s:entry value="Winter 06" key="20061" />
+    <s:entry value="Summer 06" key="20066" />
+  </util:map>
+
+</s:beans>

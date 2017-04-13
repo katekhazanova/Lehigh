@@ -1,0 +1,34 @@
+CREATE TABLE JOB_QUEUE_DESTINATION (
+JOBID CHAR(16) NOT NULL,
+USERID VARCHAR(30) NOT NULL,
+DESTINATION_URL VARCHAR(255) NOT NULL,
+OUTPUT_FORMAT CHAR(1),
+SEND_ERROR_COUNT INTEGER DEFAULT 0 NOT NULL,
+SEND_ERROR_MESSAGE VARCHAR(255),
+STATUS CHAR(1) NOT NULL,
+SEND_DATE datetime,
+NEXT_SEND_DATE datetime
+CONSTRAINT PK_JOB_QUEUE_DESTINATION PRIMARY KEY NONCLUSTERED (JOBID, USERID)
+)
+GO
+
+CREATE INDEX IX_JOB_QUEUE_DEST_NXT_SND_DATE ON JOB_QUEUE_DESTINATION
+(STATUS, NEXT_SEND_DATE)
+GO
+
+/* Add USERID to ADV_MASTER, Add adv_authcodes.auth_code to PK */
+Alter table adv_master
+add userid char(30)
+go
+
+Alter table adv_authcodes
+drop constraint PK_ADV_AUTHCODES
+go
+
+Alter table adv_authcodes
+ alter column auth_code  varchar(10) not null
+go
+ 
+ Alter table adv_authcodes
+Add constraint PK_ADV_AUTHCODES Primary Key (adv_id, auth_code)
+go

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+	
+	 <bean id="courseSearchService" class="uachieve.programmatcher.search.DefaultCourseSearchServiceImpl">
+    	<property name="activeIndexDirectoryUtil" ref="activeIndexDirectoryUtil" />
+    </bean>
+	
+	<bean id="programSearchService" class="uachieve.programmatcher.domain.services.DefaultProgramSearchService">
+		<property name="jdbcTemplate" ref="uachieveapi.c.jdbcTemplate"/>
+		<property name="sessionFactory" ref="uachieveapi.sessionFactory"/>
+	</bean>
+
+	<bean id="subreqCourseService" class="uachieve.programmatcher.domain.services.DefaultSubreqCourseService">
+		<property name="jdbcTemplate" ref="uachieveapi.c.jdbcTemplate"/>
+		<property name="sessionFactory" ref="uachieveapi.sessionFactory"/>
+		<property name="reqMainDao" ref="uachieveapi.reqMainDao"/>
+	</bean>
+	
+	<bean id="studentFactory" class="uachieve.selfservice.area.student.StudentFactory2">
+		<property name = "stuAcadrecDao" ref="uachieveapi.stuAcadrecDao"/>
+		<property name = "stuMasterDao" ref="uachieveapi.stuMasterDao"/>
+		<property name = "whatifCourseDao" ref="uachieveapi.whatifCourseDao"/>
+		
+		<property name = "studentDataLoader" ref="customStudentDataLoader"/>
+		<property name = "studentDataMerger" ref="customStudentDataMerger"/>
+		<property name = "studentDataMutator" ref="customStudentDataMutator"/>
+	</bean>
+	
+	<bean id="customStudentDataLoader"  class="uachieve.apis.custom.DefaultStudentDataLoader"/>    
+	<bean id="customStudentDataMutator" class="uachieve.apis.custom.DefaultStudentDataMutator"/>
+	<bean id="customStudentDataMerger" class="uachieve.apis.custom.DefaultStudentDataMerger"/>
+	
+	<bean id="keywordSkip" class="uachieve.programmatcher.grouping.KeywordSkip" init-method="init">
+		<property name="skipWords">
+				<list>
+					<value>BACHELOR</value>
+					<value>PROGRAM</value>	
+					<value>OPTION</value>
+					<value>MINOR</value>
+					<value>MASS</value>
+					<value>GENERAL</value>		
+				</list>
+		</property>
+	</bean>
+	
+	<bean id="programMatcherConfig" class="uachieve.programmatcher.ProgramMatcherConfig">
+		<property name="npgAllKey" value="View all Programs"/>
+		<property name="nGramSize" value="4"/>
+		<property name="defaultComKey" value="${uachieve.selfservice.audit.default.comKey}"/>
+		<property name="defaultEvalsw" value="${uachieve.selfservice.audit.default.evalsw}"/>
+		<property name="curytFromCom" value="${uachieve.selfservice.audit.getCurytFromCom}"/>
+		<property name="ignoreCONDC" value="${uachieve.selfservice.audit.ignoreCONDC}"/>
+		<property name="threadTimeout" value="${uachieve.selfservice.audit.programMatcherTimeout}"/>
+		<property name="typeCodes" value="${uachieve.selfservice.audit.programMatcherTypeCodes}"/>
+		<property name="buildIfMissing" value="false"/>
+		<property name="maxAgeInHours" value="24"/>
+		<property name="buildWaitInSecs" value = "15"/>
+		<property name="indexComs">
+				<list>
+					<value>SSIKE</value>
+					<value>SSDEB</value>
+					<value>NOREP</value>	
+					<value>KSGMH</value>	
+				</list>
+		</property>
+	</bean>
+	
+	 <bean id="programmatcher.comService" class="uachieve.programmatcher.domain.services.DefaultComService">
+		<property name="sessionFactory" ref="uachieveapi.sessionFactory"/>
+	 </bean>
+	 
+	 <bean id = "studentCourseService" class = "uachieve.programmatcher.sis.services.DefaultStudentCourseService">
+	 	<property name="courseTransformer">
+	 		<bean class="uachieve.programmatcher.sis.services.DefaultCourseTransformer" />
+	 	</property>
+	 </bean>
+
+</beans>

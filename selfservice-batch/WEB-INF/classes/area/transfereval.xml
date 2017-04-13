@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<pages>
+
+  <options name="certifyOptions">
+    <option name=" " label="Original" />
+    <option name="X" label="Marked" />
+    <option name="S" label="Soft" />
+    <option name="P" label="Permanent" />
+  </options>
+  
+  <!-- 
+  <page name="transfereval.StuAcadrec" label="Course" urlBase="transfereval">
+    <permissions create="SS_AREA_TRANSFEREVAL" edit="SS_AREA_TRANSFEREVAL" />
+    <masterView defaultSortBy="comp_id.crsNum" />
+    <columns>
+      <column name="evalflg" label="Type" renderer="uachieve.selfservice.area.transfereval.web.renderer.TransferCourseTypeColumnRenderer" />
+      <column name="comp_id.crsYt" label="Year/Term" />
+      <column name="comp_id.crsNum" label="Course" />
+      <column name="rcredit" label="R Credit" format="number:#0.00" />
+      <column name="grade" label="Grade" />
+      <column name="ecredit" label="E Credit" format="number:#0.00" />
+      <column name="comp_id.crsSeq" label="Seq" />
+    </columns>
+  </page>
+   -->
+
+  <page name="transfereval.StuAcadrec" label="Course" urlBase="transfereval">
+    <permissions create="SS_AREA_TRANSFEREVAL" edit="SS_AREA_TRANSFEREVAL" />
+    <masterView defaultSortBy="comp_id.crsYt" />
+    <columns>
+<!--      <column name="stuEvalgrp.comp_id.evalgrp" label="Evalgrp" />-->
+      <column name="comp_id.sourceId" label="Source School">
+        <detailView>
+          <permissions read="SS_AREA_TRANSFEREVAL" edit="nobody" />
+        </detailView>
+      </column>
+      <column name="comp_id.sourceCd" label="Source College">
+        <detailView>
+          <permissions read="SS_AREA_TRANSFEREVAL" edit="nobody" />
+        </detailView>
+      </column>
+      <column name="comp_id.cdpmask" label="DPMask">
+        <detailView maxLength="15">
+          <permissions read="SS_AREA_TRANSFEREVAL" edit="nobody" />
+        </detailView>
+      </column>
+      <column name="comp_id.crsYt" label="Term" renderer="uachieve.selfservice.area.course.web.renderer.StuAcadrecTermColumnRenderer">
+        <detailView inputType="menu" options="yearTerms" />
+      </column>
+      <column name="comp_id.crsNum" label="Course Number" />
+      <column name="comp_id.crsSeq" label="Sequence" />
+      <column name="rcredit" label="Requested Credit" format="number:#0.00">
+        <detailView>
+          <permissions read="SS_AREA_TRANSFEREVAL" edit="nobody" />
+        </detailView>
+      </column>
+      <column name="grade" label="Grade">
+        <detailView inputType="menu" options="gradeTable" />
+      </column>
+      <column name="ecredit" label="Earned Credit" />
+      <column name="ctitle" label="Title">
+        <detailView inputType="textarea" maxLength="29" />
+      </column>
+     <column name="pflg" label="Pflg" align="left">
+      	<detailView inputType="checkbox" checkboxMapping="PflgMapping"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg1" label="iflg1" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="condc" label="Condc" align="left">
+      	<detailView inputType="text" maxLength="12" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa">
+        <detailView>
+          <permissions read="SS_AREA_TRANSFEREVAL" edit="nobody" />
+        </detailView>
+      </column>
+      <column name="lastModUser" label="Modified By">
+        <masterView>
+			<permissions read="nobody" />
+		</masterView>
+        <detailView>
+          <permissions read="SS_AREA_TRANSFEREVAL" edit="nobody" />
+        </detailView>
+      </column>
+      
+<!--      <column name="comp_id.crsSeq" label="Course Sequence">-->
+<!--        <permissions read="advisor" edit="advisor" /> -->
+<!--        <detailView maxLength="4">-->
+<!--          <rule name="uachieve.selfservice.util.validation.LengthRule" min="0" max="3" />-->
+<!--        </detailView>-->
+<!--      </column>-->
+      
+<!--      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa">-->
+<!--        <masterView>-->
+<!--          <permissions read="advisor" />-->
+<!--        </masterView>-->
+<!--        <detailView>-->
+<!--          <permissions edit="nobody" />-->
+<!--        </detailView>-->
+<!--      </column>-->
+
+    </columns>
+  </page>
+
+  <page name="StuEgrpCourses" label="Target Course" urlBase="transfereval">
+    <permissions create="SS_AREA_TRANSFEREVAL" edit="SS_AREA_TRANSFEREVAL" delete="SS_AREA_TRANSFEREVAL" />
+<!--  TODO change sort to source/target -->
+    <masterView defaultSortBy="comp_id.crsNum" />
+    <columns>
+      <column name="stuAcadrec.evalflg" label="Type" renderer="uachieve.selfservice.area.transfereval.web.renderer.TransferCourseTypeColumnRenderer" width="5"/>
+      <column name="stuAcadrec.comp_id.crsYt" label="Term" align="left" width="5" renderer="uachieve.selfservice.area.transfereval.web.renderer.StuEgrpCourseTermColumnRenderer" />
+      <column name="stuAcadrec.comp_id.crsNum" align="left" label="Course" width="8" renderer="uachieve.selfservice.area.transfereval.web.renderer.ViewCourseLinkColumnRenderer" />
+      <column name="stuAcadrec.ctitle" label="Title" align="left" width="20"/>
+      <!-- column name="stuAcadrec.rcredit" label="Registered Credit" format="number:#0.00" /-->
+      <column name="stuAcadrec.grade" label="Grade" width="5" />
+      <column name="stuAcadrec.ecredit" label="Earned Credit" format="number:#0.00" />
+      <column name="stuAcadrec.condc" label="Condc" width="5" />
+      <column name="stuAcadrec.comp_id.crsSeq" label="Seq" width="3" />
+    </columns>
+  </page>
+
+  <page name="TransferEval" label="Transfer Evaluation" urlBase="transfereval">
+    <permissions create="SS_AREA_TRANSFEREVAL" edit="SS_AREA_TRANSFEREVAL" delete="nobody" />
+    <masterView defaultSortBy="sourceId" groupBy="sourceId" >
+    	<!-- filter on="dpmask" label="DPMask" /-->
+    	<!-- groupBy on="sourceId" / -->
+    	<groupBy on="sourceId" renderer="uachieve.selfservice.area.transfereval.web.renderer.EvalGroupInameHeaderRenderer" />
+    	<!-- groupBy on="sourceId" renderer="uachieve.selfservice.area.transfereval.web.renderer.EvalGroupRpinstidHeaderRenderer" /-->
+    </masterView>
+    <subPage name="StuEgrpCourses" property="stuEgrpCourses" />
+    <columns>
+      <column name="sourceId" label="Source Id" align="left" width="8" />
+      <column name="sourceCd" label="Source College" sortable="false" >
+            	<masterView>
+			<permissions read="nobody" />
+		</masterView>
+      </column>
+      <column name="comp_id.evalgrp" label="Grp" width="5"/>
+      <!--column name="dpmask" label="DPMask" / -->
+      <column name="evallock" label="Lock" sortable="false" 
+      	renderer="uachieve.selfservice.area.transfereval.web.renderer.EvallockCheckboxColumnRenderer" 
+      	width="3">
+      	<masterView>
+			<permissions read="SS_AREA_TRANSFEREVAL" edit="SS_AREA_TRANSFEREVAL" create="SS_AREA_TRANSFEREVAL"/>
+		</masterView>
+		<detailView>
+			<permissions read="SS_AREA_TRANSFEREVAL" edit="SS_AREA_TRANSFEREVAL" create="SS_AREA_TRANSFEREVAL"/>
+		</detailView>
+      </column>
+      <column name="certify" label="Certify" sortable="false" renderer="uachieve.selfservice.area.transfereval.web.renderer.CertifySelectColumnRenderer" width="5" />
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa" width="15"/>
+    </columns>
+  </page>
+
+</pages>

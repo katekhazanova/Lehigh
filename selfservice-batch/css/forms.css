@@ -1,0 +1,13 @@
+/* ========================================================================== */
+/* forms */
+
+input.smallWidth { width: 75px; }
+input.mediumWidth { width: 175px; }
+select.mediumWidth { width: 179px; }
+/* select { min-width: 50px; } */
+
+.markerButtonUL {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}

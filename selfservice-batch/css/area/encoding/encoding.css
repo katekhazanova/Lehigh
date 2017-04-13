@@ -1,0 +1,52 @@
+.last_mod {
+	color: gray;
+}
+
+.smallStack {
+	width: 1em !important;
+	height: 1em !important;
+	line-height: 1em !important;
+	vertical-align: top !important;
+}
+
+.bullsEye {
+	padding-left: 1px;
+}
+
+.noMarginTop {
+	margin-top: 0px;
+}
+
+a.list-group-item {color: black;}
+.checkboxText {line-height: 22px;}
+.checklist {font-size: 15px;}
+.checklistLink {font-size: 12px; text-decoration: underline;}	
+.panel2 {padding: 7px;border: 1px solid #dedede;border-radius: 4px;}	
+.ruleGroup {padding: 5px; margin-bottom: 5px;}
+.ruleHeader {margin: 0px;padding:5px 0px;height: 34px;}
+.move {cursor:move;color: #a1a1a1;}
+/* .fakeButton {width: 21px; border-color: #000000; padding: 1px 2px; font-size: 12px; line-height: 1.5; border-radius: 3px;text-align: center; vertical-align: middle; border-width: 1px; border-style: solid;} */
+/* .fakeButton2 {width: 21px; border-color: #000000; padding: 3px 5px; font-size: 12px; line-height: 1.5; border-radius: 3px;text-align: center; vertical-align: middle; border-width: 1px; border-style: solid;} */
+.crsMsk {padding-left:4px;font-family: Courier, monospace;}
+.crsMsk2 {padding-left:10px;font-family: Courier, monospace;}
+tfoot > tr > td{border: 0px solid transparent!important;}
+.smallTopMargin {margin-top: 10px;}
+.vAlignMid {vertical-align: middle!important;}
+.ruleLabel {font-size: 14px;}
+.ruleCourses {font-size: 10px;clear:both;}
+.selectedRuleText {font-size: 10px; font-style: italic; margin-top: 3px;}
+.help {font-size: 10px; font-style: italic; color: #707070;}
+.helpWizard {
+	background-color: #f5f5f5; 
+	border: 1px solid #dddddd; 
+	min-height: 30px; 
+	border-radius: 4px; 
+	padding: 5px;
+	display: block;
+}
+.wizard1 {float: left;margin-right: 10px; }
+
+.microhelp {display:none;visibility:hidden;}
+.microhelp.in {display:inline;visibility:visible;}
+.monoCourse {font-family: Courier, monospace;}
+

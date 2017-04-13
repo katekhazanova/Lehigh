@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<pages>
+
+<page name="BatchAudits" label="Batch Audit" urlBase="batchresult">
+		<masterView defaultSortBy="key.stuName" />
+		<columns>
+			<column name="key.jobid" label="Job ID" />
+			<column name="key.stuno" label="Student" />
+			<column name="key.stuName" label="Name" />
+			<column name="key.dprog" label="Degree" />
+			<column name="key.catlyt" label="Term" />
+			<column name="key.complete" label="Complete" 
+				renderer="uachieve.bas.area.batchresult.web.renderer.JobQueueRunCompleteColumnRenderer" />
+			<column name="key.ip" label="Course Type" 
+				renderer="uachieve.bas.area.batchresult.web.renderer.JobQueueRunIpColumnRenderer" width="5"/>	
+			<column label="openPdf" derived="true" 
+				renderer="uachieve.bas.area.batchresult.web.renderer.OpenBatchPdfAuditColumnRenderer" />
+			<column label="openTxt" derived="true" 
+				renderer="uachieve.bas.area.batchresult.web.renderer.OpenBatchTxtAuditColumnRenderer" />
+		</columns>
+	</page>
+	
+	<page name="BatchResult" label="Batch Result" urlBase="batchresult">
+		<masterView defaultSortBy="batch.id" 
+			editColumnRenderer="uachieve.bas.area.batchresult.web.renderer.BatchResultsEditColumnRenderer"
+			deleteColumnRenderer="uachieve.bas.area.batchresult.web.renderer.BatchResultsDeleteColumnRenderer">
+			<filter on="batch.type" label="Type" />
+			<filter on="batch.owner" label="Owner" />
+		</masterView>
+		<columns>
+			<column name="batch.id" label="Id">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<column name="batch.description" label="Description" />
+			<column name="batch.datasource" label="Datasource">
+				<detailView inputType="menu" options="datasources" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.servername" label="Server Name">
+				<detailView inputType="menu" options="serverNames" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.soprid" label="SOPRID">
+				<detailView inputType="menu" options="soprids" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.type" label="Type">
+				<detailView inputType="menu" options="auditTypes" />
+			</column>
+			<column name="batch.retentionperiod" label="Retention Period (Days)">
+				<detailView inputType="menu" options="retentionPeriod" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.owner" label="Owner">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<!-- column name="lastRun.status" label="Status"  renderer="uachieve.bas.area.batchresult.web.renderer.BatchResultsStatusColumnRenderer" / -->
+			<column name="lastRun.lastModDate" label="Last Run Date" format="date:MM/dd/yy"/>
+
+			<!-- column name="criteria" label="Criteria" /-->
+			<!-- need column for clone -->
+			
+			<column name="batch.comkey" label="COM Table">
+			<detailView inputType="menu" options="comkeys" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.degree" label="Degree Program">
+				<!-- detailView inputType="menu" options="StuDprog.dprogs" / -->
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.term" label="Catalog Term">
+				<detailView maxLength="6" inputType="menu" options="yearTerms" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.mask" label="DP Mask">
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.includeplanned" label="Include Planned?">
+				<detailView inputType="checkbox" options="trueFalse" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.excludeinprogress" label="Exclude in Progress?">
+				<detailView inputType="checkbox" options="trueFalse" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+
+	<!-- Elements from BatchReport page -->
+			<column name="batch.report" label="Report"> <!-- renderer="uachieve.bas.area.batch.web.renderer.BatchTypeColumnRenderer"-->
+				<detailView inputType="menu" options="batchReportTypes" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.printreq" label="Print Req">
+				<detailView inputType="menu" options="printReqOptions" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="batch.listall" label="List All">
+				<detailView inputType="menu" options="listAllOptions" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column derived="true" label="Audit Result Status" renderer="uachieve.bas.area.batchresult.web.renderer.ResultStatusCountColumnRenderer" />
+			<column derived="true" label="View Audits" renderer="uachieve.bas.area.batchresult.web.renderer.ViewAuditsColumnRenderer" />
+		</columns>
+	</page>
+</pages>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="server-deleteJobQueueRunStatusD" class="uachieve.daemon.scheduler.JobQueueRunDeleter">
+    	<property name="jdbcTemplate" ref="server.jdbcTemplate" />
+    	<property name="jobQueueRunDao" ref="uachieveapi.jobQueueRunDao" />
+    	<property name="deleteMax" value="5000" />
+    	<property name="transactionSize" value="250" />
+    </bean>
+    
+	<!-- deletes about 2000 jobs per minute, much faster if only report is saved -->
+    <bean id="server-purgeJobQueueBean" class="uachieve.daemon.scheduler.JobQueuePurgingJobBean">
+    	<property name="jdbcTemplate" ref="uachieve.jdbcTemplate" />
+    	<property name="jobQueueRunDao" ref="uachieveapi.jobQueueRunDao" />
+    	<!-- configure these options below -->
+    	<property name="thresholdInDays" value="60" />
+    	<property name="databaseType" value="SqlServer" /> <!-- SqlServer, Oracle -->
+    </bean>
+    
+    <bean id="job-purgeJobQueueBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	  <property name="targetObject" ref="server-purgeJobQueueBean" />
+	  <property name="targetMethod" value="cleanAuditTables" />
+	  <property name="concurrent" value="false" />
+	</bean>
+	
+	<bean id="trigger-purgeJobQueueBean" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	    <property name="jobDetail" ref="job-purgeJobQueueBean" />
+	    <!-- run every morning at 4 AM -->
+	    <property name="cronExpression" value="0 0 4 * * ?" />
+	</bean>
+	
+	<bean id="performanceMonitor" class="uachieve.daemon.scheduler.PerformanceMonitor" init-method="init">
+		<property name="performanceNotifier">
+			<bean class="uachieve.daemon.notifications.DefaultPerformanceNotifier" />
+		</property>
+		<property name="enableMemoryDumps" value="false"/>
+    </bean>
+    
+    <bean id="job-performanceMonitor" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	  <property name="targetObject" ref="performanceMonitor" />
+	  <property name="targetMethod" value="monitor" />
+	  <property name="concurrent" value="false" />
+	</bean>
+	
+	<bean id="trigger-performanceMonitor" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	    <property name="jobDetail" ref="job-performanceMonitor" />
+	    <!-- run every 5 seconds -->
+	    <property name="cronExpression" value="0/5 * * * * ?" />
+	</bean>
+  <!--  
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+	    <property name="triggers">
+	        <list>
+	            <ref bean="trigger-purgeJobQueueBean" />
+	        </list>
+	    </property>
+	</bean>
+	-->
+</beans>

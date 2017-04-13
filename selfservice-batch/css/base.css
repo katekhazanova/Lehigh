@@ -1,0 +1,91 @@
+/* ---------- page level */
+
+html { }
+
+.textonlylink{font: 100% "arial"; text-decoration:none; line-height:14.5pt; color:#8a8a8a}
+.textonlylink a{}
+/* ---------- tables */
+
+div.tableContainer {width:100%; overflow-x: auto;}
+
+th, td { border: none; }
+
+/* ---------- general font styling */
+
+strong { font-weight: bold; }
+.stronger {font-size:125%; font-weight:bold; margin:10px 5px 15px;}
+u { text-decoration: underline; }
+p { margin: 10px 5px; }
+.readonly {}
+hr { width: 100%; margin: 10px 0; clear: both;}
+
+/* success, notice and error boxes */
+/*.error, .notice, .success { padding: .8em; margin-bottom: 1em;}*/
+/* .error      { background-image: url(../images/fam/exclamation.png); } */
+/* .notice     { background-image: url(../images/fam/error.png); } */
+/* .success    { background-image: url(../images/fam/accept.png); } */
+/* set to match udirect */
+.error.udirect { padding: 0em; margin-bottom: 0em; padding-left: 30px;}
+.error, .notice, .success { background-repeat: no-repeat; background-position: 10px 50%; padding-left: 30px; }
+/* #doc2{min-width:1240px; max-width:1240px;} */
+
+/* ---------- lists */
+
+ul, ol { list-style-position: inside; }
+ul { list-style-type: disc; margin: 15px;  list-style-position: outside;}
+ol { list-style-type: decimal; }
+ol li { padding: 8px 19px; }
+
+
+
+/* ---------- centering/floating */
+
+.aligncenter	{ text-align: center; }
+.alignright		{ text-align: right; }
+.alignleft		{ text-align: left; }
+.floatright		{ float: right; }
+.floatleft		{ float: left; }
+.cleared		{ clear: both; }
+.onefifth		{ width: 20%; }
+.onequarter		{ width: 25%; }
+.onethird		{ width: 33%; }
+.onehalf		{ width: 50%; }
+.twothirds		{ width: 66%; }
+.threequarters	{ width: 75%; }
+.inline			{ display: inline; }
+
+/* ---------- images, buttons, and inputs */
+ .sorting_asc 				{background: url('../images/sort_asc.png') no-repeat center right;} 
+.sorting_desc 				{background: url('../images/sort_desc.png') no-repeat center right;}
+
+
+/* img, input, .button, .help { vertical-align: middle; } */
+
+/* ---------- legend */
+.legend { text-align: center; margin-left: auto; vertical-align: center; margin-top: 5px; margin-bottom: 5px; clear: both; }
+.legend h3 {
+	 margin-top: 0; 
+	 }
+.legend .entry { padding-right: 1.5em; }
+.legend .image {border: 1px solid #005663;}
+
+/* Misc classes and elements
+-------------------------------------------------------------- */
+
+/* In case you need to add a gutter above/below an element */
+.prepend-top { 
+	margin-top:1.5em; 
+}
+.append-bottom { 
+	margin-bottom:1.5em; 
+}
+
+.imgBorder{border: 1px solid #000000;}
+
+.high-contrast-border {
+	border-style: inset outset outset inset !important;
+}
+
+.badge-highContrastCSS {
+	border-style: inset outset outset inset !important;
+}

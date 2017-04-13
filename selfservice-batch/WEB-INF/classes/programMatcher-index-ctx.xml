@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+   
+    <bean id="activeIndexService" class="uachieve.programmatcher.index.domain.services.DefaultActiveIndexService">
+		<property name="sessionFactory" ref="uachieveapi.sessionFactory"/>
+	</bean>
+	
+	<bean id="activeIndexDirectoryUtil" class="uachieve.programmatcher.index.directory.LuceneActiveIndexDirectoryUtil" init-method="initSearcher">
+		<property name="activeIndexService" ref="activeIndexService"/>
+		<property name="scheduleBuilderHome" value="${home.dir}"/>
+	</bean>
+    
+    <bean id="indexService" class="uachieve.programmatcher.index.FileLuceneIndexService">
+		<property name="activeIndexDirectoryUtil" ref="activeIndexDirectoryUtil"/>
+		<property name="configFactory" ref="indexWriterConfigFactory"/>
+	</bean>
+	
+	<bean id="indexWriterConfigFactory" class="uachieve.programmatcher.index.IndexWriterConfigFactory"/>
+    
+    <bean id="indexBuilder" class="uachieve.programmatcher.index.quartz.DefaultIndexBuilderServiceImpl">
+		<property name = "subreqCourseService" ref = "subreqCourseService"/>
+		<property name = "indexService" ref = "indexService" />
+	</bean>
+	
+	
+	<bean id="task-indexBuilder" class="uachieve.programmatcher.index.quartz.IndexBuilderTask">
+    	<property name="indexBuilder" ref="indexBuilder" />
+    	<property name="activeDirectoryUtil" ref="activeIndexDirectoryUtil" />
+    </bean>
+    
+    <bean id = "programMatcherScheduler" class="uachieve.programmatcher.index.quartz.QuartzScheduler" init-method="init" destroy-method="destroy">
+    	<property name="schedulerFactory" ref="schedulerFactory"/>
+    	<property name="activeDirectoryUtil" ref="activeIndexDirectoryUtil" />
+    </bean>
+    
+    <!-- 
+    	Moved here from scheduler.xml, which is excluded from non-batch license downloads.  This
+    	needs to be here always from now on :)
+     -->
+    <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/>
+    
+	
+</beans>

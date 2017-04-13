@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<pages>
+	<checkboxMapping name="PflgMapping" trueValue="P" falseValue=" " />
+
+
+  <page name="StuAcadrec" label="Course" urlBase="course">
+    <permissions create="SS_AREA_COURSE" edit="SS_AREA_COURSE" delete="SS_AREA_COURSE" />
+    <masterView defaultSortBy="comp_id.crsYt">
+      <filter on="comp_id.crsYt" label="Term" />
+      <filter on="grade" label="Grade" />
+      <!-- filter on="comp_id.sourceId" label="School" /-->
+    </masterView>
+    <columns>
+         <column name="comp_id.sourceCd" label="Cd" width="5">
+      		<detailView inputType="text" maxLength="3"/>
+      </column>
+      <column name="comp_id.crsYt" label="Term" width="5" renderer="uachieve.selfservice.area.course.web.renderer.StuAcadrecTermColumnRenderer" align="left">
+        <detailView inputType="menu" options="yearTerms" />
+      </column>
+      <column name="comp_id.crsNum" label="Course" 
+      renderer="uachieve.selfservice.area.course.web.renderer.ViewCourseLinkColumnRenderer" description="Adding a \ between the department and the course number allows u.achieve to calculate the 
+      correct number of spaces between department and course" align="left" width="10">
+        <detailView allowBlank="false" maxLength="15"/>
+      </column>
+      <column name="ctitle" label="Title" default="" align="left">
+        <detailView inputType="textarea" maxLength="29" />
+      </column>
+      <column name="grade" label="Grade" width="5">
+        <detailView inputType="menu" options="gradeTable" allowBlank="false">
+          <!-- <rule name="foo.bar.MustUseValueFromOptionsRule" />-->
+        </detailView>
+      </column>
+      <column name="rcredit" label="Credit" format="number:#0.00" width="5">
+        <detailView allowBlank="false">
+        	<rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99.99" />
+        </detailView>
+      </column>
+      <column name="pflg" label="Pflg" align="left">
+      	<detailView inputType="checkbox" checkboxMapping="PflgMapping"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg1" label="iflg1" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="comp_id.crsSeq" label="Seq" width="3">
+        <permissions read="SS_ROLE_ADVISOR" edit="SS_ROLE_ADVISOR" />
+        <detailView maxLength="3">
+          <rule name="uachieve.selfservice.util.validation.LengthRule" min="0" max="3" />
+        </detailView>
+      </column>
+      <column name="lastModDate" label="Last Modified" 
+      	format="date:MM/dd/yyyy h:mm aaa" width="15" align="left">
+        <detailView>
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      
+      <!-- column name="evalflg" label="Eval Flag">
+        <detailView maxLength="1">
+          <permissions read="SS_AREA_COURSE" edit="nobody" />
+        </detailView>
+      </column-->
+      <!-- column name="certify" label="Certify" />
+      <column name="comp_id.sourceId" label="School" /-->
+    </columns>
+  </page>
+
+</pages>

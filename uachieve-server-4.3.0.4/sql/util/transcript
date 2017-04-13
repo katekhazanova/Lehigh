@@ -1,0 +1,29 @@
+ select  s.sno, (s.gothrs - s.iphrs - s.whatifhrs) as Complete, s.iphrs as InProgress,  s.whatifhrs as  Planned,  (s.est_reqhrs - s.gothrs) as Unfulfilled, s.gotgpa as GPA, s.stabx as stabx, s.rtabx as rtabx, o.darout 
+ from       job_queue_req r, job_queue_subreq s , job_queue_out o
+ where      r.jobq_seq_no = s.jobq_seq_no     
+ and    r.rtabx = s.rtabx
+ and 	s.jobq_seq_no = o.jobq_seq_no
+ and	s.rtabx = o.rtabx
+ and	s.stabx = o.stabx 
+ and    s.jobq_seq_no = 7000922    
+ and     r.transcript = 'T' 
+ and     r.hidefromchart != 'T'
+ and 	 o.lasera in ('G', 'H')    
+ order by s.rtabx, s.stabx 
+ 
+ 
+ 
+ select 
+    o.darout, o.rtabx, o.stabx 
+ from 
+    job_queue_out o, job_queue_req r 
+ where 
+    o.lasera in ('G', 'H') 
+    and o.jobq_seq_no = r.jobq_seq_no 
+    and o.jobq_seq_no = 7000924 
+    and o.rtabx = r.rtabx 
+    and r.transcript = 'T' 
+    and hidefromchart != 'T' 
+order by 
+    o.rtabx, o.stabx 
+

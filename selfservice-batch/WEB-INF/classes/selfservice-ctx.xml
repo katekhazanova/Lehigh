@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= GENERAL U.ACHIEVE RELATED DEFINITIONS ============================= -->
+
+  <!-- ============== Dao's -->
+  <bean class="uachieve.selfservice.util.dars.GmasterHibernateDao" />
+
+  <!-- ============== Repositories -->
+
+  <!-- ============== Services -->
+  <bean id="comService" class="uachieve.selfservice.util.dars.ComServiceImpl" />
+
+  <!-- ============== Entities -->
+  <bean id="selfServiceConfig" class="uachieve.selfservice.SelfServiceConfig">
+    <property name="instidq" value="${uachieve.selfservice.instidq}" />
+    <property name="instid" value="${uachieve.selfservice.instid}" />
+    <property name="instcds" value="${uachieve.selfservice.instcds}" />
+    <property name="applicationName" value="${uachieve.selfservice.applicationName}" />
+    <property name="applicationLogo" value="${uachieve.selfservice.applicationLogo}" />
+    <property name="loginSuccessUrl" value="${uachieve.selfservice.studentLoginSuccessUrl}" />
+    <property name="logoutSuccessUrl" value="${uachieve.selfservice.logoutSuccessUrl}" />
+    <property name="courseCatalogLink" value="${uachieve.selfservice.courseCatalogLink}" />
+    <property name="gzip" value="${uachieve.selfservice.gzip}" />
+    <property name="debug" value="${uachieve.selfservice.debug}" />
+    <property name="advisorHelpUrl" value="${uachieve.selfservice.advisorHelpUrl}" />
+    <property name="studentHelpUrl" value="${uachieve.selfservice.studentHelpUrl}"/>
+  	<property name="allowLoginScreenAccess" value="${uachieve.selfservice.security.login.allowAccessToLoginPage}" />
+  	<property name="applicationID" value="${uachieve.security.appid}" />
+  	<property name="auditFile" value="${uachieve.selfservice.debug.auditFile}" />
+  	<property name="disableFrames" value="${uachieve.selfservice.security.disableFrames}"/>
+  	<property name="urlEncode" value="${uachieve.selfservice.security.urlEncode}" />
+  	<property name="allowDirectAuditLink" value="${uachieve.selfservice.security.allowDirectAuditLink}" />
+  	<property name="showInstcd" value="${uachieve.selfservice.showInstcd}" />
+  	<property name="useDefaultInst" value="${uachieve.selfservice.useDefaultInstitution}" />
+  	<property name="courseCatalogLinkPreserveCase" value="${uachieve.selfservice.courseCatalogLink.preserveCase}"></property>
+  </bean>
+  
+  <bean name="antisamyUtil" class="uachieve.selfservice.AntisamyUtil" init-method="postConstruct">
+	<property name="antisamyFileName" value="${uachieve.antisamyFileName}" />
+	<property name="removeHtmlEncoding" value="${security.filter.removeHtmlEncoding}" />
+  </bean>
+  
+   <bean id="studentCompletedCourses" class="uachieve.selfservice.area.audit.updateAuditRequest.DefaultStudentCompletedCourses" >
+    	<property name="dataSource" ref="uachieveapi.dataSource" />
+    </bean>
+  
+  
+  
+    <!-- ========================= PARAMETER CODEC DEFINITIONS ========================= -->
+
+	    <!-- 
+       - Select (uncomment) one of the codecs below for encoding/decoding url parameters.
+       - Take care to ensure that only one codec is uncommented at a time - otherwise
+       - Self-Service will not work. 
+       -->
+
+    <!--
+       - ClearTextParameterCodec does no encoding/decoding - use this codec if 
+       - you don't care about encoding url parameters.  
+       -
+       - This is the default codec.
+       -->
+    
+    <bean id="codec" class="redlantern.util.codec.ClearTextParameterCodec" />
+    
+    <!-- 
+       - ReverseClearTextParameterCodec reverses the value of parameters - "1234" becomese "4321".  
+       - Useful for testing integration with other systems, but provides no security above 
+       - and beyond ClearTextParameterCodec.
+    -->
+
+    <!-- bean id="codec" class="redlantern.util.codec.ReverseClearTextParameterCodec" /-->
+
+    <!--
+       - Base64ParameterCodec uses the relatively weak (but perhaps powerful enough)
+       - Base64 encoding scheme.  Implementing Base64 encoding on other
+       - platforms is relatively easy, but bear in mind a determined hacker
+       - can easily break Base64 encoding.
+    -->
+    
+    <!--bean id="codec" class="redlantern.util.codec.Base64ParameterCodec" /--> 
+    
+    
+    <!--
+       - ConfigurableParameterCodec is a highly configurable codec.  You may choose this codec
+       - if you none of the other codecs meets your needs.  Power users only!
+       -
+       - CONFIGURATION OPTIONS for ConfigurableParameterCodec:
+       -  * algorithm: Sets the algorithm to be used for encryption, like PBEWithMD5AndDES.
+       -  
+       -     Sample values: See 
+       -     http://download.oracle.com/javase/6/docs/technotes/guides/security/StandardNames.html for
+       -     the names of available encryption algorithms. Some of these algorithms may not 
+       -     be available depending on your JVM configuration.
+       -     
+       -     A short list of possible values: AES, Blowfish, DES, DESede, 
+       -     PBEWithMD5AndDES, PBEWithHmacSHA1AndDESede, RC2, RC4, RC5, RSA
+       - 
+       -  * keyObtentionIterations: Set the number of hashing iterations applied to obtain the encryption key.
+       -     
+       -     Sample values: 100 or 1000
+       -     
+       -  * password: Sets the password to be used.
+       - 
+       -     Sample values (without quotes): "changeme" or "verysecret!" or "uncrackable"
+       -     
+       -  * saltGenerator: Sets the salt generator to be used.
+       - 
+       -     Sample values:
+       -     
+       -     <bean class="org.jasypt.salt.FixedStringSaltGenerator">
+       -       <property name="salt" value="changemetoo" />
+       -     </bean>
+       -     
+       -     or
+       -     
+       -     <bean class="org.jasypt.salt.RandomSaltGenerator">
+       -     </bean>
+       - 
+       -->
+
+    <!-- bean id="codec" class="redlantern.util.codec.ConfigurableParameterCodec">
+      <property name="stringEncryptor" ref="stringEncryptor"/>
+    </bean>
+
+        <bean class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor" id="stringEncryptor">
+          <property name="algorithm" value="PBEWithMD5AndDES" />
+          <property name="keyObtentionIterations" value="100" />
+          <property name="password" value="changeme!" />
+          <property name="saltGenerator">
+            <bean class="org.jasypt.salt.FixedStringSaltGenerator">
+              <property name="salt" value="changemetoo!" />
+            </bean>
+          </property>
+        </bean-->
+
+	<bean class="uachieve.selfservice.util.web.cookies.PlaintextEncryptor" id="stringEncryptor" />
+</beans>

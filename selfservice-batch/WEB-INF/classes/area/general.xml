@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<pages>
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  GENERAL
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  BLAH BLAH BLAH
+
+  -->
+
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               ADVISOR SELECT INSTCD PAGE
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+  This page definition configures the page that lists all of the available
+  instcds that an advisor may choose (/general/selectinstitution.html).
+  
+  -->
+  
+  <options name="General.instcds" provider="uachieve.selfservice.area.general.web.provider.InstcdOptionsProvider" />
+  
+  <page name="Institution" label="School" urlBase="general">
+    <permissions create="nobody" edit="nobody" delete="nobody" />
+<!--    <masterView defaultSortBy="" />-->
+    <columns>
+      <column name="code" label="School">
+        <detailView maxLength="3" inputType="menu" options="General.instcds" />
+      </column>
+    </columns>
+  </page>
+  
+</pages>

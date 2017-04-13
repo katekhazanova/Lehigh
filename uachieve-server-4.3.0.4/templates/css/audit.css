@@ -1,0 +1,244 @@
+/* ===== audit.css ===== */
+
+.auditHeaderMessage{}
+
+.auditMessage{text-align:center; font-weight:bold;}
+/* ========================= PDF AUDIT FORMATTING ====================================== */
+#pdfAudit { margin: 3em auto; width: 830px; }
+#pdfAudit .pdf { }
+#pdfAudit .pdfDownload, #pdfAudit .pdfDownload a { font-size: 110%; }
+#pdfAudit .getAcrobat, #pdfAudit .pdfDownload { text-align: right; }
+
+/* ========================= HTML AUDIT FORMATTING ====================================== */
+
+#auditStudentInfo, #auditSummary { margin-top: 5px; margin-bottom: 5px; }
+
+
+.graphs h3 {color: #31314e; padding: 2px 5px;}
+.graphs hr { margin-top: 4px; margin-bottom: 4px; }
+p.graphLegend { margin-top: 0; margin-bottom: 0; height:18px;}
+.auditTitle{ font-size:140%; text-align:center; font-style:italic;}
+@media:screen{
+	.auditTitle{margin:5px 5px 15px 100px;}
+}
+@media:print{
+	.auditTitle{margin:5px 5px 15px 5px;}
+}
+
+.hiddenTH th {
+	width:0px; 
+	height: 0px; 
+	text-indent: -10000px; 
+	background-color: transparent;
+	padding: 0px;
+}
+
+/* ===== AUDIT RESULTS ===== */
+/*
+	Line types are set by the user to identify the byte to assign each of the 
+	30 possible output content line types produced on the degree audit report.
+	
+	Note: some sources may have line types that are off by one - i.e. the Page Header
+	line type may be referenced as 00 instead of 01.
+
+	The position meaning of each of these 30 possibilities are:
+
+	01	Page Header - occurs once at top of audit
+	02	Horizontal Separator - separator lines - 2-column report only
+	03	Column Header/End Line  2-column report only
+	04	INCLTOP Text - All - text included at top of audit
+	05	INCLBOT Text - All - text included at bottom of audit
+	06	Mail block Text  2-column report only
+	07	Completion Text Line - text included at top of audit when program is complete (like "don't forget to register for graduation")
+	08	'H' Text Lines  Requirement Header text  printed before the Requirement Title
+	09	Error Message Lines - occurs if there is an error
+	10	Blank Line - No Text - a blank line
+	11	OK-Requirement Title - self explanatory
+	12	NO-Requirement Title - self explanatory
+	13	OK-Requirement Earned Line - self explanatory
+	14	NO-Requirement Earned Line  - self explanatory
+	15	OK-Requirement Needs Line  - self explanatory
+	16	NO-Requirement Needs Line  - self explanatory
+	
+	'T' subrequirement titles are displayed whether or not the subreq is satisfied
+	'V' subrequirement titles are only displayed when the subreq is satisfied, and will replace the regular title ('T' lines)
+	I have no idea how the 'no-subreq V' condition (20) would ever occur.
+	17	OK-Sub-Requirement 'T' Line - see above
+	18	NO-Sub-Requirement 'T' Line - see above
+	19	OK-Sub-Requirement 'V' Line - see above
+	20	NO-Sub-Requirement 'V' Line - see above
+	
+	21	OK-Sub-Requirement Earned Line - self explanatory
+	22	NO-Sub-Requirement Earned Line - self explanatory
+	23	OK-Sub-Requirement Courses - courses taken to fulfill subrequirement
+	24	NO-Sub-Requirement Courses - courses taken to fulfill subrequirement
+	25	OK-Sub-Req. Needs Summary Line - self explanatory
+	26	NO-Sub-Req. Needs Summary Line - self explanatory
+	27	OK-Sub-Requirement Reject Courses - courses that can't be taken to fulfill subreq
+	28	NO-Sub-Requirement Reject Courses - courses that can't be taken to fulfill subreq
+	29	OK-Sub-Requirement Accept Courses - courses that can be taken to fulfill subreq
+	30	NO-Sub-Requirement Accept Courses - courses that can be taken to fulfill subreq
+*/
+
+
+
+#auditResults { margin: auto 20px; }
+
+
+	/* ===== MENU / OPTIONS ===== */
+	#auditMenu p { float: left; }	
+	#auditMenu a { padding-left: 15px; background: #fff none no-repeat left center; font-size: 13px; font-weight: bold; }
+/* 	#auditMenu #expandAll { background-image: url(../../../images/icon_open_all.gif); } */
+/* 	#auditMenu #collapseAll { background-image: url(../../../images/icon_close_all.gif); } */
+/* 	#auditMenu #printerFriendly { background-image: url(../../../images/icon_print.gif); } */
+	#auditMenu #printerFriendlyP { float: right; }
+
+
+
+	/* ===== AUDIT ===== */
+	#audit { }
+	#audit .spacer { }
+	
+		/* ===== STYLE RESETS ===== */
+		#audit div, #audit p {}
+		
+				/* ===== HEADER / FOOTER ===== */
+		#auditHeader, #audit #auditFooter {font-weight: bold; }
+		#auditHeader div, #audit #auditFooter div { }
+		#auditHeader #testMessageHeader {font-weight: bold;}
+		
+		/* linetype: 00 */	#auditHeader	.pageHeader				{ display: none; }
+		/* linetype: 01 */	#audit			.horizontalSeparator	{ /* 2 column audit only */ }
+		/* linetype: 02 */	#auditHeader	.columnHeader			{ /* 2 column audit only */ }
+		/* linetype: 03 */	#auditHeader	.includeTopText         {font-weight:normal; font-style:italic; }
+		/* linetype: 04 */		.includeBottomText					{ font-weight:normal; font-style:italic; }
+		/* linetype: 05 */	#auditHeader	.mailBlockText			{ /* 2 column audit only */ }
+		/* linetype: 06 */	#auditHeader	.completionText			{ color: black; }
+		/* linetype: 07 */	/* see below */
+		/* linetype: 08 */	#auditHeader	.errorText				{ color: #c27079; }
+		/* linetype: 09 */	#audit			.blankLine				{ }
+		/* Reference articulation header*/ #auditHeader #refArtHeaderText { font-style: italic;}
+		/* cmess header */ .cmessHeader { font-weight: bold; }
+
+        /* ===== COMPLETION TEXT =====*/
+        #auditHeader .completionTextNO  { color: red; padding-bottom:10px; }
+        #auditHeader .completionTextOK { color: green; padding-bottom:10px; }
+        
+		/* ===== REQUIREMENTS ===== */
+		#auditRequirements { }
+		
+			/* ===== REQUIREMENT ===== */
+			#auditRequirements .requirement { clear: both; }
+			#auditRequirements .requirement .toggler { float: left; background: #fff none no-repeat;}
+			.fa-togglerExpanded:before {content: " \f078";}
+			.fa-togglerCollapsed:before {content: " \f054";}
+          #auditRequirements .requirement .reqText p .reqStatus {display:none;}
+          
+          	#auditRequirements .requirement .status {background: #fff none no-repeat; }
+			#auditRequirements .requirement .statusOK, .statusOK { background-color: #1b7403; color: #ffffff;}
+			.fa-statusOK:before {content: "OK";}
+			#auditRequirements .requirement .statusNO, .statusNO { background-color: #c2717a; color: #ffffff;}
+			.fa-statusNO:before {content: "NO";}
+			#auditRequirements .requirement .statusPL, .statusPL { background-color: #6666c5; color: #ffffff;}
+			.fa-statusPL:before {content: " PL";}
+			#auditRequirements .requirement .statusIP, .statusIP { background-color: #3ea133; color: #ffffff;}
+			.fa-statusIP:before {content: "IP";}
+			#auditRequirements .requirement .statusNONE { background-color: transparent;}
+			
+			#auditRequirements .requirement .reqHeader {font-size:125%;}
+			#auditRequirements .requirement .reqText .reqTitle{font-size:125%;}
+			#auditRequirements .requirement .statusNO + .reqHeader { color: black;}
+			#auditRequirements .requirement .statusOK + .reqHeader { color: green;}
+			#auditRequirements .requirement .statusPL + .reqHeader { color: #FF8C00;}
+			#auditRequirements .requirement .statusIP + .reqHeader { color: blue;}
+			#auditRequirements .requirement .statusNONE + .reqHeader { color: black;}
+			
+			#auditRequirements .requirement .reqText { font-weight: bold; }
+			#auditRequirements .requirement .reqText p { }
+			#auditRequirements .requirement .requirementTotals {}
+			#auditRequirements .requirement .requirementTotals strong { font-weight: bold; }
+			#auditRequirements .requirement .requirementTotals p { }
+			#auditRequirements .requirement .reqBody {}
+			#auditRequirements .requirement .reqBody .reqEarned, #auditRequirements .requirement .reqBody .reqNeeds {}
+			#auditRequirements .requirement .reqBody .reqEarned {}
+			
+			/*
+            #auditRequirements .requirement .requirementTotals strong { font-weight: bold; }
+            #auditRequirements .requirement .requirementTotals .warnind {font-weight:bold;}
+			#auditRequirements .requirement .requirementTotals .rowlabel {font-weight:bold; }
+			#auditRequirements .requirement .requirementTotals .fieldlabel {font-weight:normal; font-style:normal; color:gray;}
+			#auditRequirements .requirement .requirementTotals .smallfieldlabel {font-weight:normal; font-style:normal; color: gray;}
+			#auditRequirements .requirement .requirementTotals .number {font-weight:normal; font-style:normal;}
+			#auditRequirements .requirement .requirementTotals .count {}
+			*/
+			
+							/* ===== SUBREQUIREMENTS ===== */
+				#auditRequirements .auditSubrequirements { }
+			    #auditRequirements .auditSubrequirements .subrequirement {}
+			    
+			    				/* ===== SUBREQUIREMENT ===== */
+				#auditRequirements .auditSubrequirements .subrequirement .status {background-position: left top;  }
+				#auditRequirements .auditSubrequirements .subrequirement .Status_OK { background-color: #1b7403; color: #ffffff; }
+				.fa-Status_OK:before {content: "OK";}
+				#auditRequirements .auditSubrequirements .subrequirement .Status_NO { background-color: #c2717a; color: #ffffff; }
+				.fa-Status_NO:before {content: "NO";}
+				#auditRequirements .auditSubrequirements .subrequirement .Status_PL { background-color: #6666c5; color: #ffffff; }
+				.fa-Status_PL:before {content: "PL";}
+				#auditRequirements .auditSubrequirements .subrequirement .Status_IP { background-color: #3ea133; color: #ffffff; }
+				.fa-Status_IP:before {content: "IP";}
+				#auditRequirements .auditSubrequirements .subrequirement .Status_NONE { background-color: transparent; }
+				
+				#auditRequirements .auditSubrequirements .subrequirement .subreqStatus {display:none;}
+				#auditRequirements .auditSubrequirements .subrequirement .subreqRequired .subreqRequiredBorder {border:solid;}
+				#auditRequirements .auditSubrequirements .subrequirement .subreqTitle { }
+				#auditRequirements .auditSubrequirements .subrequirement .subreqTitle .subreqTitleText {}
+				#auditRequirements .auditSubrequirements .subrequirement .Status_NO + .subreqTitle { color: black;}
+				#auditRequirements .auditSubrequirements .subrequirement .Status_OK + .subreqTitle { color: black;}
+			    #auditRequirements .auditSubrequirements .subrequirement .Status_PL + .subreqTitle { color: black;}
+			    #auditRequirements .auditSubrequirements .subrequirement .Status_IP + .subreqTitle { color: black;}
+			    
+			    #auditRequirements .auditSubrequirements .subrequirement .subrequirementTotals {}
+				#auditRequirements .auditSubrequirements .subrequirement .subreqNeeds, #auditRequirements .auditSubrequirements .subrequirement .subreqGotGpa, #auditRequirements .auditSubrequirements .subrequirement .subreqIpHours, #auditRequirements .auditSubrequirements .subrequirement .subreqIpCount, #auditRequirements .auditSubrequirements .subrequirement .subreqWhatIfDetail  {
+                      background-image: none; }
+               #auditRequirements .auditSubrequirements .subrequirement .subreqGotGpa, #auditRequirements .auditSubrequirements .subrequirement .subreqIpHours, #auditRequirements .auditSubrequirements .subrequirement .subreqIpCount, #auditRequirements .auditSubrequirements .subrequirement .subreqWhatIfDetail  {
+					   position:relative; background-image: none; }
+				#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqCline {}
+				#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals .subreqEarned {}
+				#auditRequirements .auditSubrequirements .subrequirement .description {}
+				
+			   	#auditRequirements .auditSubrequirements .subrequirement  .completedCourses {}
+				#auditRequirements .auditSubrequirements .subrequirement  .completedCourses table {}
+				#auditRequirements .auditSubrequirements .subrequirement  .completedCourses .wif td {color:#000000;}
+				#auditRequirements .auditSubrequirements .subrequirement  .completedCourses td { }
+				#auditRequirements .auditSubrequirements .subrequirement  .completedCourses table tr.takenCourse {background-color: #EAEAEA; vertical-align: top;}
+				#auditRequirements .auditSubrequirements .subrequirement  .completedCourses table tr.takenCourse > td {}
+					
+				#auditRequirements .auditSubrequirements .subrequirement  .notFromCourses, #auditRequirements .auditSubrequirements .subrequirement .selectFromCourses { background-color:#FFFFFF;}
+				#auditRequirements .auditSubrequirements .subrequirement  .notFromCourses, #auditRequirements .auditSubrequirements .subrequirement .refCourses { font-style:italic; }
+				#auditRequirements .auditSubrequirements .subrequirement  .notFromCourses, #auditRequirements .auditSubrequirements .subrequirement .noRefFoundMsg { font-style:italic; }
+				#auditRequirements .auditSubrequirements .subrequirement  .notFromCourses a, #auditRequirements .auditSubrequirements .subrequirement .selectFromCourses a { color: #000000; text-decoration: underline;}
+				#auditRequirements .auditSubrequirements .subrequirement  .notFromCourses a:hover, #auditRequirements .auditSubrequirements .subrequirement  .selectFromCourses a:hover { color: #6f3d05; }
+					
+				#auditRequirements .auditSubrequirements .subrequirement  .transferCourse { color: #1b7403; }
+				
+				
+				#auditRequirements .auditSubrequirements .course {}
+				#auditRequirements .auditSubrequirements .course .department { }
+				#auditRequirements .auditSubrequirements .course .number { }
+				#auditRequirements .auditSubrequirements .course a { color: #000000; text-decoration: underline; }
+				#auditRequirements .auditSubrequirements .course a:visited {}
+				
+				
+               #endText{}
+                    
+             td {}
+             pre {display:inline; front-family:inherit;}
+			.preformatted {white-space:pre; font-family:Consolas,Monaco,"Courier 10 Pitch",monospace;font-size:9pt;}
+			.fromcourselist {}
+					
+			.completedCourses .course {}
+			.completedCourses .term {}
+			.notfromcourses .fromlabel {font-weight:bold;}
+			.notfromcourses .fromcourselist{color:grey}
+			.selectfromcourses .fromlabel {font-weight:bold;}
+			#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .takenCourse{background-color:#eeeeee;}

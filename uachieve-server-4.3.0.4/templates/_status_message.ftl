@@ -1,0 +1,1 @@
+<#rt>${auditStatusMessage?right_pad(65)}

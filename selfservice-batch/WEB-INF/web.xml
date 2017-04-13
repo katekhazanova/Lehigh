@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app PUBLIC
+  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+  "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+  <display-name>u.achieve Self Service</display-name>
+  <description>u.achieve Self Service</description>
+
+  <!--
+    - Location of the XML file that defines the root application context.
+    - Applied by ContextLoaderServlet.
+  -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    
+    <param-value>
+      classpath:/corda-ctx.xml
+      
+      classpath:app-ctx.xml
+      classpath:security-ctx.xml
+      classpath:freemarker-ctx.xml
+      classpath:hibernate-ctx.xml
+      classpath:jdbc-ctx.xml
+      classpath:tx-ctx.xml
+      
+      classpath:mvc-ctx.xml
+      classpath:programMatcher-ctx.xml
+      classpath:programMatcher-index-ctx.xml
+      
+      classpath:actionservice-app-ctx.xml
+      classpath:actionservice-jdbc.xml
+      
+      classpath:selfservice-ctx.xml
+      classpath:pages-ctx.xml
+      classpath:area/ctx/audit-ctx.xml
+      classpath:area/ctx/batch-ctx.xml
+      classpath:area/ctx/batchresult-ctx.xml
+      classpath:area/ctx/blackout-ctx.xml
+      classpath:area/ctx/email-ctx.xml
+      classpath:area/ctx/course-ctx.xml
+      classpath:area/ctx/crosswalk-ctx.xml
+      classpath:area/ctx/dprog-ctx.xml
+      classpath:area/ctx/exception-ctx.xml
+      classpath:area/ctx/general-ctx.xml
+      classpath:area/ctx/plannedcourse-ctx.xml
+      classpath:area/ctx/scheduledjob-ctx.xml
+      classpath:area/ctx/student-ctx.xml
+      classpath:area/ctx/transfereval-ctx.xml
+      
+      classpath:batch/criteria.xml
+
+      classpath:batch/scheduler.xml
+
+      classpath:uachieve/apis/context/uachieveapi_daoContext.xml
+      classpath:udirect/apis/context/udirect-hibernateContext.xml
+      
+      classpath:udirect/apis/context/udirect-daoContext.xml
+      classpath:udirect/apis/context/udirect-hibernateContext.xml
+      
+      classpath:redlantern/actions/apis/context/actionservice-daoContext.xml
+	  classpath:redlantern/actions/apis/context/actionservice-hibernateContext.xml
+    </param-value>
+  </context-param>
+  
+  <!-- prints extra debugging information on startup if true -->
+  <context-param>
+    <param-name>selfservice.startupdebug</param-name>
+    <param-value>false</param-value>
+  </context-param>
+  
+  <!-- selfservice version -->
+  <context-param>
+    <param-name>selfservice.version</param-name>
+    <param-value>4.3.0.3</param-value>
+  </context-param>
+
+<context-param>
+   <param-name>springJspExpressionSupport</param-name>
+   <param-value>false</param-value>
+   <description>Spring Expression Language Support</description>
+</context-param>
+
+  <!-- CAS Single Sign Out -->
+  <filter>
+	<filter-name>CAS Single Sign Out Filter</filter-name>
+	<filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
+  </filter>
+
+
+  <!-- logging filter -->
+  <filter>
+    <filter-name>NDC Logging Filter</filter-name>
+    <filter-class>uachieve.selfservice.util.logging.NdcLoggingFilter</filter-class>
+  </filter>
+
+  <!-- the wonderful Open Session In View filter, make sure it's invoked before Spring's filters -->
+  <filter>
+    <filter-name>Open Session In View Filter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+    <init-param>
+      <param-name>sessionFactoryBeanName</param-name>
+      <param-value>uachieveapi.sessionFactory</param-value>
+    </init-param>
+  </filter>
+  
+  <filter>
+    <filter-name>Open uDirect Session In View Filter</filter-name>
+    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+    <init-param>
+      <param-name>sessionFactoryBeanName</param-name>
+      <param-value>uachieveapi.sessionFactory</param-value>
+    </init-param>
+  </filter>
+  
+    <filter>
+  		<filter-name>LoadAuthCookieFilter</filter-name>
+  		<filter-class>uachieve.selfservice.util.web.cookies.LoadAuthenticationCookieFilter</filter-class>
+  		<init-param>
+  			<param-name>cookieName</param-name>
+  			<param-value>auditCookie</param-value>
+  		</init-param>
+  		<init-param>
+  			<param-name>useFilter</param-name>
+  			<param-value>false</param-value>
+  		</init-param>
+  </filter>
+  
+  	<!-- Sanitize requests -->
+	<filter>
+		<filter-name>ParameterSanitizationFilter</filter-name>
+		<filter-class>uachieve.selfservice.web.filter.ParameterSanitizationFilter</filter-class>
+	</filter>
+  
+  <!-- Loads Spring Security Startup -->
+  <filter>
+	<filter-name>springFilterChainProxy</filter-name>
+	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  
+  <!-- caching filter for images -->
+  <filter>
+    <filter-name>Image Caching Filter</filter-name>
+    <filter-class>uachieve.selfservice.util.web.CacheFilter</filter-class>
+    <init-param>
+      <param-name>privacy</param-name>
+      <param-value>public</param-value>
+    </init-param>
+    <init-param>
+        <param-name>expirationTime</param-name>
+        <!-- 2592000 in seconds = 30 days -->
+        <param-value>2592000</param-value>
+    </init-param>
+  </filter>
+  
+    <filter>
+		<filter-name>Log4j Username Filter</filter-name>
+		<filter-class>uachieve.selfservice.web.filter.SelfServiceLog4jUsernameFilter</filter-class>
+	</filter>
+  
+  <!-- gzipping filter - can be disabled in selfservice.properties -->
+  <filter>
+    <filter-name>Gzip Filter</filter-name>
+    <filter-class>uachieve.selfservice.util.web.GzipFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Gzip Filter</filter-name>
+    <servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>NDC Logging Filter</filter-name>
+    <servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>Open Session In View Filter</filter-name>
+    <servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>Open uDirect Session In View Filter</filter-name>
+    <servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+
+<filter-mapping>
+    <filter-name>LoadAuthCookieFilter</filter-name>
+    <servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+
+  <filter-mapping>
+	<filter-name>CAS Single Sign Out Filter</filter-name>
+	<servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+  
+  	<filter-mapping>
+		<filter-name>ParameterSanitizationFilter</filter-name>
+		<servlet-name>selfservice</servlet-name>
+	</filter-mapping>
+
+  <!--  secures all URLs -->
+  <filter-mapping>
+    <filter-name>springFilterChainProxy</filter-name>
+    <servlet-name>selfservice</servlet-name>
+  </filter-mapping>
+  
+
+
+  <!-- set caching headers for all files under the /images directory -->
+  <filter-mapping>
+    <filter-name>Image Caching Filter</filter-name>
+    <url-pattern>/images/*</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>uachieve.selfservice.util.logging.LoggingContextLoaderListener</listener-class>
+  </listener>
+
+  <listener>
+  	<listener-class>net.sf.ehcache.constructs.web.ShutdownListener</listener-class>
+  </listener>
+
+	<!-- CAS Single Sign Out Listener -->
+  <listener>
+	<listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
+  </listener>
+
+  <!--
+    - Spring web MVC servlet that dispatches requests to registered handlers.
+    - Has its own application context, by default defined in "{servlet-name}-servlet.xml",
+    - i.e. "selfservice-servlet.xml" in this case.
+    -
+    - A web app can contain any number of such servlets.
+    - Note that this web app has a shared root application context, serving as parent
+    - of all DispatcherServlet contexts.
+  -->
+  <servlet>
+    <servlet-name>selfservice</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+
+  <!-- Jawr servlet for serving compressed JS files -->
+  <servlet>
+    <servlet-name>JavascriptServlet</servlet-name>
+    <servlet-class>net.jawr.web.servlet.JawrServlet</servlet-class>
+    <init-param>
+      <param-name>configLocation</param-name>
+      <param-value>/jawr.properties</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!-- Jawr servlet for serving compressed CSS files -->
+  <servlet>
+    <servlet-name>CssServlet</servlet-name>
+    <servlet-class>net.jawr.web.servlet.JawrServlet</servlet-class>
+    <init-param>
+      <param-name>configLocation</param-name>
+      <param-value>/jawr.properties</param-value>
+    </init-param>
+    <init-param>
+      <param-name>type</param-name>
+      <param-value>css</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <!--
+    - Dispatcher servlet mapping for the main web user interface,
+    - refering to "selfservice" for the Spring web MVC dispatcher.
+  -->
+  <servlet-mapping>
+    <servlet-name>selfservice</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!--
+    - Dispatcher servlet mapping for PDF downloads.
+  -->
+  <servlet-mapping>
+    <servlet-name>selfservice</servlet-name>
+    <url-pattern>/audit/readpdf.pdf</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>JavascriptServlet</servlet-name>
+    <url-pattern>*.js</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet-mapping>
+    <servlet-name>CssServlet</servlet-name>
+    <url-pattern>*.css</url-pattern>
+  </servlet-mapping> 
+  
+  <!--  session timeout (in minutes)  -->
+  <session-config>
+    <session-timeout>120</session-timeout>
+  </session-config>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+   <error-page>
+    <error-code>400</error-code>
+    <location>/general/error.html</location>
+  </error-page>
+  
+  <error-page>
+    <error-code>404</error-code>
+    <location>/general/pagenotfound.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>403</error-code>
+    <location>/general/accessdenied.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/general/error.html</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/general/error.html</location>
+  </error-page>
+  
+   	<resource-ref>
+  	 <description>udirect Database Connection</description>
+  	 <res-ref-name>jdbc/UACHIEVETEST</res-ref-name>
+  	 <res-type>javax.sql.DataSource</res-type>
+  	 <res-auth>Container</res-auth>
+ 	</resource-ref>
+  
+</web-app>

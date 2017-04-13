@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <!-- ========================= VIEW DEFINITIONS ====================== -->
+  <!-- A different viewresolver is defined in each Spring *-servlet.xml 
+    file, while only a single freemarker engine is configured for use by all
+    *-servlet.xml files and also email programs. Defining different view 
+    resolvers allow file names to stay short (like "index" instead of "app/index")-->
+  <bean id="freeMarkerConfigurer"
+    class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+    <property name="templateLoaderPath" value="/WEB-INF/freemarker" />
+    <property name="freemarkerSettings">
+      <props>
+        <prop key="auto_import">
+        	"/macros/spring_mod.ftl" as spring, 
+        	"/macros/html.ftl" as h, 
+        </prop>
+        <prop key="default_encoding">ISO-8859-1</prop>
+        <prop key="url_escaping_charset">ISO-8859-1</prop>
+        <!-- tell FreeMarker how many seconds between checking for updated templates (not a Spring setting) -->
+        <prop key="template_update_delay">${freemarker.templateUpdateDelay}</prop>
+      </props>
+    </property>
+    <property name="freemarkerVariables">
+      <map>
+        <entry key="xhtmlCompliant">
+          <!-- the value of "true" must be done as a Boolean reference b/c FreeMarker 
+               will interpret the setting value="true" as a String, not a boolean -->
+          <bean class="java.lang.Boolean">
+            <constructor-arg index="0" value="true" />
+          </bean>
+        </entry> 
+        <entry key="readerDumper">
+          <bean class="com.dashboard.web.ReaderDumper" />
+        </entry>
+        <entry key="AppFuncRole">
+          <bean class="com.dashboard.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeEnums" value="true" />
+            <property name="source" value="com.dashboard.web.security.AppFuncRole" />
+          </bean>
+        </entry>
+        <entry key="AppFunRoleValues">
+          <bean class="com.dashboard.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeStatics" value="true" />
+            <property name="source" value="com.dashboard.web.security.AppFuncRole" />
+          </bean>
+        </entry>
+         <entry key="Compressor">
+          <bean class="com.dashboard.web.freemarker.FreeMarkerModelFactoryBean">
+            <property name="exposeStatics" value="true" />
+            <property name="source" value="com.dashboard.util.CompressorUtils" />
+          </bean>
+        </entry>
+      </map>
+    </property>
+  </bean>
+</beans>

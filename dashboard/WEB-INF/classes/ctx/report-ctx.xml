@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+       
+       
+       <bean id="reportConfig" class="com.collegesource.report.ReportConfig">
+       		<property name="reports">
+       			<map>
+       				<!-- Batch Based Reports -->
+       				<entry key="CompletionCheckReport">
+       					<bean id="CompletionCheckReport" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="CompletionCheckReport"/>
+       						<property name="reportLabel" value="Audit Completion Check"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[ This report looks at previously run batch audits and shows the number of complete versus incomplete audits in that batch. It also identifies which audits used in-progress courses.
+
+
+       								]]>
+       							</value>
+       						</property>
+       						<property name="subReports">
+       							<list>
+       								<bean id="CompletionCheckReport_subreport1" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="CompletionCheckReport_subreport1"/>
+       								</bean>
+       							</list>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="jobIdCCR" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="jobid"/>
+       									<property name="label" value="JobId"/>
+       									<property name="description" value="JobId for the Audit(s)"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="queryLoV">
+       										<value>	
+												select ('BAT' || SUBSTR('0000', LENGTH(CAST(b.id as VARCHAR(10))), 3) || CAST(b.id as VARCHAR(10)) || '%') as RESULT, 
+       											(('BAT' || SUBSTR('0000', LENGTH(CAST(b.id as VARCHAR(10))), 3) || CAST(b.id as VARCHAR(10))) || ' - ' || b.description) as LABEL
+												from batch b
+												order by b.id
+       										</value>
+       									</property>
+       									<property name="forceRefresh" value="true"/>
+       								</bean>
+       								<bean id="reportTypeCCR" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="reportType"/>
+       									<property name="label" value="Report Type"/>
+       									<property name="description" value="Report Type of the Audit (HTML, TXT, PDF), defaults to PDF"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="PDF" value="PDF"/>
+       											<entry key="HTML" value="HTML"/>
+       											<entry key=" " value="TXT"/>
+       										</map>
+       									</property>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+       				</entry>
+					
+					<entry key="CountAcceptCourse">
+       					<bean id="CountAcceptCourse" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="CountAcceptCourse"/>
+       						<property name="reportLabel" value="Accept Course Count"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report looks at previously run batch audits and lists a count of each course and how many times it was applied to audits within this batch.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="jobIdCAC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="JobId"/>
+       									<property name="label" value="JobId"/>
+       									<property name="description" value="JobId for the Audit(s)"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="queryLoV">
+       										<value>	
+												select ('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') as RESULT, 
+												(('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') || ' - ' || b.description) as LABEL
+												from batch b
+												order by b.id
+       										</value>
+       									</property>
+       									<property name="forceRefresh" value="true"/>
+       								</bean>
+       								<bean id="reportTypeCAC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="reportType"/>
+       									<property name="label" value="Report Type"/>
+       									<property name="description" value="Report Type of the Audit (HTML, TXT, PDF), defaults to PDF"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="PDF" value="PDF"/>
+       											<entry key="HTML" value="HTML"/>
+       											<entry key=" " value="TXT"/>
+       										</map>
+       									</property>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+       				</entry>
+       				
+       				<entry key="BatchReqCompletion">
+       				<bean id="BatchReqCompletion" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="BatchReqCompletion"/>
+       						<property name="reportLabel" value="Requirement Completion Grid"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report looks at previously run batch audits and breaks down requirement completion per student in grid format.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="jobIdBRC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="jobid"/>
+       									<property name="label" value="JobId"/>
+       									<property name="description" value="JobId for the Audit(s)"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="queryLoV">
+       										<value>	
+												select ('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') as RESULT, 
+												(('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') || ' - ' || b.description) as LABEL
+												from batch b
+												order by b.id
+       										</value>
+       									</property>
+       									<property name="forceRefresh" value="true"/>
+       								</bean>
+       								<bean id="reportTypeBRC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="reportType"/>
+       									<property name="label" value="Report Type"/>
+       									<property name="description" value="Report Type of the Audit (HTML, TXT, PDF), defaults to PDF"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="PDF" value="PDF"/>
+       											<entry key="HTML" value="HTML"/>
+       											<entry key=" " value="TXT"/>
+       										</map>
+       									</property>
+       								</bean>
+       							</list>
+       						</property>
+       						<property name="reportOutputTypes">
+				      			<list>
+				      				<value>HTML</value>
+				      			</list>
+				      		</property>
+       					</bean>
+       				</entry>
+       				<!-- <entry key="BatchSubReqComplete">
+       				<bean id="BatchSubReqComplete" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="BatchSubReqComplete"/>
+       						<property name="reportLabel" value="Batch Sub-Requirement Completion"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[ 
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="jobIdBSRC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="jobId"/>
+       									<property name="label" value="JobId"/>
+       									<property name="description" value="JobId for the Audit(s)"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="queryLoV">
+       										<value>	
+       											select ('BAT' || SUBSTR('0000', LENGTH(CAST(b.id as VARCHAR(10))), 3) || CAST(b.id as VARCHAR(10))) as RESULT, 
+       											(('BAT' || SUBSTR('0000', LENGTH(CAST(b.id as VARCHAR(10))), 3) || CAST(b.id as VARCHAR(10))) || ' - ' || b.description) as LABEL
+												from batch b
+       										</value>
+       									</property>
+       								</bean>
+       								<bean id="reportTypeBSRC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="reportType"/>
+       									<property name="label" value="Report Type"/>
+       									<property name="description" value="Report Type of the Audit (HTML, TXT, PDF), defaults to PDF"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="PDF" value="PDF"/>
+       											<entry key="HTML" value="HTML"/>
+       											<entry key=" " value="TXT"/>
+       										</map>
+       									</property>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+       				</entry> -->
+       				
+       				<!-- Percent Completion Reports -->
+       				<entry key="MajorReqPercentComplete">
+       					<bean id="majorReqPercentComplete" parent="abstractReport" class="com.collegesource.report.model.Report">	
+       						<property name="reportName" value="MajorReqPercentComplete"/>
+       						<property name="reportLabel" value="Requirement Percent Complete"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report looks at previously run batch audits and details, per student, to see how much they have completed each requirement found on their audit.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="jobIdMRPC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="jobId"/>
+       									<property name="label" value="JobId"/>
+       									<property name="description" value="JobId for the Audit(s)"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="queryLoV">
+       										<value>	
+												select ('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') as RESULT, 
+												(('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') || ' - ' || b.description) as LABEL
+												from batch b
+												order by b.id
+       										</value>
+       									</property>
+       									<property name="forceRefresh" value="true"/>
+       								</bean>
+       								<bean id="reportTypeMRPC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="reportType"/>
+       									<property name="label" value="Report Type"/>
+       									<property name="description" value="Report Type of the Audit (HTML, TXT, PDF), defaults to PDF"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="PDF" value="PDF"/>
+       											<entry key="HTML" value="HTML"/>
+       											<entry key=" " value="TXT"/>
+       										</map>
+       									</property>
+       								</bean>
+       								<bean id="studentListMRPC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="studentList"/>
+       									<property name="label" value="Student List"/>
+       									<property name="description" value="List of Student Numbers (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+       				</entry>
+					
+					<!-- Course Demand Reports -->
+					<entry key="CourseDemandOverview">
+       					<bean id="courseDemandOverview" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="CourseDemandOverview"/>
+       						<property name="reportLabel" value="Course Demand Overview"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report details a total count of each course students have added to their declared plans within u.direct, breaking it down by term.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       								<bean id="startDateCDO" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="startDate"/>
+       									<property name="label" value="Start YearTerm"/>
+       									<property name="description" value="Starting Year Term for Report to Run From."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id="endDateCDO" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="endDate"/>
+       									<property name="label" value="End YearTerm"/>
+       									<property name="description" value="Ending Year Term for Report to Run To."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       							</list>
+       						</property>       						
+       					</bean>
+       				</entry>
+       				<entry key="PlannedCoursesByTerm">
+       					<bean id="courseDemand" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="PlannedCoursesByTerm"/>
+       						<property name="reportLabel" value="Planned Courses by Term"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report details a total count of each course students have added to their declared plans within u.direct, breaking it down by term. It also displays how many of those courses were added to approved versus non-approved plans.
+
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       								<bean id="startDate" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="startDate"/>
+       									<property name="label" value="Start YearTerm"/>
+       									<property name="description" value="Starting Year Term for Report to Run From."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id="endDate" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="endDate"/>
+       									<property name="label" value="End YearTerm"/>
+       									<property name="description" value="Ending Year Term for Report to Run To."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       							</list>
+       						</property>       						
+       					</bean>
+       				</entry>
+       				<entry key="PlannedCoursesByCourse">
+       					<bean id="courseDemandbyCourse" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="PlannedCoursesByCourse"/>
+       						<property name="reportLabel" value="Planned Courses by Course"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report details the terms in which courses were added to student plans within u.direct, breaking it down by course. It also displays how many of those courses were added to approved versus non-approved plans.
+
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       								<bean id="courseListCDbC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="courseList"/>
+       									<property name="label" value="Course List"/>
+       									<property name="description" value="List of Courses (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+       				</entry>
+       			<entry key="StudentPlanProgress">
+					<bean id ="StudentPlanProgress" parent="abstractReport" class="com.collegesource.report.model.Report">
+						<property name="reportName" value="StudentPlanProgress"/>
+						<property name="reportLabel" value="Student Planning Report"/>
+						<property name="reportDescription">
+							<value>	
+       							<![CDATA[This report will give you plan tracking information based on students taken courses.
+       								]]>
+       						</value>
+       					</property>
+       					<property name="subReports">
+       							<list>
+       								<bean id="CoursesTaken" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="CoursesTaken"/>
+       								</bean>
+       							</list>
+       						</property>
+       					<property name="parameters">
+       							<list>
+    								<bean id ="currentTerm" class="com.collegesource.report.model.ReportParameter">
+         								<property name="name" value="currentTerm"/>
+       									<property name="label" value="Ending Plan Term"/>
+       									<property name="description" value="Track for course completion through this term."/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>     									
+       								</bean>
+       							    <bean id="OffTrack" class="com.collegesource.report.model.ReportParameter">
+       							   	    <property name="name" value="offTrack"/>
+       									<property name="label" value="Off Track Course Threshold"/>
+       									<property name="description" value="How many courses the student has to miss before they are considered off track "/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="Integer"/>
+       								</bean>
+       								<bean id="PlanStatus" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="published_status"/>
+       									<property name="label" value="Plan Status"/>
+       									<property name="description" value="The status of the plans to be tracked"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="" value="All Declared Plans"/>
+       											<entry key="A" value="All Approved Plans"/>
+       										</map>
+       									</property>
+       								</bean>
+       								<bean id ="DeclaredDprog" class="com.collegesource.report.model.ReportParameter">
+         								<property name="name" value="dprog"/>
+       									<property name="label" value="Declared Program"/>
+       									<property name="description" value="Generate this report only for students who have this declared program"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>     									
+       								</bean>
+    								<bean id ="planApprover" class="com.collegesource.report.model.ReportParameter">
+         								<property name="name" value="approver"/>
+       									<property name="label" value="Plan Approver"/>
+       									<property name="description" value="The username of the plan approver"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>     									
+       								</bean>
+       								<bean id="InstidqPlanProgress" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instidq"/>
+       									<property name="label" value="IDQ"/>
+       									<property name="description" value="Institution's two-digit ID qualifier"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id="InstidPlanProgress" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instid"/>
+       									<property name="label" value="InstID"/>
+       									<property name="description" value="Institution's unique identification code"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id ="InstcdPlanProgress" class="com.collegesource.report.model.ReportParameter">
+         								<property name="name" value="instcd"/>
+       									<property name="label" value="CD"/>
+       									<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>     									
+       								</bean>
+
+       							</list>
+       					</property>	
+						</bean>
+					</entry>
+       				
+       			<entry key="CourseSearch">
+					<bean id ="CourseSearch" parent="abstractReport" class="com.collegesource.report.model.Report">
+						<property name="reportName" value="CourseSearch"/>
+						<property name="reportLabel" value="Course Search"/>
+						<property name="reportDescription">
+							<value>	
+       							<![CDATA[This report allows you to do a Find Course, looking at Convert, String, Repeat, Sub-requirement, TA Source, and TA Target areas by course name, instidq, instid and/or instcd.
+       								]]>
+       						</value>
+       					</property>
+       					<property name="subReports">
+       							<list>
+       								<bean id="Convert" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="Convert"/>    								</bean>    								
+       								<bean id="RepeatTable" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="RepeatTable"/>
+       								</bean>
+       								<bean id="String" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="String"/>
+       								</bean>
+       								<bean id="SubReq" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="SubReq"/>
+       								</bean>
+       								<bean id="TASource" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="TASource"/>
+       								</bean>
+       								<bean id="TATarget" parent="abstractReport" class="com.collegesource.report.model.Report">
+       									<property name="reportName" value="TATarget"/>
+       								</bean>
+       							</list>
+       						</property>
+       					<property name="parameters">
+       							<list>
+       							    <bean id="Select_Course_Course_Search" class="com.collegesource.report.model.ReportParameter">
+       							   	    <property name="name" value="Select_Course_Course_Search"/>
+       									<property name="label" value="Course"/>
+       									<property name="description" value="Course you wish to search for"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id="IDQ_Course_Search" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="IDQ_Course_Search"/>
+       									<property name="label" value="IDQ"/>
+       									<property name="description" value="Institution's two-digit ID qualifier"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id="InstID_Course_Search" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="InstID_Course_Search"/>
+       									<property name="label" value="InstID"/>
+       									<property name="description" value="Institution's unique identification code"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       								<bean id ="CD_Course_Search" class="com.collegesource.report.model.ReportParameter">
+         								<property name="name" value="CD_Course_Search"/>
+       									<property name="label" value="CD"/>
+       									<property name="description" value="Used when a part of your institution needs to be considered a separate institution"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>     									
+       								</bean>
+       							</list>
+       					</property>	
+						</bean>
+					</entry>		
+					<!-- Transfer Articulation Reports -->
+					<entry key="NumRulesBySchool">
+						<bean id="NumRulesBySchool" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="NumRulesBySchool"/>
+       						<property name="reportLabel" value="Number of Rules by TA School"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a count of the number of rules for each school set up in the transfer articulation tables.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="sourceIdBRC" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="sourceIdList"/>
+       									<property name="label" value="SourceId(s)"/>
+       									<property name="description" value="List of Source Ids (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					<entry key="StudentTABySchool">
+						<bean id="StudentTABySchool" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="StudentTABySchool"/>
+       						<property name="reportLabel" value="Number of Student Courses by TA School"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a count of the total number of student courses per source institution. 
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="sourceIdSTbS" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="sourceIdList"/>
+       									<property name="label" value="SourceId(s)"/>
+       									<property name="description" value="List of Source Ids (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					<entry key="NumStudentPerTASchool">
+						<bean id="NumStudentPerTASchool" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="NumStudentPerTASchool"/>
+       						<property name="reportLabel" value="Number of Students by TA School"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a count of the number of students who have coursework for each source institution.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="sourceIdSpTAS" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="sourceIdList"/>
+       									<property name="label" value="SourceId(s)"/>
+       									<property name="description" value="List of Source Ids (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					<!-- Degree Audit Encoding Reports -->
+					<entry key="MostUsedRequirements">
+						<bean id="MostUsedRequirements" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="MostUsedRequirements"/>
+       						<property name="reportLabel" value="Most Used Requirements"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays requirements and the combined number of times they are used in degree programs throughout your institution.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							    <bean id="dprname" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="dprnameList"/>
+       									<property name="label" value="Requirement"/>
+       									<property name="description" value="List of Requirements (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+     								<bean id="instidq" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instidq"/>
+       									<property name="label" value="Instidq"/>
+       									<property name="description" value="Instidq of the Requirements."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+   									<bean id="instid" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instid"/>
+       									<property name="label" value="Instid"/>
+       									<property name="description" value="Instid of the Requirements."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+     								<bean id="instcd" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instcd"/>
+       									<property name="label" value="Instcd"/>
+       									<property name="description" value="Instcd of the Requirements."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					<entry key="AllRPTINSTID">
+						<bean id="AllRPTINSTID" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="AllRPTINSTID"/>
+       						<property name="reportLabel" value="All Master Reference by RPTINSTID"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays all Master References by RPTINSTID.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+     								<bean id="instidq2" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instidq"/>
+       									<property name="label" value="Instidq"/>
+       									<property name="description" value="Instidq of the Master References."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+   									<bean id="instid2" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instid"/>
+       									<property name="label" value="Instid"/>
+       									<property name="description" value="Instid of the Master References."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+     								<bean id="instcd2" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instcd"/>
+       									<property name="label" value="Instcd"/>
+       									<property name="description" value="Instcd of the Master References."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					<entry key="DupRPTINSTID">
+						<bean id="DupRPTINSTID" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="DupRPTINSTID"/>
+       						<property name="reportLabel" value="Duplicate RPTINSTIDs"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays all Duplicate RPTINSTIDs from Master Reference.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+     								<bean id="instidq3" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instidq"/>
+       									<property name="label" value="Instidq"/>
+       									<property name="description" value="Instidq of the Master References."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+   									<bean id="instid3" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instid"/>
+       									<property name="label" value="Instid"/>
+       									<property name="description" value="Instid of the Master References."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+     								<bean id="instcd3" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="instcd"/>
+       									<property name="label" value="Instcd"/>
+       									<property name="description" value="Instcd of the Master References."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="String"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					<entry key="MostUsedDprogs">
+						<bean id="MostUsedDprogs" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="MostUsedDprogs"/>
+       						<property name="reportLabel" value="Most Used Degree Programs"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report looks at previously run batch audits and lists a count of each degree program used within that batch.
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+									<bean id="jobIdMUD" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="jobId"/>
+       									<property name="label" value="JobId"/>
+       									<property name="description" value="JobId for the Audit(s)"/>
+       									<property name="optional" value="false"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="queryLoV">
+       										<value>	
+												select ('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') as RESULT, 
+												(('BAT' || SUBSTR('00000', LENGTH(CAST(b.id as VARCHAR(10))), 5 - LENGTH(CAST(b.id as VARCHAR(10)))) || CAST(b.id as VARCHAR(10)) || '%') || ' - ' || b.description) as LABEL
+												from batch b
+												order by b.id
+       										</value>
+       									</property>
+       									<property name="forceRefresh" value="true"/>
+       								</bean>
+       								<bean id="dprogListMUD" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="dprogList"/>
+       									<property name="label" value="Degree Program List"/>
+       									<property name="description" value="List of Degree Programs (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       								<bean id="reportTypeMUD" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="reportType"/>
+       									<property name="label" value="Report Type"/>
+       									<property name="description" value="Report Type of the Audit (HTML, TXT, PDF), defaults to PDF"/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="dropdown"/>
+       									<property name="inputClass" value="String"/>
+       									<property name="listOfValues">
+       										<map>
+       											<entry key="PDF" value="PDF"/>
+       											<entry key="HTML" value="HTML"/>
+       											<entry key=" " value="TXT"/>
+       										</map>
+       									</property>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+					</entry>
+					
+					
+					
+    				<!-- Exception Reports -->
+    				<entry key="WhoUsesExceptions">
+       					<bean id="WhoUsesExceptions" parent="abstractReport" class="com.collegesource.report.model.Report">
+       						
+       						<property name="reportName" value="WhoUsesExceptions"/>
+       						<property name="reportLabel" value="Number of Exceptions by LastModUser"/>
+       						<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a count of exceptions per LastModUser, broken down by control code.
+
+
+       								]]>
+       							</value>
+       						</property>
+       						<property name="parameters">
+       							<list>
+       							<bean id="lastModUser" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="lastModUser"/>
+       									<property name="label" value="Last Mod User"/>
+       									<property name="description" value="List of Last Mod Users (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							    <bean id="ctlcd" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="ctlcd"/>
+       									<property name="label" value="CtlCd"/>
+       									<property name="description" value="List of Control Codes (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       					</bean>
+       				</entry>
+       				<entry key="WhoUsesExceptions_AuthId">
+       						<bean id="WhoUsesExceptions_AuthId" parent="abstractReport" class="com.collegesource.report.model.Report">
+       							<property name="reportName" value="WhoUsesExceptions_AuthId"/>
+       							<property name="reportLabel" value="Number of Exceptions by AuthId"/>
+       							<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a count of exceptions per AuthID, broken down by control code.
+       								]]>
+       							</value>
+       							</property>
+       							<property name="parameters">
+       							<list>
+       							    <bean id="AuthIdWUEAI" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="authIdList"/>
+       									<property name="label" value="Authorization Id"/>
+       									<property name="description" value="List of Authorization Ids (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							    <bean id="ctlcdWUEAI" class="com.collegesource.report.model.ReportParameter">
+       									<property name="name" value="ctlcd"/>
+       									<property name="label" value="CtlCd"/>
+       									<property name="description" value="List of Control Codes (comma-separated) for the report to display."/>
+       									<property name="optional" value="true"/>
+       									<property name="inputType" value="textbox"/>
+       									<property name="inputClass" value="List"/>
+       								</bean>
+       							</list>
+       						</property>
+       						</bean>
+    				</entry>
+    				<entry key="MostUsedEXByType">
+       						<bean id="MostUsedEXByType" parent="abstractReport" class="com.collegesource.report.model.Report">
+       							<property name="reportName" value="MostUsedEXByType"/>
+       							<property name="reportLabel" value="Number of Exceptions by Type "/>
+       							<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a total count, across all students, of each exception type per control code.
+       								]]>
+       							</value>
+       							</property>
+       							<property name="parameters">
+       								<list>
+       							    	<bean id="ctlcdEBT" class="com.collegesource.report.model.ReportParameter">
+	       									<property name="name" value="ctlcdList"/>
+	       									<property name="label" value="CtlCd"/>
+	       									<property name="description" value="List of Control Codes (comma-separated) for the report to display."/>
+	       									<property name="optional" value="true"/>
+	       									<property name="inputType" value="textbox"/>
+	       									<property name="inputClass" value="List"/>
+       									</bean>
+       								</list>
+       							</property>
+       						</bean>
+    				</entry>
+    				<entry key="NumberOfExByStudent">
+       						<bean id="NumberOfExByStudent" parent="abstractReport" class="com.collegesource.report.model.Report">
+       							<property name="reportName" value="NumberOfExByStudent"/>
+       							<property name="reportLabel" value="Number of Exceptions by Student"/>
+       							<property name="reportDescription">
+       							<value>	
+       								<![CDATA[This report displays a count of exceptions per student, broken down by control code.
+       								]]>
+       							</value>
+       							</property>
+       							<property name="parameters">
+       								<list>
+       								    <bean id="studentListEbS" class="com.collegesource.report.model.ReportParameter">
+	       									<property name="name" value="studentList"/>
+	       									<property name="label" value="Student List"/>
+	       									<property name="description" value="List of Students (comma-separated) for the report to display."/>
+	       									<property name="optional" value="true"/>
+	       									<property name="inputType" value="textbox"/>
+	       									<property name="inputClass" value="List"/>
+       									</bean>
+       							    	<bean id="ctlcdEbS" class="com.collegesource.report.model.ReportParameter">
+	       									<property name="name" value="ctlcdList"/>
+	       									<property name="label" value="CtlCd"/>
+	       									<property name="description" value="List of Control Codes (comma-separated) for the report to display."/>
+	       									<property name="optional" value="true"/>
+	       									<property name="inputType" value="textbox"/>
+	       									<property name="inputClass" value="List"/>
+       									</bean>
+       								</list>
+       							</property>
+       						</bean>
+    				</entry>
+       			</map>
+       		</property>
+       </bean>
+       
+       <bean id ="reportService" class="com.collegesource.report.service.ReportService">
+       		<property name="reportConfig" ref="reportConfig"/>
+       		<property name="errorReport">
+       			<bean id="ErrorReport" parent="abstractReport" class="com.collegesource.report.model.Report">
+       					<property name="reportName" value="Error_Report"/>
+       			</bean>
+       		</property>
+       </bean>
+       
+      <bean id = "abstractReport" abstract="true" class="com.collegesource.report.model.SuperReport">
+      		<property name="driver" 	value="${uachieve.report.driver}"/>
+      		<property name="url" 		value="${uachieve.report.url}"/>
+      		<property name="user" 		value="${uachieve.report.user}"/>
+      		<property name="password" 	value="${uachieve.report.password}"/>
+      		<property name="jndi" 		value="${uachieve.report.jndi}"/>
+      		<property name="reportDirectory" value="${uachieve.report.directory}"/>
+      		<property name="reportImgDirectory" value="${uachieve.report.image.directory}"/>
+      		<property name="reportPDFImgDirectory" value="${uachieve.report.pdf.image.directory}"/>
+      		<property name="forceReportCompile" value="${uachieve.report.force.reports.compile}"/>
+      		<property name="reportOutputTypes">
+       			<list>
+       				<value>HTML</value>
+       				<value>PDF</value>
+       			</list>
+       		</property>
+       		<property name="validationQuery" value="${uachieve.report.validation.query}"/>
+      </bean>
+       
+</beans>

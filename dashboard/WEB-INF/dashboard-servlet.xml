@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  	   xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  		   				   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						   http://www.springframework.org/schema/util 
+						   http://www.springframework.org/schema/util/spring-util-3.0.xsd
+						   http://www.springframework.org/schema/aop 
+					  	   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<import resource="classpath:ctx/dashboard-app-ctx.xml" />
+	
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="logHttpRequestInterceptor" />
+				<ref bean="preventCachingInterceptor" />
+				<ref bean="menuInterceptor" />
+				<ref bean="userLookupServiceCheckInterceptor"/>
+			</list>
+		</property>
+		<property name="mappings">
+			<value>
+				/404.html=_404Controller
+				/500.html=_500Controller
+				/accessdenied.html=accessDeniedController
+				
+				/general/helloworld.html=helloWorldController
+				/home.html=homeController
+				/comments_notifications.html=CommentsNotificationsController
+				
+				/login.html=loginController
+				
+				/admin/admin_menu.html=AdminMenuController
+				/admin/admin_remote.html=AdminRemoteController
+				/admin/admin_general.html=AdminGeneralController
+				/admin/admin_Home.html=AdminHomeController
+				/admin/admin_auditException.html=AdminAuditExceptionController
+				/admin/admin_schedule.html=AdminScheduleController
+				/admin/admin_courseGrades.html=AdminCourseGradesController
+				/admin/admin_planNotes.html=AdminPlanNotesController
+				/admin/admin_property.html=AdminGlobalController
+				
+				/auditviewer/home.html=AuditViewerHomeController
+				/auditviewer/listBatchIds.html=BatchListController
+				/auditviewer/compareAudits.html=CompareAuditsController
+				/auditviewer/listAudits.html=ListAuditsController
+				/auditviewer/listBatchStudents.html=ListBatchStudentsController
+				/auditviewer/listStudentsByName.html=ListStudentsByNameController
+				/auditviewer/listStudents.html=ListStudentsController
+				/auditviewer/auditViewSingle.html=SingleAuditController
+				/auditviewer/submitAudits.html=SubmitAuditController
+				/auditviewer/updateRunOptions.ajax=AjaxUpdateRunOptionsController
+				/auditviewer/updateStunoList.ajax=AjaxUpdateStunoListController
+				/auditProcessing.ajax=AjaxAuditProcessingController
+				
+				/reports/reports-console.html=reportsConsoleController
+				/reports/report-options.html=reportOptionsController
+				/reports/report-show.html=reportShowController
+				
+				/security-console.html=securityConsoleController
+				/groups.html=groupsController
+				/manage-groups.html=manageGroupsController
+				/group-roles-manager.ajax=ajaxGroupRolesManagerController
+				/group-member-search.html=groupMemberSearchController
+				/manage-group-members.html=groupMemberManageController
+				/manage-group-domain.html=groupDomainManagerController
+				/manage-group-property.html=groupPropertyManagerController
+				
+				/roles.html=rolesController
+				/delete-role.html=deleteRoleController
+				/save-permissions.html=savePermissionsController
+				
+				/users.html=usersController
+				/user-details.html=userDetailsController
+				/save-user-details.html=editUserController
+				/manage-user-domain.html=manageUserDomainController
+				/advisee-search.html=adviseeSearchController
+				/manage-advisee.html=adviseeManageController
+				/user-groups.html=userGroupsController
+				/manage-user-property.html=userPropertyManagerController
+				
+				/properties.html=propertiesController
+				/manage-property.html=managePropertyController
+				
+				/info.html=infoController
+				
+				/userlist.ajax=jsonUserListController
+				
+				<!--/advisor/browse-students.html=browseStudentsController-->
+				
+				/**/*.js=jawrJsController
+				/**/*.css=jawrCSSController
+			</value>
+		</property>
+		<property name="defaultHandler" ref="_404Controller" />
+	</bean>
+	
+	<bean id="freeMarkerViewResolver" class="com.dashboard.web.NonQueryAppendingFreeMarkerViewResolver">
+		<property name="cache" value="${freemarker.cache}" />
+		<property name="prefix" value="/views/" />
+		<property name="suffix" value=".ftl" />
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="requestContextAttribute" value="request" />
+	</bean>
+	
+<!-- 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>validation</value>
+			</list>
+		</property>
+	</bean>
+	 -->
+	<!-- ========================= EXCEPTION RESOLVERS ========================= -->
+	<!-- 
+		This bean resolves specific types of exception to corresponding error 
+		views. The default behavior of DispatcherServlet is to propagate all 
+		exceptions to the servlet container: This will happen here with all other 
+		types of exception. 
+	-->
+	<bean id="globalExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+    	<property name="defaultErrorView" value="500" />
+	</bean>
+	
+		<bean class="com.dashboard.web.LoggingHandlerExceptionResolver"/>
+
+	<!-- ========================= INTERCEPTOR DEFINITIONS ======================== -->
+  	<bean id="logHttpRequestInterceptor" class="com.dashboard.web.interceptor.LogHttpServletRequestInterceptor" />
+  	<bean id="preventCachingInterceptor" class="com.dashboard.web.interceptor.PreventCachingInterceptor" />
+  	<bean id="userLookupServiceCheckInterceptor" class="com.dashboard.web.interceptor.UserLookupServiceCheckInterceptor">
+		<property name="userLookupService" ref="userLookupServiceUtil" />
+	</bean>
+	<bean id="menuInterceptor" class="com.dashboard.web.interceptor.MenuInterceptor">
+		<property name="udirectURL" value="${udirect.baseUrl}" />
+		<property name="helpURL" value="${help.baseUrl}" />
+	    <property name="selfServiceURL" value="${selfService.baseUrl}" />
+	    <property name="scheduleBuilderURL" value="${schedule.builder.baseUrl}"/>
+	    <property name="controllerUtils" ref="controllerUtils"/>
+	    <property name="commentLabel" value="${comment.label}"/>
+	     <property name="planLabel" value="${studentPlan.label}" />
+	     <property name="studentLandingPageUrl" value="${student.landingPageURL}"/>
+		    <property name="daversion" value="${daversion1}"/>
+		    <!-- <property name="studentLabel" value="${student.label}"/>
+		    <property name="displayStudentName" value="${student.displayName}"/>
+		    <property name="displayStudentNumber" value="${student.displayNumber}"/>
+		    -->
+	</bean>
+	
+	<bean name="controllerUtils" class="com.dashboard.controllers.support.DefaultControllerUtils" />
+	
+
+	
+	
+	<!-- ================ JAWR Config & CONTROLLERS ============= -->	
+	<bean abstract="true" id="jawrBase"  class="net.jawr.web.servlet.JawrSpringController" >
+	        <property name="configLocation" value="/jawr.properties" />
+	</bean>
+	
+	<!-- JS controller -->
+	<bean id="jawrJsController" parent="jawrBase" />
+
+	<!-- CSS controller -->
+	<bean id="jawrCSSController"  parent="jawrBase">
+        <property name="type" value="css" />
+	</bean>
+	
+		<!-- ================ SOAP CONTROLLER ================ -->
+	<bean class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+		<property name="mappings">
+			<props>
+				<prop key="/soap">dataHandler</prop>
+			</props>
+		</property>
+	</bean>
+  	
+  	 <!-- ======== UrlFilenameViewController is commented for security -->
+ 	 <!-- if you want to bypass security, uncomment following controller -->
+	<!--  bean name="indexController" class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />-->
+  	
+  	<bean name="accessDeniedController" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+    	<property name="viewName" value="accessdenied" />
+  	</bean>
+  	
+  	<bean name="_404Controller" class="com.dashboard.controllers.ErrorPageController">
+    	<property name="viewName" value="404" />
+    	<property name="status" value="404" />
+  	</bean>
+ 	
+ 	<bean name="_500Controller" class="com.dashboard.controllers.ErrorPageController">
+    	<property name="viewName" value="500" />
+    	<property name="status" value="500" />
+  	</bean>
+  	
+  	<bean name="loginController" class="com.dashboard.controllers.LoginController" />
+	<bean name="helloWorldController" class="com.dashboard.controllers.HelloWorldController">
+		<property name="validationQuery" value="${security.jdbc.validationQuery}"/>
+ 		<property name="instid" value="${instid}" />
+		<property name="instidq" value="${instidq}" />
+	</bean>
+  	
+  	<bean name="homeController" class="com.dashboard.controllers.HomeController">
+  		<property name="welcomeText" value="${welcomeText}" />
+  		<property name="controllerUtils" ref="controllerUtils"/>
+	    <property name="studentLandingPageUrl" value="${student.landingPageURL}"/>
+  	</bean>
+  	
+  	<bean name="CommentsNotificationsController" class="com.dashboard.controllers.CommentsNotificationsController">
+		<property name="enableComments" value="${dashboard.enableComments}" />
+		<property name="declaredLabel" value="${dashboard.declared.label}" />
+	</bean>
+  	
+<!-- 	<bean name="browseStudentsController" class="com.dashboard.controllers.advisor.BrowseStudentsController">
+		<property name="declaredLabel" value="${declared.label}" />
+	</bean> -->
+  	
+  	<bean name="AdminMenuController" class="com.dashboard.controllers.admin.AdminMenuController"/>
+  	<bean name="AdminRemoteController" class="com.dashboard.controllers.admin.AdminRemoteController"/>
+  	<bean name="AdminGeneralController" class="com.dashboard.controllers.admin.AdminGeneralController"/>
+  	<bean name="AdminHomeController" class="com.dashboard.controllers.admin.AdminHomeController"/>
+  	<bean name="AdminAuditExceptionController" class="com.dashboard.controllers.admin.AdminAuditExceptionController"/>
+  	<bean name="AdminScheduleController" class="com.dashboard.controllers.admin.AdminScheduleController"/>
+  	<bean name="AdminCourseGradesController" class="com.dashboard.controllers.admin.AdminCourseGradesController"/>
+  	<bean name="AdminPlanNotesController" class="com.dashboard.controllers.admin.AdminPlanNotesController"/>
+  	<bean name="AdminGlobalController" class="com.dashboard.controllers.admin.AdminGlobalController"/>
+  	
+  	<bean name="AuditViewerHomeController" class="com.dashboard.controllers.auditviewer.AuditViewerHomeController" parent="BaseAuditController"/>
+	<bean name="BatchListController" class="com.dashboard.controllers.auditviewer.BatchListController" parent="BaseAuditController"/>
+	<bean name="CompareAuditsController" class="com.dashboard.controllers.auditviewer.CompareAuditsController" parent="BaseAuditController"/>
+	<bean name="ListAuditsController" class="com.dashboard.controllers.auditviewer.ListAuditsController" parent="BaseAuditController"/>
+	<bean name="ListBatchStudentsController" class="com.dashboard.controllers.auditviewer.ListBatchStudentsController" parent="BaseAuditController"/>
+	<bean name="ListStudentsByNameController" class="com.dashboard.controllers.auditviewer.ListStudentsByNameController" parent="BaseAuditController"/>
+	<bean name="ListStudentsController" class="com.dashboard.controllers.auditviewer.ListStudentsController" parent="BaseAuditController"/>
+	<bean name="SingleAuditController" class="com.dashboard.controllers.auditviewer.SingleAuditController" parent="BaseAuditController"/>
+	<bean name="SubmitAuditController" class="com.dashboard.controllers.auditviewer.SubmitAuditController" parent="BaseAuditController"/>
+	<bean name="AjaxUpdateRunOptionsController" class="com.dashboard.controllers.auditviewer.AjaxUpdateRunOptionsController" parent="BaseAuditController"/>
+	<bean name="AjaxUpdateStunoListController" class="com.dashboard.controllers.auditviewer.AjaxUpdateStunoListController" parent="BaseAuditController"/>
+	<bean name="AjaxAuditProcessingController" class="com.dashboard.controllers.auditviewer.AjaxAuditProcessingController" parent="BaseAuditController"/>
+  	
+	<bean name="reportsConsoleController" class="com.dashboard.controllers.reports.ReportsConsoleController"/>
+	<bean name="reportOptionsController" class="com.dashboard.controllers.reports.ReportOptionsController" >
+		<property name="controllerUtils" ref="controllerUtils"/>
+	</bean>
+	<bean name="reportShowController" class="com.dashboard.controllers.reports.ReportShowController" />
+	
+	<bean name="securityConsoleController" class="com.dashboard.controllers.SecurityConsoleController" />
+  	<bean name="groupsController" class="com.dashboard.controllers.groups.GroupsController" />
+  	<bean name="manageGroupsController" class="com.dashboard.controllers.groups.ManageGroupsController" />
+  	<bean name="ajaxGroupRolesManagerController" class="com.dashboard.controllers.groups.AjaxGroupRolesManagerController" />
+  	<bean name="groupMemberSearchController" class="com.dashboard.controllers.groups.GroupMemberSearchController" />
+  	<bean name="groupMemberManageController" class="com.dashboard.controllers.groups.GroupMemberManageController" />
+  	<bean name="groupDomainManagerController" class="com.dashboard.controllers.groups.ManageGroupDomainsController" />
+  	<bean name="groupPropertyManagerController" class="com.dashboard.controllers.groups.ManageGroupPropertiesController" />
+  	
+  	<bean name="rolesController" class="com.dashboard.controllers.roles.RolesController" />
+  	<bean name="deleteRoleController" class="com.dashboard.controllers.roles.DeleteRoleController" />
+  	<bean name="savePermissionsController" class="com.dashboard.controllers.roles.SavePermissionsController" />
+  	
+  	<bean name="usersController" class="com.dashboard.controllers.users.UsersController" />	
+  	<bean name="userDetailsController" class="com.dashboard.controllers.users.UserDetailsController" />
+  	<bean name="editUserController" class="com.dashboard.controllers.users.EditUserController" />
+  	<bean name="manageUserDomainController" class="com.dashboard.controllers.users.ManageUserDomainController" />
+  	<bean name="adviseeSearchController" class="com.dashboard.controllers.users.AdviseeSearchController" />
+  	<bean name="adviseeManageController" class="com.dashboard.controllers.users.AdviseeManageController" />
+  	<bean name="userGroupsController" class="com.dashboard.controllers.users.UserGroupsController" />
+  	<bean name="userPropertyManagerController" class="com.dashboard.controllers.users.ManageUserPropertiesController" />
+  		
+  	<bean name="propertiesController" class="com.dashboard.controllers.properties.PropertiesController" />
+  	<bean name="managePropertyController" class="com.dashboard.controllers.properties.ManagePropertiesController" />
+  		
+  	<bean name="applicationsController" class="com.dashboard.controllers.ApplicationsController" />
+  	
+  	<bean name="infoController" class="com.dashboard.controllers.InfoController">
+  		<property name="appId" value="SEC"/>
+  		<property name="infoDebug" value="false"/>
+  	</bean>
+  	
+  	<bean name="jsonUserListController" class="com.dashboard.controllers.users.JSONUserListController" />
+  	
+</beans>

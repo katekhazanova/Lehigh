@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+  <!-- ========================= HIBERNATE DEFINITIONS ======================== -->
+  <bean id="hibernateValidator" class="uachieve.selfservice.util.dao.hibernate.HibernateValidator" />
+  
+
+  <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true" />
+
+    <!-- ========== Hibernate SessionFactory -->
+    <bean id="uachieveapi.sessionFactory" class="uachieve.apis.common.util.hibernate.TableRenamingAnnotatedSessionFactoryBean">
+        <property name="useViews"><value>${uachieveapi.hibernate.useViews}</value></property>
+        <property name="dataSource"><ref bean="uachieveapi.dataSource"/></property>
+          <property name="annotatedClasses">
+	      <list>
+              <value>uachieve.programmatcher.index.domain.ActiveIndex</value>
+	      </list>
+	    </property>
+        <property name="eventListeners">
+    	<map>
+    		<entry key="pre-update">
+    			<bean class="org.hibernate.validator.event.ValidateEventListener" />
+    		</entry>
+    		<entry key="pre-insert">
+    			<bean class="org.hibernate.validator.event.ValidateEventListener" />
+    		</entry>
+    	</map>
+    	</property>
+        <property name="mappingResources">
+            <list>
+                <!--  Audit mappings -->
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueSysin.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueList.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueDetail.hbm.xml</value>
+                
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueRun.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueReq.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueSubreq.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueAccept.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueCourse.hbm.xml</value>
+                
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueOut.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueReport.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueInclText.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/IncludeText.hbm.xml</value>
+                
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueExceptions.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueMarkers.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueReqText.hbm.xml</value>
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueSubreqText.hbm.xml</value>
+                
+                <value>uachieve/apis/audit/dao/hibernate/hbm/JobQueueDestination.hbm.xml</value>
+                
+                <value>uachieve/apis/audit/dao/hibernate/hbm/CurrentJobs.hbm.xml</value>
+                
+                <!-- Student mappings -->
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuAcadrec.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuAddress.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuDemo.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuDprog.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuEgrpCourse.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuEvalgrp.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuExcCourse.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuException.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuMarkerReq.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/StuMaster.hbm.xml</value>
+                <value>uachieve/apis/student/dao/hibernate/hbm/WhatifCourse.hbm.xml</value>
+                
+                <!--  Support table mappings -->
+                <value>uachieve/apis/support/dao/hibernate/hbm/ComTable.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/Gmaster.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/Repeat.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/CrsConvert.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/ReportOption.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/StringTable.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/StringCrse.hbm.xml</value>
+                <value>uachieve/apis/support/dao/hibernate/hbm/ChartCategories.hbm.xml</value>
+                
+                <!-- Mastref table mappings -->
+                <value>uachieve/apis/mastref/dao/hibernate/hbm/TransferInst.hbm.xml</value>
+                <value>uachieve/apis/mastref/dao/hibernate/hbm/Mastref.hbm.xml</value>
+                <value>uachieve/apis/mastref/dao/hibernate/hbm/MastrefAddress.hbm.xml</value>
+                <value>uachieve/apis/mastref/dao/hibernate/hbm/MastrefSeg.hbm.xml</value>
+               
+                <!-- Transfer Articulation Tables -->
+                <value>uachieve/apis/transfer/dao/hibernate/hbm/TcaMaster.hbm.xml</value>
+                <value>uachieve/apis/transfer/dao/hibernate/hbm/TcaSegment.hbm.xml</value>
+                <value>uachieve/apis/transfer/dao/hibernate/hbm/TcaRule.hbm.xml</value>
+                <value>uachieve/apis/transfer/dao/hibernate/hbm/TcaSource.hbm.xml</value>
+                <value>uachieve/apis/transfer/dao/hibernate/hbm/TcaTarget.hbm.xml</value>
+                
+                <!-- Requirement Tables -->
+                <value>uachieve/apis/requirement/dao/hibernate/hbm/Dprog.hbm.xml</value>
+                <value>uachieve/apis/requirement/dao/hibernate/hbm/DprogReq.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/ReqMain.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/ReqText.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/ReqXy.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/SubReq.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/SubReqAr.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/SubReqText.hbm.xml</value>
+				<value>uachieve/apis/requirement/dao/hibernate/hbm/DprogType.hbm.xml</value>
+				
+				<!--  whatIfMarker Tables -->
+				<value>uachieve/apis/whatifmarker/dao/hibernate/hbm/WhatifElementFilter.hbm.xml</value>
+				<value>uachieve/apis/whatifmarker/dao/hibernate/hbm/WhatifElementTypeAssoc.hbm.xml</value>
+				<value>uachieve/apis/whatifmarker/dao/hibernate/hbm/WhatifForcedMarker.hbm.xml</value>
+				
+				<!--Batch Tables-->
+				<value>uachieve/apis/batch/dao/hibernate/hbm/Batch.hbm.xml</value>
+				<value>uachieve/apis/batch/dao/hibernate/hbm/BatchBlackout.hbm.xml</value>
+				<value>uachieve/apis/batch/dao/hibernate/hbm/BatchCriteria.hbm.xml</value>
+				<value>uachieve/apis/batch/dao/hibernate/hbm/BatchShare.hbm.xml</value>
+				
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${uachieveapi.hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${uachieveapi.hibernate.show_sql}</prop>
+            	<prop key="hibernate.validator.autoregister_listeners">true</prop>
+            	<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+            	<prop key="hibernate.cache.use_query_cache">${uachieveapi.hibernate.use_query_cache}</prop>
+            	<prop key="hibernate.cache.use_second_level_cache">${uachieveapi.hibernate.use_second_level_cache}</prop>
+	            <prop key="hibernate.generate_statistics">${uachieveapi.hibernate.generate_statistics}</prop>
+	            <prop key="hibernate.cache.use_structured_entries">true</prop>
+            </props>
+        </property>
+        <property name="lobHandler" ref="defaultLobHandler" />
+    </bean>
+    
+
+</beans>

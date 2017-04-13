@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+		
+	<bean id="simpleEmailCommunicator" class="uachieve.selfservice.area.email.SimpleEmailCommunicator">
+		<property name="smtpServer" value="${smtpServer}" />
+		<property name="port" value="${port}" />
+		<property name="login" value="${login}" />
+		<property name="password" value="${password}" />
+	</bean>
+	
+	<bean id="mockCommunicator" class="uachieve.selfservice.area.email.MockCommunicator">
+	</bean>
+	
+	<bean id="emailService" class="uachieve.selfservice.area.email.DefaultEmailService">
+		<property name="emailCommunicator" ref="mockCommunicator" />
+		<property name="userTypeService" ref="userTypeService" />
+		<property name="userService" ref="userLookupServiceUtil" />
+		<property name="emailCommentSubjectText" value="${emailCommentSubjectText}" />
+		<property name="emailCommentIntroText" value="${emailCommentIntroText}" />
+		<property name="emailFooterText" value="${emailFooterText}" />
+		<property name="udirectLink" value="${udirectLink}" />
+		<property name="udirectLinkText" value="${udirectLinkText}" />
+		<property name="from" value="${emailFrom}" />
+	</bean>
+	
+	<bean id="userTypeService" class="uachieve.selfservice.util.user.DefaultUserTypeService">
+		<property name="advisorsGroupName" value="${advisorsGroupName}" />
+  	</bean>
+	
+</beans>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= PAGES RELATED DEFINITIONS ============================= -->
+
+  <!-- ============== Dao's -->
+
+  <!-- ============== Repositories -->
+
+  <!-- ============== Services -->
+  <bean id="pageService" class="uachieve.selfservice.pages.PageServiceImpl">
+    <property name="debug" value="${uachieve.selfservice.debug}" />
+    <property name="pageConfigParser">
+      <bean class="uachieve.selfservice.pages.support.PageConfigParserImpl">
+        <property name="xmls">
+          <list>
+            <value>classpath:/area/options.xml</value>
+            <value>classpath:/area/audit.xml</value>
+            <value>classpath:/area/batch.xml</value>
+            <value>classpath:/area/batchresult.xml</value>
+            <value>classpath:/area/blackout.xml</value>
+            <value>classpath:/area/comment.xml</value>
+            <value>classpath:/area/course.xml</value>
+            <value>classpath:/area/interfaces/crosswalk.xml</value>
+            <value>classpath:/area/dprog.xml</value>
+            <value>classpath:/area/exception.xml</value>
+            <value>classpath:/area/general.xml</value>
+            <value>classpath:/area/plannedcourse.xml</value>
+            <value>classpath:/area/scheduledjob.xml</value>
+            <value>classpath:/area/student.xml</value>
+            <value>classpath:/area/transfercourse.xml</value>
+            <value>classpath:/area/transfereval.xml</value>
+          </list>
+        </property>
+      </bean>
+    </property>
+  </bean>
+  
+  <!-- ============== Entities -->
+  
+</beans>

@@ -1,0 +1,39 @@
+<!-- the url /sitemesh/* is mapped to the spring mvc sitemesh servlet. 
+  this means that any requests that come to /sitemesh/* (and the only requests
+  that come to that url will originate from the sitemesh filter and be for decorators) 
+  will only be requests for decorators -->
+<!-- explanation of what happens:
+  suppose the url http://localhost/dcp/site/foo.html is requested
+  * /dcp is the webapp context (it is ignored by sitemesh)
+  * /site is the servlet mapping for the "site" servlet
+  * /foo.html will load the foo.html template
+  * sitemesh will apply the decorator named "site" to this request
+  * the decorator that will be requested will be: /sitemesh/site.ftl
+  * that decorator will be loaded from WEB-INF/freemarker/sitemesh/site.ftl
+-->
+<decorators defaultdir="/sitemesh">
+
+  <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+  <excludes>
+    <pattern>/*.ftl</pattern>
+ 	<!-- pattern>/note/manage/view-notes.html*</pattern-->
+    <!-- 
+    <pattern>/ajax/*</pattern>
+    <pattern>/exclude.html</pattern>
+    <pattern>/exclude/*</pattern>
+    -->
+  </excludes>
+
+  <decorator name="popup" page="popup.ftl">
+   <!--   <pattern>/note/manage/view-notes.html*</pattern> -->
+  </decorator>
+
+  <!-- decorator used by most pages -->
+  <decorator name="standard" page="standard.ftl">
+    <pattern>/*</pattern>
+  </decorator>
+  
+  <!-- this decorator doesn't include many styles or any javascript -->
+  <decorator name="nostyle" page="nostyle.ftl" />
+
+</decorators>

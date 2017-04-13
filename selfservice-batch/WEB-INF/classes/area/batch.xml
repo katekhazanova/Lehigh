@@ -1,0 +1,331 @@
+<?xml version="1.0"?>
+<pages>
+
+	<checkboxMapping name="YNMapping" trueValue="Y" falseValue="N" />
+
+   	<options name="datasources">
+    	<option name="UACHIEVEDS" label="u.achieve" />
+ 	</options>
+
+	<options name="serverNames">
+		<option name="BATCH" label="BATCH" />
+	</options>
+
+	<options name="operandOptions" provider="uachieve.bas.area.batch.web.provider.OperandOptionsProvider" />
+	
+	<options name="operatorOptions" provider="uachieve.bas.area.batch.web.provider.OperatorOptionsProvider" />
+	
+	<options name="valueOptions" provider="uachieve.bas.area.batch.web.provider.ValueOptionsProvider" />
+	
+	<options name="comOptions" provider="uachieve.bas.area.batch.web.provider.ComOptionsProvider" />
+	
+	<options name="userOptions" provider="uachieve.bas.area.batch.web.provider.UserOptionsProvider"/>
+	
+	<options name="dprogOptions" provider="uachieve.bas.area.batch.web.provider.DprogOptionsProvider" />
+	
+	<options name="soprids">
+		<option name="BARS" label="BARS" />
+	</options>
+	
+<options name="forcedYearTerms">
+	<option name="" label="" />
+    <option name="201310" label="Spring 2013" />
+    <option name="201320" label="Summer 2013" />  
+    <option name="201330" label="Fall 2013" />
+    <option name="201410" label="Spring 2014" />
+    <option name="201420" label="Summer 2014" />  
+    <option name="201430" label="Fall 2014" />
+    <option name="201510" label="Spring 2015" />
+    <option name="201520" label="Summer 2015" />  
+    <option name="201530" label="Fall 2015" />    
+    <option name="201610" label="Spring 2016" />
+    <option name="201620" label="Summer 2016" />
+    <option name="201630" label="Fall 2016" />
+  </options>
+	
+	<options name="retentionPeriod">
+		<option name="1" label="1" />
+		<option name="2" label="2" />
+		<option name="3" label="3" />
+		<option name="4" label="4" />
+		<option name="5" label="5" />
+		<option name="6" label="6" />
+		<option name="7" label="7" />
+		<option name="14" label="14" />
+		<option name="21" label="21" />
+	</options>
+
+	<options name="batchReportTypes">
+		<option name="" label="" />
+		<option name="F" label="F - Incomplete Only" />
+		<option name="P" label="P - Complete Only" />
+		<option name="C" label="C - Complete w/no IP" />
+		<option name="N" label="N - Print No Reports" />
+		<option name="L" label="L - No LIMHRS-REF AR" />
+	</options>
+
+	<options name="printReqOptions">
+		<option name="" label="" />
+		<option name="N" label="N - Incomplete Requirements Only" />
+		<option name="Y" label="Y - Complete Requirements Only" />
+		<option name="X" label="X - No Student Data" />
+	</options>
+
+	<options name="andOrOptions">
+		<option name="" label="" />
+		<option name="and" label="and" />
+		<option name="or" label="or" />
+	</options>
+	
+	<options name="openParenOptions">
+		<option name="" label="" />
+		<option name="(" label="(" />
+	</options>
+		
+	<options name="closeParenOptions">
+		<option name="" label="" />
+		<option name=")" label=")" />
+	</options>
+
+	<options name="frequencyOptions">
+		<option name="once" label="Once" />
+		<option name="hourly" label="Hourly" />
+		<option name="daily" label="Daily" />
+		<option name="weekdays" label="Weekdays" />
+		<option name="weekly" label="Weekly" />
+		<option name="monthly" label="Monthly" />
+	</options>
+	
+	<page name="BatchShare" label="Batch Share" urlBase="batch">
+			<masterView defaultSortBy="id" />
+		<columns>
+			<column name="id" label="Id">
+				<permissions read="nobody" />
+			</column>
+			<column name="userid" label="User">
+				<detailView />
+			</column>
+			<column name="viw" label="View" >
+				<detailView inputType="checkbox" checkboxMapping="YNMapping" />
+			</column>
+			<column name="edt" label="Edit" >
+				<detailView inputType="checkbox" checkboxMapping="YNMapping" />
+			</column>
+			<column name="dlt" label="Delete" >
+				<detailView inputType="checkbox" checkboxMapping="YNMapping"/>
+			</column>
+			<column name="run" label="Run" >
+				<detailView inputType="checkbox" checkboxMapping="YNMapping"/>
+			</column>
+			<column name="sch" label="Schedule" >
+				<!-- <detailView inputType="checkbox" checkboxMapping="YNMapping" /> -->
+				<permissions read="nobody" />
+			</column>
+		</columns>
+	</page>
+
+	<page name="BatchSchedule" label="Batch Schedule" urlBase="batch">
+			<columns>
+				<column name="batchId" label="Batch ID">
+					<permissions read="nobody" />
+				</column>
+				<column name="frequency" label="Frequency">
+					<detailView inputType="menu" options="frequencyOptions" >
+						<!-- permissions read="SS_AREA_RESULTS" create="SS_AREA_RESULTS" / -->
+					</detailView>
+				</column>
+				<column name="startDate" label="Start Date" description="Enter date in the format MM-DD-YYYY">
+					<detailView allowBlank="false" maxLength="10">
+          				<rule name="uachieve.selfservice.util.validation.ValidDateRule" dateFormat="MM-dd-yyyy"  />
+          				<!-- permissions read="SS_AREA_RESULTS" create="SS_AREA_RESULTS" / -->
+        			</detailView>
+				</column>
+				<column name="startTime" label="Start Time" description="Enter time in the format HH:MM:SS" default="00:00:00" >
+					<detailView allowBlank="false" maxLength="8">
+          				<rule name="uachieve.selfservice.util.validation.ValidDateRule" dateFormat="HH:mm:ss"  />
+          				<!-- permissions read="SS_AREA_RESULTS" create="SS_AREA_RESULTS" / -->
+        			</detailView>
+				</column>
+			</columns>
+	</page>
+
+	<page name="DisplayCriteria" label="Batch criteria" urlBase="batch">
+			<permissions create="SS_AREA_BATCHES" delete="SS_AREA_BATCHES" 
+		edit="SS_AREA_BATCHES" read="SS_AREA_BATCHES"/>
+		<masterView defaultSortBy="id.seq" />
+		<columns>
+			<column name="andor" label="And/Or">
+				<detailView inputType="menu" options="andOrOptions" />
+			</column>
+			<column name="openparen" label="(">
+				<detailView inputType="menu" options="openParenOptions" />
+			</column>
+			<column name="operand" label="Operand">
+				<detailView inputType="menu" options="operandOptions"/>
+			</column>
+			<column name="operator" label="Operator">
+				<detailView inputType="menu" options="operatorOptions" />
+			</column>
+			<column name="value" label="Value" renderer="uachieve.bas.area.batch.web.renderer.BatchCriteriaValueColumnRenderer" >
+				<detailView inputType="menu" options="valueOptions" />
+			</column>
+			<column name="closeparen" label=")">
+				<detailView inputType="menu" options="closeParenOptions" />
+			</column>
+			<column derived="true" label="Move Up" renderer="uachieve.bas.area.batch.web.renderer.MoveUpColumnRenderer">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<column derived="true" label="Move Down" renderer="uachieve.bas.area.batch.web.renderer.MoveDownColumnRenderer">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<column name="first" label="first">
+				<permissions read="nobody" />
+			</column>
+			<column name="last" label="last">
+				<permissions read="nobody" />
+			</column>
+		</columns>
+	</page>
+	
+	<page name="PreviewBatch" label="Preview" urlBase="batch">
+		<masterView defaultSortBy="stuno" />
+		<columns>
+			<column name="stuno" label="Student Number"/>
+			<column name="stuname" label="Student Name" />
+			<!--<column name="dprog" label="Student Forced Program" />
+			<column name="catlyt" label="Student Forced Term" />-->
+		</columns>
+	</page>
+
+	<page name="Batch" label="Batch" urlBase="batch">
+		<permissions create="SS_AREA_BATCHES" delete="SS_AREA_BATCHES" 
+		edit="SS_AREA_BATCHES" read="SS_AREA_BATCHES"/>
+		<masterView defaultSortBy="id">
+			<filter on="type" label="Type" />
+			<filter on="owner" label="Owner" />
+		</masterView>
+		<columns>
+			<column derived="true" label="Run Batch" renderer="uachieve.bas.area.batch.web.renderer.RunBatchColumnRenderer">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<column name="id" label="Id">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<column name="description" label="Description">
+				<detailView allowBlank="false" maxLength="50" />
+			</column>
+			<column name="datasource" label="Datasource">
+				<detailView inputType="menu" options="datasources" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="servername" label="Server Name">
+				<detailView inputType="menu" options="serverNames" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="soprid" label="SOPRID">
+				<detailView inputType="menu" options="soprids" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="type" label="Type" renderer="uachieve.bas.area.batch.web.renderer.EvalswColumnRenderer">
+				<detailView inputType="menu" options="evalswOptions" />
+			</column>
+			<column name="retentionperiod" label="Retention Period (Days)">
+				<detailView inputType="menu" options="retentionPeriod" allowBlank="false" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="owner" label="Owner">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>
+			</column>
+			<column name="status" label="Status">
+				<permissions read="nobody" />
+			</column>
+			<column name="rundate" label="Run Date">
+				<permissions read="nobody" />
+			</column>
+			<column name="statusdate" label="Status Date">
+				<permissions read="nobody" />
+			</column>
+			<!-- column name="criteria" label="Criteria" /-->
+			<!-- need column for clone -->
+			
+			<column name="comkey" label="COM Table">
+			<detailView inputType="menu" options="comOptions" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="degree" label="Degree Program">
+				<detailView inputType="menu" options="dprogOptions" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="term" label="Catalog Term">
+				<detailView maxLength="6" inputType="menu" options="forcedYearTerms" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="mask" label="DP Mask">
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="includeplanned" label="Include Planned?">
+				<detailView inputType="checkbox" checkboxMapping="characterMappingAll" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="excludeinprogress" label="Exclude in Progress?">
+				<detailView inputType="checkbox" checkboxMapping="YNMapping" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+
+	<!-- Elements from BatchReport page -->
+			<column name="report" label="Report">
+				<detailView inputType="menu" options="batchReportTypes" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="printreq" label="Print Req">
+				<detailView inputType="menu" options="printReqOptions" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column name="listall" label="List All">
+				<detailView inputType="menu" options="listAllOptions" />
+				<masterView>
+					<permissions read="nobody" />
+				</masterView>
+			</column>
+			<column derived="true" label="Clone" renderer="uachieve.bas.area.batch.web.renderer.CloneBatchColumnRenderer">
+				<detailView>
+					<permissions read="nobody" />
+				</detailView>	
+			</column>
+		</columns>
+	</page>
+</pages>

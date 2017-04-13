@@ -1,0 +1,233 @@
+#footerContainer {
+    background-color: #ffffff;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font: 7pt "arial";
+    color: #333;
+    text-decoration: none;
+    clear: both;
+    line-height: 15px;
+    margin-top: 50px;
+}
+
+.greyBar{
+	clear: both;
+	background-color: #55ccdd;
+	padding: 3px;
+	margin-bottom: 5px;
+	text-align: center;
+	color: white;
+}
+
+.verticalListing th { width: 150px;	color: #000000; background-color:transparent; padding: 3px 3px; font-weight:bold;}
+.verticalListing td.content { width: 250px;	color: #000000; background-color:transparent; padding: 3px 5px; }
+.verticalListing tr {border-bottom: 1px solid #EEE;}
+.verticalListing tr.hidden{line-height: 0px;}
+
+/* #bd {width:1230px; background-color: #fff; overflow:auto; margin-left: 5px;} */
+
+/* /* h1 {font-size: 22px;} */ */
+/* h1 { font-size: 22px; font-weight:bold; margin-top: 5px; } */
+/* h2 {color: #000000; font-size: 19px; font-weight:bold;  } */
+/* h3 {} */
+
+/* /* html,body { */ */
+/* /* 	margin:0; */ */
+/* /* 	padding:0; */ */
+/* /* 	font-family:  arial;    */ */
+/* /* 	font-size: 10pt; */ */
+/* /* 	background-image: url(../images/background.png); */ */
+/* /* } */ */
+/* body {font: 12px/1.4 arial, FreeSans, Helvetica, sans-serif; color: #000000;} */
+
+/* div#header { */
+/* 	padding:10px 0px 5px 15px; */
+/* } */
+
+/* #white-link { */
+/* padding-right: 2px; */
+/* float: right; */
+/* } */
+
+/* /* div#container { */ */
+/* /* 	background-color:white;  */ */
+/* /* 	border-left:solid 1px grey;  */ */
+/* /* 	border-right: solid 1px grey; */ */
+/* /* 	width:1240px; */ */
+/* /* 	margin:0 auto; */ */
+/* /* } */ */
+
+/* div#content { */
+/* 	float:center; */
+/* 	padding-top:28px; */
+/* } */
+
+/* div#content p { */
+/* 	line-height:1.4; */
+/* } */
+
+/* div#extra { */
+/* 	background:#FF8539; */
+/* } */
+
+
+
+/* div#footer a { */
+/* 	display:inline; */
+/* 	padding:0; */
+/* 	color: #333; */
+/* 	text-decoration:underline; */
+/* } */
+
+/* div#menu { */
+/* } */
+
+/* div#extra { */
+/* 	float:left; */
+/* 	clear:left; */
+/* 	width:200px; */
+/* } */
+
+/* a.specialeffects:hover { */
+/*   color: black; */
+/*   text-decoration: none; */
+/*   font-family: arial; */
+/*   font-weight: bold; */
+/* } */
+
+/* .bordered { */
+/* 	border: solid black 2px; */
+/* } */
+
+/* .centeredBox { */
+/* 	text-align:center; */
+/* } */
+
+/* .footer { */
+/* 	font-size: 70%; */
+/* } */
+
+/* #directionsTab{ */
+/* 	margin-left: 10px; */
+/* 	margin-right: 10px; */
+/* } */
+
+/* #groupTabs{ */
+/* 	margin-left: 10px; */
+/* 	margin-right: 10px; */
+/* } */
+
+/* #propertyTabs{ */
+/* 	margin-left: 10px; */
+/* 	margin-right: 10px; */
+/* } */
+
+
+/* .pageTitle { */
+/* 	padding:10px; */
+/* } */
+
+/* .emptySearch { */
+/* 	font-style: italic; */
+/* 	color: #CCC; */
+/* } */
+
+/* .bd { */
+/* 	font-variant: normal; */
+/* } */
+
+/* .error { */
+/* 	font-style: bold; */
+/* 	color: red; */
+/* } */
+
+/* .yui-skin-sam .yui-navset .yui-content { */
+/* 	background-color: #eeeeee; */
+/* 	background-image: none; */
+/* 	background-repeat: repeat; */
+/* 	background-attachment: scroll; */
+/* 	background-position: 0% 0%; */
+/* } */
+
+/* #propertyTabs .yui-content, #groupTabs .yui-content, #userTabs .yui-content { */
+/* 	background-color: #eeeeee; */
+/* } */
+
+
+/* /* BOX COLORS */ */
+/* .box    		{border-color: #8B8B8B; background-color: #E0E0E0;} */
+/* .box		{border:solid 1px #8B8B8B;} */
+/* .box h3		 {background: #a1a1a1; for non-css3 browsers  */
+/*     			  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea',endColorstr='#a1a1a1'); for IE  */
+/*     			  background: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#a1a1a1)); for webkit browsers  */
+/*     		      background: -moz-linear-gradient(top, #eaeaea, #a1a1a1); for firefox 3.6+ */
+/*     			  border: 0px;} */
+/* /* http://www.themaninblue.com/experiment/InForm/ */ */
+
+/* #marginForm fieldset { */
+/* margin:0pt 0pt 1em; */
+/* } */
+/* #marginForm input { */
+/* display:block; */
+/* left:8em; */
+/* position:relative; */
+/* top:-1.4em; */
+/* } */
+/* #marginForm input.submit { */
+/* clear:both; */
+/* top:0pt; */
+/* } */
+/* #marginForm label { */
+/* clear:both; */
+/* display:block; */
+/* float:left; */
+/* font-weight:bold; */
+/* margin-top:0em; */
+/* width:8em; */
+/* } */
+/* #marginForm select { */
+/* display:block; */
+/* left:8em; */
+/* position:relative; */
+/* top:-1.4em; */
+/* } */
+
+/* #marginForm .loginFieldset { */
+/* 	margin: 0pt; */
+/* 	padding: 0pt; */
+/* } */
+
+/* .loginFieldset label { */
+/* 	margin: 0pt; */
+/* 	padding: 0pt; */
+/* } */
+
+/* .loginFieldset input.submit { */
+/* 	width: 60px; */
+/* 	height: 25px; */
+/* } */
+
+/* img						{border:0px} */
+/* a						{font: 100% "arial"; color: #000000; text-decoration: none; line-height:14.5pt;} */
+/* a:hover					{font: 100% "arial"; color: #000000; text-decoration: underline; line-height:14.5pt;} */
+/* select					{font: 100% "arial"; color: #000000; text-decoration: none;} */
+/* input					{font: 100% "arial"; color: #000000; text-decoration: none;} */
+
+/* .errorMessage			{font: 100% "arial"; color: #FB0F10; font-weight: bold; font-style:italic; text-decoration: none;} */
+/* label.error 			{ float: none; color: red; padding-left: .5em; } */
+
+/* .box    		{float:left; clear:left; margin: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;} */
+/* .box h3		{margin: 0px; padding: 6px 8px 4px 5px; font-size:130%; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; } */
+/* .box ul 		{margin: 0;	padding: 5px 10px 14px 10px; list-style: none;} */
+/* .box ul li 	{margin:0 06px;	padding: 0;	list-style-type: none;} */
+
+/* .propertyHeader{ */
+/* 	text-align: left; */
+/* } */
+
+#reportDesc{
+	padding-left: 20px;
+	color: grey;
+	font-style: italic;
+}

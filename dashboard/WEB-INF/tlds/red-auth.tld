@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<taglib>
+	<tlib-version>1.0</tlib-version>
+	<jsp-version>1.2</jsp-version>
+	<short-name>red-auth</short-name>
+	<uri>/WEB-INF/tlds/red-auth.tld</uri>
+	<description>CollegeSource Security Tag Library</description>
+	
+	<tag>
+		<name>authorize</name>
+		<tag-class>com.collegesource.security.authorization.AuthorizationTag</tag-class>
+		<description>
+			A tag that determines whether to output the content based on the user's credentials.
+		</description>
+		
+		<attribute>
+			<name>ifNotGranted</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				A comma separated list of app functions and actions that a user must NOT have for 
+				the body to be output.  The format should be AppFn=CRUD
+			</description>
+		</attribute> 
+		
+		<attribute>
+			<name>ifAllGranted</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				A comma separated list of app functions and actions (AppFn=CRUD) that a user must
+				have every one of in order for the body content to be output.
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>IfAnyGranted</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				A comma separated list of app functions and actions (AppFn=CRUD) that a user must
+				have at least one of in order for the body content to be output.
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>IfNoneGranted</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				A comma separated list of app functions and actions (AppFn=CRUD) that a user must 
+				NOT have in order to see the content.  This is similar as an "else" statement when
+				used with one of the other tags.
+			</description>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<name>restrictDomain</name>
+		<tag-class>com.collegesource.security.domain.RestrictDomainTag</tag-class>
+		<description>
+			If a user has the permission on the app function defined, but it's restricted, the
+			tag will compare the Domain of the DomainObject provided with the list of domains
+			a user has access to in order to determine whether to display the content or not.
+		</description>
+		
+		<attribute>
+			<name>appFunction</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>
+				A single application function that is going to be checked against the user's
+				permissions.
+			</description>
+		</attribute> 
+		
+		<attribute>
+			<name>action</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>
+				The action that is to be performed.  If the permission for the action is restricted
+				then a check will be done on the Domain Object.
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>domainObject</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description>
+				The Domain object that is to be accessed.
+			</description>
+		</attribute>
+		
+		<attribute>
+			<name>inverse</name>
+			<required>false</required>
+			<rtexprvalue>false</rtexprvalue>
+			<description>
+				This reverses the expression as if to say "is NOT part of the domain."
+			</description>
+		</attribute>
+	</tag>
+</taglib>

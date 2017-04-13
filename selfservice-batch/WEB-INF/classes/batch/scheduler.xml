@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+  	<bean id="schedulerProvider" class="uachieve.bas.area.batch.provider.impl.QuartzProviderImpl" destroy-method="close">
+  		<property name="schedulerFactory" ref="schedulerFactory" />
+  		<property name="scheduleCleanUp" value="${bars.quartz.scheduler.schedule.cleanup}"/>
+  		<property name="schedulerCleanUpCron" value= "${bars.quartz.scheduler.schedule.cleanup.cronexpression}"/>
+  	
+  	</bean>
+	
+	<!-- <bean id="schedulerFactory" class="org.quartz.impl.StdSchedulerFactory"/> -->
+	
+	
+	<bean id="batchHelper" class="uachieve.bas.area.batch.util.BatchHelper">
+		<property name="observeBlackouts" value ="true"/>
+	</bean>
+	 	
+</beans>

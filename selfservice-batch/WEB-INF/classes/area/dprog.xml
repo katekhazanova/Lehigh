@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<pages>
+
+  <options name="StuDprog.dprogs" provider="uachieve.selfservice.area.dprog.web.provider.DprogOptionsProvider" />
+
+  <options name="drtypes">
+    <option name="D" label="List of Req's inserted" />
+    <option name="R" label="Single Req inserted" />
+  </options>
+
+  <page name="StuMarkerReq" label="Marker" urlBase="dprog">
+    <permissions create="SS_AREA_DPROG" edit="SS_AREA_DPROG" delete="SS_AREA_DPROG" />
+    <masterView defaultSortBy="marker" />
+    <columns>
+      <column name="marker" label="Marker" align="left">
+        <detailView maxLength="9" />
+        <masterView>
+          <permissions read="SS_AREA_DPROG" />
+        </masterView>
+      </column>
+      <column name="drval" label="Value" align="left">
+        <detailView maxLength="15" />
+      </column>
+      <column name="drtype" label="Type">
+<!-- 
+        <description>
+          <![CDATA[
+            <ul>
+              <li><strong>Single Req inserted</strong> - Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Integer dolor. Nullam eu neque consequat magna mollis facilisis.</li>
+              <li><strong>List of Req's inserted</strong> - Maecenas vestibulum, felis non ullamcorper lacinia, lectus enim aliquet nisi</li>
+            </ul>
+          ]]>
+        </description> -->       
+        <detailView maxLength="1" inputType="menu" options="drtypes" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="drinstcd" label="CD">
+        <detailView maxLength="3" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="drcatlyt" label="Term">
+        <detailView maxLength="6" inputType="menu" options="yearTerms" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa">
+        <detailView>
+          <permissions read="SS_AREA_DPROG" edit="nobody" />
+        </detailView>
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="lastModUser" label="By">
+        <detailView>
+          <permissions read="SS_AREA_DPROG" edit="nobody" />
+        </detailView>
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+    </columns>
+  </page>
+
+  <page name="StuDprog.instcds" label="Instcds" urlBase="dprog">
+    <permissions create="nobody" edit="nobody" delete="nobody" />
+    <masterView defaultSortBy="instcd.code" />
+    <columns>
+      <column name="instcd.code" label="Instcd" default="- no Instcd -" renderer="uachieve.selfservice.area.dprog.web.renderer.CreateStuDprogLinkColumnRenderer" />
+<!--      renderer="uachieve.selfservice.area.exception.web.renderer.CreateExceptionLinkColumnRenderer" />-->
+<!--      <column name="ctlcd" label="Exception Code" renderer="uachieve.selfservice.area.exception.web.renderer.CreateExceptionLinkColumnRenderer" />-->
+    </columns>
+  </page>
+
+  <page name="StuDprog" label="Degree Program" urlBase="dprog">
+    <permissions create="SS_AREA_DPROG" edit="SS_AREA_DPROG" delete="SS_AREA_DPROG" />
+    <masterView defaultSortBy="comp_id.instcd" />
+    <subPage name="StuMarkerReq" property="stuMarkerReqs" />
+    <columns>
+      <column name="comp_id.instcd" label="School" align="left" width="5">
+        <detailView maxLength="3">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="comp_id.dprog" label="Degree Program" align="left">
+        <detailView inputType="menu" options="StuDprog.dprogs" maxLength="15" />
+      </column>
+      <column name="drcatlyt" label="Term" align="left" width="5" renderer="uachieve.selfservice.area.dprog.web.renderer.StuDprogTermColumnRenderer">
+        <detailView maxLength="6" inputType="menu" options="yearTerms" />
+      </column>
+      <column name="dpmask" label="Dpmask">
+        <detailView maxLength="15" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="acatlyt1" label="Alternate Cat Y/T 1">
+        <detailView maxLength="6" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="acatlyt2" label="Alternate Cat Y/T 2">
+        <detailView maxLength="6" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="whatif" label="Whatif">
+        <detailView maxLength="1" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="degreeDate" label="Degree Date">
+        <detailView maxLength="10">
+          <!--<rule name="uachieve.selfservice.util.validation.ValidDateRule" dateFormat="MMddyy" />-->
+        </detailView>
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa">
+        <detailView>
+          <permissions read="SS_AREA_DPROG" edit="nobody" />
+        </detailView>
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+      <column name="lastModUser" label="By">
+        <detailView>
+          <permissions read="SS_AREA_DPROG" edit="nobody" />
+        </detailView>
+        <masterView>
+          <permissions read="nobody" />
+        </masterView>
+      </column>
+    </columns>
+  </page>
+
+
+</pages>

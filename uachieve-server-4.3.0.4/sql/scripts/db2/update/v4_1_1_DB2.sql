@@ -1,0 +1,1 @@
+Alter table req_xy ADD column series char(1)

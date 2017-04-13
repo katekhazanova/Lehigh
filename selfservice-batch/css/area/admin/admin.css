@@ -1,0 +1,66 @@
+/*
+        =====================================================
+        Admin Page Setup
+        =====================================================
+*/
+#admin_main_tb {
+    vertical-align: top;
+}
+
+.admin_menu {
+    vertical-align: top;
+}
+
+
+/*
+        =====================================================
+        Admin Table Formatting
+        =====================================================
+*/
+.admin-table {
+   
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0px;
+    text-align: left;
+    vertical-align: top;
+}
+.admin-table tr {
+    vertical-align: top;
+    border-bottom: 1px solid #EEE;
+    padding-top: 3px;
+}
+.admin-table-rowh {
+    font-weight: bold;  
+}
+.admin-table th {
+    font-weight: bold;
+    background-color: white;
+}
+.admin-table td {
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+}
+#cronHelp {
+	font-size: 8pt;	
+}
+.cronHelp {
+	font-size: 8pt;
+}
+
+/*
+        =====================================================
+        Admin Reports Page
+        =====================================================
+*/
+#reportMain {
+	
+	height: 400px;
+	
+}
+#reportBack {
+	padding: 5px;	
+}
+/*

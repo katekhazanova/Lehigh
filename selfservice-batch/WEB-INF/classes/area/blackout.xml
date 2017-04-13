@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<pages>
+
+<page name="Blackout" label="Blackout" urlBase="blackout">
+		<permissions create="SS_AREA_BLACKOUTS" edit="SS_AREA_BLACKOUTS" 
+		delete="SS_AREA_BLACKOUTS" read="SS_AREA_BLACKOUTS" />
+		<masterView defaultSortBy="id">
+		   <!--  <filter on="dataSource" label="Datasource" /> -->
+			<filter on="frequency" label="Frequency"/> 
+		</masterView>
+		
+		<columns>
+			<column name="id" label="Id">
+				<permissions read="nobody" />
+			</column>	
+			<column name="description" label="Description" />
+ 			<column name="datasource" label="Datasource" />
+			<column name="frequency" label="Frequency" renderer="uachieve.bas.area.blackout.web.renderer.FrequencyColumnRenderer" />
+			<column name="dayoftheweek" label="Day of the Week">
+				<masterView>
+					<permissions read="nobody"/>
+				</masterView>
+			</column>
+			<column name="dayofthemonth" label="Day of the Month">
+				<detailView inputType="menu" />
+				<masterView>
+					<permissions read="nobody"/>
+				</masterView>
+			</column>
+			<column name="starttime" label="Start">
+				<detailView>
+					<rule name="uachieve.selfservice.util.validation.ValidDateRule" dateFormat="HH:mm:ss"  />
+				</detailView>
+			</column>
+			<column name="endtime" label="End">
+				<detailView>
+					<rule name="uachieve.selfservice.util.validation.ValidDateRule" dateFormat="HH:mm:ss"  />
+				</detailView>
+			</column> 
+		</columns>		
+	</page>
+
+</pages>

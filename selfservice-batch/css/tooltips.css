@@ -1,0 +1,52 @@
+/* ========================================================================== */
+/* tooltips */
+div.tooltip {
+	position: absolute;
+	z-index: 99;
+	display: none;
+}
+div.help {
+	display: inline;
+	position: relative;
+}
+
+div.help:hover>span {
+	position: absolute;
+	z-index: 99;
+	top: .5em;
+	left: 1.25em;
+	display: block;
+	background: #ffffff;
+	border: 1px solid gray;
+	white-space: nowrap;
+}
+
+div.help:hover>div {
+	position: absolute;
+	top: .5em;
+	left: .5em;
+	display: block;
+	min-width: 30em;
+	padding: 4px;
+	background: #f7f7f7;
+	z-index: 99;
+	border: 1px solid gray;
+}
+
+div.tooltip h1, div.tooltip h2, div.tooltip h3 {
+	margin-top: 0;
+}
+
+.acourse {
+	text-align: center;
+}
+
+.acourseTH {
+	font-size: 10px;
+}
+.acourseCheck {
+	color: green;
+}
+.acourseX {
+	color: #a1a1a1;
+}

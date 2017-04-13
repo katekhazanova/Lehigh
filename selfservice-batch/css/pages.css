@@ -1,0 +1,17 @@
+/* ------------------------------------- PAGES CSS ---------------------------- */
+.pages-savebar {
+	padding-top: 2em;	
+}
+
+/* for columns like edit and delete */
+.pages-op {
+	width: 3%;
+	padding-left: 0;
+}
+
+.filter { min-width: inherit; }
+
+.groupByHeader { background: #dedede ; }
+.groupByHeader td.title { padding: 0; text-align: left; font-size: 100%; background: #dedede !important;}
+
+#auditMenu a {padding-right: 15px;}

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= BATCH RELATED DEFINITIONS ============================= -->
+
+  <!-- ============== Dao's -->
+   	<bean id="batchDAO" parent="uachieveapi.parentDao" class="uachieve.bas.area.batch.dao.hibernate.BatchHibernateDao"/>
+
+	<bean id="batchShareDAO" parent="uachieveapi.parentDao" class="uachieve.bas.area.batch.dao.hibernate.BatchShareHibernateDao">
+		<property name="userLookupService" ref="userLookupServiceUtil"/>
+	</bean>
+	
+	<bean id="batchStudentDAO" class="uachieve.bas.area.batch.dao.jdbc.BatchStudentJdbcDao">
+		<property name="dataSource" ref="uachieveapi.dataSource" />
+	</bean>
+	
+  <!-- ============== Repositories -->
+  <!-- ============== Services -->
+  	<bean id="batchService" class="uachieve.bas.area.batch.service.impl.BatchServiceImpl"/>
+	
+	<bean id="batchShareService" class="uachieve.bas.area.batch.service.impl.BatchShareServiceImpl"/>
+	
+  <!-- ============== Entities -->
+  
+    <bean id="batchConfig" class="uachieve.bas.area.batch.BatchConfig">
+    	<property name="jobidPrefix" value="${uachieve.selfservice.batch.jobid.prefix}"/>
+    	<property name="jobPriority" value="${uachieve.selfservice.batch.priority}" />
+    	<property name="startingStatus" value="${uachieve.selfservice.batch.startingStatus}" />
+    	<property name="userId" value="${uachieve.selfservice.batch.userId}" />
+    	<property name="maxAudits" value="${uachieve.selfservice.batch.maxAudits}" />
+    	<property name="logLevel" value="${uachieve.selfservice.batch.serverLogLevel}" />
+    	<property name="warnSize" value="${uachieve.selfservice.batch.warnSize}" />
+    	<property name="pollingRate" value="${uachieve.selfservice.batch.batchPollingRate}" />
+    	<property name="datasources" value="${uachieve.selfservice.batch.dataSources}" />
+	</bean>
+	<bean id="criteriaConfig" class="uachieve.bas.area.batch.CriteriaConfig">
+		<property name="criteria" ref="criteria"/>
+		<property name="operators">
+			<map>
+				<entry key="equals" value="equals" />
+				<entry key="notequal" value="not equal"  />
+				<entry key="greaterthan" value="greater than" />
+				<entry key="greaterequal" value="greater than or equal to" />
+				<entry key="lessthan" value="less than"  />
+				<entry key="lessequal" value="less than or equal to" />
+				<entry key="like" value="like" />
+				<entry key="notlike" value="not like" />
+				<entry key="in" value="in" />
+				<entry key="notin" value="not in" />
+			</map>
+		</property>
+	</bean>
+</beans>

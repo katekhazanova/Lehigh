@@ -1,0 +1,139 @@
+/* ========================================================================== */
+/* tables */
+table { caption-side: top; }
+
+
+/*
+	Marker tables and Buttons
+*/
+table.markerDivider {width: 100%}
+table.markerDivider td.left {border-right: 1px solid black; width: 60%;}
+table.markerDivider td.right {width: 40%; padding-left: 15px;}
+
+table.markerDivider a:link { color: red; text-Decoration: underline; }
+table.markerDivider a:hover {text-decoration: underline; cursor: pointer;}
+table.markerDivider a:visited {color: red;}
+table.markerDivider label {font-weight: bold}
+
+table.markerDivider ul{
+	margin: 0px;
+	width: auto;
+}
+
+#clearMarker:disabled{
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+	cursor: default;
+}
+
+#changeProgram{
+	border: 1px solid #E0E0E0;
+	background: #E0E0E0;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#FFF6BF');
+	background: -webkit-gradient(linear, left top, left bottom, from(white), to(#FFF6BF));
+	background: -moz-linear-gradient(top, white, #FFF6BF);
+	font-weight: normal;
+	color: black;
+	border-radius: 5px;
+}
+
+#changeProgram:disabled{
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+	cursor: default;
+}
+
+
+#removeChild:disabled{
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+	cursor:default
+}
+
+
+#cancelAdd{
+	border: 1px solid #E0E0E0;
+	background: #E0E0E0;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#FFF6BF');
+	background: -webkit-gradient(linear, left top, left bottom, from(white), to(#FFF6BF));
+	background: -moz-linear-gradient(top, white, #FFF6BF);
+	font-weight: normal;
+	color: black;
+	border-radius: 5px;
+	
+}
+
+#cancelAdd:disabled{
+	opacity:0.4;
+	filter:alpha(opacity=40); /* For IE8 and earlier */
+	cursor: default;
+}
+.marker {
+	font-weight: bold;
+	font-size: 100%;
+	color: darkcyan;
+	cursor: default;
+}
+
+.maxWidth {
+	max-width: 200px;
+}
+
+
+.verticalListing th { width: 150px;	color: #000000; background-color:transparent; padding: 3px 3px; font-weight:bold;}
+.verticalListing td.content { width: 250px;	color: #000000; background-color:transparent; padding: 3px 5px; }
+.verticalListing tr {border-bottom: 1px solid #EEE;}
+.verticalListing tr.hidden{line-height: 0px;}
+.auditHeaderTable {width:100%;}
+
+caption { text-align: left; font-weight: bold; margin-bottom: 10px; margin-top: 20px; margin-left: 4px; }
+.fullWidth { width: 100%; }
+
+table.tabular {
+	width: 100%;
+	border: 1px solid #7f7f7f;
+}
+
+table.tabular tr th, table.tabular tr td {
+	text-align: center;
+}
+
+table.tabular th{
+    background: #a1a1a1; /* for non-css3 browsers */ 
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eaeaea',endColorstr='#a1a1a1'); /* for IE */ 
+    background: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#a1a1a1)); /* for webkit browsers */ 
+    background: -moz-linear-gradient(top, #eaeaea, #a1a1a1); /* for firefox 3.6+ */
+    border-right: 1px solid #000000;
+    font-weight: normal;
+ }
+
+table.tabular th a{
+	font-weight: normal;
+}	
+
+/* for zebra striping */
+table.tabular tr.odd{ background-color: #eaeaea; }
+table.tabular tr.even{ background-color: #ffffff; }
+ 
+table.tabular tr:hover{background-color: #daf7fc;}
+
+/* th { */
+/* 	width: 15%; */
+/* 	text-align: left; */
+/* 	background-color: #a1a1a1; */
+/* 	color: #31314e; */
+/* } */
+
+th, td {
+	padding: 2px 3px;
+}
+
+table.resultList th
+{
+    border-right-width:1px;
+    border-right-style:solid;
+    border-right-color:#000000;
+    vertical-align: bottom!important;
+}
+
+#overDiv {background-color: #FFFFCC;border:1px solid #667F66;}

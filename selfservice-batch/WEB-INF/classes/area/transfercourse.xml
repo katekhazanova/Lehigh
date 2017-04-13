@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<pages>
+	<checkboxMapping name="PflgMapping" trueValue="P" falseValue=" " />
+	
+	<!-- This InstOptions shows Iname (Source_id) -->
+	<!-- provider="uachieve.selfservice.area.transfercourse.web.provider.MastrefInstitutionOptionsWithInameProvider" -->
+	
+	<!-- This InstOptions shows RptInstid (Source_id) -->
+	<!-- provider="uachieve.selfservice.area.transfercourse.web.provider.MastrefInstitutionOptionsProvider" -->
+	
+	<!-- Replace the definition after provider= with whichever InstOptions you want to use -->
+	<options name="instOptions" 
+		provider="uachieve.selfservice.area.transfercourse.web.provider.MastrefInstitutionOptionsWithInameProvider"
+	/>	
+	<options name="transferYearTerms">
+		<option name="200901" label="Spring 2009" />
+	    <option name="200906" label="Summer 2009" />  
+	    <option name="200908" label="Fall 2009" />
+	    <option name="201001" label="Spring 2010" />
+	    <option name="201006" label="Summer 2010" />  
+	    <option name="201008" label="Fall 2010" />
+	    <option name="201101" label="Spring 2011" />
+	    <option name="201106" label="Summer 2011" />  
+	    <option name="201108" label="Fall 2011" />
+	    <option name="201201" label="Spring 2012" />
+	    <option name="201206" label="Summer 2012" />  
+	    <option name="201208" label="Fall 2012" />    
+	    <option name="201301" label="Spring 2013" />
+	    <option name="201306" label="Summer 2013" />
+	    <option name="201308" label="Fall 2013" />
+	   	<option name="201401" label="Spring 2014" />
+	    <option name="201406" label="Summer 2014" />
+	    <option name="201408" label="Fall 2014" />
+	    <option name="201501" label="Spring 2015" />
+	    <option name="201506" label="Summer 2015" />
+	    <option name="201508" label="Fall 2015" />
+	    <option name="201601" label="Spring 2016" />
+	    <option name="201606" label="Summer 2016" />
+	    <option name="201608" label="Fall 2016" />
+	    <option name="201701" label="Spring 2017" />
+	    <option name="201706" label="Summer 2017" />
+	    <option name="201708" label="Fall 2017" />
+  	</options>
+  	
+  	<options name="transferGradeTable">
+	    <option name="A" label="A" />
+	    <option name="A-" />
+	    <option name="B+" />
+	    <option name="B" />
+	    <option name="B-" />
+	    <option name="C+" />
+	    <option name="C" />
+	    <option name="C-" />
+	    <option name="D+" />
+	    <option name="D" />
+	    <option name="D-" />
+	    <option name="F" />
+	    <option name="Z" />
+  	</options>
+		
+  <page name="TransferCourse" label="Transfer Course" urlBase="transfercourse">
+    <permissions create="SS_AREA_TRANSFERCOURSE" edit="SS_AREA_TRANSFERCOURSE" delete="SS_AREA_TRANSFERCOURSE" />
+    <masterView defaultSortBy="comp_id.crsYt">
+      <filter on="comp_id.crsYt" label="Term" />
+      <filter on="grade" label="Grade" />
+      <filter on="comp_id.sourceId" label="School" />
+    </masterView>
+    <columns>
+      <column name="comp_id.sourceId" label="School" 
+      		renderer="uachieve.selfservice.area.transfercourse.web.renderer.InameColumnRenderer" align="left">
+      <!--column name="comp_id.sourceId" label="School" 
+      		renderer="uachieve.selfservice.area.transfercourse.web.renderer.RpinstidColumnRenderer" -->
+      	<detailView inputType="menu" options="instOptions" />
+      </column>
+      <column name="comp_id.sourceCd" label="Cd" width="5">
+      		<detailView inputType="text" maxLength="3"/>
+      </column>
+      <column name="comp_id.crsYt" label="Term" align="left" width="5" renderer="uachieve.selfservice.area.course.web.renderer.StuAcadrecTermColumnRenderer">
+        <detailView inputType="menu" options="transferYearTerms" />
+      </column>
+      <column name="comp_id.crsNum" label="Course" 
+      renderer="uachieve.selfservice.area.transfercourse.web.renderer.ViewCourseLinkColumnRenderer" description="Adding a \ between the department and the course number allows u.achieve to calculate the 
+      correct number of spaces between department and course" align="left" >
+        <detailView allowBlank="false" />
+      </column>
+      <column name="ctitle" label="Title" default="" align="left">
+        <detailView inputType="textarea" maxLength="29" />
+      </column>
+      <column name="grade" label="Grade" width="5">
+        <detailView inputType="text" maxLength="4"/>
+
+      </column>
+     <column name="rcredit" label="Credit" format="number:#0.00" width="5">
+        <detailView allowBlank="false" />
+      </column>
+      <column name="pflg" label="Pflg" align="left">
+      	<detailView inputType="checkbox" checkboxMapping="PflgMapping"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg1" label="iflg1" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg2" label="iflg2" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg3" label="iflg3" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg4" label="iflg4" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="iflg5" label="iflg5" align="left">
+      	<detailView inputType="text" maxLength="3" width="5"/>
+      	<masterView>
+          <permissions edit="nobody" />
+        </masterView>
+      </column>
+      <column name="bacc" label="Bacc" align="left">
+      	<detailView inputType="menu" options="bacc"/>
+      </column>
+      <column name="agclc" label="Agclc" align="left">
+      	<detailView inputType="menu" options="agclc"/>
+      </column>
+      <column name="repeatf" label="Repeatf" align="left">
+      	<detailView inputType="menu" options="repeatf"/>
+      </column>
+      <column name="actc" label="Actc" align="left">
+      	<detailView inputType="menu" options="actc"/>
+      </column>
+       <column name="honors" label="Honors" align="left">
+      	<detailView inputType="menu" options="honors"/>
+      </column>
+      <column name="comp_id.crsSeq" label="Course Sequence">
+        <permissions read="advisor" edit="advisor" />
+        <detailView maxLength="4">
+          <rule name="uachieve.selfservice.util.validation.LengthRule" min="0" max="3" />
+        </detailView>
+      </column>
+      <column name="lastModDate" label="Last Modified" format="date:MM/dd/yyyy h:mm aaa" width="15">
+        <masterView>
+          <permissions read="advisor" />
+        </masterView>
+        <detailView>
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <!-- column name="evalflg" label="Eval Flag">
+        <detailView maxLength="1">
+          <permissions read="SS_AREA_COURSE" edit="nobody" />
+        </detailView>
+      </column-->
+      <!-- column name="certify" label="Certify" /-->
+      <!-- column name="comp_id.sourceId" label="School" -->
+    </columns>
+  </page>
+
+</pages>

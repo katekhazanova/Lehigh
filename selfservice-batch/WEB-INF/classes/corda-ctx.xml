@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- ============================= GRAPHS ============================= -->
+
+    <!-- The academicProgressGraph is the bar graph that is shown above audit results - it includes 2 bar graphs -->
+    <bean id="academicProgressGraph" class="uachieve.selfservice.area.audit.graph.corda.AcademicProgressGraph">
+      <property name="graphDao" ref="academicProgressGraphDao" />
+    </bean>
+
+    <!-- The gpaDetailGraph is the pie graph that is shown above audit results -->
+    <bean id="gpaDetailGraph" class="uachieve.selfservice.area.audit.graph.corda.GpaDetailGraph">
+      <property name="graphDao" ref="gpaDetailGraphDao" />
+    </bean>
+
+    <!-- The transcriptGraph is the bar and line graph that shows a snapshot of all student course work and gpa -->
+    <bean id="transcriptGraph" class="uachieve.selfservice.area.audit.graph.corda.TranscriptGraph">
+      <property name="graphDao" ref="transcriptGraphDao" />
+    </bean>
+    
+    <bean id="navigationTrailDao" class="uachieve.selfservice.area.audit.graph.dao.sqlmaps.NavigationTrailSqlMapsDao" />
+  	<bean id="progressInformationDao" class="uachieve.selfservice.area.audit.graph.dao.sqlmaps.ProgressInformationSqlMapsDao" />
+  	<bean id="gpaDetailGraphDao" class="uachieve.selfservice.area.audit.graph.dao.sqlmaps.GpaDetailGraphSqlMapsDao" />
+  	<bean id="academicProgressGraphDao" class="uachieve.selfservice.area.audit.graph.dao.sqlmaps.AcademicProgressGraphSqlMapsDao" />
+  	<bean id="transcriptGraphDao" class="uachieve.selfservice.area.audit.graph.dao.sqlmaps.TranscriptGraphSqlMapsDao" />
+    
+    
+    <bean id="graphConfig" class="uachieve.selfservice.GraphConfig">
+    	<property name="animateGraphs" value="${uachieve.selfservice.graph.animate}" />
+        <property name="gpaGraphDecimalPlaces" value="${uachieve.selfservice.graph.gpa.decimalPlaces}" />
+    	<property name="showAllGPADecimals" value="${uachieve.selfservice.graph.gpa.showAllDecimals}" />
+    	<property name="hourGraphDecimalPlaces" value="${uachieve.selfservice.graph.hour.decimalPlaces}" />
+    	<property name="showAllHourDecimals" value="${uachieve.selfservice.graph.hour.showAllDecimals}" />
+    	<property name="truncateGPA" value="${uachieve.selfservice.graph.gpa.truncate}" />
+    	<property name="hoursLabel" value="${uachieve.selfservice.graph.hour.label}" />
+    	<property name="gpaLabel" value="${uachieve.selfservice.graph.gpa.label}" />
+    	<property name="maxGPA" value="${uachieve.selfservice.graph.gpa.max}" />
+    </bean>
+</beans>

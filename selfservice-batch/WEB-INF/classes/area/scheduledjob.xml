@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<pages>
+	<page name="ScheduledJob" label="Scheduled Job" urlBase="scheduledjob">
+		<permissions read="SS_AREA_RESULTS" create="nobody" edit="SS_AREA_RESULTS" delete="nobody"/>
+		<masterView defaultSortBy="name" />
+		<columns>
+			<column name="name" label="ID" />
+			<column name="description" label="Description" />
+			<column name="nextrun" label="Next Run" />
+			<column name="previousrun" label="Previous Run" />
+			<column name="start" label="Start" >
+				<permissions read="nobody" />
+			</column>
+			<column name="end" label="End" >
+				<permissions read="nobody" />
+			</column>
+		</columns>
+	</page>
+</pages>

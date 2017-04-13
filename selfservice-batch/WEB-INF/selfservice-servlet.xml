@@ -1,0 +1,82 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:lang="http://www.springframework.org/schema/lang"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-2.0.xsd">
+
+	<import resource="classpath:app-ctx.xml"/>
+
+	<!-- ========================= URL MAPPING DEFINITIONS ========================= -->
+   <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="alwaysUseFullPath" value="true"/>
+		<property name="interceptors">
+			<list>
+				<bean class="uachieve.selfservice.util.logging.DebugInterceptor">
+                  <property name="debug" value="${uachieve.selfservice.debug}" />
+                </bean>
+			</list>
+		</property>
+		<property name="defaultHandler" ref="generalController"/>
+	</bean>
+
+	<!-- ========================= CONTROLLER DEFINITIONS ========================= -->
+    <bean id="generalController" class="uachieve.selfservice.area.general.web.GeneralController" />
+    <bean id="auditController" class="uachieve.selfservice.area.audit.web.AuditController" >
+    	<property name="treeDao" ref="udirect.treeDao" />
+    </bean>
+    <bean id="batchController" class="uachieve.bas.area.batch.web.BatchController" />
+    <bean id="batchResultController" class="uachieve.bas.area.batchresult.web.BatchResultController"/>
+    <bean id="commentController" class="uachieve.selfservice.area.comment.web.CommentController" />
+    <bean id="blackoutController" class="uachieve.bas.area.blackout.web.BlackoutController" />
+    <bean id="courseController" class="uachieve.selfservice.area.course.web.CourseController" />
+    <bean id="dprogController" class="uachieve.selfservice.area.dprog.web.DprogController" />
+    <bean id="exceptionController" class="uachieve.selfservice.area.exception.web.ExceptionController" />
+    <bean id="plannedCourseController" class="uachieve.selfservice.area.plannedcourse.web.PlannedCourseController" >
+    	<property name="availabilityLabel" value="${uachieve.selfservice.catalogcourse.availabilityLabel}" />
+        <property name="hourLabel" value="${uachieve.selfservice.catalogcourse.hour}" />
+   	  	<property name="showDepartment" value="${uachieve.selfservice.catalogcourse.showDepartment}" />
+	  	<property name="showCourseNumber" value="${uachieve.selfservice.catalogcourse.showCourseNumber}" />
+	  	<property name="showHours" value="${uachieve.selfservice.catalogcourse.showHours}" />
+	  	<property name="showDescription" value="${uachieve.selfservice.catalogcourse.showDescription}" />
+	  	<property name="showPreCoReqDisplay" value="${uachieve.selfservice.catalogcourse.showPreCoReqDisplay}" />
+	  	<property name="showAvailability" value="${uachieve.selfservice.catalogcourse.showAvailability}" />
+	  	<property name="maxYearTermCode" value="${uachieve.selfservice.catalogcourse.maxYearTermCode}" />
+	  	<property name="showTitle" value="${uachieve.selfservice.catalogcourse.showTitle}" />
+	  	<property name="customProperty1" value="${uachieve.selfservice.catalogcourse.customProperty1}" />
+	  	<property name="customProperty2" value="${uachieve.selfservice.catalogcourse.customProperty2}" />
+	  	<property name="customProperty3" value="${uachieve.selfservice.catalogcourse.customProperty3}" />
+	  	<property name="customProperty4" value="${uachieve.selfservice.catalogcourse.customProperty4}" />
+    </bean>
+    <bean id="scheduledJobController" class="uachieve.bas.area.scheduledjob.web.ScheduledJobController" />
+    <bean id="studentController" class="uachieve.selfservice.area.student.web.StudentController" />
+    <bean id="transferEvalController" class="uachieve.selfservice.area.transfereval.web.TransferEvalController" />
+    <bean id="transferCourseController" class="uachieve.selfservice.area.transfercourse.web.TransferCourseController" />
+    <bean id="crosswalkController" class="uachieve.selfservice.area.interfaces.crosswalk.web.CrosswalkController" />
+    <!-- bean name="accessDeniedController" class="org.springframework.web.servlet.mvc.ParameterizableViewController" >
+		<property name="viewName" value="accessdenied" />
+	</bean-->
+    
+	<!-- ========================= EXCEPTION RESOLVERS ========================= -->
+	<bean id="defaultExceptionResolver" class="uachieve.selfservice.util.web.LoggingSimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="general/error"/>
+		<property name="exceptionMappings">
+			<props>
+				<prop key="AccessDeniedException">redirect:/general/accessdenied.html</prop>
+				<prop key="CurrentUserRequiredException">redirect:/general/login.html?src=userrequired</prop>
+				<prop key="CurrentStudentRequiredException">redirect:/student/search.html?src=studentrequired&amp;destination={0}</prop>
+				<prop key="InstitutionRequiredException">redirect:/general/selectinstitution.html?src=institutionrequired&amp;destination={0}</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean class="uachieve.selfservice.web.LoggingHandlerExceptionResolver"/>
+
+	<!-- ========================= VIEW DEFINITIONS AND RESOLVERS ========================= -->
+	<bean id="viewResolver" class="uachieve.selfservice.util.web.freemarker.NonModelExposingFreeMarkerViewResolver">
+		<property name="cache" value="${uachieve.selfservice.freemarker.cache}"/>
+		<property name="prefix" value=""/>
+		<property name="suffix" value=".ftl"/>
+		<property name="exposeSpringMacroHelpers" value="true"/>
+		<property name="exposeRequestAttributes" value="false"/>
+		<property name="exposeSessionAttributes" value="true"/>
+	</bean>
+</beans>

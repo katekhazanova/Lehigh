@@ -1,0 +1,317 @@
+/* Main Menu */
+
+ .main-menu .navbar-nav,
+ .main-menu .navbar-nav > li {
+  	height: 25px;
+  	margin-bottom: 0px;
+  	max-height: 340px;
+  }
+  
+ .main-menu .navbar-nav > li > a {
+  	height: 25px;
+  	padding-top: 3px;
+  	padding-bottom: 3px;
+  }
+  
+
+.main-menu {
+	background-color: #55ccdd ;
+	border-radius: 0px ;
+}
+
+.main-menu .navbar-nav > .active > a,
+.main-menu .navbar-nav > .active > a:hover,
+.main-menu .navbar-nav > .active > a:focus,
+.main-menu .nav > li:hover {
+  color: #333333 ;
+  background-color: #ffffff ;
+  height: 26px ;
+}
+
+.main-menu .navbar-nav > a,
+.main-menu .navbar-nav > a:hover,
+.main-menu .navbar-nav > a:focus,
+.main-menu .nav > li:hover {
+  color: #333333 ;
+  background-color: #e7e7e7 ;
+  height: 25px ;
+}
+
+.main-menu .navbar-nav > .open > a, 
+.main-menu .navbar-nav > .open > a:hover, 
+.main-menu .navbar-nav > .open > a:focus {
+/* 	background-color: green; */
+	color: #333333;
+}
+
+.main-menu .nav > li > a {
+	color: #ffffff;
+	font-weight: bold ;
+}
+
+.main-menu .navbar-nav > .dropdown > a .caret {
+	border-top-color: #ffffff ;
+	border-bottom-color: #ffffff ;
+}
+
+.main-menu .navbar-nav > .active > a .caret {
+	border-top-color: #333333 ;
+	border-bottom-color: #333333 ;
+}
+
+/* Student Menu */
+
+ .studentMenu .navbar-nav,
+ .studentMenu .navbar-nav > li {
+  	height: 25px;
+  }
+  
+ .studentMenu .navbar-nav > li > a {
+  	height: 25px;
+  	padding-top: 3px;
+  	padding-bottom: 3px;
+  }
+  
+  .studentMenu .navbar-nav > li > .navbar-text {
+  	height: 25px;
+  	padding-top: 5px;
+  	padding-bottom: 2px;
+  	margin-top: 0px;
+  	margin-bottom: 0px;
+  }
+
+.studentMenu {
+	background-color: #eeeeee ;
+	border-radius: 0px ;
+}
+
+.studentMenu .navbar-nav > .active > a,
+.studentMenu .navbar-nav > .active > a:hover,
+.studentMenu .navbar-nav > .active > a:focus,
+.studentMenu .nav > li:hover {
+  background-color: #ffffff ;
+  height: 26px ;
+}
+
+.studentMenu .navbar-nav > a,
+.studentMenu .navbar-nav > a:hover,
+.studentMenu .navbar-nav > a:focus,
+.studentMenu .nav > li:hover {
+  color: #ffffff ;
+  background-color: #bbbbbb ;
+  height: 25px ;
+}
+
+.studentMenu .nav > li.selectedStudent {
+	margin-right: 10px;
+}
+
+.studentMenu .nav > li.selectedStudent:hover {
+  background-color: transparent ;
+}
+
+.studentMenu .navbar-nav > .open > a, 
+.studentMenu .navbar-nav > .open > a:hover, 
+.studentMenu .navbar-nav > .open > a:focus {
+	background-color: #bbbbbb;
+	color: #333333;
+}
+
+.studentMenu .nav > li > a {
+	color: #333333;
+	font-weight: bold ;
+}
+
+.studentMenu .navbar-nav > .dropdown > a .caret,
+.studentMenu .navbar-nav > .active > a .caret {
+	border-top-color: #333333 ;
+	border-bottom-color: #333333 ;
+}
+
+
+/* Encoding Submenu */
+
+ .encodingMenu .navbar-nav,
+ .encodingMenu .navbar-nav > li {
+  	height: 25px;
+  }
+  
+ .encodingMenu .navbar-nav > li > a {
+  	height: 25px;
+  	padding-top: 3px;
+  	padding-bottom: 3px;
+  }
+  
+  .encodingMenu .navbar-nav > li > .navbar-text {
+  	height: 25px;
+  	padding-top: 5px;
+  	padding-bottom: 2px;
+  	margin-top: 0px;
+  	margin-bottom: 0px;
+  }
+
+.encodingMenu {
+	background-color: #555555 ;
+	border-radius: 0px ;
+}
+
+.encodingMenu .navbar-nav > .active > a,
+.encodingMenu .navbar-nav > .active > a:hover,
+.encodingMenu .navbar-nav > .active > a:focus,
+.encodingMenu .nav > li:hover {
+  background-color: #ffffff ;
+  height: 26px ;
+}
+
+.encodingMenu .navbar-nav > a,
+.encodingMenu .navbar-nav > a:hover,
+.encodingMenu .navbar-nav > a:focus,
+.encodingMenu .nav > li:hover {
+  color: #ffffff ;
+  background-color: #bbbbbb ;
+  height: 25px ;
+}
+
+.encodingMenu .nav > li.selectedStudent:hover {
+  background-color: transparent ;
+}
+
+.encodingMenu .navbar-nav > .open > a, 
+.encodingMenu .navbar-nav > .open > a:hover, 
+.encodingMenu .navbar-nav > .open > a:focus {
+	background-color: #bbbbbb;
+	color: #ffffff;
+}
+
+.encodingMenu .nav > li > a {
+	color: #ffffff;
+}
+
+.encodingMenu .navbar-nav > .dropdown > a .caret,
+.encodingMenu .navbar-nav > .active > a .caret {
+	border-top-color: #ffffff ;
+	border-bottom-color: #ffffff ;
+}
+
+.encodingMenu .nav > li.selectedStudent {
+	margin-right: 10px;
+}
+
+.encodingMenu .nav > li.selectedStudent:hover {
+  background-color: transparent ;
+}
+
+.schoolInfo {
+	color: white;
+}
+
+/* Other */
+#header {
+	min-height: 70px ;
+	background-color: #ffffff;
+	overflow: auto;
+}
+
+.navbar {
+	min-height: 25px;
+	max-height: 340px;
+	margin-bottom: 0px;
+	background-color: #55ccdd;
+}
+
+/* .navbar-nav  > .dropdown > a:focus { */
+/* 	border: 1px dotted black; */
+/* } */
+
+.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}     
+
+
+
+@media (max-width: 979px) {
+	body {
+	  padding-top: 50px;
+	}
+	 .navbar {
+		top: 0;
+		position: fixed;
+		right: 0;
+		left: 0;
+		z-index: 1030;
+	  }
+}
+
+
+.skiplist {
+    margin: 0;
+    padding: 0
+}
+
+.skip {
+    display: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    position: absolute
+}
+
+.skip {
+    display: block
+}
+
+:root .skip {
+    display: block
+}
+
+.skip a {
+    padding: 0 0.5em;
+    display: inline;
+    z-index: 999;
+    text-decoration: none;
+    position: absolute;
+    width: 14em;
+    left: -200em;
+}
+
+.skip a:focus, .skip a:active {
+    position: absolute;
+    left: 0.5em;
+    border: solid #333 2px;
+    color: #fff;
+    background: #555;
+}
+
+.skip a:hover {
+    cursor: default;
+}
+
+
+.off-left {
+	position:absolute;
+	left:-10000px;
+	top:auto;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}
+
+
+#headerLogo{
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+#headerInfo {
+	padding-right: 10px;
+}
+
+.placeholder
+{
+  color: #aaa;
+}
+
+.navbar-right {
+	margin-right: 0px;
+}
+

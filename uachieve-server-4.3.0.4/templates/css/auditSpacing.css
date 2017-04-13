@@ -1,0 +1,140 @@
+
+/* ===== auditSpacing.css ===== */
+div {border: 1px}
+hr {clear:both;}
+#audit {width: 100%;}
+#audit .includeTopText {float:left; clear:both;  width:100%; padding-bottom:6px}
+#audit .includeBottomText {float:left; clear:both; width:100%; }
+#auditHeader #refArtHeaderText {float:left; clear:both; width:100%; margin-left:24px; padding-bottom:6px}
+#auditHeader    .completionTextOK, #auditHeader .completionTextNO, #auditHeader .completionText  {float:left; clear:both; width:100%; padding-left:55px; }
+#auditResults .legend {float:left; clear:both; margin-left:22%}
+#endText {text-align: center;float: left;clear: both;width: 100%;} 
+
+/* ===== REQUIREMENTS LISTALL HEADER ===== */
+#auditRequirements {width:100%;}
+#auditRequirements .cmessc { clear: both; float:left;}
+#auditRequirements .requirement { clear: both;  }
+#auditRequirements .requirement .togglerExpanded { }
+#auditRequirements .requirement .togglerCollapsed { }
+#auditRequirements .requirement .status { }
+#auditRequirements .requirement .reqText p .reqStatus {display:none;}
+
+#auditRequirements .listAll {float:left; clear:both; padding:0px}
+#auditRequirements .listAll table {margin:12px 0px 0px 0px }
+#auditRequirements .listAll td {padding-right: 10px }
+
+
+/* ===== REQUIREMENTS ===== */
+#auditRequirements .requirement { }
+#auditRequirements .reqBody {float:left; clear:both; width: 100%;
+								margin-left:0px; margin-top: 0px; 
+								padding-bottom:6px;
+								-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+								-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+								box-sizing: border-box;         /* Opera/IE 8+ */
+							}
+							
+#auditRequirements .requirement-buttons {float:right;}
+#auditRequirements .subrequirement-buttons {float:right;}
+#auditRequirements .selectfrom-buttons {float:right;}
+#auditRequirements .notfrom-buttons {float:right;}
+
+/* UACH-3366	DAP		03/24/16	added margin-top to put a little extra space between requirement titles when collapsed  */
+#auditRequirements .requirement .reqHeaderTable {float:left; clear:right; display:table; margin-top:7px;}
+#auditRequirements .requirement .reqStatusGroup {display:table-cell; padding-top:2px}
+@media screen {
+	#auditRequirements .reqBody {padding-left:38px;}
+	#auditRequirements .requirement .reqStatusGroup {width:73px;}
+	/* UACH-3366	DAP		03/24/16	changed margin to removed extra height  */
+	#auditRequirements .requirement .reqStatusGroup .toggler {float:left; width:18px; height:16px; margin-right:7px; border:none;}
+}
+@media print {
+	#auditRequirements .reqBody {padding-left:0px;}
+	#auditRequirements .requirement .reqStatusGroup {width:53px;}
+	#auditRequirements .requirement .reqStatusGroup .toggler {float:left; width:0px; height:16px; margin:0px ; border:none;}
+}
+#auditRequirements .requirement .reqStatusGroup .status, .legend_status {float:left; width:16px; height:16px; text-align:center;}
+#auditRequirements .requirement .reqStatusGroup .reqNumber {float:left; width:23px; height:23px; text-align:left; padding-left:3px;}
+#auditRequirements .requirement .reqStatusGroup .reqGroups {float:left; width:100%; text-align:right;vertical-align:top}
+
+#auditRequirements .requirement .reqText {padding-left:6px; width:790px; display:table-cell;vertical-align:top}
+#auditRequirements .requirement .reqText .requirement-buttons {float:right;}
+#auditRequirements .requirement .reqText .reqHeader {float:left; clear:left;}
+#auditRequirements .requirement .reqText .reqTitle {float:left; clear:left;}
+
+#auditRequirements .requirement .requirementTotals {margin-bottom: 10px;}
+#auditRequirements .requirement .requirementTotals .reqEarned {margin-bottom: 5px; width: 100%;}
+#auditRequirements .requirement .requirementTotals .reqNeeds {margin-bottom: 5px; width: 100%;}
+
+#auditRequirements .requirement .requirementTotals .warnind {display:inline-block; float:left; text-align:left; font-style:italic;}
+#auditRequirements .requirement .requirementTotals .rowlabel {width:100px; text-align:right; padding-right:5px;  font-style:italic;}
+#auditRequirements .requirement .requirementTotals .bigcolumn {width:264px;}
+#auditRequirements .requirement .requirementTotals .fieldlabel {display:inline-block; width:144px; text-align:left; font-style:italic;}
+#auditRequirements .requirement .requirementTotals .smallfieldlabel {display:inline-block; width:84px; text-align:left; font-style:italic;}
+#auditRequirements .requirement .requirementTotals .gpalabel {display:inline-block; font-style:italic; max-width:84px; text-align:left;}
+#auditRequirements .requirement .requirementTotals .number {display:inline-block; width: 48px; text-align:right; padding-right:5px; font-style:italic;}
+#auditRequirements .requirement .requirementTotals .count {width: 24px; font-style:italic;}
+#auditRequirements .requirement .requirementTotals {font-style:italic; font-size:10pt;}
+
+
+/* ===== SUB-REQUIREMENTS ===== */
+#auditRequirements .auditSubrequirements .subrequirement {float:left; clear:both; display:table;}  
+#auditRequirements .auditSubrequirements .subrequirement .status {display:inline-block; width:13px; height:13px; min-height:1px; max-height:23px; background-position:top; text-align:center; vertical-align:text-top; font-size: 9px; margin-top:2px; }
+#auditRequirements .auditSubrequirements .subrequirement .Status_NO { }
+#auditRequirements .auditSubrequirements .subrequirement .Status_OK { }
+#auditRequirements .auditSubrequirements .subrequirement .Status_PL { }
+#auditRequirements .auditSubrequirements .subrequirement .Status_IP { }
+#auditRequirements .auditSubrequirements .subrequirement .subreqTitle {float:left; margin-left:0px; padding:2px; min-height:17px; }
+#auditRequirements .auditSubrequirements .subrequirement .rowlabel {width:75px; text-align:right; padding-right: 5px;}
+
+#auditRequirements .auditSubrequirements .subrequirement .subreqPretext {display:table-cell; padding-left: 0px; padding-right:3px; padding-top:2px; margin-left:0px; vertical-align:top; min-width:90px}
+#auditRequirements .auditSubrequirements .subrequirement .subreqPretext .subreqSeqErr {display:inline-block; max-height:23px; min-height:1px; text-align:center; width:20px; padding:0em;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqPretext .subreqSeqErrBorder {float:left; height:23px; border-width:1px; border-style:solid;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqPretext .subreqRequired {display:inline-block; max-height:23px; min-height:1px; text-align:center; width:20px;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqPretext .subreqRequiredBorder {float:left;height:16px; width:16px; margin-top:2px;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqPretext .subreqNumber {display:inline-block; max-height:23px; min-height:1px; text-align:right; min-width:24px;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqTitle {float:left; margin-left:0px; margin-bottom:5px; }
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqCline {float:left; clear:right; text-align:left; width:100%; padding-left:60px;}
+
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody {display:table-cell; width:720px; margin-left:5px;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals {margin-left:0px; margin-bottom:10px; float:left; clear:both; }
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals .rowlabel {width:204px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals .fieldlabel {width:180px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals .smallfieldlabel {width:48px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals .bigcolumn {width:224px; text-align:left;}
+
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subrequirementTotals .number {width:48px; display:inline-block; text-align:right; padding-right:5px;}
+
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses {width:100%; margin-left: 0px; margin-bottom:5px; float:left; clear:both;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses td {padding-right:10px; padding-top:1px; padding-bottom: 1px}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses tr {vertical-align:top; }
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .term {width: 40px; text-align:right;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .course {width: 180px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .credit {width: 48px; text-align:right;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .grade {width: 30px; text-align:left; white-space: nowrap}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .ccode {width: 30px; text-align:left}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .description {text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .description table {border-spacing:0px}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .completedCourses .description td {padding:0px}
+#auditRequirements .auditSubrequirements .subrequirement .completedCourses .pretext {float:left; }
+
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqNeeds {float:left; clear:left; padding-bottom: 5px}
+
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqNeeds .fieldlabel {width:144px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqNeeds .smallfieldlabel {width:94px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqNeeds .rowlabel {width:78px; text-align:left;}
+#auditRequirements .auditSubrequirements .subrequirement .subreqBody .subreqNeeds .number {width: 42px; text-align:right; padding-right:5px; }
+
+#auditRequirements .auditSubrequirements .course {margin: 0px 1px 0px 1px;}
+#auditRequirements .auditSubrequirements .subrequirement .selectcourses { width:100%; margin-bottom: 5px; float:left; clear:both;}
+#auditRequirements .auditSubrequirements .subrequirement .selectcourses table { padding:0px; border-spacing:0px;}
+#auditRequirements .auditSubrequirements .subrequirement .selectcourses table td { }
+
+#auditRequirements .auditSubrequirements .subrequirement .notcourses { width:100%; margin-bottom: 5px; float:left; clear:both;}
+#auditRequirements .auditSubrequirements .subrequirement .notcourses table { padding:0px; border-spacing:0px;}
+#auditRequirements .auditSubrequirements .subrequirement .notcourses table td { }
+
+#auditRequirements .auditSubrequirements .subrequirement .fromlabel { width:117px; vertical-align:top}
+
+#auditRequirements .auditSubrequirements .subrequirement .refcoursemessage { margin-bottom: 5px; float:left; clear:both;}
+

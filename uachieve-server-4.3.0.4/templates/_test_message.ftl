@@ -1,0 +1,1 @@
+${testMessage?right_pad(65)}

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<pages>
+ 	<options name="dprogs" provider="uachieve.selfservice.area.interfaces.crosswalk.web.provider.DprogOptionsProvider"/>
+
+
+	<page name="Crosswalk" label="Program Mapping" urlBase="crosswalk">
+		<permissions create="SS_AREA_CROSSWALK" edit="SS_AREA_CROSSWALK" delete="SS_AREA_CROSSWALK" />
+		<masterView defaultSortBy="dprog" sortAsc="false">
+			<filter on="collegeCode" label="College" />
+			<filter on="majorCode" label="Major" />
+			<filter on="degreeCode" label="Degree" />
+		</masterView>
+		<columns>
+			<column name="instcd" label="School"  width="8">
+				<detailView>
+					<permissions read="SS_AREA_CROSSWALK" edit="nobody" />
+				</detailView>
+			</column>
+			<column name="dprog" label="Program" width="12"
+				renderer="uachieve.selfservice.area.interfaces.crosswalk.web.renderer.ViewCrosswalkMappingColumnRenderer">
+				<detailView allowBlank="false" maxLength="20" inputType="menu" options="dprogs" />
+			</column>
+			<column name="campusCode" label="Campus" align="left" width="12">
+				<detailView maxLength="20" />
+			</column>
+			<column name="collegeCode" label="College" align="left" width="15">
+				<detailView maxLength="20" />
+			</column>
+			<column name="majorCode" label="Major" align="left" width="15">
+				<detailView maxLength="20" />
+			</column>
+			<column name="degreeCode" label="Degree" align="left" width="15">
+				<detailView maxLength="20" />
+			</column>
+			<column name="concentrationCode" label="Concentration" align="left" width="15">
+				<detailView maxLength="20" />
+			</column>
+			<column name="levelCode" label="Level" default="UG"  width="8">
+				<detailView maxLength="20" />
+			</column>
+			<column name="activityDate" label="Activity Date" format="date:MM/dd/yyyy h:mm aaa">
+        		<detailView>
+          			<permissions edit="nobody" read="SS_AREA_CROSSWALK" />
+        		</detailView>
+			</column>
+			<column name="user" label="User">
+        		<detailView>
+          			<permissions edit="nobody" read="SS_AREA_CROSSWALK"/>
+        		</detailView>
+			</column>
+		</columns>
+	</page>
+</pages>

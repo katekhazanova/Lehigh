@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+  <!-- ========================= STUDENT RELATED DEFINITIONS ============================= -->
+
+  <!-- ============== Dao's -->
+  <bean id="studentDao" class="uachieve.selfservice.area.student.dao.StudentHibernateDao" />
+ <bean id="plannedCourseDao" class="uachieve.selfservice.area.plannedcourse.dao.hibernate.PlannedCourseHibernateDao" /> 
+ <bean id="studentFinder" class="uachieve.selfservice.area.student.UachieveStudentFinder" />
+ <!-- bean id="studentFinder" class="com.redlantern.interfaces.student.BannerStudentFinder" >
+ 	<property name="bannerDao" ref="bannerDao" />
+ 	<property name="studentInstidq" value="${uachieve.selfservice.instidq}" />
+ 	<property name="studentInstid" value="${uachieve.selfservice.instid}" />
+ </bean -->
+
+  <!-- ============== Use in conjunction with StudentFinderInterface JAR  -->
+  <!--bean id="studentFinder" class="com.collegesource.student.StudentFinderJdbcImpl" >
+ 	<property name="studentInstidq" value="${uachieve.selfservice.instidq}" />
+ 	<property name="studentInstid" value="${uachieve.selfservice.instid}" />
+ 	<property name="datasource" ref="uachieveapi.dataSource"/>
+ 	<property name="searchByNameQuery">
+ 		<value>
+ 			<![CDATA[
+ 				select 
+ 					stuno, stuname
+ 				from
+ 					STU_MASTER sm, STU_DEMO sd
+ 				WHERE
+ 					sm.int_seq_no = sd.stu_mast_no
+ 					AND stuname like ? || ' ' || ?
+ 			]]>
+ 		</value>
+ 	</property>
+ 	<property name="searchBySisidQuery">
+ 		<value>
+ 			<![CDATA[
+ 				select 
+ 					stuno, 'TEST' as stuname
+ 				from
+ 					STU_MASTER sm, STU_DEMO sd
+ 				WHERE
+ 					sm.int_seq_no = sd.stu_mast_no
+ 					AND stuno = ? 
+ 			]]>
+ 		</value>
+ 	</property>
+ </bean-->
+
+  <!-- ============== Repositories -->
+
+  <!-- ============== Services -->
+  <bean id="studentService" class="uachieve.selfservice.area.student.StudentServiceImpl" />
+  
+  <!-- ============== Transformer -->
+  <bean id="transformer" class="uachieve.selfservice.util.iref.DefaultIrefTransformer"/>
+
+  <!-- ============== Entities -->
+  <bean id="studentConfig" class="uachieve.selfservice.area.student.StudentConfig">
+    <property name="minAllowableSearchLength" value="${uachieve.selfservice.student.search.minAllowableSearchLength}" />
+    <property name="displayStudentName" value="${uachieve.selfservice.student.display.studentName}" />
+    <property name="displayStudentNumber" value="${uachieve.selfservice.student.display.studentNumber}" />
+    <property name="displayAdvisees" value="${uachieve.selfservice.student.displayAdvisees}" />
+    <property name="uppercaseStuno" value="${uachieve.selfservice.student.uppercaseStuno}"/>
+  </bean>
+  
+</beans>

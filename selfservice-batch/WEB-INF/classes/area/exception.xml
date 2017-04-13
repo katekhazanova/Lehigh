@@ -1,0 +1,764 @@
+<?xml version="1.0"?>
+<pages>
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  EXCEPTIONS
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -->
+<!-- 
+	<options name="authCodeOptions" 
+		provider="uachieve.selfservice.area.exception.web.provider.PrefixBasedAuthCodeOptionsProvider" />
+  		-->
+  <options name="reqOptions" 
+  		provider="uachieve.selfservice.area.exception.web.provider.PrefixBasedAuthCodeRequirementOptionsProvider" />
+   
+ 	<checkboxMapping name="maxhrsckMapping" trueValue="Y" falseValue=" " />
+ 	
+  <options name="matchCtlOptions">
+  	<option name=" " label="Default" />
+  	<option name=":" label=": Range" />
+  	<option name=";" label="; Range and Group" />
+  	<option name="/" label="/ Or" />
+  	<option name="&amp;" label="&amp; And" />
+  	<option name="$" label="$ Pseudo" />
+  	<option name="P" label="P Pseudo- no hide" />
+  	<option name="G" label="G Group" />  	
+  	<option name="R" label="R Required" />
+  	<option name="B" label="B Group- first course required" /> 	
+  	<option name="X" label="X Compare original course" />  	
+  	<option name="=" label="= Compare original course - range" />  	
+  	<option name="N" label="N In-stream note" />
+  	<option name="!" label="! Or and hide" />
+  	<option name="|" label="| Test Transfer ID" />
+ </options>
+  
+    <options name="drtypeOptions">
+	  	<option name="R" label="Requirement" />
+	  	<option name="D" label="Degree Program" />
+	  	<option name=" " label="Default" />
+ 	</options>
+ 	
+ 	<options name="catalogNoOptions">
+	  	<option name="0" label="0 - CATLYT" />
+	  	<option name="1" label="1 - ACATLYT1" />
+	  	<option name="2" label="2 - ACATLYT2" />
+	    <option name="3" label="3 - ACATLYT3" />
+	  	<option name="4" label="4 - ACATLYT4" />
+	  	<option name="5" label="5 - ACATLYT5" />
+	    <option name="6" label="6 - ACATLYT6" />
+	  	<option name="7" label="7 - ACATLYT7" />
+	  	<option name="8" label="8 - ACATLYT8" />
+	    <option name="9" label="9 - ACATLYT9" />
+	  	<option name="R" label="R - REFY" />
+	  	<option name="Q" label="Q - Set REFYQ" />
+	  	<option name="S" label="S - Set REFYS" />
+	  	<option name="P" label="P - Set COM.CURYT" />
+	  	<option name="F" label="F - Set COM.FIRSTYT" />
+	  	<option name=" " label="Default" />
+ 	</options>
+ 	
+ 	 <options name="refIndexOptions">
+ 	 	<option name=" " label="Default" />
+	  	<option name="0" label="COM.REFCRSE1 / COM.REFVAL1" />
+	  	<option name="1" label="COM.REFCRSE2 / COM.REFVAL2" />
+	  	<option name="2" label="COM.REFCRSE3 / COM.REFVAL3" />
+	    <option name="3" label="COM.REFCRSE4 / COM.REFVAL4" />
+	  	<option name="4" label="COM.REFCRSE5 / COM.REFVAL5" />
+	  	<option name="5" label="COM.REFCRSE6 / COM.REFVAL6" />
+	    <option name="6" label="COM.REFCRSE7 / COM.REFVAL7" />
+	  	<option name="7" label="COM.REFCRSE8 / COM.REFVAL8" />
+	  	<option name="8" label="COM.REFCRSE9 / COM.REFVAL9" />
+	    <option name="9" label="COM.REFCRSE10 / COM.REFVAL10" />
+ 	</options>
+  
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                         CONTROL CODE TO PAGE MAPPINGS
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -->
+  <exceptions>
+    <ctlcd name="CE" page="coursesub" label="Course Swap" />	<!-- action=C -->
+    <ctlcd name="RM" page="requirementmod" label="Requirement Modification - Insert Course" />	<!-- action=R -->
+    <ctlcd name="CS" page="coursesub" label="Course Substitution" />	<!-- action=S -->
+    <ctlcd name="PS" page="pseudosub" label="Substitute a Course for a Pseudo-Course" />	<!-- action=S -->
+    <ctlcd name="E3" page="deptexam" label="Departmental Exam" />	<!-- action=E -->
+    
+    <ctlcd name="MN" page="markerreq" label="Marker Requirement" />	<!-- action=$ -->
+    <ctlcd name="SC" page="systemcc" label="System Condition Code" />	<!-- action=Q -->
+    <ctlcd name="MM" page="miscnote" label="Miscellaneous Note" />	<!-- action=M -->
+    <ctlcd name="Y1" page="dprogselect" label="Degree Program Selection" />	<!-- action=Y -->
+	<ctlcd name="XL" page="xlinemod" label="X-Line Modification" />	<!-- action=X -->
+	<ctlcd name="NN" page="refmod" label="Reference Modification" />	<!-- action=N -->
+	
+	<ctlcd name="EE" page="forcecomplete" label="Force Complete" /> <!-- action=E -->
+	<ctlcd name="C9" page="forcecourse" label="Force Course" />	<!-- action=C -->
+	<ctlcd name="XM" page="requirementmod" label="Requirement/Sub-Requirement Modification" /><!-- action=R -->
+	<ctlcd name="RS" page="requirementmod" label="Requirement Modification - Course Swap" /><!-- action=R -->
+	<ctlcd name="RD" page="requirementmod" label="Requirement Modification - Delete Course" /><!-- action=R -->
+  </exceptions>
+
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               MAIN EXCEPTIONS LIST PAGE
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
+  This page definition configures the page that lists all of a student's 
+  exceptions (/exception/list.html).
+  
+  -->
+  <page name="StuException" label="Exception" urlBase="exception">
+    <permissions create="SS_AREA_EXCEPTION" edit="SS_AREA_EXCEPTION" delete="SS_AREA_EXCEPTION" />
+    <masterView defaultSortBy="userSeqNo" 
+    	editColumnRenderer="uachieve.selfservice.area.exception.web.renderer.EditExceptionColumnRenderer" />
+    <columns>
+      <column name="userSeqNo" label="#" width="4" />
+     
+      <column name="ctlcd" label="Code" 
+      	renderer="uachieve.selfservice.area.exception.web.renderer.ControlCodeColumnRenderer" width="6" />
+      	<column name="action" label="A"  width="4" />
+      <column name="ruflg" label="R" width="4" />
+      	 <column name="cline" label="Audit Note" align="left" width="25"/>
+      <column name="psname" label="Pseudo Name" align="left" width="15" />
+      <column name="course" label="Course" align="left" width="15" />
+      <column name="rcourse" label="Rcourse" align="left" width="15" />
+      <column name="authCode" label="Auth Code" align="left" width="10" />
+      <!-- other columns
+      <column name="intSeqNo" label="intSeqNo" />
+      <column name="stuMaster.intSeqNo" label="stuMastNo" />
+      <column name="instcd" label="instcd" />
+      <column name="dpmask" label="dpmask">
+      	<detailView maxLength="15" />
+      </column>
+      <column name="dprog" label="dprog" />
+      
+      <column name="yeartm" label="yeartm" />
+      <column name="ac1" label="ac1" />
+      <column name="ac2" label="ac2" />
+      <column name="rc1" label="rc1" />
+      <column name="rc2" label="rc2" />
+      
+      <column name="reqhrs" label="reqhrs" />
+      <column name="maxhrs" label="maxhrs" />
+      <column name="reqsrq" label="reqsrq" />
+      <column name="maxct" label="maxct" />
+      <column name="val" label="val" />
+      <column name="matchctl" label="matchctl" />
+      <column name="effdte" label="effdte" />
+      <column name="reqgpa" label="reqgpa" />
+      <column name="assignc" label="assignc" />
+      <column name="maxhrsck" label="maxhrsck" />
+      <column name="rname" label="rname" />
+      <column name="authId" label="authId" />
+      <column name="authDate" label="authDate" />
+      <column name="lastModUser" label="lastModUser" />
+      <column name="lastModDate" label="lastModDate" />      
+      -->
+
+    </columns>
+  </page>
+ 
+  <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                               EXCEPTION FORM PAGES
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+  <page name="requirementmod" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+     <column name="dprog" label="Dprog">
+        <detailView maxLength="15" />
+      </column>
+      <column name="rname" label="Requirement Name">
+        <detailView maxLength="9" />
+        <!-- detailView inputType="menu" options="reqOptions" /-->
+      </column>
+      <!-- column name="authCode" label="Auth Code">
+      	<detailView inputType="menu" options="authCodeOptions" >
+      		<permissions edit="nobody" read="SS_AREA_EXCEPTION" create="SS_AREA_EXCEPTION" />
+      	</detailView>
+      </column -->
+      <column name="psname" label="Pseudo-Course Name">
+        <detailView maxLength="15" />
+      </column>
+      <column name="cline" label="Exception Note">
+        <detailView maxLength="27" />
+      </column>
+      <column name="reqsrq" label="Required Sub-reqs (req level) or Courses (sub-req)" default="0">
+        <detailView maxLength="2" >
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99" />
+        </detailView>
+      </column>
+      <column name="reqhrs" label="Required hours" default="0.00" format="number:#0.00">
+        <detailView maxLength="7">
+        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
+        </detailView>
+      </column>
+      <column name="val" label="Required Count (req level)" default="0">
+        <detailView maxLength="2" />
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99" />
+      </column>
+      <column name="reqgpa" label="Required GPA" default="0.000" format="number:#0.00">
+        <detailView maxLength="7">
+        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="3" />
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="999.999" />
+        </detailView>
+      </column>
+      <column name="ac1" label="Accept Code 1">
+        <detailView maxLength="1" />
+      </column>
+      <column name="ac2" label="Accept Code 2">
+        <detailView maxLength="1" />
+      </column>
+      <column name="rc1" label="Reject Code 1">
+        <detailView maxLength="1" />
+      </column>
+      <column name="rc2" label="Reject Code 2">
+        <detailView maxLength="1" />
+      </column>
+      <column name="maxhrs" label="Max Hours" default="0.00" format="number:#0.00">
+        <detailView maxLength="7">
+        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
+        </detailView>
+      </column>
+      <column name="maxhrsck" label="Max Hours Control">
+        <detailView maxLength="1" />
+      </column>
+      <column name="maxct" label="Max Count/USECT" default="0">
+        <detailView maxLength="2" />
+      </column>
+      <column name="assignc" label="Assign condition code">
+        <detailView maxLength="1" />
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+
+
+	<page name="markerreq" label="" urlBase="exception">
+	    <columns>
+	      <column name="ctlcd" label="Exception Code" case="upper">
+	        <detailView maxLength="2">
+	          <permissions edit="nobody" />
+	        </detailView>
+	      </column>
+	      <column name="rname" label="Marker Name" case="upper">
+	        <detailView maxLength="9" />
+	      </column>
+	      <!-- column name="authCode" label="Auth Code">
+	      	<detailView inputType="menu" options="authCodeOptions" >
+	      		<permissions edit="nobody" read="SS_AREA_EXCEPTION" create="SS_AREA_EXCEPTION" />
+	      	</detailView>
+	      </column-->
+	      <column name="course" label="Replacement Name" case="upper">
+	        <detailView maxLength="15" />
+	      </column>
+	      <column name="assignc" label="Replacement Type">
+	        <detailView maxLength="1" inputType="menu" options="drtypeOptions"/>
+	      </column>
+	      <column name="psname" label="InstCD">
+	        <detailView maxLength="3" />
+	      </column>      
+	      <column name="yeartm" label="Year/Term" case="upper">
+	        <detailView maxLength="6" inputType="menu" options="yearTerms" />
+	      </column>
+	      <column name="memo" label="Memo">
+	        <detailView maxLength="255" inputType="textarea" />
+	      </column>
+	      <column name="authId" label="Authorized By">
+	        <detailView maxLength="30" />
+	      </column>
+	      <column name="authDate" label="Date">
+	        <detailView maxLength="12" />
+	      </column>
+	    </columns>
+  	</page>
+
+
+  <page name="coursesub" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="course" label="Course Taken by Student" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="yeartm" label="Year/Term" case="upper">
+      	<detailView maxLength="6" />
+      </column>
+      <column name="rcourse" label="Substituted Course">
+        <detailView maxLength="15" />
+      </column>
+      <column name="cline" label="Message displayed on audit">
+        <detailView maxLength="27" />
+      </column>
+     <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+  
+    <page name="forcecourse" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="dprog" label="Dprog" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="course" label="Course Taken by Student" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="yeartm" label="Year/Term" case="upper">
+      	<detailView maxLength="6" />
+      </column>
+      <column name="rcourse" label="Pseudo">
+        <detailView maxLength="15" />
+      </column>
+      <column name="cline" label="Message displayed on audit">
+        <detailView maxLength="27" />
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+  
+  <page name="forcecomplete" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="dprog" label="Dprog" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="course" label="Pseudo" >
+        <detailView maxLength="15" />
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+
+  <page name="pseudosub" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="course" label="Course Taken by Student" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="yeartm" label="Year/Term" case="upper">
+      	<detailView maxLength="6" />
+      </column>
+      <column name="rcourse" label="Substituted for Pseudo-Course">
+        <detailView maxLength="15" />
+      </column>
+      <column name="cline" label="Message displayed on audit">
+        <detailView maxLength="27" />
+      </column>
+      <column case="lower" name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+
+  <page name="waivehours" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="psname" label="Pseudo-course" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="reqhrs" label="Hours Waived" default="0.000" format="number:#0.00">
+       <detailView maxLength="7" >
+       <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
+        </detailView>
+      </column>
+      <column name="cline" label="Displayed As">
+        <detailView maxLength="27" />
+      </column>
+      <column name="yeartm" label="Year/Term" case="upper">
+        <detailView maxLength="6" inputType="menu" options="yearTerms" />
+      </column>
+      <column name="ac1" label="Add Condition Code 1">
+        <detailView maxLength="1" />
+      </column>
+      <column name="ac2" label="Add Condition Code 2">
+        <detailView maxLength="1" />
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+
+  <page name="rmcourseswap" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Control Code" case="upper">
+        <detailView maxLength="2" />
+      </column>
+      <column name="action" label="Action" case="upper">
+        <detailView maxLength="1">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+      <column name="course" label="Remove the Course" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="rcourse" type="menu" label="Replace with this Course">
+        <detailView maxLength="15" />
+      </column>
+      <column name="cline" label="Message displayed on audit">
+        <detailView maxLength="27" />
+      </column>
+      <column name="psname" label="Pseudo Course identifying sub-req">
+        <detailView maxLength="15" />
+      </column>
+      <column name="rname" label="rname">
+        <detailView maxLength="9" />
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Auth By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>  
+  
+    <page name="deptexam" label="" urlBase="exception">
+    <columns>
+      <column name="ctlcd" label="Exception Code" case="upper">
+        <detailView maxLength="2">
+          <permissions edit="nobody" />
+        </detailView>
+      </column>
+	  <column name="course" label="Course" case="upper">
+        <detailView maxLength="15" />
+      </column>
+      <column name="yeartm" label="Year/Term" case="upper">
+        <detailView maxLength="6" inputType="menu" options="yearTerms" />
+      </column>
+      <column name="reqhrs" label="Hours Waived" default="0.000" format="number:#0.00">
+        <detailView maxLength="7" >
+        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
+        </detailView>
+      </column>
+      <column name="memo" label="Memo">
+        <detailView maxLength="255" inputType="textarea" />
+      </column>
+      <column name="authId" label="Authorized By">
+        <detailView maxLength="30" />
+      </column>
+      <column name="authDate" label="Date">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+  
+  	  <page name="systemcc" label="" urlBase="exception">
+		    <columns>
+		      <column name="ctlcd" label="Exception Code" case="upper">
+		        <detailView maxLength="2">
+		          <permissions edit="nobody" />
+		        </detailView>
+		      </column>
+		      <column name="ac1" label="Set Condition Code 1">
+		        <detailView maxLength="1" />
+		      </column>
+		      <column name="ac2" label="Set Condition Code 2">
+		        <detailView maxLength="1" />
+		      </column>
+		      <column name="rc1" label="Remove Condition Code 1">
+		        <detailView maxLength="1" />
+		      </column>
+		      <column name="rc2" label="Remove Condition Code 2">
+		        <detailView maxLength="1" />
+		      </column>
+		      <column name="memo" label="Memo">
+		        <detailView maxLength="255" inputType="textarea" />
+		      </column>
+		      <column name="authId" label="Authorized By">
+		        <detailView maxLength="30" />
+		      </column>
+		      <column name="authDate" label="Date">
+		        <detailView maxLength="12" />
+		      </column>
+		    </columns>
+  		</page>
+  		
+  		<page name="miscnote" label="" urlBase="exception">
+		    <columns>
+		      <column name="ctlcd" label="Exception Code" case="upper">
+		        <detailView maxLength="2">
+		          <permissions edit="nobody" />
+		        </detailView>
+		      </column>
+		      <column name="memo" label="Memo">
+		        <detailView maxLength="255" inputType="textarea" />
+		      </column>
+		      <column name="authId" label="Authorized By">
+		        <detailView maxLength="30" />
+		      </column>
+		      <column name="authDate" label="Date">
+		        <detailView maxLength="12" />
+		      </column>
+		    </columns>
+  		</page>
+  		
+  		<page name="dprogselect" label="" urlBase="exception">
+		    <columns>
+		      <column name="ctlcd" label="Exception Code" case="upper">
+		        <detailView maxLength="2">
+		          <permissions edit="nobody" />
+		        </detailView>
+		      </column>
+			  <column name="course" label="Degree Program" case="upper">
+		        <detailView maxLength="15" />
+		      </column>
+			  <column name="psname" label="InstCD">
+		        <detailView maxLength="3" />
+		      </column>      
+			  <column name="assignc" label="Catalog No.">
+		        <detailView maxLength="1" inputType="menu" options="catalogNoOptions"/>
+		      </column>
+		      <column name="yeartm" label="CatYT/ACatYT" case="upper">
+		        <detailView maxLength="6" inputType="menu" options="yearTerms" />
+		      </column>
+		      <column name="memo" label="Memo">
+		        <detailView maxLength="255" inputType="textarea" />
+		      </column>
+		      <column name="authId" label="Authorized By">
+		        <detailView maxLength="30" />
+		      </column>
+		      <column name="authDate" label="Date">
+		        <detailView maxLength="12" />
+		      </column>
+		    </columns>
+  		</page>
+  		
+  		 <page name="refmod" label="" urlBase="exception">
+		    <columns>
+		      <column name="ctlcd" label="Exception Code" case="upper">
+		        <detailView maxLength="2">
+		          <permissions edit="nobody" />
+		        </detailView>
+		      </column>
+			  <column name="course" label="Reference Course" case="upper">
+		        <detailView maxLength="15" />
+		      </column>
+		      <column name="reqhrs" label="Reference Value" default="0.00" format="number:#0.00">
+		        <detailView maxLength="7" >
+		        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+		        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
+		        </detailView>
+		      </column>
+			  <column name="assignc" label="Reference Index">
+		        <detailView maxLength="1" inputType="menu" options="refIndexOptions"/>
+		      </column>
+		      <column name="memo" label="Memo">
+		        <detailView maxLength="255" inputType="textarea" />
+		      </column>
+		      <column name="authId" label="Authorized By">
+		        <detailView maxLength="30" />
+		      </column>
+		      <column name="authDate" label="Date">
+		        <detailView maxLength="12" />
+		      </column>
+		    </columns>
+  		</page>
+  		
+	  <page name="xlinemod" label="" urlBase="exception">
+	    <columns>
+	      <column name="ctlcd" label="Exception Code" case="upper">
+	        <detailView maxLength="2">
+	          <permissions edit="nobody" />
+	        </detailView>
+	      </column>
+	      <column name="assignc" label="Cond. Code Control">
+	        <detailView maxLength="1" />
+	      </column>
+	      <column name="course" label="Pseudo Course">
+	        <detailView maxLength="15" />
+	      </column>
+	      <column name="val" label="Max Groups" default="99">
+	        <detailView maxLength="2" />
+	        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99" />
+	      </column>
+	      <column name="maxct" label="Max Courses" default="99">
+	        <detailView maxLength="2" />
+	      </column>
+	      <column name="maxhrsck" label="Skip Reused Courses">
+	        <detailView inputType="checkbox" checkboxMapping="maxhrsckMapping"/>
+	      </column>
+	      <column name="maxhrs" label="Max Hours" default="999.9" format="number:#0.0">
+	        <detailView maxLength="7" >
+	        <rule name="uachieve.selfservice.util.validation.PrecisionScaleRule" precision="6" scale="2" />
+	        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="9999.99" />
+	        </detailView>
+	      </column>
+	      <column name="reqsrq" label="Max Sub-req's" default="99">
+	        <detailView maxLength="2" >
+	        <rule name="uachieve.selfservice.util.validation.MaximumValueRule" maximumValue="99" />
+	        </detailView>
+	      </column>
+	      <column name="ac1" label="Assign Condition Codes">
+	        <detailView maxLength="1" />
+	      </column>
+	      <column name="matchctl" label="Series">
+	        <detailView maxLength="1" />
+	      </column>
+	      <column name="memo" label="Memo">
+	        <detailView maxLength="255" inputType="textarea" />
+	      </column>
+	      <column name="authId" label="Authorized By">
+	        <detailView maxLength="30" />
+	      </column>
+	      <column name="authDate" label="Date">
+	        <detailView maxLength="12" />
+	      </column>
+	    </columns>
+	  </page>
+  		
+
+  <!-- displays list of exception types to choose from when creating a new one -->
+  <page name="StuException.Gmaster" label="Exception" urlBase="exception">
+    <permissions create="nobody" edit="nobody" delete="nobody" />
+    <masterView defaultSortBy="ctlcd" />
+    <columns>
+      <column name="memo" label="Description" default="- no description -" renderer="uachieve.selfservice.area.exception.web.renderer.CreateExceptionLinkColumnRenderer" />
+      <column name="ctlcd" label="Exception Code" renderer="uachieve.selfservice.area.exception.web.renderer.CreateExceptionLinkColumnRenderer" />
+      
+      <!-- 
+      <column name="action" label="action" />
+      <column name="instidq" label="instidq" />
+      <column name="instid" label="instid" />
+      <column name="instcd" label="instcd" />
+      <column name="lineType" label="lineType" />
+      <column name="userSeqNo" label="userSeqNo" />
+      <column name="grade" label="grade" />
+      <column name="rgrade" label="rgrade" />
+      <column name="gpapt" label="gpapt" />
+      <column name="gpacal" label="gpacal" />
+      <column name="addcr" label="addcr" />
+      <column name="addct" label="addct" />
+      <column name="pseudo" label="pseudo" />
+      <column name="force" label="force" />
+      <column name="ip" label="ip" />
+      <column name="ctlcd" label="ctlcd" />
+      
+      <column name="ruflg" label="ruflg" />
+      <column name="condg" label="condg" />
+      <column name="delig" label="delig" />
+      <column name="replac" label="replac" />
+      <column name="creditck" label="creditck" />
+      <column name="lcredit" label="lcredit" />
+      <column name="hcredit" label="hcredit" />
+      <column name="ac" label="ac" />
+      <column name="rc" label="rc" />
+      <column name="effdte" label="effdte" />
+      <column name="memo" label="memo" />
+      <column name="lastModUser" label="lastModUser" />
+      <column name="lastModDate" label="lastModDate" />
+      -->
+    </columns>
+  </page>
+
+  <!-- displays list of exception types that are not configured -->
+  <page name="StuException.UnconfiguredGmaster" label="Unavailable Exception Type" urlBase="exception">
+    <permissions create="nobody" edit="nobody" delete="nobody" />
+    <masterView defaultSortBy="ctlcd">
+    </masterView>
+    <columns>
+      <column name="memo" label="Description" default="- no description -" align="left"  sortable="false"/>
+      <column name="ctlcd" label="Exception Code" align="left" sortable="false" />
+    </columns>
+  </page>    
+   
+  <page name="StuExcCourse" label="Course" urlBase="exception">
+    <permissions create="SS_AREA_EXCEPTION" read="SS_AREA_EXCEPTION" edit="SS_AREA_EXCEPTION" delete="SS_AREA_EXCEPTION" />
+    <masterView defaultSortBy="userSeqNo" editColumnRenderer="uachieve.selfservice.area.exception.web.renderer.EditExceptionCourseColumnRenderer" />
+    <columns>
+      <column name="userSeqNo" label="#" width="3" >
+         <detailView>
+          <permissions edit="nobody" />
+         </detailView>
+      </column>
+      <column name="course" label="Course" sortable="false">
+        <detailView maxLength="15" />
+      </column>
+      <column name="rcourse" label="Replacement Course" sortable="false">
+        <detailView maxLength="15" />
+      </column>
+      <column name="matchctl" label="Match Control" sortable="false">
+        <detailView maxLength="1" inputType="menu" options="matchCtlOptions" />
+      </column>
+      <column name="effdte" label="Year Term Range" sortable="false">
+        <detailView maxLength="12" />
+      </column>
+    </columns>
+  </page>
+    
+</pages>
