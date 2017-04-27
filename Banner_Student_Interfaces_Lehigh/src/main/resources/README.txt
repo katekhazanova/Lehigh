@@ -1,0 +1,1 @@
+Resources are located in the profiles/release directory.

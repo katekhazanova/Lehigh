@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+   xsi:schemaLocation="
+      http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+      http://www.springframework.org/schema/context 
+      http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+<!--
+  Copyright (c) 2013 CollegeSource, Inc.  All Rights Reserved.
+  
+  This software is the confidential and proprietary information of 
+  CollegeSource, Inc ("Confidential Information").  You shall not 
+  disclose such Confidential Information and shall use it only in 
+  accordance with the terms of the license agreement you entered
+  into with CollegeSource, Inc.  You shall not distribute this software
+  in any form (whole, part, modified, compiled, encrypted, etc.) to
+  any individual or organization not covered by the terms of your
+  license agreement.
+  
+  -->
+
+<!-- Properties that can be changed to reference client customized classes -->
+			
+	<import resource="classpath:studentQueries.xml" />
+	<context:property-placeholder location="classpath:server.properties"/>		
+			
+<!--<bean id="customStudentDataMutator" class="uachieve.server.custom.DefaultStudentDataMutator"/>
+	<bean id="customStudentDataMerger" class="uachieve.server.custom.DefaultStudentDataMerger"/>
+-->	
+	<bean id="customStudentDataLoader" class="com.collegesource.interfaces.student.BannerStudentDataLoader">
+		<property name="bannerDao" ref="bannerDao" />
+ 	</bean>
+	
+	<bean id="bannerDao" class="com.collegesource.interfaces.student.dao.BannerDaoImpl">
+       <property name="bannerJdbcTemplate" ref="bannerJdbcTemplate"/>
+       <property name="uachieveJdbcTemplate" ref="uachieveJdbcTemplate"/>
+       <property name="studentQueryUtil" ref="studentQueryUtil" />
+    </bean>
+	
+	<bean name="uachieveJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="uachieveapi.dataSource" />
+    </bean>
+    
+   	<bean id="uachieveapi.dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="${uachieveapi.jdbc.driver}"/>
+	    <property name="url" value="${uachieveapi.jdbc.url}"/>
+	    <property name="username" value="${uachieveapi.jdbc.username}"/>
+	    <property name="password" value="${uachieveapi.jdbc.password}"/>
+ 	</bean>
+	
+	<bean id="bannerJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+ 		<constructor-arg ref="bannerDataSource" />
+ 	</bean>
+	
+	<!-- Update the bannerDataSource property values if the Banner database is not accessible from the Uachieve database -->
+	<bean id="bannerDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	    <property name="driverClassName" value="${uachieveapi.jdbc.driver}"/>
+	    <property name="url" value="${uachieveapi.jdbc.url}"/>
+	    <property name="username" value="${uachieveapi.jdbc.username}"/>
+	    <property name="password" value="${uachieveapi.jdbc.password}"/>
+ 	</bean>
+	
+<!-- <bean id="transferResultsMutator" class="uachieve.server.ta.DefaultTransferResultsMutator" >
+		<property name="studentService" ref="uachieve-slayer.studentService"/>
+	</bean>
+-->
+	<!-- End of properties that can be changed to reference client customized classes -->	
+</beans>

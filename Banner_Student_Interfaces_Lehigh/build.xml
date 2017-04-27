@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!--
+	 Copyright (c) 2013 CollegeSource, Inc.  All Rights Reserved.
+	 
+	 This software is the confidential and proprietary information of 
+	 CollegeSource, Inc ("Confidential Information").  You shall not 
+	 disclose such Confidential Information and shall use it only in 
+	 accordance with the terms of the license agreement you entered
+	 into with CollegeSource, Inc.  You shall not distribute this software
+	 in any form (whole, part, modified, compiled, encrypted, etc.) to
+	 any individual or organization not covered by the terms of your
+	 license agreement. 
+	-->
+<project name="banner-student-interfaces" default="dist.zip" basedir=".">
+	
+	<buildnumber file="build-number.txt"/>
+	
+    <!-- ========================================================= -->
+    <!-- ===================== IMPORTS =========================== -->
+    <!-- ========================================================= -->
+    <import file="/redLanternCommonsBuild/build-common.xml" />
+
+	<!-- ========================================================= -->
+	<!-- ===================== PROFILE TARGETS =================== -->
+	<!-- ========================================================= -->	
+	<target name="profile.copy" depends="profile.require" description="copies profile specified with command line argument">
+	    <echo message="skipping copy of profile ${profile} for Banner Student Interfaces"/>
+		
+		<!-- Overriding this target with a blank body because the
+			 the profile copy is already being done in dist.zip.before -->
+	</target>
+
+	<!-- ========================================================= -->
+	<!-- ===================== COMPILE TARGETS =================== -->
+	<!-- ========================================================= -->
+	<target name="compile.java" depends="profile.copy" description="compiles java source files">
+		<compileMacro srcdir="src/main" destdir="target/classes"/>
+	</target>	
+	
+    <!-- ========================================================= -->
+    <!-- ===================== DISTRIBUTION TARGETS ============== -->
+    <!-- ========================================================= -->
+
+	<target name="dist.jar.before" description="allows you to perform additional tasks before jar is created">
+	    <delete>
+	      <fileset dir="target/classes" includes="*.xml, *.properties"/>
+	    </delete>
+	</target>
+	
+	<target name="dist.jar" description="builds a jar file for distribution" depends="dist.jar.before">
+	    <mkdir dir="target/dist/jar"/>
+	    <jar destfile="target/dist/jar/${app.name}-${app.version}.jar" basedir="target/classes" whenmanifestonly="fail" duplicate="fail">
+	    	<manifest>
+	        	<attribute name="Built-By" value="${user.name}"/>
+	        	<attribute name="Implementation-Title" value="${app.name}"/>
+	        	<attribute name="Implementation-Version" value="${app.version} ${tstamp.datetime}"/>
+	        	<attribute name="Implementation-Vendor" value="CollegeSource Inc."/>
+	      	</manifest>
+	    </jar>
+		<copy todir="target/dist/jar">
+			<fileset dir="src/main/jar">
+				<patternset>
+					<include name="README.txt"/>
+				</patternset>
+			</fileset>
+		</copy>
+	</target>
+	
+    <target name="dist.zip.before" description="adds directories to the distribution" depends="dist.jar">
+        
+    	<!-- Cleanup directories -->
+        <delete dir="target/dist/sql" />
+    	<delete dir="target/dist/context" />
+    	
+		<!-- Create distribution directories -->
+		<mkdir dir="target/dist/sql" />
+		<mkdir dir="target/dist/context" />
+    		
+    	<!-- Create filesets -->
+    			
+	    <!-- docs -->
+	    <zipfileset id="dist.docs" dir="target/dist/docs" prefix="docs" />
+		
+		<!-- jar sources -->
+    	<zipfileset id="dist.jar" dir="target/dist/jar" prefix="jar" includes="*.*"/>
+    	
+    	<!-- sql files -->
+		<zipfileset id="dist.sql" dir="src/main/sql" prefix="sql" includes="**/*.sql"/>
+		
+		<!-- context directory -->
+		<zipfileset id="dist.context" dir="src/main/profiles/${profile}" prefix="context" includes="*.*"/>
+		
+		<!-- Third party libraries -->
+		<zipfileset id="dist.libs" dir="src/main/lib" prefix="lib" includes="**/*.jar"/>
+    	
+		<!-- java source -->
+		<zipfileset id="dist.src" dir="src/main/java" prefix="src" includes="**/*.java"/>    	
+        
+    </target>
+	
+	<target name="dist.zip" depends="compile.java,dist.javadoc,dist.zip.before" description="builds zip and tar.gz files containing the war, documentation, etc">
+
+		<!-- Create zip file -->
+		<zip destfile="target/dist/${app.name}-${app.version}.zip">
+	        <zipfileset refid="dist.docs" />
+			<zipfileset refid="dist.jar" />
+			<zipfileset refid="dist.sql" />
+	        <zipfileset refid="dist.context" />
+	        <zipfileset refid="dist.libs" />
+			<zipfileset refid="dist.src" />
+	    </zip>
+		
+		<!-- Create tar file -->
+		<tar tarfile="target/dist/${app.name}-${app.version}.tar.gz" compression="gzip" longfile="gnu">
+	        <zipfileset refid="dist.docs" />
+			<zipfileset refid="dist.jar" />
+			<zipfileset refid="dist.sql" />
+	        <zipfileset refid="dist.context" />
+	        <zipfileset refid="dist.libs" />
+			<zipfileset refid="dist.src" />
+		</tar>
+		
+	</target>
+	   
+</project>

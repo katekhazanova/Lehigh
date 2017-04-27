@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+  	<bean id="studentQueryUtil" class="com.collegesource.interfaces.student.util.StudentQueryUtil">
+  		
+  		<property name="pidmQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					spriden_pidm 
+				FROM 
+					spriden
+				WHERE 
+					spriden_id = ? 
+					AND spriden_change_ind IS NULL
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>
+  		
+  		<property name="nameQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					spriden_last_name || ', ' || spriden_first_name AS stuname 
+				FROM 
+					spriden 
+				WHERE 
+					spriden_pidm = ? 
+					AND spriden_change_ind IS NULL
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>
+
+		<property name="dprogQuery">
+			<value>
+  			<![CDATA[
+			SELECT 
+				sovlcur_pidm, 
+				sovlcur_term_code, 
+				sovlcur_priority_no, 
+				sovlcur_levl_code, 
+				sovlcur_coll_code, 
+				sovlcur_camp_code, 
+				RPAD(sovlcur_degc_code,6,' ') AS sovlcur_degc_code,
+				sovlcur_term_code_ctlg, 
+				sovlcur_term_code_end, 
+				sovlfos_priority_no, 
+				sovlfos_lfst_code, 
+				sovlfos_majr_code, 
+				sovlfos_term_code_ctlg, 
+				sovlfos_dept_code, 
+				sovlfos_conc_attach_majr_code, 
+				sovlcur_seqno, 
+				sovlfos_lcur_seqno 
+			FROM 
+				sovlcur, sovlfos 
+			WHERE
+				sovlcur_pidm = ?  
+				AND sovlfos_pidm = sovlcur_pidm 
+				AND sovlfos_lcur_seqno = sovlcur_seqno 
+				AND sovlfos_current_ind = sovlcur_current_ind 
+				AND sovlfos_active_ind = sovlcur_active_ind
+				AND sovlcur_lmod_code = 'LEARNER' 
+				AND sovlcur_current_ind = 'Y' 
+				AND sovlcur_active_ind = 'Y'  
+			ORDER BY 
+				sovlcur_seqno, 
+				sovlcur_priority_no, 
+				sovlfos_priority_no
+			]]>
+			</value>
+  		</property>
+
+		<property name="courseHistoryQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					shrtckn_term_code AS YEARTERM,
+					shrtckn_subj_code AS DEPT,
+					shrtckn_crse_numb AS NUM,
+					shrtckg_credit_hours AS RCREDIT,
+					shrtckg_grde_code_final AS GRADE,
+					shrtckn_crse_title AS TITLE,
+					shrtckn_repeat_course_ind AS REPEAT,
+					NVL(RTRIM(shrtckn_course_comment),'') AS CRS_COMMENT
+				FROM 
+					shrtckn, shrtckg
+				WHERE 
+					shrtckn_pidm = ?
+					AND shrtckg_pidm = shrtckn_pidm
+					AND shrtckg_tckn_seq_no = shrtckn_seq_no
+					AND shrtckg_term_code = shrtckn_term_code
+					AND shrtckg_seq_no =
+						(SELECT 
+							MAX(shrtckg_seq_no) 
+						FROM 
+						 	saturn.shrtckg
+						WHERE 
+							shrtckg_tckn_seq_no = shrtckn_seq_no
+							AND shrtckg_term_code = shrtckn_term_code
+							AND shrtckg_pidm = shrtckn_pidm 
+						)
+					AND shrtckg_grde_code_final != 'NG' 
+				ORDER BY 
+					shrtckn_term_code, 
+					shrtckn_subj_code,
+					shrtckn_crse_numb
+			]]>
+  			</value>
+  		</property>  		
+
+		<property name="currentCourseQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					sfrstcr_term_code AS YEARTERM,
+					ssbsect_subj_code AS DEPT,
+					ssbsect_crse_numb AS NUM,
+					ssbsect_seq_numb AS SEQ_NUM,
+					sfrstcr_credit_hr AS RCREDIT,
+					sfrstcr_gmod_code AS GMOD_CODE,
+					sfrstcr_crn AS CRN,   
+					NVL(stvrsts_auto_grade,'IP') AS GRADE,
+					NVL(ssbsect_crse_title, scbcrse_title) AS TITLE
+				FROM 
+					ssbsect, sfrstcr, stvrsts, scbcrse
+				WHERE 
+					sfrstcr_pidm = ?					
+					AND ssbsect_crn = sfrstcr_crn
+					AND ssbsect_term_code = sfrstcr_term_code
+					AND sfrstcr_rsts_code = stvrsts_code
+					AND stvrsts_incl_sect_enrl = 'Y'
+					AND stvrsts_code != 'AU'
+					AND TO_NUMBER(ssbsect_term_code) >= ?
+					AND TO_NUMBER(ssbsect_term_code) <= ?
+					AND ssbsect_gradable_ind != 'N'
+					AND scbcrse_subj_code = ssbsect_subj_code
+					AND scbcrse_crse_numb = ssbsect_crse_numb
+					AND scbcrse_eff_term = 
+						(SELECT 
+							MAX(scbcrse_eff_term)
+						FROM 
+							scbcrse
+						WHERE 
+							scbcrse_subj_code = ssbsect_subj_code
+							AND scbcrse_crse_numb = ssbsect_crse_numb                
+							AND scbcrse_eff_term <= sfrstcr_term_code
+						)
+			]]>
+  			</value>
+  		</property> 
+
+		<property name="transferCourseQuery">
+  			<value>
+  			<![CDATA[
+				SELECT 
+					shrtrce_term_code_eff AS YEARTERM,
+					shrtrce_subj_code AS DEPT,
+					shrtrce_crse_numb AS NUM,
+					shrtrce_credit_hours AS RCREDIT,
+					shrtrce_grde_code AS GRADE,
+					shrtrce_crse_title AS TITLE,
+					shrtrit_sbgi_code AS RTITLE,
+					shrtrce_repeat_course AS REPEAT
+				FROM
+					shrtrce, shrtrcr, shrtrit, stvsbgi, shrtram
+				WHERE
+					shrtrce_pidm = ?
+					AND shrtrce_pidm = shrtrcr_pidm
+					AND shrtrcr_pidm = shrtram_pidm
+					AND shrtram_pidm = shrtrit_pidm
+					AND shrtrce_trit_seq_no = shrtrit_seq_no
+					AND shrtrce_tram_seq_no = shrtram_seq_no
+					AND shrtrce_trcr_seq_no = shrtrcr_seq_no
+					AND shrtrcr_trit_seq_no = shrtrit_seq_no
+					AND shrtrcr_tram_seq_no = shrtram_seq_no
+					AND shrtram_trit_seq_no = shrtrit_seq_no
+					AND shrtrit_sbgi_code = stvsbgi_code					
+				ORDER BY 
+					shrtrce_term_code_eff,
+					shrtrce_subj_code,
+					shrtrce_crse_numb
+			]]>
+  			</value>
+  		</property>
+	
+		<property name="findByStunoQuery">
+			<value>
+  			<![CDATA[
+				SELECT 
+					* 
+				FROM 
+					spriden 
+				WHERE 
+					spriden_id = ?
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>
+
+		<property name="findByNameQuery">
+			<value>
+  			<![CDATA[
+				SELECT 
+					* 
+				FROM 
+					spriden 
+				WHERE 
+					UPPER(spriden_first_name) LIKE UPPER(?) 
+					AND UPPER(spriden_last_name) LIKE UPPER(?) 
+					AND spriden_change_ind IS NULL
+					AND EXISTS
+					( SELECT SGBSTDN_PIDM
+					  FROM SGBSTDN
+					  WHERE SGBSTDN_PIDM = SPRIDEN_PIDM
+					)
+			]]>
+  			</value>
+  		</property>	
+	
+	</bean>
+
+</beans>

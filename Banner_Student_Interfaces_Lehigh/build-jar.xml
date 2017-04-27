@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<project name="Lehigh-Banner-Student-Interfaces" default="jar" basedir=".">
+
+	<tstamp>
+		<format property="TODAY" pattern="ddMMMyyyy"/>
+	</tstamp>
+	
+	<property file="${basedir}/build.properties"/>
+	
+	<property name="bin.dir" location="./bin"/>
+	<property name="src.dir" location="./src"/>
+	<property name="lib.dir.jar" location="./src/main/lib"/>
+	<property name="dist.dir" location="./target/dist"/>
+	<property name="jar.name" location="${dist.dir}/${app.name}-${TODAY}.jar" />
+	
+	<path id="compile.classpath">
+	    <fileset dir="${lib.dir.jar}">
+	      <include name="*.jar"/>
+	    </fileset>
+	    <pathelement path="${lib.dir.class}"/>
+	</path>		
+	
+	<target name="resources">
+		<copy todir="${bin.dir}" includeEmptyDirs="no">
+			<fileset dir="${src.dir}">
+				<patternset>
+					<include name="**/*.conf"/>
+					<include name="**/*.properties"/>
+					<include name="**/*.xml"/>
+					<include name="**/*.html"/>
+				</patternset>
+			</fileset>
+		</copy> 
+	</target>
+	
+	<target name="compile">
+		<javac srcdir="${src.dir}" destdir="${bin.dir}" debug="on">
+		   	<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+	<target name="clean">
+		<delete dir="${bin.dir}"/>
+		<mkdir dir="${bin.dir}"/>
+	</target>
+	
+	<target name="deletejar">
+		<delete file="${jar.name}"/>
+	</target>
+		
+	<target name="jar-with-xml" depends="deletejar, clean, resources, compile">
+		<jar jarfile="${jar.name}" basedir="${bin.dir}"/>
+	</target>
+	
+	<target name="jar" depends="deletejar, clean, compile">
+		<jar jarfile="${jar.name}" basedir="${bin.dir}"/>
+	</target>
+	
+</project>
